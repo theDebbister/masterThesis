@@ -2,7 +2,7 @@
 
 import argparse
 
-from Code.PhoneticTextCreator import PhoneticTextCreator
+from PhoneticTextCreator import PhoneticTextCreator
 
 
 def get_parser() -> argparse.ArgumentParser:
@@ -17,6 +17,11 @@ def get_parser() -> argparse.ArgumentParser:
                       help='tsv file that stores words and their pronunciationin IPA',
                       type=argparse.FileType('r', encoding='utf-8'),
                       )
+    parser.add_argument('--directory', '-d',
+                        help='if it is an entire directory that needs to be precessed',
+                        action='store_const',
+                        const=True)
+
 
     return pars
 
@@ -24,8 +29,10 @@ def get_parser() -> argparse.ArgumentParser:
 if __name__ == "__main__":
     parser = get_parser()
     args = parser.parse_args()
-    print(args)
+    print(args.text)
 
-    # processor = PhoneticTextCreator(args)
+    processor = PhoneticTextCreator(args.wordlist, args.text)
+
+    print(processor.create_phonetic_text())
 
 
