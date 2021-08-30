@@ -1,0 +1,49 @@
+\newchap{Data Collection}
+\label{chap:2_data}
+The first important part of this thesis is concerned with data collection. Although phonetics is an important sub-area in linguistics, phonetic transcriptions are hard to find. If there are any transcriptions available, there are various hindrances that prevent it from being used as is. The following chapter outlines the different data types which are available and the different strategies that are used to convert the data into one well-formatted corpus. Apart from hindrances concerning sources and format, there are issues concerning the data itself. There are generally many more different pronunciations of a word than there are spellings. It is thus important to specify clearly what dialect or pronunciation convention a phonetic transcription follows.
+
+\section{Transcription Conventions}
+Another problem that needs be dealt with are different transcription conventions. There are different phonetic languages and within those there are different levels of transcription details. The most common are listed below.
+
+\begin{description}
+\item[IPA] The International Phonetic Association has one of the most common phonetic transcription conventions used in linguistics. 
+\end{description}
+
+Apart from different character sets there are different levels of detail. Not all transcriptions represent the phonetics in equal detail. Generally, there is the distinction of broad and narrow transcription. These two go back to the linguistic distinction of phone and phoneme. Broad refers to a phonemic description. Following the linguistic definition in chapter \ref{chap:2_data}, this means that the transcription does not transcribe speaker specific pronunciations or dialectal variations. This kind of transcription is therefore less complex and usually easier to create and understand. Narrow transcriptions are phonetic. They present every speaker individual or dialectal sounds as exactly as possible. 
+
+
+In order to guarantee comparability, some transcriptions need to be translated into other transcription conventions. 
+
+
+\section{Transcription Sources \& Formats}
+Phonetic transcriptions of various languages are available from different sources in different formats. In order to use those, they have to be converted into simple text format in appropriate encoding that can easily be read and processed by a machine. The following subsections list the different data types and how they are used.
+
+\subsection{Full Text}
+For the task at hand, phonetic transcriptions in the form of fully transcribed texts would be ideal. As became clear, it is hardly possible to find those. There is plenty of material describing how different languages can be transcribed but those rarely contain fully transcribed text. If they do, it is mostly limited to one or a few sentences. The JIPA continuously published different phonetic transcriptions of a short story called "The North Wind and the Sun". A collection of those is available in a handbook of the JIPA which is only available as a pdf scan of the original book \citep{JIPA2010}. While OCR is technically possible it turns out to be very difficult for IPA characters. The tools that exist do sometimes include IPA character recognition like the ABBYY FineReader which can be acquired for a fee. The CL institute at the UZH owns a version of the ABBYY tool but this version does not include the IPA module although ABBYY generally supports IPA character recognition. This ABBYY version was run on a JIPA pdf containing said phonetic transcriptions but the result could not be used. Mostly diacritics and special phonetic symbols were not correctly transcribed.
+
+There are also open source tools. One of which is called tesseract. tesseract does not include the IPA alphabet. It is possible to train the model to include the IPA alphabet but this would need appropriate training data. \review{Add quote}
+
+Some transcriptions have been published in separate issues as part of a collection of articles called "Illustrations of the IPA".
+
+Additionally, some texts include short descriptions where certain pronunciations rules are explained which are not included in the transcriptions (especially stress). 
+
+\subsection{Pronunciation Dictionaries}
+Another data type that is found quite often are lists of words' pronunciation. Those are sometimes referred to as pronunciation dictionaries. However, these often mean that there are words mapped to an audio representation which is not what is meant in this present case. Pronunciation dictionary in this present case refers to the mapping of an orthographic word to its pronunciation using phonetic symbols. Although such lists are very handy, especially as they can easily be used to train a transcription model, transcriptions of individual words and of entire texts are not exactly the same. There are two major problems:
+
+\begin{itemize}
+\item Pronunciation depends on the context of the word in question. Word forms are ambiguous and sometimes their pronunciation differs given on their specific context. \review{add example} 
+\item Phonetic boundaries are not always equivalent with word boundaries. Spoken language sometimes merges certain words which leads to one phonetic unit. \review{There are phonetic symbols to represent such merging which often happens in, for example, French.}
+\end{itemize} 
+
+\subsubsection*{WikiPron}
+There exist databases of pronunciation dictionaries. Many of those do not release the mining software used to extend the database with more languages \citep{Lee&Ashby.2020}. A very recent project that publishes pronunciation lists is WikiPron. The WikiPron project \citep{Lee&Ashby.2020} is an open-source Python mining tool to retrieve pronunciation data from Wiktionary. Their database contains 1.7 million word/pronunciation pairs in 165 languages. Both, the database and the tool, are freely available online. Apart from the mining tool and the database, WikiPron can be used for grapheme-to-phoneme modelling. More on this subject will be discussed in chapter \ref{chap:3_model}.
+In both G2P shared tasks organized by SIGMORPHON (see \ref{chap:3_model}, data provided by WikiPron was used. For the 2021 task, WikiPron was improved and additional scripts were added based on feedback and findings in the 2020 task. One major improvement was concerned with languages written in different scripts. WikiPron supports now the detection of different scripts and languages can be sorted according to those scripts.
+
+
+\section{Transkribus}
+In order to make use of as much data as possible, a software is used to manually transcribe the pdf scans.
+
+The software allows to make use of neural \ac{htr} models. There exists no pre-trained IPA model but I trained my own while transcribing the documents. On the website they mention that ideally training needs 5,000 - 10,000 words already transcribed. Although my available data is not nearly enough to train a reliable model, it was a great help to transcribe. As the scans where not handwritten text, the model still reached a surprisingly good quality. For the Hebrew transcription, the model reached a \ac{wer} of 34.52\% and a \ac{cer} of 6.11\%. The two main mistakes were made for two characters that were not even in the training data. The quality of the scans differed quite a lot which had an influence on the performance of the model as well. After transcribing another document I trained the model again and transcribed the remaining documents. The transcriptions got continuously better. 
+
+
+ 	

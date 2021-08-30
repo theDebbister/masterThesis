@@ -1,0 +1,73 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: masterThesis.aux
+Reallocating 'name_of_file' (item size: 1) to 28 items.
+A level-1 auxiliary file: chapters/titlepage_phil.aux
+Reallocating 'name_of_file' (item size: 1) to 22 items.
+A level-1 auxiliary file: chapters/abstract.aux
+Reallocating 'name_of_file' (item size: 1) to 20 items.
+A level-1 auxiliary file: chapters/acknow.aux
+Reallocating 'name_of_file' (item size: 1) to 19 items.
+A level-1 auxiliary file: chapters/index.aux
+Reallocating 'name_of_file' (item size: 1) to 23 items.
+A level-1 auxiliary file: chapters/acro-list.aux
+Reallocating 'name_of_file' (item size: 1) to 31 items.
+A level-1 auxiliary file: chapters/chap1Introduction.aux
+Reallocating 'name_of_file' (item size: 1) to 24 items.
+A level-1 auxiliary file: chapters/chap2_data.aux
+Reallocating 'name_of_file' (item size: 1) to 25 items.
+A level-1 auxiliary file: chapters/chap3_model.aux
+Reallocating 'name_of_file' (item size: 1) to 31 items.
+A level-1 auxiliary file: chapters/chap4_experiments.aux
+Reallocating 'name_of_file' (item size: 1) to 24 items.
+A level-1 auxiliary file: chapters/references.aux
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+The style file: abbrvnat.bst
+Reallocating 'name_of_file' (item size: 1) to 14 items.
+Reallocating 'name_of_file' (item size: 1) to 20 items.
+A level-1 auxiliary file: appendix/tables.aux
+Database file #1: biblio/thesis.bib
+Warning--empty author in 100LC.21.07.2021
+Warning--empty publisher in Intro.2007
+You've used 19 entries,
+            2773 wiz_defined-function locations,
+            740 strings with 9508 characters,
+and the built_in function-call counts, 10091 in all, are:
+= -- 924
+> -- 631
+< -- 16
++ -- 215
+- -- 196
+* -- 808
+:= -- 1530
+add.period$ -- 87
+call.type$ -- 19
+change.case$ -- 120
+chr.to.int$ -- 19
+cite$ -- 40
+duplicate$ -- 443
+empty$ -- 776
+format.name$ -- 221
+if$ -- 2173
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 17
+newline$ -- 124
+num.names$ -- 72
+pop$ -- 270
+preamble$ -- 1
+purify$ -- 104
+quote$ -- 0
+skip$ -- 361
+stack$ -- 0
+substring$ -- 267
+swap$ -- 77
+text.length$ -- 6
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 194
+warning$ -- 2
+while$ -- 73
+width$ -- 0
+write$ -- 303
+(There were 2 warnings)

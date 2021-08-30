@@ -1,0 +1,52 @@
+
+\newchap{Models for Phonetic Transcription}
+\label{chap:3_model}
+This chapter introduces to the various methods and models that can be used to create phonetic transcription of various languages out of plain text.
+
+\section{Rule-based systems}
+The first systems of to create phonetic transcriptions of text were rule-based systems. This is possible for languages where the pronunciation follows a more or less clear pattern that can be described by a speaker of this language. The problem with rule-based approaches is mainly the maintenance of the systems. In order to create the rules in the first place, a lot of linguistic expertise is needed. To maintain the system, experts need to keep track of language change which is time consuming and expensive. In addition, most languages are irregular in their pronunciation and those irregularities need to be tracked. Due to the open-vocabulary situation which is caused by constant language change all systems must be able to deal with rare and unseen words. Rule-based systems are outperformed by more recent neural systems \citep{gorman-etal-2020-sigmorphon, Ashby&Bartley.2021}.
+
+\review{add a few examples of rule-based systems and why and by whom they where outperformed (see \cite{Ashby&Bartley.2021, gorman-etal-2020-sigmorphon} for this purpose)}
+
+
+\section{Neural \ac{g2p}}
+A common way to transform written text into its phonetic version is referred to as \ac{g2p}. The idea behind this approach is that individual letters (graphemes) are converted into sounds represented as phonemes. The definition of phoneme in this context does not satisfy the precise linguistic definition. It is therefore to note that phoneme used here simply refers to the transcription symbols used to represent a specific sound in a specific language. 
+
+Other ways of grapheme-to-phoneme conversion will be described here (apart from the \ac{sigm} tasks which will be described below). 
+
+As with many NLP tasks, research focussed mainly on English or other languages where a lot of data is easily available \citep{gorman-etal-2020-sigmorphon}.
+
+
+The \ac{sigm} \citep{Sigmorphon.2021} regularly organizes shared tasks concerned with morphology and phonology. For the years 2020 and 2021 they organized a grapheme-to-phoneme conversion task \citep{Ashby&Bartley.2021, gorman-etal-2020-sigmorphon}. The tasks represent a first attempt at creating benchmarks for multilingual \ac{g2p} conversion. Both tasks and their results will be discussed in sections \ref{sig20} and \ref{sig21}. Although there is other research on \ac{g2p}, many recent publications have been made within the \ac{sigm} shared tasks which is why there are two separate sections on those tasks. 
+
+\subsection{Evaluation metrics}
+The most common metric to evaluate phonetic transcriptions is the \ac{wer}. This is the percentage of predicted transcriptions, that deviate from the gold standard. The lower, the better the model.   
+
+
+\subsection{SIGMORPHON task 2020}
+\label{sig20}
+
+\citet{yu-etal-2020} contributed to the 2020 \ac{sigm} \ac{g2p} task. Their contribution is of particular interest for this thesis as it proposes a data augmentation model for low-resource settings. As there are many languages in the corpus that have only very little available data, such a model could be of great use. The methodology applied in their approach is ensemble learning combined with a self-learning strategy. \review{The system is not available online, but I asked the author if I could use it for my experiments.}
+
+\subsection{SIGMORPHON task 2021}
+\label{sig21}
+The second iteration of this \ac{g2p} task attempts at outperforming the models of the previous task. An additional challenge is its separation into high-, medium- and low-resource languages. This reflects the needs of this present research well, as many languages in the corpus are low resource languages. In preparation for the task, the WikiPron data (see chapter \ref{chap:2_data}) was cleaned to exclude foreign words that include phones that are not in the actual language's native phone inventory. If a word contained foreign phones, it was excluded. This was the case for words whose pronunciation was not adapted to the language at hand but the transcription of the foreign language was used. This cleaning was only applied to medium- and low-resource languages. The high-resource subtask consisted of about 41,000 word-transcription pairs of American English only. The medium-resource task provided 10,000 word-transcription pairs for ten languages and the low-resource task another 1,000 for ten different languages \citep{Ashby&Bartley.2021}. \review{add more details on data preparation, p.127}
+
+The baseline for this year's G2P task is an adapted version of last year's submission by \citet{makarov-clematide-2020-cluzh}. The baseline model has been made available for this year's task. The model they use is a neural transducer that is trained with imitation learning. The basis of the neural transducer was originally designed for morphological inflection \citep{Aharoni&Goldberg.2016}. Instead of just learning to output the correct string, the model learns to produce an optimal sequence of edit actions needed to transform the input string into the output string. Due to the nature of inflection (overlapping alphabets of input and output sequences), the original model was encouraged to copy the input. This does not work well for G2P tasks as the input and the output alphabet are not always the same (especially for non-Latin scripts like Korean). \review{explain neural transducer, the model more in depth}. 
+
+As explained above, the model learns to create sequences of edit actions. The problem with this approach is that there are many possible sequences of edit actions that produce the same result. Imitation learning is proposed as a solution for this problem. \review{explain imitation learning better and more precise}. 
+
+\subsubsection*{Results}
+The results show that there are great differences in languages.
+
+Results in the low-resource setting are still worse compared to the medium-resource setting.  
+
+\subsubsection*{Error analysis}
+Error analysis is important for future models. 
+
+\section{Low-resource setting}
+Apart from a few well-studied examples, for most languages there is only little available data. It is therefore highly interesting and important to find solutions of how to deal with lack of data. \cite{hammond-2021-data} submitted a system to the 2021 SIGMORPHON edition focusing on data augmentation methods. The primary goal of their approach was to test how successful a minimalist data augmentation model would be, knowing it would most probably not outperform any of the other models. They identified two approaches that might improve low-resource models. The first one is to use as much as possible of the development set for training. The second to train all languages together differentiating the languages only by a tag added to the word representations. 
+
+
+
+
