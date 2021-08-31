@@ -65,7 +65,8 @@ Due to recent technological advancement it has become possible to store large di
 Creating phonetic transcriptions is essentially a \ac{s2s} task. Like other \ac{nlp} tasks its goal is to transform a sequence of characters into another sequence of characters.  
 
 \subsection{Rule-based models}
-
+The first systems of to create phonetic transcriptions of text were rule-based systems. Rule-based transcriptions models are built using linguistic pronunciation rules. In order to be able to create such a system, one needs to collect pronunciation rules first. While there are only a few language where such rules are ready and available for the general public there are many languages where those rules need to be created first. In order to create the rules in the first place, a lot of linguistic expertise is needed. A problem with rule-based approaches is mainly the maintenance of the systems. To maintain the system, experts need to keep track of language change which is time consuming and expensive. In addition, most languages are irregular in their pronunciation and those irregularities need to be tracked. Due to the open-vocabulary situation which is caused by constant language change and some flexibility in language use, all systems must be able to deal with rare and unseen words. Rule-based systems are outperformed by more recent neural systems \citep{gorman-etal-2020-sigmorphon, Ashby&Bartley.2021}. 
+To the best of my knowledge, there have not been published any more new rule-based systems in the last few years. Many examples considered only one language (see e.g. \citep{rule-based2009}).
 
 \subsection{N-gram Models / Statistical models}
 These are sometimes referred to as traditional models. 

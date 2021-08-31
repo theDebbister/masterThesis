@@ -1,4 +1,4 @@
-\begin{thebibliography}{19}
+\begin{thebibliography}{20}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -150,6 +150,14 @@ SPUR project.
 \newblock {Non-randomness in Morphological Diversity}, 2021.
 \newblock URL
   \url{https://www.spur.uzh.ch/en/departments/research/textgroup/MorphDiv.html}.
+
+\bibitem[Toma and Munteanu(2009)]{rule-based2009}
+S.-A. Toma and D.~Munteanu.
+\newblock Rule-based automatic phonetic transcription for the romanian
+  language.
+\newblock \emph{Future Computing, Service Computation, Cognitive, Adaptive,
+  Content, Patterns, Computation World}, 0:\penalty0 682--686, 11 2009.
+\newblock \doi{10.1109/ComputationWorld.2009.59}.
 
 \bibitem[Yu et~al.(2020)Yu, Vu, and Kuhn]{yu-etal-2020}
 X.~Yu, N.~T. Vu, and J.~Kuhn.

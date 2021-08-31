@@ -29,45 +29,45 @@ A level-1 auxiliary file: appendix/tables.aux
 Database file #1: biblio/thesis.bib
 Warning--empty author in 100LC.21.07.2021
 Warning--empty publisher in Intro.2007
-You've used 19 entries,
+You've used 20 entries,
             2773 wiz_defined-function locations,
-            740 strings with 9508 characters,
-and the built_in function-call counts, 10091 in all, are:
-= -- 924
-> -- 631
-< -- 16
-+ -- 215
-- -- 196
-* -- 808
-:= -- 1530
-add.period$ -- 87
-call.type$ -- 19
-change.case$ -- 120
-chr.to.int$ -- 19
-cite$ -- 40
-duplicate$ -- 443
-empty$ -- 776
-format.name$ -- 221
-if$ -- 2173
+            749 strings with 9787 characters,
+and the built_in function-call counts, 10548 in all, are:
+= -- 968
+> -- 652
+< -- 17
++ -- 222
+- -- 202
+* -- 845
+:= -- 1600
+add.period$ -- 91
+call.type$ -- 20
+change.case$ -- 125
+chr.to.int$ -- 20
+cite$ -- 42
+duplicate$ -- 463
+empty$ -- 815
+format.name$ -- 230
+if$ -- 2271
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 17
-newline$ -- 124
-num.names$ -- 72
-pop$ -- 270
+missing$ -- 18
+newline$ -- 130
+num.names$ -- 76
+pop$ -- 277
 preamble$ -- 1
-purify$ -- 104
+purify$ -- 108
 quote$ -- 0
-skip$ -- 361
+skip$ -- 376
 stack$ -- 0
-substring$ -- 267
-swap$ -- 77
+substring$ -- 290
+swap$ -- 79
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 194
+type$ -- 205
 warning$ -- 2
-while$ -- 73
+while$ -- 77
 width$ -- 0
-write$ -- 303
+write$ -- 318
 (There were 2 warnings)
