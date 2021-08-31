@@ -48,8 +48,6 @@ if __name__ == "__main__":
 
     valid_args = validate_args(args)
 
-    print(valid_args)
-
     processor = PhoneticTextCreator(**valid_args)
 
     processor.create_csv()

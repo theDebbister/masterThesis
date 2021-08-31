@@ -19,8 +19,6 @@ class PhoneticTextCreator:
         else:
             self._create_phonetic_text(text, wordlist)
 
-
-
     def _process_csv(self):
         with open(self.csv_file, 'r', encoding='utf8') as file:
             data_reader = csv.reader(file, delimiter=',')
@@ -76,7 +74,6 @@ class PhoneticTextCreator:
                         phonetic_text += wordlist[w1] + wordlist[w2] + " "
                         splittable = True
                         count_exist += 1
-                        print(w1, w2, wordlist[w1], wordlist[w2])
                         break
 
                 if not splittable:
@@ -96,3 +93,4 @@ class PhoneticTextCreator:
         df = pd.DataFrame(d)
 
         df.to_csv("example_output.csv", index=False)
+        print('Created csv output')
