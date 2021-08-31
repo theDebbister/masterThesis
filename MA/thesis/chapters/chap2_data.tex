@@ -35,6 +35,7 @@ Another data type that is found quite often are lists of words' pronunciation. T
 \item Phonetic boundaries are not always equivalent with word boundaries. Spoken language sometimes merges certain words which leads to one phonetic unit. \review{There are phonetic symbols to represent such merging which often happens in, for example, French.}
 \end{itemize} 
 
+
 \subsubsection*{WikiPron}
 There exist databases of pronunciation dictionaries. Many of those do not release the mining software used to extend the database with more languages \citep{Lee&Ashby.2020}. A very recent project that publishes pronunciation lists is WikiPron. The WikiPron project \citep{Lee&Ashby.2020} is an open-source Python mining tool to retrieve pronunciation data from Wiktionary. Their database contains 1.7 million word/pronunciation pairs in 165 languages. Both, the database and the tool, are freely available online. Apart from the mining tool and the database, WikiPron can be used for grapheme-to-phoneme modelling. More on this subject will be discussed in chapter \ref{chap:3_model}.
 In both G2P shared tasks organized by SIGMORPHON (see \ref{chap:3_model}, data provided by WikiPron was used. For the 2021 task, WikiPron was improved and additional scripts were added based on feedback and findings in the 2020 task. One major improvement was concerned with languages written in different scripts. WikiPron supports now the detection of different scripts and languages can be sorted according to those scripts.
