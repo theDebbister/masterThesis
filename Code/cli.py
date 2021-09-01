@@ -12,18 +12,31 @@ def get_parser() -> argparse.ArgumentParser:
     pars.add_argument('text',
                       help='Text(s) that need to be converted into phonetic texts. '
                            'Either txt file or csv containing paths.'
-                           'Csv must be first text path, then wordlist path.',
+                           'Csv must look like this: lang-code, path-original, path-wordlist',
                       )
     pars.add_argument('--wordlist', '-wl',
                       help='tsv file that stores words and their pronunciation in IPA',
                       required=False,
                       )
 
-    pars.add_argument('--csv',
-                      help='If it is a csv file containing paths to both text and wordlist',
+    pars.add_argument('--name', '-n',
+                      help="in case you'd like to create several version of the same texts using different settings, "
+                           "you can add version names here",
+                      type=str,
+                      )
+
+    pars.add_argument('--concat', '-c',
+                      help="If this option is chosen, words that are not in the wordlists will be split iteratively "
+                           "and concatenated if word parts are in the list",
                       action='store_const',
                       const=True,
-                      default=False)
+                      default=False,
+                      )
+
+    pars.add_argument('--language', '-l',
+                      help='Only necessary if a single text and a wordlist is passed',
+                      type=str,
+                      )
 
     return pars
 
@@ -35,8 +48,8 @@ def validate_args(arguments: argparse.Namespace) -> dict:
     }
 
     # args csv and wl are mutually exclusive
-    if args_dict["csv"] == ("wordlist" in args_dict):
-        print("You can either combine text and wordlist or specify that it is an csv file that needs to be processed.")
+    if ("language" in args_dict) != ("wordlist" in args_dict):
+        print("You need to pass both wordlist and language or a csv only.")
         exit(1)
 
     return args_dict
@@ -49,6 +62,4 @@ if __name__ == "__main__":
     valid_args = validate_args(args)
 
     processor = PhoneticTextCreator(**valid_args)
-
-    processor.create_csv()
 
