@@ -27,18 +27,17 @@ class PhoneticTextCreator:
             data_reader = csv.reader(file, delimiter=',')
             data_writer = csv.writer(output, delimiter='\t')
 
-            prev_lang = ''
+            all_langs = []
             num = 0
             for row in data_reader:
                 lang, path_org, path_wordlist = row[0], row[1], row[2]
 
-                # differentiate texts of different languages
-                if lang == prev_lang:
-                    num += 1
-                else:
+                # differentiate texts of same languages
+                if lang not in all_langs:
+                    all_langs.append(lang)
                     num = 0
-
-                prev_lang = lang
+                else:
+                    num += 1
 
                 # create new file name including the custom name
                 new_file_name = lang + '_' + str(num) + '_phonetic' + ('_' if self.name else '') + self.name + '.txt'
