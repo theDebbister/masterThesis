@@ -13,6 +13,8 @@ Reallocating 'name_of_file' (item size: 1) to 23 items.
 A level-1 auxiliary file: chapters/acro-list.aux
 Reallocating 'name_of_file' (item size: 1) to 31 items.
 A level-1 auxiliary file: chapters/chap1Introduction.aux
+Reallocating 'name_of_file' (item size: 1) to 29 items.
+A level-1 auxiliary file: chapters/chap_background.aux
 Reallocating 'name_of_file' (item size: 1) to 24 items.
 A level-1 auxiliary file: chapters/chap2_data.aux
 Reallocating 'name_of_file' (item size: 1) to 25 items.
@@ -27,47 +29,59 @@ Reallocating 'name_of_file' (item size: 1) to 14 items.
 Reallocating 'name_of_file' (item size: 1) to 20 items.
 A level-1 auxiliary file: appendix/tables.aux
 Database file #1: biblio/thesis.bib
+Warning--entry type for "writing-systems" isn't style-file defined
+--line 411 of file biblio/thesis.bib
+Warning--entry type for "celex2-documentation" isn't style-file defined
+--line 428 of file biblio/thesis.bib
+Name 1 in "R H. Baayen, R Piepenbrock, and L Gulikers" has a comma at the end for entry celex2-documentation
+while executing---line 1347 of file abbrvnat.bst
+Name 1 in "R H. Baayen, R Piepenbrock, and L Gulikers" has a comma at the end for entry celex2-documentation
+while executing---line 1347 of file abbrvnat.bst
 Warning--empty author in 100LC.21.07.2021
 Warning--empty publisher in Intro.2007
-You've used 20 entries,
+Name 1 in "R H. Baayen, R Piepenbrock, and L Gulikers" has a comma at the end for entry celex2-documentation
+while executing---line 1429 of file abbrvnat.bst
+Name 1 in "R H. Baayen, R Piepenbrock, and L Gulikers" has a comma at the end for entry celex2-documentation
+while executing---line 1429 of file abbrvnat.bst
+You've used 24 entries,
             2773 wiz_defined-function locations,
-            749 strings with 9787 characters,
-and the built_in function-call counts, 10548 in all, are:
-= -- 968
-> -- 652
-< -- 17
-+ -- 222
-- -- 202
-* -- 845
-:= -- 1600
-add.period$ -- 91
-call.type$ -- 20
-change.case$ -- 125
-chr.to.int$ -- 20
-cite$ -- 42
-duplicate$ -- 463
-empty$ -- 815
-format.name$ -- 230
-if$ -- 2271
+            773 strings with 10624 characters,
+and the built_in function-call counts, 12345 in all, are:
+= -- 1133
+> -- 743
+< -- 21
++ -- 253
+- -- 229
+* -- 976
+:= -- 1863
+add.period$ -- 104
+call.type$ -- 24
+change.case$ -- 144
+chr.to.int$ -- 24
+cite$ -- 50
+duplicate$ -- 545
+empty$ -- 968
+format.name$ -- 265
+if$ -- 2664
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 18
-newline$ -- 130
-num.names$ -- 76
-pop$ -- 277
+missing$ -- 20
+newline$ -- 151
+num.names$ -- 92
+pop$ -- 321
 preamble$ -- 1
-purify$ -- 108
+purify$ -- 125
 quote$ -- 0
-skip$ -- 376
+skip$ -- 458
 stack$ -- 0
-substring$ -- 290
-swap$ -- 79
-text.length$ -- 6
+substring$ -- 355
+swap$ -- 94
+text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 205
+type$ -- 249
 warning$ -- 2
-while$ -- 77
+while$ -- 92
 width$ -- 0
-write$ -- 318
-(There were 2 warnings)
+write$ -- 370
+(There were 4 error messages)

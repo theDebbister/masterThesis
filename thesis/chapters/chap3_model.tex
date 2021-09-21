@@ -3,21 +3,13 @@
 \label{chap:3_model}
 This chapter introduces to the various methods and models that can be used to create phonetic transcription of various languages out of plain text.
 
-\section{Rule-based systems}
-\review{added section on literatur background in chapter two, not sure what to do with this here...}
 
-\review{add a few examples of rule-based systems and why and by whom they where outperformed (see \cite{Ashby&Bartley.2021, gorman-etal-2020-sigmorphon} for this purpose)}
+
+
 
 
 \section{Neural \ac{g2p}}
-A common way to transform written text into its phonetic version is referred to as \ac{g2p}. The idea behind this approach is that individual letters (graphemes) are converted into sounds represented as phonemes. The definition of phoneme in this context does not satisfy the precise linguistic definition. It is therefore to note that phoneme used here simply refers to the transcription symbols used to represent a specific sound in a specific language. 
-
-Other ways of grapheme-to-phoneme conversion will be described here (apart from the \ac{sigm} tasks which will be described below). 
-
-As with many NLP tasks, research focussed mainly on English or other languages where a lot of data is easily available \citep{gorman-etal-2020-sigmorphon}.
-
-
-The \ac{sigm} \citep{Sigmorphon.2021} regularly organizes shared tasks concerned with morphology and phonology. For the years 2020 and 2021 they organized a grapheme-to-phoneme conversion task \citep{Ashby&Bartley.2021, gorman-etal-2020-sigmorphon}. The tasks represent a first attempt at creating benchmarks for multilingual \ac{g2p} conversion. Both tasks and their results will be discussed in sections \ref{sig20} and \ref{sig21}. Although there is other research on \ac{g2p}, many recent publications have been made within the \ac{sigm} shared tasks which is why there are two separate sections on those tasks. 
+ 
 
 \subsection{Evaluation metrics}
 The most common metric to evaluate phonetic transcriptions is the \ac{wer}. This is the percentage of predicted transcriptions, that deviate from the gold standard. The lower, the better the model.   

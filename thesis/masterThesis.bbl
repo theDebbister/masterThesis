@@ -1,4 +1,4 @@
-\begin{thebibliography}{20}
+\begin{thebibliography}{24}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -32,9 +32,19 @@ L.~F. Ashby, T.~M. Bartley, S.~Clematide, L.~{Del Signore}, C.~Gibson,
   Stroudsburg, PA, USA, 2021. {Association for Computational Linguistics}.
 \newblock \doi{10.18653/v1/2021.sigmorphon-1.13}.
 
-\bibitem[Chodroff(19.07.2019)]{Chodroff.19.07.2019}
+\bibitem[Bisani and Ney(2008)]{ney-joint-sequence2008}
+M.~Bisani and H.~Ney.
+\newblock Joint-sequence models for grapheme-to-phoneme conversion.
+\newblock \emph{Speech Communication}, 50\penalty0 (5):\penalty0 434--451,
+  2008.
+\newblock ISSN 0167-6393.
+\newblock \doi{https://doi.org/10.1016/j.specom.2008.01.002}.
+\newblock URL
+  \url{https://www.sciencedirect.com/science/article/pii/S0167639308000046}.
+
+\bibitem[Chodroff(2019)]{Chodroff.19.07.2019}
 E.~Chodroff.
-\newblock {Corpus Phonetics Tutorial}, 19.07.2019.
+\newblock {Corpus Phonetics Tutorial}, 2019.
 \newblock URL \url{https://eleanorchodroff.com/tutorial/index.html#}.
 
 \bibitem[Comrie et~al.(2013)Comrie, Dryer, Gil, and
@@ -45,6 +55,11 @@ B.~Comrie, M.~S. Dryer, D.~Gil, and M.~Haspelmath.
   Language Structures Online}}. {Max Planck Institute for Evolutionary
   Anthropology}, Leipzig, 2013.
 \newblock URL \url{https://wals.info/chapter/s1}.
+
+\bibitem[CrashCourse(2021)]{writing-systems}
+CrashCourse, 2021.
+\newblock URL
+  \url{https://www.youtube.com/watch?v=-sUUWyo4RZQ&list=PL8dPuuaLjXtP5mp25nStsuDzk2blncJDW&index=18}.
 
 \bibitem[Gautam et~al.(2021)Gautam, Li, Mahmood, Mailhot, Nadig, Wang, and
   Zhang]{gautam.2021}
@@ -138,6 +153,18 @@ C.~U. Press.
 \newblock \emph{Journal of the International Phonetic Association}, 40\penalty0
   (3):\penalty0 299–358, 2010.
 \newblock \doi{10.1017/S0025100311000089}.
+
+\bibitem[R~H.~Baayen and Gulikers(2021)]{celex2-documentation}
+R.~P. R~H.~Baayen and L.~Gulikers, 2021.
+\newblock URL \url{https://catalog.ldc.upenn.edu/docs/LDC96L14/}.
+
+\bibitem[Rao et~al.(2015)Rao, Peng, Sak, and
+  Beaufays]{Rao2015GraphemetophonemeCU}
+K.~Rao, F.~Peng, H.~Sak, and F.~Beaufays.
+\newblock Grapheme-to-phoneme conversion using long short-term memory recurrent
+  neural networks.
+\newblock \emph{2015 IEEE International Conference on Acoustics, Speech and
+  Signal Processing (ICASSP)}, pages 4225--4229, 2015.
 
 \bibitem[Sigmorphon(2021)]{Sigmorphon.2021}
 Sigmorphon.

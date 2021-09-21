@@ -2,7 +2,7 @@
 \newchap{Introduction}
 \label{chap:1_intro}
 \section{Motivation}
-Comparing languages and studying their similarities and differences is part of a well-established branch of traditional linguistics called comparative linguistics. 
+Comparing languages and studying their similarities and differences is part of a well-established branch of traditional linguistics called comparative linguistics. While much of this research is done with written language, technologies like \ac{asr} or \ac{tts} require the processing of large amounts of spoken language. 
 
 Introduction to comparative and historical linguistics. \citep{Hock&Joseph.2019}
 
@@ -29,66 +29,6 @@ The primary goal of this thesis is to create phonetic transcriptions of as many 
 
 \section{Thesis structure}
 
-The thesis is subdivided into \review{six} chapters including a final conclusion. Chapter \ref{chap:1b_background} sets the boundaries of the theoretical background. It presents the linguistic foundation of phonetics and phonology, an introduction to corpus linguistics or rather corpus phonetics and finally an overview of the possibilities for automated creation of phonetic transcriptions. Chapter \ref{chap:2_data} introduces to the struggle of data collection. It explains the various data types and how those can be used. Chapter \ref{chap:3_model} dives deeper into the possibilities for creating phonetic transcriptions and what models can be used to create those. Chapter \ref{chap:4_exp} presents my own experiments to create phonetic transcriptions of the corpus.
+The thesis is subdivided into \review{six} chapters including a final conclusion. Chapter \ref{chap_background} sets the boundaries of the theoretical background. It presents the linguistic foundation of phonetics and phonology, an introduction to corpus linguistics or rather corpus phonetics and finally an overview of the possibilities for automated creation of phonetic transcriptions. Chapter \ref{chap:2_data} introduces to the struggle of data collection. It explains the various data types and how those can be used. Chapter \ref{chap:3_model} dives deeper into the possibilities for creating phonetic transcriptions and what models can be used to create those. Chapter \ref{chap:4_exp} presents my own experiments to create phonetic transcriptions of the corpus.
 
 
-\newchap{Research Background}
-\label{chap:1b_background}
-
-\section{The corpus}
-\label{corpus}
-The corpus contains 100 languages which are proposed by \citet{Comrie&Dryer.2013}. This online book contains different chapters each of which shows a different linguistic feature including a map which shows the distribution of that feature over the world's languages. While the number of languages presented on the individual maps depends on the amount of research done in a specific area, the sum of all maps gives quite an impressive overview on the structure of nearly half of the world's languages. Out of the 2676 languages a sample of 100 languages was chosen. This sample does not contain too many languages from one area, neither does it contain too many languages from one family. Not considering the aforementioned criteria of maximizing genealogical and areal diversity can lead to misleading results. Figure \ref{fig:100lc} shows the distribution of the corpus on a world map. The different icons show the genus of the languages which is a classification of languages defined by the \ac{wals} team that maintains the language collection. The interactive map can be viewed online \citep{100LC.21.07.2021}. Table \ref{tab:100LC} in the appendix A shows all languages that are in the 100 language corpus. 
-
-%\fig{#1: filename}{#2: label}{#3: long caption}{#4: width}{#5: short caption}
-\fig{images/100sample.png}{fig:100lc}{WALS - 100 Language Sample}{\textwidth}{100 Language Sample}
-
-\section{Corpus linguistics and quantitative analysis}
-\review{The relation between spoken and written language. Remember that writing systems came only much later compared to language in general. Can they capture language as such well enough? Computational linguistics deals mostly with written languages, what does linguistics say and do?}
-
-\section{Introduction to phonetics and phonology}
-Given that phonetics and phonology is a sub-area of traditional linguistics and often only touched on superficially in computational linguistics, I will summarise the most important assumptions and terms concerning said field. A very important terminological distinction is between phonetics and phonology. While phonetics refers to the study of actual sounds, phonology refers to the study of sound \textit{systems}. In phonetics, it is not so much important what the different sounds mean, but how they are produced and perceived and what different sounds a human being can produce and perceive at all. When it comes to human communication using spoken language, many of these sounds are not actually used to produce distinguishable meaning. This is why on the other hand phonology is important to describe the set of distinguishable sounds that make up a language. For example: the letter /r/ in English can be pronounced in many different ways. None of those pronunciations produces a change in meaning. This means that there exist many different \textit{phonetic} sounds but only one \textit{phonological}. Those sounds are referred to as phone and phoneme respectively. While there are infinitely many phones there are only finitely many phonemes in a language. Not all different possible sounds are actually considered qualitatively `good' sounds of a language. Usually there is a subset of all possible phones that is accepted as `good quality sounds' within all different dialects of a language \citep{Intro.2007}. An obvious example being loudness: Although very silent speech produces correct phones, these are not 'good quality' as they simply cannot be understood. Or speaking in English with hardly any mouth and tongue movement. Although this produces understandable sound, it is not generally considered good speech. 
-
-The alphabets used to represent sounds in different languages do not uniquely map a letter to one specific phoneme. Most of the time, there is a standard pronunciation of each letter that is trained by reciting the alphabet. However, in reciting the alphabet there is a vowel added to the consonants in order to pronounce them more easily. These explanations make clear that the mapping of written text to spoken text in various languages is complex. In order to make things easier, there is the International Phonetic Alphabet (IPA) that can be used to transcribe any text in any language to a phonetic text \citep{Intro.2007}. 
-
-It is important to note at this point that the terms phonetic and phonemic respectively phone and phoneme are sometimes used interchangeably. Their linguistic definition as given above is clear while the definition on the computational side is often less strict. \review{definition of phoneme / phone, the one that is used e.g. in Lee et al. [2020], foot note 4}
-
-\subsection*{Writing systems}
-Unlike spoken language that was a part of human interaction all the time, writing systems only developed over time. There are different writing systems that developed in different places at different times. The structure of the spoken language, the cultural context or the tools that were at hand to write are a few of many factors that influenced the emergence of a specific writing system. A single grapheme can represent either a phoneme, a syllables or words. In German, for example, the writing system consists of an alphabet, the Latin alphabet.  The Latin alphabet is used for many different languages in western Europe and those languages that were influence by colonisation. There are other alphabets like the Cyrillic or the Greek alphabet. Having an alphabet means that each grapheme of the alphabet represents a phoneme. The exact phonemic realisation of the grapheme depends on the context, so there is not necessarily a one-to-one mapping. Many language use accents to slightly change the sound of a grapheme or they use more than one grapheme to represent one sound. Apart from these conventions spoken and written languages change differently over time. Spoken languages are typically more flexible and ready to change while their written representation often stays the same. This can lead to official governmental interventions like the German orthography reform of 1996 that intended to adapt the German spelling to represent the German pronunciation more adequately. Also, major inventions like printing machines gave rise to standardization of writing systems as reading and writing became more common.
-
-A special variant of an alphabet-language is abjad. Abjad represents only consonants and no vocals. Semitic languages make use of abjad. A part from alphabets, there are also syllabic and logographic writing systems. In syllabaries, a grapheme represents a syllable instead of a single sound. Examples are the Japanese Hiragana and Katakana. Logographic systems represent entire words or morphemes as graphemes. Chinese is an example for a logographic system. We cannot break down Chinese signs into single morphemes or letters. The history and development of writing systems is an entire independent study area. For this thesis it is mostly important to be aware of the independently developing systems. Not all scripts can be treated the same and this most certainly has implications on models to create phonetic transcription. 
-
-An exception to the above explained characteristics of an alphabet are phonetic alphabets like the \ac{ipalpha} where each grapheme represents exactly one phone. More on this special alphabet will be explained in section \ref{transcb-conventions}.
-\review{add example}. 
-
-(\href{https://www.youtube.com/watch?v=-sUUWyo4RZQ&list=PL8dPuuaLjXtP5mp25nStsuDzk2blncJDW&index=17}{video})
-
-
-
-\section{Corpus phonetics}
-Due to recent technological advancement it has become possible to store large digital collections of speech recordings and their aligned transcriptions. These possibilities gave rise to a wider acknowledgement of corpus phonetics. Corpus phonetics deals with an abundance of linguistic variation. In addition to language, style or vocabulary variation, there are differences in dialect and idiolect, physiological state of the speakers and their attitude \citep{Liberman.2019, Chodroff.19.07.2019}. Many methods and tools used in corpus phonetics are based on \ac{asr} algorithms or simple programming \citep{Chodroff.19.07.2019}.
-
-\section{Automated phonetic transcription}
-Creating phonetic transcriptions is essentially a \ac{s2s} task. Like other \ac{nlp} tasks its goal is to transform a sequence of characters into another sequence of characters.  
-
-\subsection{Rule-based models}
-The first systems to create phonetic transcriptions of text were rule-based systems. Rule-based transcriptions models are built using linguistic pronunciation rules. In order to be able to create such a system, one needs to collect pronunciation rules first. While there are only a few language where such rules are ready and available for the general public there are many languages where those rules need to be created first. In order to create the rules in the first place, a lot of linguistic expertise is needed. A problem with rule-based approaches is mainly the maintenance of the systems. To maintain the system, experts need to keep track of language change which is time consuming and expensive. In addition, most languages are irregular in their pronunciation and those irregularities need to be tracked. Due to the open-vocabulary situation which is caused by constant language change and some flexibility in language use, all systems must be able to deal with rare and unseen words. Rule-based systems are outperformed by more recent neural systems \citep{gorman-etal-2020-sigmorphon, Ashby&Bartley.2021}. 
-To the best of my knowledge, there have not been published any more new rule-based systems in the last few years. Many examples considered only one language (see e.g. \citep{rule-based2009}).
-
-\subsection{N-gram Models / Statistical models}
-These are sometimes referred to as traditional models. 
-
-
-\subsection{Neural models}
-Neural G2P models have been reported to outperform most other models \citep{Lee&Ashby.2020}. Many researchers experiment with different variants of LSTM models \citep{Lee&Ashby.2020, hammond-2021-data, gautam.2021}. 
-
-transducers: those are like automaton. Unlike automaton that only tell you if a certain sequence is in a particular language, transducers output something at every state. 
-
-seq2seq: condition output sequence on entire input sequence. This does not work well for input that gets continuously longer or very long input sequences. 
-
-Neural transducers, as presented by \citet{jaitly2016neural}, extend previously used \ac{s2s} models. They can treat more arriving input without having to redo the entire calculation for the entire updated sequence. At each time step, the neural transducer can output zero to many output symbols. 
-
-
-A problem with creating phonetic transcriptions is that the input and output segments are not always of the same length. It is difficult to align input and output. 
-
-
-Generally, there is a difference between models that assume conditional independence between the each output step (e.g. Hidden Markov Models) and there are models that do not make this assumption but condition the current output on the entire sequence before (seq2seq). Seq2seq models, however, have to wait until the full input sequence is processed before they can start decoding.  
