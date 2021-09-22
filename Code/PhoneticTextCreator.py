@@ -23,8 +23,9 @@ class PhoneticTextCreator:
             self._create_phonetic_text(text, wordlist, self.lang)
 
     def _process_csv(self) -> None:
-        with open(self.csv_file, 'r', encoding='utf8') as file, open(self.output_name, 'a', encoding='utf8', newline='') as output:
-            data_reader = csv.reader(file, delimiter=',')
+        with open(self.csv_file, 'r', encoding='utf8') as file, \
+             open(self.output_name, 'a', encoding='utf8', newline='') as output:
+            data_reader = csv.reader(file, delimiter=';')
             data_writer = csv.writer(output, delimiter='\t')
 
             all_langs = []
@@ -49,6 +50,7 @@ class PhoneticTextCreator:
                 with open(new_file_name, 'w', encoding='utf8') as new_phonetic:
                     new_phonetic.write(phonetic_text)
 
+
                 new_row = [lang, path_org, path_wordlist, new_file_name, per_transcribed, per_concat, per_unk]
                 data_writer.writerow(new_row)
 
@@ -62,12 +64,15 @@ class PhoneticTextCreator:
 
     @staticmethod
     def _preprocess_text(text: str) -> [str]:
-        with open(text, 'r', encoding='utf8') as text_file:
-            text = text_file.read()
-        text = text.lower()
-        text = re.sub(r'[\?!:;\.,\"\(\)]', "", text)
-        text = re.sub(r'[\'\-]', " ", text)
-        text = text.split()
+        try:
+            with open(text, 'r', encoding='utf8') as text_file:
+                text = text_file.read()
+            text = text.lower()
+            text = re.sub(r'[\?!:;\.,\"\(\)]', "", text)
+            text = re.sub(r'[\'\-]', " ", text)
+            text = text.split()
+        except UnicodeDecodeError:
+            print(text)
 
         return text
 

@@ -30,11 +30,11 @@
 \contentsline {subsection}{\numberline {3.2.2}Pronunciation Dictionaries}{13}{subsection.3.2.2}%
 \contentsline {section}{\numberline {3.3}Transkribus}{14}{section.3.3}%
 \contentsline {chapter}{\numberline {4}Models for Phonetic Transcription}{15}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Neural \ac {g2p}}{15}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Evaluation metrics}{15}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}SIGMORPHON task 2020}{15}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}SIGMORPHON task 2021}{15}{subsection.4.1.3}%
-\contentsline {section}{\numberline {4.2}Low-resource setting}{17}{section.4.2}%
+\contentsline {section}{\numberline {4.1}Evaluation metrics}{15}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Neural \ac {g2p}}{15}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}SIGMORPHON task 2020}{15}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}SIGMORPHON task 2021}{16}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Low-resource setting}{17}{section.4.3}%
 \contentsline {chapter}{\numberline {5}Experiments}{18}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Typewriting pdf phonetic transcriptions and training a model to do OCR}{18}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Creating full texts out of pronunciation dictionaries}{18}{section.5.2}%
