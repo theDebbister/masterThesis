@@ -41,7 +41,7 @@ class PhoneticTextCreator:
                     num += 1
 
                 # create new file name including the custom name
-                new_file_name = lang + '_' + str(num) + '_phonetic' + ('_' if self.name else '') + self.name + '.txt'
+                new_file_name = 'output/' + lang + '_' + str(num) + '_phonetic' + ('_' if self.name else '') + self.name + '.txt'
 
                 phonetic_text, per_transcribed, per_concat, per_unk = self._create_phonetic_text(path_org,
                                                                                                  path_wordlist,
@@ -50,13 +50,12 @@ class PhoneticTextCreator:
                 with open(new_file_name, 'w', encoding='utf8') as new_phonetic:
                     new_phonetic.write(phonetic_text)
 
-
-                new_row = [lang, path_org, path_wordlist, new_file_name, per_transcribed, per_concat, per_unk]
+                new_row = [lang, per_transcribed, per_concat, per_unk, path_org, path_wordlist, new_file_name]
                 data_writer.writerow(new_row)
 
     def _prepare_output_file(self):
-        header = ['lang-code (iso 639-3)', 'path-original', 'path-wordlist',
-                  'path-phonetic-text', 'per-transcribed', 'per-concat', 'per-unk']
+        header = ['lang-code (iso 639-3)', 'per-transcribed', 'per-concat', 'per-unk', 'WER', 'CER', 'path-original',
+                  'path-wordlist', 'path-phonetic-text']
 
         with open(self.output_name, 'w', newline='') as output:
             writer = csv.writer(output, delimiter='\t')
@@ -69,7 +68,7 @@ class PhoneticTextCreator:
                 text = text_file.read()
             text = text.lower()
             text = re.sub(r'[\?!:;\.,\"\(\)]', "", text)
-            text = re.sub(r'[\'\-]', " ", text)
+            text = re.sub(r'[\'\-。，]', " ", text)
             text = text.split()
         except UnicodeDecodeError:
             print(text)

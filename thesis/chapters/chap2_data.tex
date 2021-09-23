@@ -8,13 +8,24 @@ Another problem that needs be dealt with are different transcription conventions
 
 \begin{description}
 \item[IPA] The \ac{ipa} has one of the most common phonetic transcription conventions used in linguistics. 
-\item[DISC] The \ac{disc} convention is different from most of the others as it assigns exactly one ASCII code to each phone. The alphabet covers only Dutch, English and German phone inventories \citep{celex2-documentation}. It is therefore very impractical for a multilingual corpus. However, it is still in use and can be found in some papers (e.g. \cite{Rao2015GraphemetophonemeCU}). 
+\item[DISC] The \acs{disc} convention is different from most of the others as it assigns exactly one ASCII code to each phone. The alphabet covers only Dutch, English and German phone inventories \citep{celex2-documentation}. It is therefore very impractical for a multilingual corpus. However, it is still in use and can be found in some papers (e.g. \cite{Rao2015GraphemetophonemeCU}). 
 \end{description}
 
-Apart from different character sets there are different levels of detail. Not all transcriptions represent the phonetics in equal detail. Generally, there is the distinction of broad and narrow transcription. These two go back to the linguistic distinction of phone and phoneme. Broad refers to a phonemic description. Following the linguistic definition in chapter \ref{chap:2_data}, this means that the transcription does not transcribe speaker specific pronunciations or dialectal variations. This kind of transcription is therefore less complex and usually easier to create and understand. Narrow transcriptions are phonetic. They present every speaker individual or dialectal sounds as exactly as possible. 
+In order to guarantee comparability, some transcriptions need to be translated into other transcription conventions.
+
+Apart from different character sets there are different levels of detail. Not all transcriptions represent the phonetics in equal detail. Generally, there is the distinction of broad and narrow transcription. These two go back to the linguistic distinction of phone and phoneme. Broad refers to a phonemic description. Following the linguistic definition in chapter \ref{chap:2_data}, this means that the transcription does not transcribe speaker specific pronunciations or dialectal variations. This kind of transcription is therefore less complex and usually easier to create and understand. Narrow transcriptions are phonetic. They present every speaker individual or dialectal sounds as exactly as possible. Although the spoken text in narrow and broad transcription sounds only minimally different, the two texts can diverge greatly. It is important to treat broad and narrow transcriptions as two different kinds of transcriptions. 
 
 
-In order to guarantee comparability, some transcriptions need to be translated into other transcription conventions. 
+
+\begin{covexamples}
+%\textipa{pɪˈkʰʊ kʰɘˈʐɘf ɘë̝ˈŋʊ̃ ɜ̃n̪ˈt̪ë̝ʰ}
+\item \label{exNar} \textipa{p\textsci\textprimstress k\super h}
+\item \label{exBro}\textipa{p\textsci\textprimstress k\super h}
+\end{covexamples}
+
+
+
+Example \ref{exNar} is a narrow (phonetic) transcription of the beginning of the Mapudungun version of the short story \textit{The North Wind and the Sun}. The same text is transcribed broadly (phonemic) in example \ref{exBro}. As becomes clear in this example, the narrow transcriptions is much longer as it contains more different characters. 
 
 
 \section{Transcription Sources \& Formats}
@@ -25,7 +36,7 @@ For the task at hand, phonetic transcriptions in the form of fully transcribed t
 
 There are also open source tools. One of which is called tesseract. tesseract does not include the IPA alphabet. It is possible to train the model to include the IPA alphabet but this would need appropriate training data. \review{Add quote}
 
-Some transcriptions have been published in separate issues as part of a collection of articles called "Illustrations of the IPA".
+Some transcriptions have been published in separate issues as part of a collection of articles called "Illustrations of the IPA". While some of them are available in plain text format most of them are only available as pdfs or even images in text books. It is of course possible to manually type-write those which is what I did. More on how this is best done is explained in chapter \ref{chap:exp} on experiments.
 
 Additionally, some texts include short descriptions where certain pronunciations rules are explained which are not included in the transcriptions (especially stress). 
 
@@ -42,11 +53,7 @@ Another data type that is found quite often are lists of words' pronunciation. T
 There exist databases of pronunciation dictionaries. Many of those do not release the mining software used to extend the database with more languages \citep{Lee&Ashby.2020}. A very recent project that publishes pronunciation lists is WikiPron. The WikiPron project \citep{Lee&Ashby.2020} is an open-source Python mining tool to retrieve pronunciation data from Wiktionary. Their database contains 1.7 million word/pronunciation pairs in 165 languages. Both, the database and the tool, are freely available online. Apart from the mining tool and the database, WikiPron can be used for grapheme-to-phoneme modelling. More on this subject will be discussed in chapter \ref{chap:3_model}.
 In both G2P shared tasks organized by SIGMORPHON (see \ref{chap:3_model}, data provided by WikiPron was used. For the 2021 task, WikiPron was improved and additional scripts were added based on feedback and findings in the 2020 task. One major improvement was concerned with languages written in different scripts. WikiPron supports now the detection of different scripts and languages can be sorted according to those scripts.
 
-
-\section{Transkribus}
-In order to make use of as much data as possible, a software is used to manually transcribe the pdf scans.
-
-The software allows to make use of neural \ac{htr} models. There exists no pre-trained IPA model but I trained my own while transcribing the documents. On the website they mention that ideally training needs 5,000 - 10,000 words already transcribed. Although my available data is not nearly enough to train a reliable model, it was a great help to transcribe. As the scans where not handwritten text, the model still reached a surprisingly good quality. For the Hebrew transcription, the model reached a \ac{wer} of 34.52\% and a \ac{cer} of 6.11\%. The two main mistakes were made for two characters that were not even in the training data. The quality of the scans differed quite a lot which had an influence on the performance of the model as well. After transcribing another document I trained the model again and transcribed the remaining documents. The transcriptions got continuously better. 
+ 
 
 
  	
