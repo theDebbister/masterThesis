@@ -13,11 +13,13 @@ The corpus contains 100 languages which are proposed by \citet{Comrie&Dryer.2013
 
 \section{Introduction to phonetics and phonology}
 \label{phonology}
-Given that phonetics and phonology is a sub-area of traditional linguistics and often only touched on superficially in computational linguistics, I will summarise the most important assumptions and terms concerning said field. A very important terminological distinction is between phonetics and phonology. While phonetics refers to the study of actual sounds, phonology refers to the study of sound \textit{systems}. In phonetics, it is not so much important what the different sounds mean, but how they are produced and perceived and what different sounds a human being can produce and perceive at all. When it comes to human communication using spoken language, many of these sounds are not actually used to produce distinguishable meaning. This is why on the other hand phonology is important to describe the set of distinguishable sounds that make up a language. For example: the letter /r/ in English can be pronounced in many different ways. None of those pronunciations produces a change in meaning. This means that there exist many different \textit{phonetic} sounds but only one \textit{phonological}. Those sounds are referred to as phone and phoneme respectively. While there are infinitely many phones there are only finitely many phonemes in a language. Not all different possible sounds are actually considered qualitatively `good' sounds of a language. Usually there is a subset of all possible phones that is accepted as `good quality sounds' within all different dialects of a language \citep{Intro.2007}. An obvious example being loudness: Although very silent speech produces correct phones, these are not 'good quality' as they simply cannot be understood. Or speaking in English with hardly any mouth and tongue movement. Although this produces understandable sound, it is not generally considered good speech. 
+Given that phonetics and phonology is a sub-area of traditional linguistics and often only touched on superficially in computational linguistics, I will summarise the most important assumptions and terms concerning said field. A very important terminological distinction is between phonetics and phonology. While phonetics refers to the study of actual sounds, phonology refers to the study of sound \textit{systems}. In phonetics, it is not so much important what the different sounds mean, but how they are produced and perceived and what different sounds a human being can produce and perceive at all. When it comes to human communication using spoken language, many of these sounds are not actually used to produce distinguishable meaning. This is why on the other hand phonology is important to describe the set of distinguishable sounds that make up a language. For example: the letter /r/ in English can be pronounced in many different ways. None of those pronunciations produces a change in meaning. This means that there exist many different \textit{phonetic} sounds but only one \textit{phonological} or \textit{phonemic}. Those sounds are referred to as phone and phoneme respectively. While there are infinitely many phones there are only finitely many phonemes in a language. Not all different possible sounds are actually considered qualitatively `good' sounds of a language. Usually there is a subset of all possible phones that is accepted as `good quality sounds' within all different dialects of a language \citep{Intro.2007}. An obvious example being loudness: Although very silent speech produces correct phones, these are not 'good quality' as they simply cannot be understood. Or speaking in English with hardly any mouth and tongue movement. Although this produces understandable sound, it is not generally considered good speech. 
 
 The alphabets used to represent sounds in different languages do not uniquely map a letter to one specific phoneme. Most of the time, there is a standard pronunciation of each letter that is trained by reciting the alphabet. However, in reciting the alphabet there is a vowel added to the consonants in order to pronounce them more easily. These explanations make clear that the mapping of written text to spoken text in various languages is complex. In order to make things easier, there is the International Phonetic Alphabet (IPA) that can be used to transcribe any text in any language to a phonetic text \citep{Intro.2007}. 
 
 It is important to note at this point that the terms phonetic and phonemic respectively phone and phoneme are sometimes used interchangeably. Their linguistic definition as given above is clear while the definition on the computational side is often less strict. \review{definition of phoneme / phone, the one that is used e.g. in Lee et al. [2020], foot note 4}
+
+\review{add explanation of allophones, monophthongs, diphthong, suprasegmental they appear quite often in the lit (maybe make a glossary}
 
 \subsection*{Writing systems}
 \label{writing-sys}
@@ -27,7 +29,7 @@ A special variant of an alphabet-language is abjad. Abjad represents only conson
 
 \review{add example}
 
-An exception to the above explained characteristics of an alphabet are phonetic alphabets like the \ac{ipalpha} where each grapheme represents exactly one phone. More on this special alphabet will be explained in section \ref{transcb-conventions} \citep{writing-systems}.
+An exception to the above explained characteristics of an alphabet are phonetic alphabets like the \ac{ipalpha} where each grapheme represents exactly one phone  \citep{writing-systems}. More on this special alphabet will be explained in section \ref{transcb-conventions}.
 
 
 
@@ -35,7 +37,9 @@ An exception to the above explained characteristics of an alphabet are phonetic 
 Due to recent technological advancement it has become possible to store large digital collections of speech recordings and their aligned transcriptions. These possibilities gave rise to a wider acknowledgement of corpus phonetics. Corpus phonetics deals with an abundance of linguistic variation. In addition to language, style or vocabulary variation, there are differences in dialect and idiolect, physiological state of the speakers and their attitude \citep{Liberman.2019, Chodroff.19.07.2019}. Many methods and tools used in corpus phonetics are based on \ac{asr} algorithms or simple programming \citep{Chodroff.19.07.2019}.
 
 \section{Automated phonetic transcription}
-Today's technologies allow to build models that create phonetic transcriptions automatically given an original text. There are several approaches which will be discussed below. Creating phonetic transcriptions is essentially a \ac{s2s} task. Like other \ac{nlp} tasks its goal is to transform a sequence of characters into another sequence of characters. In the present case, the input sequence is a sequence of graphemes. These can look very differently depending on the script (see section \ref{writing-sys}). The output sequence is a sequence of phonemes\footnote[1]{Please refer to section \ref{phonology} in order to understand the terminological implications. As it is common in research, I will stick to the term \textit{phoneme} although strictly speaking it is not always correct.}. 
+Today's technologies allow to build models that create phonetic transcriptions automatically given an original text. There are several approaches which will be discussed below. Creating phonetic transcriptions is essentially a \ac{s2s} task. Like other \ac{nlp} tasks its goal is to transform a sequence of characters into another sequence of characters. In the present case, the input sequence is a sequence of graphemes. These can look very differently depending on the script (see section \ref{writing-sys}). The output sequence is a sequence of phonemes\footnote[1]{Please refer to section \ref{phonology} in order to understand the terminological implications phoneme. As it is common in research, I will stick to the term \textit{phoneme} although strictly speaking it is not always correct. Phoneme in this case just refers to any symbol that is used to represent that sound.}. A common way to transform written text into its phonetic version is referred to as \ac{g2p}. The idea behind this approach is that individual letters (graphemes) are converted into sounds represented as phonemes. 
+
+Most of the research done in this area is limited to the English language. This is not uncommon in \ac{nlp} research. The overwhelming availability of English data resources and the unavailability and serious struggles to find data in other languages heavily influences this research. \citet{Ashby&Bartley.2021} report that the \ac{sigm} \ac{g2p} tasks in 2020 and 2021 is the first attempt to tackle multilingual \ac{g2p}. While these are very recent tasks, there earlier models and methods that contributed to the evolving of modern \ac{g2p} methods.
 
 \subsection{Rule-based models}
 The first systems to create phonetic transcriptions of text were rule-based systems. Rule-based transcriptions models are built using linguistic pronunciation rules. In order to be able to create such a system, one needs to collect pronunciation rules first. While there are only a few language where such rules are ready and available for the general public there are many languages where those rules need to be created first. In order to create the rules in the first place, a lot of linguistic expertise is needed. A problem with rule-based approaches is the maintenance of the systems. To maintain the system, experts need to keep track of language change which is time consuming and expensive. In addition, most languages are irregular in their pronunciation and those irregularities need to be tracked. Due to the open-vocabulary situation and the impossibility to cover all possible words, all systems must be able to deal with rare and unseen words \citep{Rao2015GraphemetophonemeCU, ney-joint-sequence2008}. Rule-based systems are outperformed by more recent neural systems \citep{gorman-etal-2020-sigmorphon, Ashby&Bartley.2021}. 
@@ -48,25 +52,11 @@ To the best of my knowledge, there have not been published any more new rule-bas
 \review{add a few examples of rule-based systems and why and by whom they where outperformed (see \cite{Ashby&Bartley.2021, gorman-etal-2020-sigmorphon} for this purpose)}
 
 \subsection{N-gram Models / Statistical models}
-These are sometimes referred to as traditional models. 
+N-gram models, statistical models or joint-sequence models were used before neural models took over the field. These are sometimes referred to as traditional models. One reason why they were outperformed by neural models is that it is necessary to construct alignments between grapheme and phonemes. This is necessary because one grapheme can be realized as multiple phonemes or vice versa. It is not possible to simply have a one-to-one alignment. \review{check \cite{lo-nicolai-2021-linguistic} they include a lot of references about this topic}
 
 
 \subsection{Neural models}
-
-
-Neural G2P models have been reported to outperform most other models \citep{Lee&Ashby.2020}. Many researchers experiment with different variants of LSTM models \citep{Lee&Ashby.2020, hammond-2021-data, gautam.2021, Rao2015GraphemetophonemeCU}. 
-
-A common way to transform written text into its phonetic version is referred to as \ac{g2p}. The idea behind this approach is that individual letters (graphemes) are converted into sounds represented as phonemes. The definition of phoneme in this context does not satisfy the precise linguistic definition. It is therefore to note that phoneme used here simply refers to the transcription symbols used to represent a specific sound in a specific language. 
-
-Other ways of grapheme-to-phoneme conversion will be described here (apart from the \ac{sigm} tasks which will be described below). 
-
-As with many NLP tasks, research focussed mainly on English or other languages where a lot of data is easily available \citep{gorman-etal-2020-sigmorphon}.
-
-
-The \ac{sigm} \citep{Sigmorphon.2021} regularly organizes shared tasks concerned with morphology and phonology. For the years 2020 and 2021 they organized a grapheme-to-phoneme conversion task \citep{Ashby&Bartley.2021, gorman-etal-2020-sigmorphon}. The tasks represent a first attempt at creating benchmarks for multilingual \ac{g2p} conversion. Both tasks and their results will be discussed in sections \ref{sig20} and \ref{sig21}. Although there is other research on \ac{g2p}, many recent publications have been made within the \ac{sigm} shared tasks which is why there are two separate sections on those tasks.
-
-
-
+Neural G2P models have been reported to outperform most other models \citep{Lee&Ashby.2020}. Many researchers experiment with different variants of LSTM models \citep{Lee&Ashby.2020, hammond-2021-data, gautam.2021, Rao2015GraphemetophonemeCU}. Many earlier neural LSTM models use a connectionist temporal classification layer to include alignment information \citep{lo-nicolai-2021-linguistic}. 
 
 transducers: those are like automaton. Unlike automaton that only tell you if a certain sequence is in a particular language, transducers output something at every state. 
 
@@ -78,4 +68,57 @@ Neural transducers, as presented by \citet{jaitly2016neural}, extend previously 
 A problem with creating phonetic transcriptions is that the input and output segments are not always of the same length. It is difficult to align input and output. 
 
 
-Generally, there is a difference between models that assume conditional independence between the each output step (e.g. Hidden Markov Models) and there are models that do not make this assumption but condition the current output on the entire sequence before (seq2seq). Seq2seq models, however, have to wait until the full input sequence is processed before they can start decoding.  
+Generally, there is a difference between models that assume conditional independence between the each output step (e.g. Hidden Markov Models) and there are models that do not make this assumption but condition the current output on the entire sequence before (seq2seq). Seq2seq models, however, have to wait until the full input sequence is processed before they can start decoding. 
+
+The \ac{sigm} \citep{Sigmorphon.2021} regularly organizes shared tasks concerned with morphology and phonology. For the years 2020 and 2021 they organized a grapheme-to-phoneme conversion task \citep{Ashby&Bartley.2021, gorman-etal-2020-sigmorphon}. The tasks represent a first attempt at creating benchmarks for multilingual \ac{g2p} conversion. Both tasks and their results will be discussed in sections \ref{sig20} and \ref{sig21}. Although there is other research on \ac{g2p}, many recent publications have been made within the \ac{sigm} shared tasks which is why there are two separate sections on those tasks. As the \ac{sigm} tasks are the most recent and probably most influential contributions to \ac{g2p} research, both tasks will be discussed separately below. 
+
+\subsection{SIGMORPHON task 2020}
+\label{sig20}
+
+\citet{yu-etal-2020} contributed to the 2020 \ac{sigm} \ac{g2p} task. Their contribution is of particular interest for this thesis as it proposes a data augmentation model for low-resource settings. As there are many languages in the corpus that have only very little available data, such a model could be of great use. The methodology applied in their approach is ensemble learning combined with a self-learning strategy. 
+
+
+\subsubsection*{Results}
+
+  
+\subsubsection*{Error analysis}
+
+
+\subsection{SIGMORPHON task 2021}
+\label{sig21}
+The second iteration of this \ac{g2p} task attempts at outperforming the models of the previous task. An additional challenge is its separation into high-, medium- and low-resource languages. This reflects the needs of this present research well, as many languages in the corpus are low resource languages. In preparation for the task, the WikiPron data (see chapter \ref{chap:2_data}) was cleaned to exclude foreign words that include phones that are not in the actual language's native phone inventory. If a word contained foreign phones, it was excluded. This was the case for words whose pronunciation was not adapted to the language at hand but the transcription of the foreign language was used. This cleaning was only applied to medium- and low-resource languages. Additionally, the lists were sorted according to scripts. There are many languages that use multiple scripts and using them in the same dataset does not produce good results. There were other steps done to ensure good quality of the datasets. I collected more on that subject in section \ref{data_qual}. 
+The final datasets have to following sizes: The high-resource subtask consisted of about 41,000 word-transcription pairs of American English only. The medium-resource task provided 10,000 word-transcription pairs for ten languages and the low-resource task another 1,000 for ten different languages \citep{Ashby&Bartley.2021}. The datasets were split into 80\% training data, 10\% development data and another 10\% test data. 
+
+The baseline for this year's G2P task is an adapted version of last year's submission by \citet{makarov-clematide-2020-cluzh}. The baseline model has been made available for this year's task. The model they use is a neural transducer that is trained with imitation learning. The basis of the neural transducer was originally designed for morphological inflection \citep{Aharoni&Goldberg.2016}. Instead of just learning to output the correct string, the model learns to produce an optimal sequence of edit actions needed to transform the input string into the output string. Due to the nature of inflection (overlapping alphabets of input and output sequences), the original model was encouraged to copy the input. This does not work well for G2P tasks as the input and the output alphabet are not always the same (especially for non-Latin scripts like Korean). \review{explain neural transducer, the model more in depth}. 
+
+As explained above, the model learns to create sequences of edit actions. The problem with this approach is that there are many possible sequences of edit actions that produce the same result. Imitation learning is proposed as a solution for this problem. \review{explain imitation learning better and more precise}. 
+
+\subsubsection*{Results}
+The results show that there are great differences in languages. One possible explanation is that the datasets were a mix between broad and narrow transcriptions. As narrow transcriptions contain much more detail, it can be argued that this is more difficult for any system. The authors doubt the influence of this but they could not (yet) quantify this impression. 
+
+Results in the low-resource setting are still worse compared to the medium-resource setting. This means that current systems seem to be unable to achieve a good performance when only using 800 samples for training. More research needs to be done in data augmentation techniques and improving the systems to cope with only little available data.
+
+The differing performance for various languages calls for the questions what makes a language hard to pronounce. Especially as for Georgian, all submissions and the basline reached a \ac{wer} of $0.0$.
+
+  
+\subsubsection*{Error analysis}
+in order to find most common errors of the systems, there were two types of analysis conducted. The first one is to simply find the most common wrongly transcribed grapheme-phoneme pairs. This analysis showed that many errors are due to the language internal ambiguities. Some errors go back to errors or inconsistency in the data. 
+The other type of analysis is to create a covering grammar. This means that a grammar is created that includes all possible combinations of grapheme-to-phoneme mappings that are allowed in this language. This set is constructed manually. This error analysis was only conducted for three languages in the medium setting and four of the low-resource languages. Then, words were considered that were predicted wrongly by the system. For those words it was checked whether the prediction by the system was completely wrong or if it was one of many possible transcriptions of that word. If so, the error was that system did not guess the correct transcription for this word. These errors could be considered ambiguities in the language. Another error type that can be identified by this analysis is when the reference transcription cannot be derived from the covering grammar. This can either mean that the covering grammar is incomplete or that the reference is a word that is very atypical for the language (e.g. borrowed word but not yet adapted to pronunciation rules) or simply wrong. 
+
+\section{Data quality considerations}
+\label{data_qual}
+\review{not sure where to put this, but I think it makes sense to have a separate section on data quality. Most papers include some things}
+Data quality is crucial in any machine learning application. Papers mostly include a section about their preprocessing and what should be done to ensure high quality datasets. The list given below is an incomplete list of potential problems and measures taken in different settings:
+
+\begin{itemize}
+\item \textbf{Exclusion of words with less than two Unicode characters or less than two phone segments} \citep{Ashby&Bartley.2021}
+\item \textbf{Separation by script} \citep{Ashby&Bartley.2021}: It is very straightforward why this is done. There is no obvious connection between the different scripts of a language and its pronunciation. It makes sense to treat different scripts as different languages. 
+\item \textbf{Exclude foreign words with foreign pronunciations} \citep{Ashby&Bartley.2021}: Foreign words in a language with their original pronunciation add phoneme that are not in that language's phoneme inventory. If they were to be included it made sense to include a pronunciation adapted to the actual language.
+\item \textbf{Words with multiple pronunciations in word lists}: \cite{Ashby&Bartley.2021} excluded those words, however, it might also be possible to add \ac{pos} tags or other linguistic information to distinguish these words.
+\item \textbf{Consistent broad transcriptions} \citep{Ashby&Bartley.2021}: With broad transcriptions it is important to be consistent and not use allophones. \cite{Ashby&Bartley.2021} did this specifically for Bulgarian.
+\item \textbf{Linguistic variation and processes} \citep{Ashby&Bartley.2021}: Some transcriptions include examples for monophthongization or deletion which are ongoing linguistic processes but should not be part of a dataset representing a standard variation. \cite{Ashby&Bartley.2021} dealt with monophthongization by choosing the longer to two transcriptions as this logically exclude the monophthonged version. This does of course only work if there are more than one pronunciations available. 
+\item \textbf{Tie bars}: \cite{Ashby&Bartley.2021} notice that some languages (English and Bulgarian) have inconsistent use of tie bars. This can be correct but replacing all inconsistencies by the tie-bar-version.
+\item \textbf{Errors in the transcriptions}: \citet{gautam.2021} noticed many errors in the WikiPron English data. They identified errors by looking at the least frequent phones and then check the word-pronunciation pairs where those phones occurred in. As the number of phones in a language is often known this can be used to check the phones in the datasets and identify uncommon ones. 
+\end{itemize}
+
+Especially the task of finding errors in the transcriptions is quite tricky. It often need a lot of knowledge about the phonology and phonetics of a specific language. 
