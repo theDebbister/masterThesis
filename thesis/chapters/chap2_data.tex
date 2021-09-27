@@ -32,11 +32,20 @@ Example \ref{exNar} is a narrow (phonetic) transcription of the beginning of the
 Phonetic transcriptions of various languages are available from different sources in different formats. In order to use those, they have to be converted into simple text format in appropriate encoding that can easily be read and processed by a machine. The following subsections list the different data types and how they are used.
 
 \subsection{Full Text}
-For the task at hand, phonetic transcriptions in the form of fully transcribed texts would be ideal. As became clear, it is hardly possible to find those. There is plenty of material describing how different languages can be transcribed but those rarely contain fully transcribed text. If they do, it is mostly limited to one or a few sentences. The JIPA continuously published different phonetic transcriptions of a short story called "The North Wind and the Sun". A collection of those is available in a handbook of the JIPA which is only available as a pdf scan of the original book \citep{JIPA2010}. While OCR is technically possible it turns out to be very difficult for IPA characters. The tools that exist do sometimes include IPA character recognition like the ABBYY FineReader which can be acquired for a fee. The CL institute at the UZH owns a version of the ABBYY tool but this version does not include the IPA module although ABBYY generally supports IPA character recognition. This ABBYY version was run on a JIPA pdf containing said phonetic transcriptions but the result could not be used. Mostly diacritics and special phonetic symbols were not correctly transcribed.
+For the task at hand, phonetic transcriptions in the form of fully transcribed texts would be ideal. As became clear, it is hardly possible to find those. There is plenty of material describing how different languages can be transcribed but those rarely contain fully transcribed text. If they do, it is mostly limited to one or a few sentences. The JIPA continuously published different phonetic transcriptions of a short story called ``The North Wind and the Sun". A collection of those is available in a handbook of the JIPA which is only available as a pdf scan of the original book \citep{JIPA2010}. While OCR is technically possible it turns out to be very difficult for IPA characters. The tools that exist do sometimes include IPA character recognition like the ABBYY FineReader which can be acquired for a fee. The CL institute at the UZH owns a version of the ABBYY tool but this version does not include the IPA module although ABBYY generally supports IPA character recognition. This ABBYY version was run on a JIPA pdf containing said phonetic transcriptions but the result could not be used. Mostly diacritics and special phonetic symbols were not correctly transcribed. There are also open source tools. One of which is called tesseract. tesseract does not include the IPA alphabet. It is possible to train the model to include the IPA alphabet but this would need appropriate training data. \review{Add quote}
 
-There are also open source tools. One of which is called tesseract. tesseract does not include the IPA alphabet. It is possible to train the model to include the IPA alphabet but this would need appropriate training data. \review{Add quote}
+Some transcriptions have been published in separate issues as part of a collection of articles called "Illustrations of the IPA". While some of them are available in plain text format most of them are only available as pdfs or even images in text books. It is of course possible to manually type-write those which is what I did. More on how this is best done is explained in chapter \ref{chap:exp} on experiments. Table \ref{north-wind-stories} shows the languages for which the short story is available and which are also in the corpus.
 
-Some transcriptions have been published in separate issues as part of a collection of articles called "Illustrations of the IPA". While some of them are available in plain text format most of them are only available as pdfs or even images in text books. It is of course possible to manually type-write those which is what I did. More on how this is best done is explained in chapter \ref{chap:exp} on experiments.
+\begin{table}[h!]
+\begin{center}
+\stepcounter{mytable}
+\csvautotabular{tables/overview.csv}
+\caption[The North Wind and the Sun]{The table shows a list of all the short stories ``The North Wind and the Sun" that are available as phonetic text and whose languages are in the corpus.}
+\label{north-wind-stories}
+\end{center}
+\end{table}
+
+
 
 Additionally, some texts include short descriptions where certain pronunciations rules are explained which are not included in the transcriptions (especially stress). 
 

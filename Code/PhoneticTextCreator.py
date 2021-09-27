@@ -1,6 +1,24 @@
 import re
 import pandas as pd
 import csv
+import jiwer
+import Levenshtein as lev
+
+
+def cer(hypothesis, reference):
+    cer_s, cer_i, cer_d, cer_n = 0, 0, 0, 0
+    # update CER statistics
+    stats = lev.opcodes(reference, hypothesis)
+    for op in stats:
+        if op[0] == 'replace':
+            cer_s += op[2] - op[1]
+        elif op[0] == 'insert':
+            cer_i += 1
+        elif op[0] == 'delete':
+            cer_d += op[2] - op[1]
+    cer_n = len(reference)
+
+    return (cer_s + cer_i + cer_d) / cer_n
 
 
 class PhoneticTextCreator:
@@ -14,6 +32,7 @@ class PhoneticTextCreator:
         self.name = name
         self.concat = concat
         self.output_name = "overview" + ('_' if self.name else '') + self.name + ".tsv"
+        self.stats_name = "stats" + ('_' if self.name else '') + self.name + ".csv"
 
         if not wordlist:
             self._prepare_output_file()
@@ -24,14 +43,19 @@ class PhoneticTextCreator:
 
     def _process_csv(self) -> None:
         with open(self.csv_file, 'r', encoding='utf8') as file, \
-             open(self.output_name, 'a', encoding='utf8', newline='') as output:
+                open(self.output_name, 'a', encoding='utf8', newline='') as output, \
+            open(self.stats_name, 'a', encoding='utf8', newline='') as stats:
             data_reader = csv.reader(file, delimiter=';')
             data_writer = csv.writer(output, delimiter='\t')
+            stats_writer = csv.writer(stats, delimiter=',')
 
             all_langs = []
             num = 0
             for row in data_reader:
-                lang, path_org, path_wordlist = row[0], row[1], row[2]
+                lang, path_org, path_wordlist, reference, type_ref, type_list = row[0], row[1], row[2], row[3], row[4], row[5]
+
+                with open(reference, 'r', encoding='utf8') as r:
+                    ref_text = r.read()
 
                 # differentiate texts of same languages
                 if lang not in all_langs:
@@ -41,25 +65,42 @@ class PhoneticTextCreator:
                     num += 1
 
                 # create new file name including the custom name
-                new_file_name = 'output/' + lang + '_' + str(num) + '_phonetic' + ('_' if self.name else '') + self.name + '.txt'
+                new_file_name = 'output/' + lang + '_' + str(num) + '_phonetic' + (
+                    '_' if self.name else '') + self.name + '.txt'
 
                 phonetic_text, per_transcribed, per_concat, per_unk = self._create_phonetic_text(path_org,
                                                                                                  path_wordlist,
                                                                                                  lang)
 
+                wer = round(jiwer.wer(ref_text, phonetic_text), 2)
+                print(lang)
+                cer_val = round(cer(ref_text, phonetic_text), 2)
+
                 with open(new_file_name, 'w', encoding='utf8') as new_phonetic:
                     new_phonetic.write(phonetic_text)
 
-                new_row = [lang, per_transcribed, per_concat, per_unk, path_org, path_wordlist, new_file_name]
+                new_row = [lang, per_transcribed, per_concat, per_unk, wer, cer_val,
+                           path_org, path_wordlist, new_file_name, type_ref, type_list]
+
                 data_writer.writerow(new_row)
 
+                new_stats_row = [lang, per_transcribed, wer, cer_val, type_ref, type_list]
+
+                stats_writer.writerow(new_stats_row)
+
     def _prepare_output_file(self):
-        header = ['lang-code (iso 639-3)', 'per-transcribed', 'per-concat', 'per-unk', 'WER', 'CER', 'path-original',
-                  'path-wordlist', 'path-phonetic-text']
+        header = ['lang-code (iso 639-3)', 'coverage', 'per-concat', 'per-unk', 'WER', 'CER', 'path-original',
+                  'path-wordlist', 'path-phonetic-text', 'type-ref', 'type-list']
+
+        stats_header = ['lang-code (iso 639-3)', 'coverage', 'WER', 'CER', 'type-ref', 'type-list']
 
         with open(self.output_name, 'w', newline='') as output:
             writer = csv.writer(output, delimiter='\t')
             writer.writerow(header)
+
+        with open(self.stats_name, 'w', newline='') as output:
+            writer = csv.writer(output, delimiter=',')
+            writer.writerow(stats_header)
 
     @staticmethod
     def _preprocess_text(text: str) -> [str]:
@@ -114,6 +155,7 @@ class PhoneticTextCreator:
                         phonetic_text += re.sub(r' ', '', wordlist[w1]) + re.sub(r' ', '', wordlist[w2]) + " "
                         splittable = True
                         count_concat += 1
+                        count_exist += 1
                         break
                 if not splittable:
                     phonetic_text += word.upper() + " "
@@ -123,12 +165,11 @@ class PhoneticTextCreator:
                 phonetic_text += word.upper() + " "
                 count_not_exist += 1
 
-        per_transcribed = round((count_exist / (count_not_exist + count_exist)) * 100, 2)
-        per_concat = round((count_concat / (count_not_exist + count_exist)) * 100, 2)
-        per_unk = round(100 - per_transcribed, 2)
+        per_transcribed = round((count_exist / (count_not_exist + count_exist + count_concat)) * 100, 2)
+        per_concat = round((count_concat / (count_not_exist + count_exist + count_concat)) * 100, 2)
+        per_unk = round((100 - per_transcribed), 2)
 
         self.percentage.append(per_transcribed)
         self.phonetic_text.append(phonetic_text)
 
         return phonetic_text, per_transcribed, per_concat, per_unk
-

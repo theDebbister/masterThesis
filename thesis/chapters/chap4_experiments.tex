@@ -18,8 +18,10 @@ In order to create full texts out of pronunciation dictionaries, I created a sim
 
 \begin{itemize}
 \item The pronunciation dictionaries sometimes included duplicates with different pronunciations. This is not surprising but still it needs to be handled well. A possible solution to this is to include \ac{pos} tags. Although this is generally possible it would  mean an significantly greater effort which exceeds this thesis' scope. Another solution is to simply delete duplicate words. A close examination also showed that sometimes, the duplicate pronunciations are wrong. As it is the case with the English word "would". \review{add this example indented}
-\item For some full texts it is not clear, whether their transcription is narrow or broad. On the other hand, sometimes there is no broad or narrow word list available for a specific language but only one of those.
+\item For some full texts it is not clear, whether their transcription is narrow or broad. On the other hand, sometimes there is no broad or narrow word list available for a specific language but only one of those. 
 \item The IPA allows to transcribe intonation segments. In German, those correspond mostly to punctuation marks like end of sentence symbols or commas. But this must not be true for every case. It needs to be decided if those should be kept or potentially deleted.
+\item In order to do this very simple experiment, it is necessary to tokenize the texts. This works well for languages using the Latin script. 
+\item WikiPron filtered some datasets for the \ac{sigm} shared task. \review{verify that}. whenever available I used the filtered version.
 \end{itemize}
 
 

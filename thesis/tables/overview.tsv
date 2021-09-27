@@ -1,0 +1,4 @@
+lang-code-iso-639-3,coverage,per-unk,WER,CER,type
+cmn,17.39,82.61,1.0,CER,
+deu,75.0,25.0,0.77,CER,broad
+deu,22.22,77.78,0.98,CER,narrow
