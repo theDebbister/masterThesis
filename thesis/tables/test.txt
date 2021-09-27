@@ -1,0 +1,15 @@
+\begin{longtable}{lrr}
+\stepcounter{mytable} \\
+\caption[100 Language Sample]{The table shows a list of the 100 languages in the corpus including information on the language families.} \\
+\\
+\hline
+\bfseries Iso639-3 &\bfseries Coverage  &\bfseries Unknown(\%) & WER & CER & Type \\ \midrule \endfirsthead \hline
+\bfseries Iso639-3 &\bfseries Coverage  &\bfseries Unknown(\%) & WER & CER & Type \\ \midrule \endhead 
+\bottomrule \endfoot
+\csvreader[    
+  late after line=\\,
+  before reading={\catcode`\#=12},
+  after reading={\catcode`\#=6}
+]{tables/overview.tsv}{1=\lang-code-iso-639-3,2=\coverage,3=\per-unk,4=\WER,5=\CER,6=\type}{\lang-code-iso-639-3 & \coverage & \per-unk & \WER & \CER & \type}
+\label{tab:100LC}
+\end{longtable}

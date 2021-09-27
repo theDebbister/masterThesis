@@ -1,0 +1,208 @@
+\begin{thebibliography}{25}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[100-language-sample()]{100LC.21.07.2021}
+100-language-sample.
+\newblock {WALS Online - Languages}.
+\newblock In M.~S. Dryer and M.~Haspelmath, editors, \emph{{The World Atlas of
+  Language Structures Online}}. {Max Planck Institute for Evolutionary
+  Anthropology}, Leipzig, 2013.
+\newblock URL \url{https://wals.info/languoid/samples/100}.
+
+\bibitem[Aharoni and Goldberg(2016)]{Aharoni&Goldberg.2016}
+R.~Aharoni and Y.~Goldberg.
+\newblock {Morphological Inflection Generation with Hard Monotonic Attention},
+  2016.
+\newblock URL \url{https://arxiv.org/pdf/1611.01487}.
+
+\bibitem[Ashby et~al.(2021)Ashby, Bartley, Clematide, {Del Signore}, Gibson,
+  Gorman, Lee-Sikka, Makarov, Malanoski, Miller, Ortiz, Raff, Sengupta, Seo,
+  Spektor, and Yan]{Ashby&Bartley.2021}
+L.~F. Ashby, T.~M. Bartley, S.~Clematide, L.~{Del Signore}, C.~Gibson,
+  K.~Gorman, Y.~Lee-Sikka, P.~Makarov, A.~Malanoski, S.~Miller, O.~Ortiz,
+  R.~Raff, A.~Sengupta, B.~Seo, Y.~Spektor, and W.~Yan.
+\newblock {Results of the Second SIGMORPHON Shared Task on Multilingual
+  Grapheme-to-Phoneme Conversion}.
+\newblock In \emph{{Proceedings of the 18th SIGMORPHON Workshop on
+  Computational Research in Phonetics, Phonology, and Morphology}},
+  Stroudsburg, PA, USA, 2021. {Association for Computational Linguistics}.
+\newblock \doi{10.18653/v1/2021.sigmorphon-1.13}.
+
+\bibitem[Bisani and Ney(2008)]{ney-joint-sequence2008}
+M.~Bisani and H.~Ney.
+\newblock Joint-sequence models for grapheme-to-phoneme conversion.
+\newblock \emph{Speech Communication}, 50\penalty0 (5):\penalty0 434--451,
+  2008.
+\newblock ISSN 0167-6393.
+\newblock \doi{https://doi.org/10.1016/j.specom.2008.01.002}.
+\newblock URL
+  \url{https://www.sciencedirect.com/science/article/pii/S0167639308000046}.
+
+\bibitem[Chodroff(2019)]{Chodroff.19.07.2019}
+E.~Chodroff.
+\newblock {Corpus Phonetics Tutorial}, 2019.
+\newblock URL \url{https://eleanorchodroff.com/tutorial/index.html#}.
+
+\bibitem[Comrie et~al.(2013)Comrie, Dryer, Gil, and
+  Haspelmath]{Comrie&Dryer.2013}
+B.~Comrie, M.~S. Dryer, D.~Gil, and M.~Haspelmath.
+\newblock {Introduction}.
+\newblock In M.~S. Dryer and M.~Haspelmath, editors, \emph{{The World Atlas of
+  Language Structures Online}}. {Max Planck Institute for Evolutionary
+  Anthropology}, Leipzig, 2013.
+\newblock URL \url{https://wals.info/chapter/s1}.
+
+\bibitem[CrashCourse(2021)]{writing-systems}
+CrashCourse, 2021.
+\newblock URL
+  \url{https://www.youtube.com/watch?v=-sUUWyo4RZQ&list=PL8dPuuaLjXtP5mp25nStsuDzk2blncJDW&index=18}.
+
+\bibitem[Gautam et~al.(2021)Gautam, Li, Mahmood, Mailhot, Nadig, Wang, and
+  Zhang]{gautam.2021}
+V.~Gautam, W.~Li, Z.~Mahmood, F.~Mailhot, S.~Nadig, R.~Wang, and N.~Zhang.
+\newblock Avengers, ensemble! benefits of ensembling in grapheme-to-phoneme
+  prediction.
+\newblock In \emph{Proceedings of the 18th SIGMORPHON Workshop on Computational
+  Research in Phonetics, Phonology, and Morphology}, pages 141--147, 01 2021.
+\newblock \doi{10.18653/v1/2021.sigmorphon-1.16}.
+
+\bibitem[Gorman et~al.(2020)Gorman, Ashby, Goyzueta, McCarthy, Wu, and
+  You]{gorman-etal-2020-sigmorphon}
+K.~Gorman, L.~F. Ashby, A.~Goyzueta, A.~McCarthy, S.~Wu, and D.~You.
+\newblock The {SIGMORPHON} 2020 shared task on multilingual grapheme-to-phoneme
+  conversion.
+\newblock In \emph{Proceedings of the 17th SIGMORPHON Workshop on Computational
+  Research in Phonetics, Phonology, and Morphology}, pages 40--50, Online, July
+  2020. Association for Computational Linguistics.
+\newblock \doi{10.18653/v1/2020.sigmorphon-1.2}.
+\newblock URL \url{https://aclanthology.org/2020.sigmorphon-1.2}.
+
+\bibitem[Hammond(2021)]{hammond-2021-data}
+M.~Hammond.
+\newblock Data augmentation for low-resource grapheme-to-phoneme mapping.
+\newblock In \emph{Proceedings of the 18th SIGMORPHON Workshop on Computational
+  Research in Phonetics, Phonology, and Morphology}, pages 126--130, Online,
+  Aug. 2021. Association for Computational Linguistics.
+\newblock \doi{10.18653/v1/2021.sigmorphon-1.14}.
+\newblock URL \url{https://aclanthology.org/2021.sigmorphon-1.14}.
+
+\bibitem[Hock and Joseph(2019)]{Hock&Joseph.2019}
+H.~H. Hock and B.~D. Joseph.
+\newblock \emph{{Language History, Language Change, and Language
+  Relationship}}.
+\newblock {De Gruyter}, 2019.
+\newblock ISBN 9783110613285.
+\newblock \doi{10.1515/9783110613285}.
+
+\bibitem[Jaitly et~al.(2016)Jaitly, Sussillo, Le, Vinyals, Sutskever, and
+  Bengio]{jaitly2016neural}
+N.~Jaitly, D.~Sussillo, Q.~V. Le, O.~Vinyals, I.~Sutskever, and S.~Bengio.
+\newblock A neural transducer, 2016.
+
+\bibitem[Kracht(2007)]{Intro.2007}
+M.~Kracht.
+\newblock \emph{{Introduction to linguistics}}.
+\newblock Los Angeles, 2007.
+\newblock URL
+  \url{https://linguistics.ucla.edu/people/kracht/courses/ling20-fall07/ling-intro.pdf}.
+
+\bibitem[Lee et~al.(2020)Lee, Ashby, Garza, Lee-Sikka, Miller, Wong, McCarthy,
+  and Gorman]{Lee&Ashby.2020}
+J.~L. Lee, L.~F. Ashby, M.~E. Garza, Y.~Lee-Sikka, S.~Miller, A.~Wong, A.~D.
+  McCarthy, and K.~Gorman.
+\newblock {Massively Multilingual Pronunciation Modeling with WikiPron}.
+\newblock In \emph{{Proceedings of the 12th Language Resources and Evaluation
+  Conference}}, pages 4223--4228, Marseille, France, 2020. {European Language
+  Resources Association}.
+\newblock ISBN 979-10-95546-34-4.
+\newblock URL \url{https://aclanthology.org/2020.lrec-1.521}.
+
+\bibitem[Liberman(2019)]{Liberman.2019}
+M.~Y. Liberman.
+\newblock {Corpus Phonetics}.
+\newblock \emph{{Annual Review of Linguistics}}, 5\penalty0 (1):\penalty0
+  91--107, 2019.
+\newblock ISSN 2333-9683.
+\newblock \doi{10.1146/annurev-linguistics-011516-033830}.
+
+\bibitem[Lo and Nicolai(2021)]{lo-nicolai-2021-linguistic}
+R.~Y.-H. Lo and G.~Nicolai.
+\newblock Linguistic knowledge in multilingual grapheme-to-phoneme conversion.
+\newblock In \emph{Proceedings of the 18th SIGMORPHON Workshop on Computational
+  Research in Phonetics, Phonology, and Morphology}, pages 131--140, Online,
+  Aug. 2021. Association for Computational Linguistics.
+\newblock \doi{10.18653/v1/2021.sigmorphon-1.15}.
+\newblock URL \url{https://aclanthology.org/2021.sigmorphon-1.15}.
+
+\bibitem[Makarov and Clematide(2020)]{makarov-clematide-2020-cluzh}
+P.~Makarov and S.~Clematide.
+\newblock {CLUZH} at {SIGMORPHON} 2020 shared task on multilingual
+  grapheme-to-phoneme conversion.
+\newblock In \emph{Proceedings of the 17th SIGMORPHON Workshop on Computational
+  Research in Phonetics, Phonology, and Morphology}, pages 171--176, Online,
+  July 2020. Association for Computational Linguistics.
+\newblock \doi{10.18653/v1/2020.sigmorphon-1.19}.
+\newblock URL \url{https://aclanthology.org/2020.sigmorphon-1.19}.
+
+\bibitem[McEnery and Hardie(2011)]{McEnery&Hardie.2011}
+T.~McEnery and A.~Hardie.
+\newblock \emph{{Corpus Linguistics: Method, theory and practice}}.
+\newblock {Cambridge textbooks in linguistics}. {Cambridge University Press},
+  Cambridge, 2011.
+\newblock ISBN 9780511981395.
+\newblock \doi{10.1017/CBO9780511981395}.
+
+\bibitem[Press(2010)]{JIPA2010}
+C.~U. Press.
+\newblock The principles of the international phonetic association (1949).
+\newblock \emph{Journal of the International Phonetic Association}, 40\penalty0
+  (3):\penalty0 299–358, 2010.
+\newblock \doi{10.1017/S0025100311000089}.
+
+\bibitem[R~H.~Baayen and Gulikers(2021)]{celex2-documentation}
+R.~P. R~H.~Baayen and L.~Gulikers, 2021.
+\newblock URL \url{https://catalog.ldc.upenn.edu/docs/LDC96L14/}.
+
+\bibitem[Rao et~al.(2015)Rao, Peng, Sak, and
+  Beaufays]{Rao2015GraphemetophonemeCU}
+K.~Rao, F.~Peng, H.~Sak, and F.~Beaufays.
+\newblock Grapheme-to-phoneme conversion using long short-term memory recurrent
+  neural networks.
+\newblock \emph{2015 IEEE International Conference on Acoustics, Speech and
+  Signal Processing (ICASSP)}, pages 4225--4229, 2015.
+
+\bibitem[Sigmorphon(2021)]{Sigmorphon.2021}
+Sigmorphon.
+\newblock {SIGMORPHON - Special Interest Group on Computational Morphology and
+  Phonology}, 2021.
+\newblock URL \url{https://sigmorphon.github.io/}.
+
+\bibitem[SPUR project()]{UniversityofZurich.19.07.2021}
+SPUR project.
+\newblock {Non-randomness in Morphological Diversity}, 2021.
+\newblock URL
+  \url{https://www.spur.uzh.ch/en/departments/research/textgroup/MorphDiv.html}.
+
+\bibitem[Toma and Munteanu(2009)]{rule-based2009}
+S.-A. Toma and D.~Munteanu.
+\newblock Rule-based automatic phonetic transcription for the romanian
+  language.
+\newblock \emph{Future Computing, Service Computation, Cognitive, Adaptive,
+  Content, Patterns, Computation World}, 0:\penalty0 682--686, 11 2009.
+\newblock \doi{10.1109/ComputationWorld.2009.59}.
+
+\bibitem[Yu et~al.(2020)Yu, Vu, and Kuhn]{yu-etal-2020}
+X.~Yu, N.~T. Vu, and J.~Kuhn.
+\newblock Ensemble self-training for low-resource languages:
+  Grapheme-to-phoneme conversion and morphological inflection.
+\newblock In \emph{Proceedings of the 17th SIGMORPHON Workshop on Computational
+  Research in Phonetics, Phonology, and Morphology}, pages 70--78, Online, July
+  2020. Association for Computational Linguistics.
+\newblock \doi{10.18653/v1/2020.sigmorphon-1.5}.
+\newblock URL \url{https://aclanthology.org/2020.sigmorphon-1.5}.
+
+\end{thebibliography}

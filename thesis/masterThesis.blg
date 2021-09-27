@@ -1,0 +1,87 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: masterThesis.aux
+Reallocating 'name_of_file' (item size: 1) to 28 items.
+A level-1 auxiliary file: chapters/titlepage_phil.aux
+Reallocating 'name_of_file' (item size: 1) to 22 items.
+A level-1 auxiliary file: chapters/abstract.aux
+Reallocating 'name_of_file' (item size: 1) to 20 items.
+A level-1 auxiliary file: chapters/acknow.aux
+Reallocating 'name_of_file' (item size: 1) to 19 items.
+A level-1 auxiliary file: chapters/index.aux
+Reallocating 'name_of_file' (item size: 1) to 23 items.
+A level-1 auxiliary file: chapters/acro-list.aux
+Reallocating 'name_of_file' (item size: 1) to 31 items.
+A level-1 auxiliary file: chapters/chap1Introduction.aux
+Reallocating 'name_of_file' (item size: 1) to 29 items.
+A level-1 auxiliary file: chapters/chap_background.aux
+Reallocating 'name_of_file' (item size: 1) to 24 items.
+A level-1 auxiliary file: chapters/chap2_data.aux
+Reallocating 'name_of_file' (item size: 1) to 25 items.
+A level-1 auxiliary file: chapters/chap3_model.aux
+Reallocating 'name_of_file' (item size: 1) to 31 items.
+A level-1 auxiliary file: chapters/chap4_experiments.aux
+Reallocating 'name_of_file' (item size: 1) to 24 items.
+A level-1 auxiliary file: chapters/references.aux
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+The style file: abbrvnat.bst
+Reallocating 'name_of_file' (item size: 1) to 14 items.
+Reallocating 'name_of_file' (item size: 1) to 20 items.
+A level-1 auxiliary file: appendix/tables.aux
+Database file #1: biblio/thesis.bib
+Warning--entry type for "writing-systems" isn't style-file defined
+--line 411 of file biblio/thesis.bib
+Warning--entry type for "celex2-documentation" isn't style-file defined
+--line 428 of file biblio/thesis.bib
+Name 1 in "R H. Baayen, R Piepenbrock, and L Gulikers" has a comma at the end for entry celex2-documentation
+while executing---line 1347 of file abbrvnat.bst
+Name 1 in "R H. Baayen, R Piepenbrock, and L Gulikers" has a comma at the end for entry celex2-documentation
+while executing---line 1347 of file abbrvnat.bst
+Warning--empty author in 100LC.21.07.2021
+Warning--empty publisher in Intro.2007
+Name 1 in "R H. Baayen, R Piepenbrock, and L Gulikers" has a comma at the end for entry celex2-documentation
+while executing---line 1429 of file abbrvnat.bst
+Name 1 in "R H. Baayen, R Piepenbrock, and L Gulikers" has a comma at the end for entry celex2-documentation
+while executing---line 1429 of file abbrvnat.bst
+You've used 25 entries,
+            2773 wiz_defined-function locations,
+            779 strings with 10842 characters,
+and the built_in function-call counts, 12960 in all, are:
+= -- 1201
+> -- 764
+< -- 23
++ -- 260
+- -- 235
+* -- 1019
+:= -- 1947
+add.period$ -- 110
+call.type$ -- 25
+change.case$ -- 149
+chr.to.int$ -- 25
+cite$ -- 52
+duplicate$ -- 577
+empty$ -- 1019
+format.name$ -- 274
+if$ -- 2807
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 21
+newline$ -- 158
+num.names$ -- 96
+pop$ -- 331
+preamble$ -- 1
+purify$ -- 129
+quote$ -- 0
+skip$ -- 484
+stack$ -- 0
+substring$ -- 389
+swap$ -- 105
+text.length$ -- 8
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 260
+warning$ -- 2
+while$ -- 98
+width$ -- 0
+write$ -- 389
+(There were 4 error messages)
