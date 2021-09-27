@@ -43,45 +43,45 @@ Name 1 in "R H. Baayen, R Piepenbrock, and L Gulikers" has a comma at the end fo
 while executing---line 1429 of file abbrvnat.bst
 Name 1 in "R H. Baayen, R Piepenbrock, and L Gulikers" has a comma at the end for entry celex2-documentation
 while executing---line 1429 of file abbrvnat.bst
-You've used 24 entries,
+You've used 25 entries,
             2773 wiz_defined-function locations,
-            773 strings with 10624 characters,
-and the built_in function-call counts, 12345 in all, are:
-= -- 1133
-> -- 743
-< -- 21
-+ -- 253
-- -- 229
-* -- 976
-:= -- 1863
-add.period$ -- 104
-call.type$ -- 24
-change.case$ -- 144
-chr.to.int$ -- 24
-cite$ -- 50
-duplicate$ -- 545
-empty$ -- 968
-format.name$ -- 265
-if$ -- 2664
+            779 strings with 10842 characters,
+and the built_in function-call counts, 12960 in all, are:
+= -- 1201
+> -- 764
+< -- 23
++ -- 260
+- -- 235
+* -- 1019
+:= -- 1947
+add.period$ -- 110
+call.type$ -- 25
+change.case$ -- 149
+chr.to.int$ -- 25
+cite$ -- 52
+duplicate$ -- 577
+empty$ -- 1019
+format.name$ -- 274
+if$ -- 2807
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 20
-newline$ -- 151
-num.names$ -- 92
-pop$ -- 321
+missing$ -- 21
+newline$ -- 158
+num.names$ -- 96
+pop$ -- 331
 preamble$ -- 1
-purify$ -- 125
+purify$ -- 129
 quote$ -- 0
-skip$ -- 458
+skip$ -- 484
 stack$ -- 0
-substring$ -- 355
-swap$ -- 94
-text.length$ -- 7
+substring$ -- 389
+swap$ -- 105
+text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 249
+type$ -- 260
 warning$ -- 2
-while$ -- 92
+while$ -- 98
 width$ -- 0
-write$ -- 370
+write$ -- 389
 (There were 4 error messages)

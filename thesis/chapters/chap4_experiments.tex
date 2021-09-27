@@ -8,19 +8,21 @@ In order to make use of as much data as possible, I used a software to manually 
 
 The software allows to make use of neural \ac{htr} models. There exists no pre-trained IPA model but I trained my own while transcribing the documents. On the website they mention that ideally training needs 5,000 - 10,000 words already transcribed. Although my available data is not nearly enough to train a reliable model, it was a great help to transcribe. As the scans where not handwritten text, the model still reached a surprisingly good quality. For the Hebrew transcription, the model reached a \ac{wer} of 34.52\% and a \ac{cer} of 6.11\%. The two main mistakes were made for two characters that were not even in the training data. The quality of the scans differed quite a lot which had an influence on the performance of the model as well. After transcribing another document I trained the model again and transcribed the remaining documents. The transcriptions got continuously better.
 
+\review{add more information on the model}
+
 \section{Pronunciation dictionary coverage}
-In order to get a feeling of how many words are covered in the word lists I created a script to calculate the coverage, the \ac{wer} and the \ac{cer}. I replaced the words in the texts with the words in the word list and compared it to the reference transcription.
+In order to get an understanding of how many words are covered in the word lists, I created a script to calculate the coverage, the \ac{wer} and the \ac{cer}. I replaced the words in the texts with the words in the word list and compared it to the reference transcription.
 
 
-In order to create full texts out of pronunciation dictionaries, I created a simple python script. There were several problems that needed to be addressed in order to create those texts. 
+In order to create full texts out of pronunciation dictionaries, I created a simple python script. While dealing with the full texts and the word lists, I noticed several things that are important when dealing with those texts.
 
 \begin{itemize}
-\item The pronunciation dictionaries sometimes included duplicates with different pronunciations. This is not surprising but still it needs to be handled well. A possible solution to this is to include \ac{pos} tags. Although this is generally possible it would  mean an significantly greater effort which might exceed this thesis' scope. 
-\item Not all words are in the dictionaries. This problematic as the texts cannot be fully transcribe in this way. A solution would be to transcribe only sentences and then pick those sentences that are fully transcribed. Another solution could be to have statistics of the most frequent missing words (in English 'and' is missing) and either transcribe them manually if possible, find transcriptions in the internet or check in the narrow / broad pronunciation dictionary and use this word instead. The latter possibility might corrupt the data, but as there are not that many missing words, it is worth a try.
-Another way to deal with missing words is to iteratively split the words in two or possibly three or more parts and check whether the subwords are in the dictionary. This depends on the specific language. In the case of English it was necessary to exclude splitting of the first and the last character separately as those are in the dictionary but with their alphabet reciting pronunciation which is typically not used within a word. For this approach it is necessary to have some language specific expertise.
-\item The IPA allows to transcribe intonation segments. In German, those correspond mostly to punctuation like end of sentence symbols or commas. But this must not be true for every case. In order to include those a close examination of the 
+\item The pronunciation dictionaries sometimes included duplicates with different pronunciations. This is not surprising but still it needs to be handled well. A possible solution to this is to include \ac{pos} tags. Although this is generally possible it would  mean an significantly greater effort which exceeds this thesis' scope. Another solution is to simply delete duplicate words. A close examination also showed that sometimes, the duplicate pronunciations are wrong. As it is the case with the English word "would". \review{add this example indented}
+\item For some full texts it is not clear, whether their transcription is narrow or broad. On the other hand, sometimes there is no broad or narrow word list available for a specific language but only one of those.
+\item The IPA allows to transcribe intonation segments. In German, those correspond mostly to punctuation marks like end of sentence symbols or commas. But this must not be true for every case. It needs to be decided if those should be kept or potentially deleted.
 \end{itemize}
 
 
 
 \section{Automatic \ac{g2p}}
+As there is only very little data available as full texts, we decided to use the short stories as test set for the experiments with \ac{g2p} models. Those texts are all manually created and are specifically created by linguists for the purpose of studying phonetics of many languages. 

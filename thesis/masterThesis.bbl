@@ -1,4 +1,4 @@
-\begin{thebibliography}{24}
+\begin{thebibliography}{25}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -128,6 +128,15 @@ M.~Y. Liberman.
   91--107, 2019.
 \newblock ISSN 2333-9683.
 \newblock \doi{10.1146/annurev-linguistics-011516-033830}.
+
+\bibitem[Lo and Nicolai(2021)]{lo-nicolai-2021-linguistic}
+R.~Y.-H. Lo and G.~Nicolai.
+\newblock Linguistic knowledge in multilingual grapheme-to-phoneme conversion.
+\newblock In \emph{Proceedings of the 18th SIGMORPHON Workshop on Computational
+  Research in Phonetics, Phonology, and Morphology}, pages 131--140, Online,
+  Aug. 2021. Association for Computational Linguistics.
+\newblock \doi{10.18653/v1/2021.sigmorphon-1.15}.
+\newblock URL \url{https://aclanthology.org/2021.sigmorphon-1.15}.
 
 \bibitem[Makarov and Clematide(2020)]{makarov-clematide-2020-cluzh}
 P.~Makarov and S.~Clematide.
