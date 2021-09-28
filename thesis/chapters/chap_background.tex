@@ -1,40 +1,6 @@
-\newchap{Research Background}
-\label{chap:background}
-
-\section{The corpus}
-\label{corpus}
-The corpus contains 100 languages which are proposed by \citet{Comrie&Dryer.2013}. This online book contains different chapters each of which shows a different linguistic feature including a map which shows the distribution of that feature over the world's languages. While the number of languages presented on the individual maps depends on the amount of research done in a specific area, the sum of all maps gives quite an impressive overview on the structure of nearly half of the world's languages. Out of the 2676 languages a sample of 100 languages was chosen. This sample does not contain too many languages from one area, neither does it contain too many languages from one family. Not considering the aforementioned criteria of maximizing genealogical and areal diversity can lead to misleading results. Figure \ref{fig:100lc} shows the distribution of the corpus on a world map. The different icons show the genus of the languages which is a classification of languages defined by the \ac{wals} team that maintains the language collection. The interactive map can be viewed online \citep{100LC.21.07.2021}. Table \ref{tab:100LC} in the appendix A shows all languages that are in the 100 language corpus. 
-
-%\fig{#1: filename}{#2: label}{#3: long caption}{#4: width}{#5: short caption}
-\fig{images/100sample.png}{fig:100lc}{WALS - 100 Language Sample}{\textwidth}{100 Language Sample}
-
-\section{Corpus linguistics and quantitative analysis}
-\review{The relation between spoken and written language. Remember that writing systems came only much later compared to language in general. Can they capture language as such well enough? Computational linguistics deals mostly with written languages, what does linguistics say and do?}
-
-\section{Introduction to phonetics and phonology}
-\label{phonology}
-Given that phonetics and phonology is a sub-area of traditional linguistics and often only touched on superficially in computational linguistics, I will summarise the most important assumptions and terms concerning said field. A very important terminological distinction is between phonetics and phonology. While phonetics refers to the study of actual sounds, phonology refers to the study of sound \textit{systems}. In phonetics, it is not so much important what the different sounds mean, but how they are produced and perceived and what different sounds a human being can produce and perceive at all. When it comes to human communication using spoken language, many of these sounds are not actually used to produce distinguishable meaning. This is why on the other hand phonology is important to describe the set of distinguishable sounds that make up a language. For example: the letter /r/ in English can be pronounced in many different ways. None of those pronunciations produces a change in meaning. This means that there exist many different \textit{phonetic} sounds but only one \textit{phonological} or \textit{phonemic}. Those sounds are referred to as phone and phoneme respectively. While there are infinitely many phones there are only finitely many phonemes in a language. Not all different possible sounds are actually considered qualitatively `good' sounds of a language. Usually there is a subset of all possible phones that is accepted as `good quality sounds' within all different dialects of a language \citep{Intro.2007}. An obvious example being loudness: Although very silent speech produces correct phones, these are not 'good quality' as they simply cannot be understood. Or speaking in English with hardly any mouth and tongue movement. Although this produces understandable sound, it is not generally considered good speech. 
-
-The alphabets used to represent sounds in different languages do not uniquely map a letter to one specific phoneme. Most of the time, there is a standard pronunciation of each letter that is trained by reciting the alphabet. However, in reciting the alphabet there is a vowel added to the consonants in order to pronounce them more easily. These explanations make clear that the mapping of written text to spoken text in various languages is complex. In order to make things easier, there is the International Phonetic Alphabet (IPA) that can be used to transcribe any text in any language to a phonetic text \citep{Intro.2007}. 
-
-It is important to note at this point that the terms phonetic and phonemic respectively phone and phoneme are sometimes used interchangeably. Their linguistic definition as given above is clear while the definition on the computational side is often less strict. \review{definition of phoneme / phone, the one that is used e.g. in Lee et al. [2020], foot note 4}
-
-\review{add explanation of allophones, monophthongs, diphthong, suprasegmental they appear quite often in the lit (maybe make a glossary}
-
-\subsection*{Writing systems}
-\label{writing-sys}
-Unlike spoken language that was a part of human interaction all the time, writing systems only developed over time. There are different writing systems that developed in different places at different times. The structure of the spoken language, the cultural context or the tools that were at hand to write are a few of many factors that influenced the emergence of a specific writing system. A single grapheme can represent either a phoneme, a syllables or words. In German, for example, the writing system consists of an alphabet, the Latin alphabet.  The Latin alphabet is used for many different languages in western Europe and those languages that were influence by colonisation. There are other alphabets like the Cyrillic or the Greek alphabet. Having an alphabet means that each grapheme of the alphabet represents a phoneme. The exact phonemic realisation of the grapheme depends on the context, so there is not necessarily a one-to-one mapping. Many language use accents to slightly change the sound of a grapheme or they use more than one grapheme to represent one sound. Apart from these conventions spoken and written languages change differently over time. Spoken languages are typically more flexible and ready to change while their written representation often stays the same. This can lead to official governmental interventions like the German orthography reform of 1996 that intended to adapt the German spelling to represent the German pronunciation more adequately. Also, major inventions like printing machines gave rise to standardization of writing systems as reading and writing became more common.
-
-A special variant of an alphabet-language is abjad. Abjad represents only consonants and no vocals. Semitic languages make use of abjad. A part from alphabets, there are also syllabic and logographic writing systems. In syllabaries, a grapheme represents a syllable instead of a single sound. Examples are the Japanese Hiragana and Katakana. Logographic systems represent entire words or morphemes as graphemes. Chinese is an example for a logographic system. We cannot break down Chinese signs into single morphemes or letters. The history and development of writing systems is an entire independent study area. For this thesis it is mostly important to be aware of the independently developing systems. Not all scripts can be treated the same and this most certainly has implications on models to create phonetic transcription. 
-
-\review{add example}
-
-An exception to the above explained characteristics of an alphabet are phonetic alphabets like the \ac{ipalpha} where each grapheme represents exactly one phone  \citep{writing-systems}. More on this special alphabet will be explained in section \ref{transcb-conventions}.
-
-
-
-\section{Corpus phonetics}
-Due to recent technological advancement it has become possible to store large digital collections of speech recordings and their aligned transcriptions. These possibilities gave rise to a wider acknowledgement of corpus phonetics. Corpus phonetics deals with an abundance of linguistic variation. In addition to language, style or vocabulary variation, there are differences in dialect and idiolect, physiological state of the speakers and their attitude \citep{Liberman.2019, Chodroff.19.07.2019}. Many methods and tools used in corpus phonetics are based on \ac{asr} algorithms or simple programming \citep{Chodroff.19.07.2019}.
+\newchap{Technical Background}
+\label{chap:tech-background}
+This chapter presents the technical background that is needed for this thesis. I will first present general architectures and frameworks that are commonly used and then present current models used for creating phonetic transcriptions. 
 
 \section{Automated phonetic transcription}
 Today's technologies allow to build models that create phonetic transcriptions automatically given an original text. There are several approaches which will be discussed below. Creating phonetic transcriptions is essentially a \ac{s2s} task. Like other \ac{nlp} tasks its goal is to transform a sequence of characters into another sequence of characters. In the present case, the input sequence is a sequence of graphemes. These can look very differently depending on the script (see section \ref{writing-sys}). The output sequence is a sequence of phonemes\footnote[1]{Please refer to section \ref{phonology} in order to understand the terminological implications phoneme. As it is common in research, I will stick to the term \textit{phoneme} although strictly speaking it is not always correct. Phoneme in this case just refers to any symbol that is used to represent that sound.}. A common way to transform written text into its phonetic version is referred to as \ac{g2p}. The idea behind this approach is that individual letters (graphemes) are converted into sounds represented as phonemes.  
@@ -52,17 +18,26 @@ To the best of my knowledge, there have not been published any more new rule-bas
 \review{add a few examples of rule-based systems and why and by whom they where outperformed (see \cite{Ashby&Bartley.2021, gorman-etal-2020-sigmorphon} for this purpose)}
 
 \subsection{N-gram Models / Statistical models}
-N-gram models, statistical models or joint-sequence models were used before neural models took over the field. These are sometimes referred to as traditional models. One reason why they were outperformed by neural models is that it is necessary to construct alignments between grapheme and phonemes. This is necessary because one grapheme can be realized as multiple phonemes or vice versa. It is not possible to simply have a one-to-one alignment. \review{check \cite{lo-nicolai-2021-linguistic} they include a lot of references about this topic}
+N-gram models, statistical models or joint-sequence models were used before neural models took over the field. These are sometimes referred to as traditional models. One reason why they were outperformed by neural models is that it is necessary to construct alignments between grapheme and phonemes. This is necessary because one grapheme can be realized as multiple phonemes or vice versa. It is not possible to simply have a one-to-one alignment. Joint-sequence models were often used with different versions of the \ac{em} algorithm. Other statistical models include weighted \ac{fst}s \citep{lo-nicolai-2021-linguistic}.
 
-
-\subsection{Neural models}
-Neural G2P models have been reported to outperform most other models \citep{Lee&Ashby.2020}. Many researchers experiment with different variants of LSTM models \citep{Lee&Ashby.2020, hammond-2021-data, gautam.2021, Rao2015GraphemetophonemeCU}. Many earlier neural LSTM models use a connectionist temporal classification layer to include alignment information \citep{lo-nicolai-2021-linguistic}. 
+\review{check \cite{lo-nicolai-2021-linguistic} they include a lot of references about this topic}
 
 transducers: those are like automaton. Unlike automaton that only tell you if a certain sequence is in a particular language, transducers output something at every state. 
 
-seq2seq: condition output sequence on entire input sequence. This does not work well for input that gets continuously longer or very long input sequences. 
+\subsection{Neural models}
+Neural G2P models have been reported to outperform most other models \citep{Lee&Ashby.2020}. Many researchers experiment with different variants of LSTM models \citep{Lee&Ashby.2020, hammond-2021-data, gautam.2021, Rao2015GraphemetophonemeCU}. But there are also other models that have been used. All of those will be introduced in the following.
 
+\subparagraph{LSTM}
+LSTM means long short-term memory. They are inspired by the simpler RNNs. As their name suggests they include what we could call a memory. Instead of just updating the state with all the at every step through the sequence, LSTMs can more flexibly decide what information is added to the state and what information should be forgotten.
+Many earlier neural LSTM models use a connectionist temporal classification layer to include alignment information \citep{lo-nicolai-2021-linguistic}. 
+
+\subparagraph{Transformer}
+
+\subparagraph{Neural Transducer}
 Neural transducers, as presented by \citet{jaitly2016neural}, extend previously used \ac{s2s} models. They can treat more arriving input without having to redo the entire calculation for the entire updated sequence. At each time step, the neural transducer can output zero to many output symbols. 
+
+
+seq2seq: condition output sequence on entire input sequence. This does not work well for input that gets continuously longer or very long input sequences. 
 
 
 A problem with creating phonetic transcriptions is that the input and output segments are not always of the same length. It is difficult to align input and output. 
@@ -98,7 +73,7 @@ The results show that there are great differences in languages. One possible exp
 
 Results in the low-resource setting are still worse compared to the medium-resource setting. This means that current systems seem to be unable to achieve a good performance when only using 800 samples for training. More research needs to be done in data augmentation techniques and improving the systems to cope with only little available data.
 
-The differing performance for various languages calls for the questions what makes a language hard to pronounce. Especially as for Georgian, all submissions and the basline reached a \ac{wer} of $0.0$.
+The differing performance for various languages calls for the questions what makes a language hard to pronounce. Especially as for Georgian which was in the medium-resource setting all submissions and the baseline reached a \ac{wer} of $0.0$. Interestingly enough, the \ac{wer} for the language in the high-resource setting, English, reached one of the highest \ac{wer}s.
 
   
 \subsubsection*{Error analysis}
@@ -108,7 +83,7 @@ The other type of analysis is to create a covering grammar. This means that a gr
 \section{Data quality considerations}
 \label{data_qual}
 \review{not sure where to put this, but I think it makes sense to have a separate section on data quality. Most papers include some things}
-Data quality is crucial in any machine learning application. Papers mostly include a section about their preprocessing and what should be done to ensure high quality datasets. The list given below is an incomplete list of potential problems and measures taken in different settings:
+Data quality is crucial in any machine learning application. Authors mostly include a section about their preprocessing and what should be done to ensure high quality datasets. The list given below is an incomplete list of potential problems and measures taken in different settings for \ac{g2p} data:
 
 \begin{itemize}
 \item \textbf{Exclusion of words with less than two Unicode characters or less than two phone segments} \citep{Ashby&Bartley.2021} \review{add an explanation}
@@ -122,3 +97,11 @@ Data quality is crucial in any machine learning application. Papers mostly inclu
 \end{itemize}
 
 Especially the task of finding errors in the transcriptions is quite tricky. It requires a lot of knowledge about the phonology and phonetics of a specific language. 
+
+\section{Random background}
+\review{I put things here that I had to look up working on this thesis but that might no end up in the final thesis, it is basically my notebook. I might put in into the glossary if it makes sense...}
+Monte Carlo simulation: a simulation that evolves randomly. We can, for example, estimate pi with a Monte Carlo simulation. The most basic intuition is that I can estimate something from random samples. The important thing is that the selection of the samples must be random and cannot be biased. A second factor that influences the reliability of the results is that the sample size must be large enough. According to the law of large numbers this is a common rule when estimating numbers. The Monte Carlo simulation can be used in situations where it is not possible to explore all possible combinations that are needed to produce a certain outcome (e.g. measuring the hight of all people living on this planet to obtain the average). In such cases we can pick a large enough sample randomly.
+
+\href{https://www.youtube.com/watch?v=7ESK5SaP-bc}{source}
+
+Student's t-test: This is a statistical test that tells us something about the significance of the difference between one result compared to another. If I have two  averages over two related (paired) or unrelated (unpaired) groups, the t-test tells me if the change from one average to the other is statistically significant. If not, the change can occur just as well by chance.  
