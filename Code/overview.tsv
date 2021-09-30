@@ -1,21 +1,21 @@
 lang-code (iso 639-3)	coverage	per-concat	per-unk	WER	CER	path-original	path-wordlist	path-phonetic-text	type-ref	type-list
-cmn	17.39	0.0	82.61	1.0	0.98	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/cmn-orthographic.txt	C:/Users/debor/wikipron/data/scrape/tsv/cmn_hani_broad.tsv	output/cmn_0_phonetic.txt		broad
+cmn	87.5	0.0	12.5	2.3	0.84	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/cmn-orthographic.txt	C:/Users/debor/wikipron/data/scrape/tsv/cmn_hani_broad.tsv	output/cmn_0_phonetic.txt		broad
 deu	75.0	0.0	25.0	0.77	0.52	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/deu-orthographic.txt	C:/Users/debor/wikipron/data/scrape/tsv/ger_latn_broad_filtered.tsv	output/deu_0_phonetic.txt	broad	broad
 deu	22.22	0.0	77.78	0.98	0.82	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/deu-orthographic.txt	C:/Users/debor/wikipron/data/scrape/tsv/ger_latn_narrow.tsv	output/deu_1_phonetic.txt	narrow	narrow
 deu	75.0	0.0	25.0	0.85	0.52	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/deu-orthographic.txt	C:/Users/debor/wikipron/data/scrape/tsv/ger_latn_broad_filtered.tsv	output/deu_2_phonetic.txt	narrow	broad
 deu	22.22	0.0	77.78	0.98	0.83	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/deu-orthographic.txt	C:/Users/debor/wikipron/data/scrape/tsv/ger_latn_narrow.tsv	output/deu_3_phonetic.txt	broad	narrow
 ell	6.14	0.0	93.86	1.0	0.9	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/ell-orthographic.txt	C:/Users/debor/masterThesis/data/word-list/gre_grek_narrow.tsv	output/ell_0_phonetic.txt		narrow
 ell	22.81	0.0	77.19	0.94	0.85	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/ell-orthographic.txt	C:/Users/debor/wikipron/data/scrape/tsv/gre_grek_broad_filtered.tsv	output/ell_1_phonetic.txt		broad
-eng	84.96	0.0	15.04	0.91	0.47	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/eng-orthographic.txt	C:/Users/debor/wikipron/data/scrape/tsv/eng_latn_uk_broad_filtered.tsv	output/eng_0_phonetic.txt	broad	broad
-eng	7.96	0.0	92.04	1.01	0.83	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/eng-orthographic.txt	C:/Users/debor/wikipron/data/scrape/tsv/eng_latn_uk_narrow.tsv	output/eng_1_phonetic.txt	narrow	narrow
-eng	7.96	0.0	92.04	1.0	0.83	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/eng-orthographic.txt	C:/Users/debor/wikipron/data/scrape/tsv/eng_latn_uk_narrow.tsv	output/eng_2_phonetic.txt	broad	narrow
-eng	84.96	0.0	15.04	0.93	0.45	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/eng-orthographic.txt	C:/Users/debor/wikipron/data/scrape/tsv/eng_latn_uk_broad_filtered.tsv	output/eng_3_phonetic.txt	narrow	broad
+eng	92.04	0.0	7.96	0.92	0.38	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/eng-orthographic.txt	C:/Users/debor/wikipron/data/scrape/tsv/eng_latn_us_broad_filtered.tsv	output/eng_0_phonetic.txt	broad	broad
+eng	7.08	0.0	92.92	1.01	0.83	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/eng-orthographic.txt	C:/Users/debor/wikipron/data/scrape/tsv/eng_latn_us_narrow.tsv	output/eng_1_phonetic.txt	narrow	narrow
+eng	7.08	0.0	92.92	1.0	0.83	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/eng-orthographic.txt	C:/Users/debor/wikipron/data/scrape/tsv/eng_latn_us_narrow.tsv	output/eng_2_phonetic.txt	broad	narrow
+eng	92.04	0.0	7.96	0.92	0.36	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/eng-orthographic.txt	C:/Users/debor/wikipron/data/scrape/tsv/eng_latn_us_broad_filtered.tsv	output/eng_3_phonetic.txt	narrow	broad
 eus	5.75	0.0	94.25	0.97	0.85	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/eus-ortho.txt	C:/Users/debor/wikipron/data/scrape/tsv/baq_latn_broad.tsv	output/eus_0_phonetic.txt	broad	broad
 eus	0.0	0.0	100.0	1.0	0.92	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/eus-ortho.txt	C:/Users/debor/wikipron/data/scrape/tsv/baq_latn_narrow.tsv	output/eus_1_phonetic.txt	narrow	narrow
 eus	0.0	0.0	100.0	1.0	0.89	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/eus-ortho.txt	C:/Users/debor/wikipron/data/scrape/tsv/baq_latn_narrow.tsv	output/eus_2_phonetic.txt	broad	narrow
 eus	5.75	0.0	94.25	0.98	0.89	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/eus-ortho.txt	C:/Users/debor/wikipron/data/scrape/tsv/baq_latn_broad.tsv	output/eus_3_phonetic.txt	narrow	broad
-heb	0.0	0.0	100.0	1.34	0.91	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/heb-orthographic.txt	C:/Users/debor/wikipron/data/scrape/tsv/heb_hebr_broad.tsv	output/heb_0_phonetic.txt		broad
-heb	0.0	0.0	100.0	1.34	0.91	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/heb-orthographic.txt	C:\Users\debor\masterThesis\data\word-list\heb_hebr_narrow.tsv	output/heb_1_phonetic.txt		narrow
+heb	0.0	0.0	100.0	1.28	0.92	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/heb-orthographic.txt	C:/Users/debor/wikipron/data/scrape/tsv/heb_hebr_broad.tsv	output/heb_0_phonetic.txt		broad
+heb	0.0	0.0	100.0	1.28	0.92	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/heb-orthographic.txt	C:\Users\debor\masterThesis\data\word-list\heb_hebr_narrow.tsv	output/heb_1_phonetic.txt		narrow
 ind	22.22	0.0	77.78	0.97	0.8	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/ind-orthographic.txt	C:/Users/debor/wikipron/data/scrape/tsv/ind_latn_broad.tsv	output/ind_0_phonetic.txt		broad
 ind	1.85	0.0	98.15	1.0	0.91	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/ind-orthographic.txt	C:\Users\debor\masterThesis\data\word-list\ind_latn_narrow.tsv	output/ind_1_phonetic.txt		narrow
 kat	43.66	0.0	56.34	0.86	0.66	C:/Users/debor/masterThesis/data/theNorthWindAndTheSun/kat-ortho.txt	C:/Users/debor/wikipron/data/scrape/tsv/geo_geor_broad_filtered.tsv	output/kat_0_phonetic.txt	broad	broad

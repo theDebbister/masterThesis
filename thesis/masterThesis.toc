@@ -43,7 +43,9 @@
 \contentsline {chapter}{\numberline {6}Experiments}{22}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Typewriting pdf phonetic transcriptions}{22}{section.6.1}%
 \contentsline {section}{\numberline {6.2}Pronunciation dictionary coverage}{23}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Automatic \ac {g2p}}{23}{section.6.3}%
-\contentsline {chapter}{References}{25}{section*.43}%
-\contentsline {chapter}{\numberline {A}Tables}{29}{appendix.A}%
+\contentsline {subparagraph}{\nonumberline Chinese}{24}{subparagraph*.43}%
+\contentsline {subparagraph}{\nonumberline Hebrew}{24}{subparagraph*.45}%
+\contentsline {section}{\numberline {6.3}Automatic \ac {g2p}}{24}{section.6.3}%
+\contentsline {chapter}{References}{26}{section*.47}%
+\contentsline {chapter}{\numberline {A}Tables}{30}{appendix.A}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

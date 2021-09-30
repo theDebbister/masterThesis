@@ -21,10 +21,28 @@ In order to get an understanding of how many words are covered in the word lists
 \item WikiPron filtered some datasets for the \ac{sigm} shared task. \review{verify that}. whenever available I used the filtered version.
 \end{itemize}
 
+The results from this experiment are summarized in table \ref{tab:coverage}. Generally it is good to see, that most texts are at least partially covered by the pronunciation dictionary. A closer examination of the results shows a few language specific issues that might be relevant in further experiments.
 
+
+\subparagraph{Chinese} Although the Chinese coverage is rather high, the \ac{wer} is very bad. This is due to the fact, that in the lists the tones are represented differently than in the reference text. It needs to be analysed if one of these formats can be converted into another format. \review{check the different tone transcriptions}
+\subparagraph{Hebrew} The only language that is not covered at all is Hebrew. A closer examination showed that the words in the text have many diacritics, while the words in the list do not have many diacritics. Additionally, the list if very short. 
+
+Whenever there were four experiments per language, the combination of the broad reference text written with the broad list had the best \ac{wer} and \ac{cer} or in the case of English the best \ac{wer} and a slightly worse \ac{cer}. However, this finding needs to be analysed with caution as the narrow word lists contain always less words than the broad ones. Interestingly enough, sometimes it does not matter if the text written with the broad word list is compared to the narrow transcription or the broad. In fact, for English, the text written with the broad list compared to the narrow reference shows a better \ac{cer}. This suggests that the differences in broad and narrow transcriptions are not great.
+For languages where the type of the transcriptions was unclear but two lists for available, the broad list produced the better results if there was any difference. 
+
+
+
+\begin{table}[h!]
+\begin{center}
+\stepcounter{mytable}
+\csvautotabular{tables/stats.csv}
+\caption[Coverage of Pronunciation Dictionaries]{The table shows the coverage, \ac{wer} and \ac{cer} when the pronunciation dictionaries are used to write ``The North Wind and the Sun".}
+\label{tab:coverage}
+\end{center}
+\end{table}
 
 \section{Automatic \ac{g2p}}
 As there is only very little data available as full texts, we decided to use the short stories as test set for the experiments with \ac{g2p} models. Those texts are all manually created and are specifically created by linguists for the purpose of studying phonetics of many languages. 
 
 \subsection*{Preprocessing}
-Before any of the data can be used, it needs to be preprocessed. As I am going to use the 
+Before any of the data can be used, it needs to be preprocessed. As I am going to use the pronunciation dictionaries which consist of single words per line, the full texts need to be prepared like that as well.
