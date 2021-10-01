@@ -1,6 +1,45 @@
 \newchap{Technical Background}
 \label{chap:tech-background}
-This chapter presents the technical background that is needed for this thesis. I will first present general architectures and frameworks that are commonly used and then present current models used for creating phonetic transcriptions. 
+This chapter presents the technical background that is needed for this thesis. I will first present general architectures and frameworks that are commonly used and then present current models used for creating phonetic transcriptions. Table 
+
+\begin{center}
+\begin{tabularx}{\textwidth}{
+| 	>{\raggedright\arraybackslash}l | 
+	>{\raggedright\arraybackslash}l | 
+	X | 
+	r |}
+\hline
+\textbf{Author} & \textbf{Model Architecture} & \textbf{ISO 639-3} & \textbf{WER} \\
+\hline
+\hline
+\multirow{14}{0.14\textwidth}{SIG21: \href{https://aclanthology.org/2021.sigmorphon-1.17/}{Clematide \& Makarov}}& \multirow{14}{0.5\textwidth}{CLUZH models 1-7. LSTM-based neural transducer with pointer network-like monotonic hard attention trained with imitation learning. Ensembles with different number of models (5-30), either seg input or char input
+
+}& hye (arm\_e) & 6.4 \\
+& & jpn (jpn\_hira) & 5.0 \\
+& & hun & 1.0 \\
+& & vie (vie\_han) & 2.0 \\
+& & nld (dut) & 14.7 \\
+& & kat (geo) & 0.0 \\
+& & fra (fre) & 7.5 \\
+& & kor & 16.2 \\\cline{3-4}
+& & ell (gre) & 20 \\
+& & ady & 22 \\
+& & isl (ice) & 10 \\
+& & lav & 49 \\
+& & mlt-ltn & 12 \\
+& & cym (wel-sw) & 10 \\
+\hline
+\multirow{5}{0.14\textwidth}{SIG21: \href{https://aclanthology.org/2021.sigmorphon-1.15/}{Lo \& Nicolai}}& \multirow{5}{0.5\textwidth}{UBC-1: Extends baseline model with 
+
+}& ady & 22 \\
+& & khm & 28 \\
+& & lav & 49 \\
+& & rum & 10 \\
+& & slv & 47 \\
+\hline
+
+\end{tabularx}
+\end{center}
 
 \section{Automated phonetic transcription}
 Today's technologies allow to build models that create phonetic transcriptions automatically given an original text. There are several approaches which will be discussed below. Creating phonetic transcriptions is essentially a \ac{s2s} task. Like other \ac{nlp} tasks its goal is to transform a sequence of characters into another sequence of characters. In the present case, the input sequence is a sequence of graphemes. These can look very differently depending on the script (see section \ref{writing-sys}). The output sequence is a sequence of phonemes\footnote[1]{Please refer to section \ref{phonology} in order to understand the terminological implications phoneme. As it is common in research, I will stick to the term \textit{phoneme} although strictly speaking it is not always correct. Phoneme in this case just refers to any symbol that is used to represent that sound.}. A common way to transform written text into its phonetic version is referred to as \ac{g2p}. The idea behind this approach is that individual letters (graphemes) are converted into sounds represented as phonemes.  
@@ -74,6 +113,8 @@ The results show that there are great differences in languages. One possible exp
 Results in the low-resource setting are still worse compared to the medium-resource setting. This means that current systems seem to be unable to achieve a good performance when only using 800 samples for training. More research needs to be done in data augmentation techniques and improving the systems to cope with only little available data.
 
 The differing performance for various languages calls for the questions what makes a language hard to pronounce. Especially as for Georgian which was in the medium-resource setting all submissions and the baseline reached a \ac{wer} of $0.0$. Interestingly enough, the \ac{wer} for the language in the high-resource setting, English, reached one of the highest \ac{wer}s.
+
+
 
   
 \subsubsection*{Error analysis}
