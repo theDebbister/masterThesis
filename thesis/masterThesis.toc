@@ -1,9 +1,9 @@
-\babel@toc {english}{}
+\babel@toc {english}{}\relax 
 \contentsline {chapter}{Abstract}{i}{section*.1}%
-\babel@toc {ngerman}{}
-\babel@toc {english}{}
-\babel@toc {ngerman}{}
-\babel@toc {english}{}
+\babel@toc {ngerman}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {ngerman}{}\relax 
+\babel@toc {english}{}\relax 
 \contentsline {chapter}{Acknowledgement}{ii}{section*.4}%
 \contentsline {chapter}{Contents}{iii}{section*.6}%
 \contentsline {chapter}{List of Figures}{v}{section*.9}%
@@ -24,9 +24,9 @@
 \contentsline {subsection}{\numberline {3.1.1}Rule-based models}{10}{subsection.3.1.1}%
 \contentsline {subsection}{\numberline {3.1.2}N-gram Models / Statistical models}{10}{subsection.3.1.2}%
 \contentsline {subsection}{\numberline {3.1.3}Neural models}{11}{subsection.3.1.3}%
-\contentsline {subparagraph}{\nonumberline LSTM}{11}{subparagraph*.25}%
-\contentsline {subparagraph}{\nonumberline Transformer}{11}{subparagraph*.27}%
-\contentsline {subparagraph}{\nonumberline Neural Transducer}{11}{subparagraph*.29}%
+\contentsline {subparagraph}{\nonumberline LSTM}{11}{subparagraph*.26}%
+\contentsline {subparagraph}{\nonumberline Transformer}{11}{subparagraph*.28}%
+\contentsline {subparagraph}{\nonumberline Neural Transducer}{11}{subparagraph*.30}%
 \contentsline {subsection}{\numberline {3.1.4}SIGMORPHON task 2020}{12}{subsection.3.1.4}%
 \contentsline {subsection}{\numberline {3.1.5}SIGMORPHON task 2021}{12}{subsection.3.1.5}%
 \contentsline {section}{\numberline {3.2}Data quality considerations}{14}{section.3.2}%
