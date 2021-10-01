@@ -13,6 +13,8 @@ Reallocating 'name_of_file' (item size: 1) to 23 items.
 A level-1 auxiliary file: chapters/acro-list.aux
 Reallocating 'name_of_file' (item size: 1) to 31 items.
 A level-1 auxiliary file: chapters/chap1Introduction.aux
+Reallocating 'name_of_file' (item size: 1) to 34 items.
+A level-1 auxiliary file: chapters/chap_ling-background.aux
 Reallocating 'name_of_file' (item size: 1) to 29 items.
 A level-1 auxiliary file: chapters/chap_background.aux
 Reallocating 'name_of_file' (item size: 1) to 24 items.
@@ -31,8 +33,10 @@ A level-1 auxiliary file: appendix/tables.aux
 Database file #1: biblio/thesis.bib
 Warning--entry type for "writing-systems" isn't style-file defined
 --line 411 of file biblio/thesis.bib
+Warning--entry type for "phonetics-video" isn't style-file defined
+--line 420 of file biblio/thesis.bib
 Warning--entry type for "celex2-documentation" isn't style-file defined
---line 428 of file biblio/thesis.bib
+--line 437 of file biblio/thesis.bib
 Name 1 in "R H. Baayen, R Piepenbrock, and L Gulikers" has a comma at the end for entry celex2-documentation
 while executing---line 1347 of file abbrvnat.bst
 Name 1 in "R H. Baayen, R Piepenbrock, and L Gulikers" has a comma at the end for entry celex2-documentation
@@ -43,45 +47,45 @@ Name 1 in "R H. Baayen, R Piepenbrock, and L Gulikers" has a comma at the end fo
 while executing---line 1429 of file abbrvnat.bst
 Name 1 in "R H. Baayen, R Piepenbrock, and L Gulikers" has a comma at the end for entry celex2-documentation
 while executing---line 1429 of file abbrvnat.bst
-You've used 25 entries,
+You've used 26 entries,
             2773 wiz_defined-function locations,
-            779 strings with 10842 characters,
-and the built_in function-call counts, 12960 in all, are:
-= -- 1201
-> -- 764
-< -- 23
-+ -- 260
-- -- 235
-* -- 1019
-:= -- 1947
-add.period$ -- 110
-call.type$ -- 25
-change.case$ -- 149
+            782 strings with 10933 characters,
+and the built_in function-call counts, 13249 in all, are:
+= -- 1224
+> -- 774
+< -- 24
++ -- 265
+- -- 238
+* -- 1038
+:= -- 1989
+add.period$ -- 112
+call.type$ -- 26
+change.case$ -- 152
 chr.to.int$ -- 25
-cite$ -- 52
-duplicate$ -- 577
-empty$ -- 1019
-format.name$ -- 274
-if$ -- 2807
-int.to.chr$ -- 1
+cite$ -- 54
+duplicate$ -- 592
+empty$ -- 1051
+format.name$ -- 278
+if$ -- 2868
+int.to.chr$ -- 2
 int.to.str$ -- 1
 missing$ -- 21
-newline$ -- 158
-num.names$ -- 96
-pop$ -- 331
+newline$ -- 162
+num.names$ -- 100
+pop$ -- 343
 preamble$ -- 1
-purify$ -- 129
+purify$ -- 132
 quote$ -- 0
-skip$ -- 484
+skip$ -- 497
 stack$ -- 0
-substring$ -- 389
-swap$ -- 105
+substring$ -- 391
+swap$ -- 108
 text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 260
+type$ -- 271
 warning$ -- 2
-while$ -- 98
+while$ -- 101
 width$ -- 0
-write$ -- 389
+write$ -- 399
 (There were 4 error messages)

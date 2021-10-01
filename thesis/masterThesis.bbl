@@ -1,4 +1,4 @@
-\begin{thebibliography}{25}
+\begin{thebibliography}{26}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -56,8 +56,12 @@ B.~Comrie, M.~S. Dryer, D.~Gil, and M.~Haspelmath.
   Anthropology}, Leipzig, 2013.
 \newblock URL \url{https://wals.info/chapter/s1}.
 
-\bibitem[CrashCourse(2021)]{writing-systems}
-CrashCourse, 2021.
+\bibitem[CrashCourse(2021{\natexlab{a}})]{phonetics-video}
+CrashCourse, 2021{\natexlab{a}}.
+\newblock URL \url{https://www.youtube.com/watch?v=vyea8Ph9BOM}.
+
+\bibitem[CrashCourse(2021{\natexlab{b}})]{writing-systems}
+CrashCourse, 2021{\natexlab{b}}.
 \newblock URL
   \url{https://www.youtube.com/watch?v=-sUUWyo4RZQ&list=PL8dPuuaLjXtP5mp25nStsuDzk2blncJDW&index=18}.
 
