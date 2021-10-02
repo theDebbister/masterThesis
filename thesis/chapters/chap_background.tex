@@ -1,9 +1,8 @@
 \newchap{Technical Background}
 \label{chap:tech-background}
 This chapter presents the technical background that is needed for this thesis. I will first present general architectures and frameworks that are commonly used and then present current models used for creating phonetic transcriptions. Table \ref{tab:sota} shows the state-of-the-art models for \ac{g2p} modelling.
-\begin{table}
 
-\begin{center}
+\tab{tab:sota}{This table presents the state-of-the-art \ac{g2p} models. Models that are important for this thesis will be explained in more detail. The language code in parenthesis is the code used in the respective paper.}{
 \begin{tabularx}{\textwidth}{
 | 	>{\raggedright\arraybackslash}l | 
 	>{\raggedright\arraybackslash}l | 
@@ -13,7 +12,9 @@ This chapter presents the technical background that is needed for this thesis. I
 \textbf{Author} & \textbf{Model Architecture} & \textbf{ISO 639-3} & \textbf{WER} \\
 \hline
 \hline
-\multirow{14}{0.14\textwidth}{SIG21: \href{https://aclanthology.org/2021.sigmorphon-1.17/}{Clematide \& Makarov}}& \multirow{14}{0.5\textwidth}{CLUZH models 1-7. LSTM-based neural transducer with pointer network-like monotonic hard attention trained with imitation learning. Ensembles with different number of models (5-30), either seg input or char input
+\multirow[t]{14}{0.14\textwidth}{SIG21: \citet{Clematide&Makarov.2021}}& \multirow[t]{14}{0.5\textwidth}{CLUZH models 1-7. LSTM-based neural transducer with pointer network-like monotonic hard attention trained with imitation learning. All models 1-7 are majority-vote ensembles with different number of models (5-30) and different inputs (characters or segments). 
+
+The improvements over the baseline were not great, neither did the experiments (mogrifier, input char or seg) show great improvement.
 
 }& hye (arm\_e) & 6.4 \\
 & & jpn (jpn\_hira) & 5.0 \\
@@ -27,26 +28,31 @@ This chapter presents the technical background that is needed for this thesis. I
 & & ady & 22 \\
 & & isl (ice) & 10 \\
 & & lav & 49 \\
-& & mlt-ltn & 12 \\
-& & cym (wel-sw) & 10 \\
+& & mlt\_ltn & 12 \\
+& & cym (wel\_sw) & 10 \\
 \hline
-\multirow{5}{0.14\textwidth}{SIG21: \href{https://aclanthology.org/2021.sigmorphon-1.15/}{Lo \& Nicolai}}& \multirow{5}{0.5\textwidth}{UBC-1: Extends baseline model with 
-
+\multirow[t]{5}{0.14\textwidth}{SIG21: \citet{lo-nicolai-2021-linguistic}}& \multirow[t]{5}{0.5\textwidth}{UBC-2: Only their second model outperforms the baseline. They analysed the errors of the baseline and extend it by adding penalties for wrong vowels and wrong diacritics. The macro-average outperformed all other systems (low-resource task).
 }& ady & 22 \\
 & & khm & 28 \\
 & & lav & 49 \\
 & & rum & 10 \\
 & & slv & 47 \\
 \hline
-\stepcounter{mytable}
-\label{tab:sota}
-\end{tabularx}
-\end{center}
-\caption[SOTA \ac{g2p} models]{The state-of-the-art models are listed in the table. All models relevant for this thesis will be explained in more detail.}
-\end{table}
+\multirow[t]{7}{0.14\textwidth}{SIG21: \citet{gautam.2021}}& \multirow[t]{7}{0.5\textwidth}{Dialpad-1: large majority-vote ensemble consisting of three different public models (weighted \ac{fst}, joint-sequence model trained with \ac{em} and a neural \ac{s2s}) two \ac{s2s} variants (LSTM and transformer) and two variations of the baseline. The \ac{wer} could have been reduced to around 25 if the  model had always chosen the gold reference when it was present in the predictions.
+ 
+}& eng (eng\_us)  &  37.43 \\
+& &   &   \\
+& &   &   \\
+& &   &   \\
+& &   &   \\
+& &   &   \\
+& &   &   \\
+\hline
+\end{tabularx}}{SOTA \ac{g2p} models}
+
 
 \section{Automated phonetic transcription}
-Today's technologies allow to build models that create phonetic transcriptions automatically given an original text. There are several approaches which will be discussed below. Creating phonetic transcriptions is essentially a \ac{s2s} task. Like other \ac{nlp} tasks its goal is to transform a sequence of characters into another sequence of characters. In the present case, the input sequence is a sequence of graphemes. These can look very differently depending on the script (see section \ref{writing-sys}). The output sequence is a sequence of phonemes\footnote[1]{Please refer to section \ref{phonology} in order to understand the terminological implications phoneme. As it is common in research, I will stick to the term \textit{phoneme} although strictly speaking it is not always correct. Phoneme in this case just refers to any symbol that is used to represent that sound.}. A common way to transform written text into its phonetic version is referred to as \ac{g2p}. The idea behind this approach is that individual letters (graphemes) are converted into sounds represented as phonemes.  
+Today's technologies allow to build models that create phonetic transcriptions automatically given an original text. There are several approaches which will be discussed below. Creating phonetic transcriptions is essentially a \ac{s2s} task. Like other \ac{nlp} tasks its goal is to transform a sequence of characters into another sequence of characters. In the present case, the input sequence is a sequence of graphemes. These can look very differently depending on the script (see section \ref{writing-sys}). The output sequence is a sequence of phonemes\myfootnote{Please refer to section \ref{phonology} in order to understand the terminological implications phoneme. As it is common in research, I will stick to the term \textit{phoneme} although strictly speaking it is not always correct. Phoneme in this case just refers to any symbol that is used to represent that sound.}. A common way to transform written text into its phonetic version is referred to as \ac{g2p}. The idea behind this approach is that individual letters (graphemes) are converted into sounds represented as phonemes.  
 
 Most of the research done in this area is limited to the English language. This is not uncommon in \ac{nlp} research. The overwhelming availability of English data resources and the unavailability and serious struggles to find data in other languages heavily influences this research. \citet{Ashby&Bartley.2021} report that the \acs{sigm} (\acl{sigm}) \ac{g2p} tasks in 2020 and 2021 is the first attempt to tackle multilingual \ac{g2p}. While these are very recent tasks, there are earlier models and methods that contributed to the evolving of nowadays \ac{g2p} methods.
 
@@ -107,7 +113,10 @@ The \ac{sigm} \citep{Sigmorphon.2021} regularly organizes shared tasks concerned
 The second iteration of this \ac{g2p} task attempts at outperforming the models of the previous task. An additional challenge is its separation into high-, medium- and low-resource languages. This reflects the needs of this present research well, as many languages in the corpus are low resource languages. In preparation for the task, the WikiPron data (see chapter \ref{chap:2_data}) was cleaned to exclude foreign words that include phones that are not in the actual language's native phone inventory. If a word contained foreign phones, it was excluded. This was the case for words whose pronunciation was not adapted to the language at hand but the transcription of the foreign language was used. This cleaning was only applied to medium- and low-resource languages. Additionally, the lists were sorted according to scripts. There are many languages that use multiple scripts and using them in the same dataset does not produce good results. There were other steps done to ensure good quality of the datasets. I collected more on that subject in section \ref{data_qual}. 
 The final datasets have to following sizes: The high-resource subtask consisted of about 41,000 word-transcription pairs of American English only. The medium-resource task provided 10,000 word-transcription pairs for ten languages and the low-resource task another 1,000 for ten different languages \citep{Ashby&Bartley.2021}. The datasets were split into 80\% training data, 10\% development data and another 10\% test data. 
 
-The baseline for this year's G2P task is an adapted version of last year's submission by \citet{makarov-clematide-2020-cluzh}. The baseline model has been made available for this year's task. The model they use is a neural transducer that is trained with imitation learning. The basis of the neural transducer was originally designed for morphological inflection \citep{Aharoni&Goldberg.2016}. Instead of just learning to output the correct string, the model learns to produce an optimal sequence of edit actions needed to transform the input string into the output string. Due to the nature of inflection (overlapping alphabets of input and output sequences), the original model was encouraged to copy the input. This does not work well for G2P tasks as the input and the output alphabet are not always the same (especially for non-Latin scripts like Korean). \review{explain neural transducer, the model more in depth}. 
+The baseline for this year's G2P task is an adapted version of last year's submission by \citet{makarov-clematide-2020-cluzh}. The baseline model has been made available for this year's task. The model they use is a neural transducer that is trained with imitation learning. The basis of the neural transducer was originally designed for morphological inflection \citep{Aharoni&Goldberg.2016}. Instead of just learning to output the correct string, the model learns to produce an optimal sequence of edit actions needed to transform the input string into the output string. Due to the nature of inflection (overlapping alphabets of input and output sequences), the original model was encouraged to copy the input. This does not work well for G2P tasks as the input and the output alphabet are not always the same (especially for non-Latin scripts like Korean). \review{explain neural transducer, the model more in depth}.
+
+\citet{lo-nicolai-2021-linguistic} chose to perform an error analysis on the baseline and try to minimize the frequent errors for the low-resource setting only. The analysis showed that often the model gets vowels and diacritics wrong. The extended the baseline in a way such that wrong vowel and diacritics predictions are punished more than other errors. This model outperformed the baseline for some languages (ice, khm, lav, mlt, slv) and was level for another (ady). The predictions with their model, shows an improvement in vowel prediction. A further analysis showed that many errors still happen with vowels. Vowels get often confused with similar vowels. Their conclusion is that many of these errors make sense in a linguistic sense.   
+They also tested augmenting the input data with syllable boundaries and using the baseline model as-is which did not improve the results. 
 
 As explained above, the model learns to create sequences of edit actions. The problem with this approach is that there are many possible sequences of edit actions that produce the same result. Imitation learning is proposed as a solution for this problem. \review{explain imitation learning better and more precise}. 
 
@@ -117,6 +126,8 @@ The results show that there are great differences in languages. One possible exp
 Results in the low-resource setting are still worse compared to the medium-resource setting. This means that current systems seem to be unable to achieve a good performance when only using 800 samples for training. More research needs to be done in data augmentation techniques and improving the systems to cope with only little available data.
 
 The differing performance for various languages calls for the questions what makes a language hard to pronounce. Especially as for Georgian which was in the medium-resource setting all submissions and the baseline reached a \ac{wer} of $0.0$. Interestingly enough, the \ac{wer} for the language in the high-resource setting, English, reached one of the highest \ac{wer}s.
+
+
 
 
 
@@ -142,6 +153,9 @@ Data quality is crucial in any machine learning application. Authors mostly incl
 \end{itemize}
 
 Especially the task of finding errors in the transcriptions is quite tricky. It requires a lot of knowledge about the phonology and phonetics of a specific language. 
+
+\section{IPA, scripts and unicode}
+When it comes to representing characters in a machine-readable format things get very tricky, very quickly. In order to understand this fundamental problem it is necessary to understand the basic concept behind unicode and encodings in general.
 
 \section{Random background}
 \review{I put things here that I had to look up working on this thesis but that might no end up in the final thesis, it is basically my notebook. I might put in into the glossary if it makes sense...}

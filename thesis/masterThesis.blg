@@ -42,50 +42,51 @@ while executing---line 1347 of file abbrvnat.bst
 Name 1 in "R H. Baayen, R Piepenbrock, and L Gulikers" has a comma at the end for entry celex2-documentation
 while executing---line 1347 of file abbrvnat.bst
 Warning--empty author in 100LC.21.07.2021
+Warning--empty booktitle in Clematide&Makarov.2021
 Warning--empty publisher in Intro.2007
 Name 1 in "R H. Baayen, R Piepenbrock, and L Gulikers" has a comma at the end for entry celex2-documentation
 while executing---line 1429 of file abbrvnat.bst
 Name 1 in "R H. Baayen, R Piepenbrock, and L Gulikers" has a comma at the end for entry celex2-documentation
 while executing---line 1429 of file abbrvnat.bst
-You've used 26 entries,
+You've used 27 entries,
             2773 wiz_defined-function locations,
-            782 strings with 10933 characters,
-and the built_in function-call counts, 13249 in all, are:
-= -- 1224
-> -- 774
-< -- 24
-+ -- 265
-- -- 238
-* -- 1038
-:= -- 1989
-add.period$ -- 112
-call.type$ -- 26
-change.case$ -- 152
-chr.to.int$ -- 25
-cite$ -- 54
-duplicate$ -- 592
-empty$ -- 1051
-format.name$ -- 278
-if$ -- 2868
+            787 strings with 11155 characters,
+and the built_in function-call counts, 13654 in all, are:
+= -- 1260
+> -- 795
+< -- 25
++ -- 272
+- -- 244
+* -- 1064
+:= -- 2050
+add.period$ -- 116
+call.type$ -- 27
+change.case$ -- 157
+chr.to.int$ -- 26
+cite$ -- 57
+duplicate$ -- 614
+empty$ -- 1089
+format.name$ -- 287
+if$ -- 2956
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 21
-newline$ -- 162
-num.names$ -- 100
-pop$ -- 343
+missing$ -- 22
+newline$ -- 168
+num.names$ -- 104
+pop$ -- 356
 preamble$ -- 1
-purify$ -- 132
+purify$ -- 136
 quote$ -- 0
-skip$ -- 497
+skip$ -- 513
 stack$ -- 0
-substring$ -- 391
-swap$ -- 108
+substring$ -- 393
+swap$ -- 109
 text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 271
-warning$ -- 2
-while$ -- 101
+type$ -- 282
+warning$ -- 3
+while$ -- 104
 width$ -- 0
-write$ -- 399
+write$ -- 413
 (There were 4 error messages)

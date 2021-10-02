@@ -1,4 +1,4 @@
-\begin{thebibliography}{26}
+\begin{thebibliography}{27}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -46,6 +46,13 @@ M.~Bisani and H.~Ney.
 E.~Chodroff.
 \newblock {Corpus Phonetics Tutorial}, 2019.
 \newblock URL \url{https://eleanorchodroff.com/tutorial/index.html#}.
+
+\bibitem[Clematide and Makarov(2021)]{Clematide&Makarov.2021}
+S.~Clematide and P.~Makarov.
+\newblock {CLUZH at SIGMORPHON 2021 Shared Task on Multilingual
+  Grapheme-to-Phoneme Conversion: Variations on a Baseline}.
+\newblock {Association for Computational Linguistics}, 2021.
+\newblock \doi{10.18653/v1/2021.sigmorphon-1.17}.
 
 \bibitem[Comrie et~al.(2013)Comrie, Dryer, Gil, and
   Haspelmath]{Comrie&Dryer.2013}
