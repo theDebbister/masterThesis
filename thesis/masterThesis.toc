@@ -31,22 +31,22 @@
 \contentsline {subsection}{\numberline {3.1.5}SIGMORPHON task 2021}{13}{subsection.3.1.5}%
 \contentsline {section}{\numberline {3.2}Data quality considerations}{15}{section.3.2}%
 \contentsline {section}{\numberline {3.3}IPA, scripts and unicode}{17}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Random background}{17}{section.3.4}%
-\contentsline {chapter}{\numberline {4}Data Collection}{18}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Transcription Conventions}{18}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Transcription Sources \& Formats}{19}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Full Text}{19}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Pronunciation Dictionaries}{21}{subsection.4.2.2}%
-\contentsline {chapter}{\numberline {5}Models for Phonetic Transcription}{22}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Evaluation metrics}{22}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Neural \ac {g2p}}{23}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Low-resource setting}{23}{section.5.3}%
-\contentsline {chapter}{\numberline {6}Experiments}{24}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Typewriting pdf phonetic transcriptions}{24}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Pronunciation dictionary coverage}{25}{section.6.2}%
-\contentsline {subparagraph}{\nonumberline Chinese}{26}{subparagraph*.42}%
-\contentsline {subparagraph}{\nonumberline Hebrew}{26}{subparagraph*.44}%
-\contentsline {section}{\numberline {6.3}Automatic \ac {g2p}}{26}{section.6.3}%
-\contentsline {chapter}{References}{28}{section*.46}%
-\contentsline {chapter}{\numberline {A}Tables}{32}{appendix.A}%
+\contentsline {section}{\numberline {3.4}Random background}{18}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Data Collection}{19}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Transcription Conventions}{19}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Transcription Sources \& Formats}{20}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Full Text}{20}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Pronunciation Dictionaries}{22}{subsection.4.2.2}%
+\contentsline {chapter}{\numberline {5}Models for Phonetic Transcription}{23}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Evaluation metrics}{23}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Neural \ac {g2p}}{24}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Low-resource setting}{24}{section.5.3}%
+\contentsline {chapter}{\numberline {6}Experiments}{25}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Typewriting pdf phonetic transcriptions}{25}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Pronunciation dictionary coverage}{26}{section.6.2}%
+\contentsline {subparagraph}{\nonumberline Chinese}{27}{subparagraph*.42}%
+\contentsline {subparagraph}{\nonumberline Hebrew}{27}{subparagraph*.44}%
+\contentsline {section}{\numberline {6.3}Automatic \ac {g2p}}{27}{section.6.3}%
+\contentsline {chapter}{References}{29}{section*.46}%
+\contentsline {chapter}{\numberline {A}Tables}{33}{appendix.A}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

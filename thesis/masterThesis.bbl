@@ -1,4 +1,4 @@
-\begin{thebibliography}{27}
+\begin{thebibliography}{28}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -166,6 +166,14 @@ T.~McEnery and A.~Hardie.
   Cambridge, 2011.
 \newblock ISBN 9780511981395.
 \newblock \doi{10.1017/CBO9780511981395}.
+
+\bibitem[Moran and Cysouw(2018)]{unicode-lingu}
+S.~Moran and M.~Cysouw.
+\newblock \emph{The Unicode Cookbook for Linguists: Managing writing systems
+  using orthography profiles}.
+\newblock 06 2018.
+\newblock ISBN 978-3-96110-090-3.
+\newblock \doi{10.5281/zenodo.1296780}.
 
 \bibitem[Press(2010)]{JIPA2010}
 C.~U. Press.

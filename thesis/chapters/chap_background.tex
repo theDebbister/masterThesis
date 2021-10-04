@@ -154,8 +154,22 @@ Data quality is crucial in any machine learning application. Authors mostly incl
 
 Especially the task of finding errors in the transcriptions is quite tricky. It requires a lot of knowledge about the phonology and phonetics of a specific language. 
 
-\section{IPA, scripts and unicode}
-When it comes to representing characters in a machine-readable format things get very tricky, very quickly. In order to understand this fundamental problem it is necessary to understand the basic concept behind unicode and encodings in general. As discussed in chapter \ref{chap:ling-background}, there are many different kinds of graphemes. Just as a human writer must be able to uniquely identify each different grapheme, so must a computer. The most widely spread standard to represent scripts is called Unicode. Graphemes are mapped to unique numerical, non-negative values which are called (Unicode) code points. The range of those values if referred to as \textit{code space}. The same code point can be represented differently depending on factors like the font or where exactly it appears. 
+\section{Encodings and Unicode}
+When it comes to representing characters in a machine-readable format things get very tricky, very quickly. In order to understand this fundamental problem it is necessary to understand the basic concept behind unicode and encodings in general. As discussed in chapter \ref{chap:ling-background}, there are many different kinds of what we typically call letters or graphemes or characters. Just as a human writer must be able to uniquely identify each different letter, so must a computer. The most widely spread standard to represent scripts is called Unicode. Letters are mapped to unique numbers that can be rendered differently depending on the font and the context. There are different stages of representation until a letter can be represented on screen:
+
+\begin{description}
+\item[\textsc{Code point}] A unique numerical, non-negative value usually expressed as a hexadecimal number (U+0000). Allows one-to-one mapping between letters and codes. Each code point has a set of properties attributed to it. Properties like the script, uppercase or not, etc.
+\item[\textsc{Character}] An abstract representation of the shape of the grapheme. Can in theory not be represented visually, as this includes a font. 
+\item[\textsc{Glyph}] The rendered and therefore visual representation of one character that can be identified by it's code point. A glyph is rendered in a specific font in a specific context. No matter how different it looks to the user, for Unicode all different representation of one code point are exactly the same.
+\end{description}
+
+Unicode code points are often organized in blocks. A block can, for example, contain all letters of the Latin script. Those blocks are helpful although not always consistent. The \ac{ipalpha} is represented in a basic block but many \ac{ipalpha} symbols are actually found in other blocks. Confusion often arises from the fact, that one human-perceived letter/character/grapheme is sometimes represented as more than one code point. 
+
+\begin{description}
+\item[\textsc{Grapheme clusters}] A grapheme cluster is one visual letter that is represented as more than one code point. This is the case for diacritic marks. Note that sometimes, these can be precomposed and the combination of those two or more characters is assigned a new number. 
+\end{description} 
+
+Additional complexity is added through the possibility of Unicode to create Unicode locales. These allow users to specify language- or writing-system-specific cases.
 
 \section{Random background}
 \review{I put things here that I had to look up working on this thesis but that might no end up in the final thesis, it is basically my notebook. I might put in into the glossary if it makes sense...}
