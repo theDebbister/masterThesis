@@ -1,0 +1,65 @@
+
+\tab{tab:sota}{SOTA models}{
+\begin{tabularx}{\textwidth}{
+| 	>{\raggedright\arraybackslash}l | 
+	>{\raggedright\arraybackslash}l | 
+	X | 
+	>{\raggedright\arraybackslash}r |}
+\hline
+\textbf{Author} & \textbf{Model Architecture} & \textbf{ISO 639-3} & \textbf{WER} \\
+\hline
+\hline
+\multirow[t]{11}{0.14\textwidth}{SIG21: Clematide and Makarov (2021) \\
+\vspace{0.5cm}
+\href{https://aclanthology.org/2021.sigmorphon-1.17/}{\underline{Link}}}& \multirow[t]{11}{0.5\textwidth}{CLUZH models 1-7. LSTM-based neural transducer with pointer network-like monotonic hard attention trained with imitation learning. All models 1-7 are majority-vote ensembles with different number of models (5-30) and different inputs (characters or segments). \\
+\vspace{0.5cm}
+Achieved good results in nld (14.7), ice (10), jpn (5.0), fra (7.5) and vie (2.0) but not better than SIG20.
+
+}& \multicolumn{2}{c|}{medium (8.000 train pairs)} \\\cline{3-4}
+& & hye (arm\_e) & 6.4 \\
+& & hun & 1.0 \\
+& & kat (geo) & 0.0 \\
+& & kor & 16.2 \\\cline{3-4}
+& & \multicolumn{2}{c|}{low (800 train pairs)} \\\cline{3-4}
+& & ell (gre) & 20 \\
+& & ady & 22 \\
+& & lav & 49 \\
+& & mlt\_ltn & 12 \\
+& & cym (wel\_sw) & 10 \\
+\hline
+\multirow[t]{4}{0.14\textwidth}{SIG21: Lo and Nicolai (2021) \\
+\vspace{0.5cm}
+\href{https://aclanthology.org/2021.sigmorphon-1.15/}{\underline{Link}}}& \multirow[t]{4}{0.5\textwidth}{UBC-2 outperforms the baseline. They analysed the errors of the baseline and extend it by adding penalties for wrong vowels and wrong diacritics. Errors on vowels actually decreased. Best macro average (low-resource).
+}& ady & 22 \\
+& & khm & 28 \\
+& & lav & 49 \\
+& & slv & 47 \\
+\hline
+\multirow[t]{4}{0.14\textwidth}{SIG21: Gautam et al. (2021) \\
+\vspace{0.5cm}
+\href{https://aclanthology.org/2021.sigmorphon-1.16/}{\underline{Link}}}& \multirow[t]{4}{0.5\textwidth}{Dialpad-1: Majority-vote ensemble consisting of three different public models (weighted FST, joint-sequence model trained with EM and a neural seq2seq), two seq2seq variants (LSTM and transformer) and two baseline variations. 
+}& \multicolumn{2}{c|}{high (32.800 train pairs)} \\\cline{3-4}
+& & eng (eng\_us)  &  37.43 \\
+& &   &   \\
+& &   &   \\
+\hline
+\multirow[t]{5}{0.14\textwidth}{SIG20: Peters and Martin (2020) \\
+\vspace{0.5cm}
+\href{https://aclanthology.org/2020.sigmorphon-1.4/}{\underline{Link}}}& \multirow[t]{5}{0.5\textwidth}{DeepSPIN-2,-3,-4: Transformer- or LSTM-based enc-dec seq2seq models with sparse attention. Add language embedding to enc or dec states instead of language token.
+}& \multicolumn{2}{c|}{3.600 train pairs} \\\cline{3-4}
+& & jpn (jpn\_hira) & 4.89 \\
+& & fra (fre) & 5.11 \\
+& & rum & 9.78  \\
+& & vie  & 0.89  \\
+\hline
+\multirow[t]{4}{0.14\textwidth}{SIG20: Yu et al. (2020) \\
+\vspace{0.2cm}
+\href{https://aclanthology.org/2020.sigmorphon-1.5/}{\underline{Link}}}& \multirow[t]{4}{0.5\textwidth}{IMS: Self training ensemble of one n-gram-based FST and 3 seq2seq (vanilla with attention, hard monotonic attention with pointer, hybrid of hard monotonic attention and tagging model). 
+}& hin &  5.11 \\
+& & nld (dut) & 13.56  \\
+& &   &   \\
+& &   &   \\
+\hline
+\end{tabularx}}{SOTA \ac{g2p} models}
+
+
