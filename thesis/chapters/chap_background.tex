@@ -7,14 +7,16 @@ This chapter presents the technical background that is needed for this thesis. I
 | 	>{\raggedright\arraybackslash}l | 
 	>{\raggedright\arraybackslash}l | 
 	X | 
-	r |}
+	>{\raggedright\arraybackslash}r |}
 \hline
 \textbf{Author} & \textbf{Model Architecture} & \textbf{ISO 639-3} & \textbf{WER} \\
 \hline
 \hline
-\multirow[t]{16}{0.14\textwidth}{SIG21: \citet{Clematide&Makarov.2021}}& \multirow[t]{16}{0.5\textwidth}{CLUZH models 1-7. LSTM-based neural transducer with pointer network-like monotonic hard attention trained with imitation learning. All models 1-7 are majority-vote ensembles with different number of models (5-30) and different inputs (characters or segments). 
+\multirow[t]{16}{0.14\textwidth}{SIG21: \citet{Clematide&Makarov.2021} \\
+\vspace{1cm}
+\href{https://aclanthology.org/2021.sigmorphon-1.17/}{\underline{Link}}}& \multirow[t]{16}{0.5\textwidth}{CLUZH models 1-7. LSTM-based neural transducer with pointer network-like monotonic hard attention trained with imitation learning. All models 1-7 are majority-vote ensembles with different number of models (5-30) and different inputs (characters or segments). 
 
-}& \multicolumn[c]{2}{0.14\textwidth}{medium (10,000 words)}
+}& \multicolumn{2}{c|}{medium (10,000 pairs)} \\\cline{3-4}
 & & hye (arm\_e) & 6.4 \\
 & & jpn (jpn\_hira) & 5.0 \\
 & & hun & 1.0 \\
@@ -23,7 +25,7 @@ This chapter presents the technical background that is needed for this thesis. I
 & & kat (geo) & 0.0 \\
 & & fra (fre) & 7.5 \\
 & & kor & 16.2 \\\cline{3-4}
-& \multicolumn[c]{2}{0.14\textwidth}{medium (10,000 words)}
+& & \multicolumn{2}{c|}{low (1,000 pairs)} \\\cline{3-4}
 & & ell (gre) & 20 \\
 & & ady & 22 \\
 & & isl (ice) & 10 \\
@@ -31,15 +33,21 @@ This chapter presents the technical background that is needed for this thesis. I
 & & mlt\_ltn & 12 \\
 & & cym (wel\_sw) & 10 \\
 \hline
-\multirow[t]{6}{0.14\textwidth}{SIG21: \citet{lo-nicolai-2021-linguistic}}& \multirow[t]{6}{0.5\textwidth}{Only their second model, UBC-2, outperforms the baseline. They analysed the errors of the baseline and extend it by adding penalties for wrong vowels and wrong diacritics. Errors on vowels actually decreased. The macro-average outperformed all other systems (low-resource task). Only low-resource participation.
-}& ady & 22 \\
+\multirow[t]{6}{0.14\textwidth}{SIG21: \citet{lo-nicolai-2021-linguistic} \\
+\vspace{1cm}
+\href{https://aclanthology.org/2021.sigmorphon-1.15/}{\underline{Link}}}& \multirow[t]{6}{0.5\textwidth}{Only their second model, UBC-2, outperforms the baseline. They analysed the errors of the baseline and extend it by adding penalties for wrong vowels and wrong diacritics. Errors on vowels actually decreased. The macro-average outperformed all other systems (low-resource task).
+}& \multicolumn{2}{c|}{low (1,000 pairs)} \\\cline{3-4}
+& & ady & 22 \\
 & & khm & 28 \\
 & & lav & 49 \\
 & & rum & 10 \\
 & & slv & 47 \\
 \hline
-\multirow[t]{7}{0.14\textwidth}{SIG21: \citet{gautam.2021}}& \multirow[t]{7}{0.5\textwidth}{Dialpad-1: large majority-vote ensemble consisting of three different public models (weighted \ac{fst}, joint-sequence model trained with \ac{em} and a neural \ac{s2s}) two \ac{s2s} variants (LSTM and transformer) and two variations of the baseline. The \ac{wer} could have been reduced to around 25 if the  model had always chosen the gold reference when it was present in the predictions.
-}& eng (eng\_us)  &  37.43 \\
+\multirow[t]{7}{0.14\textwidth}{SIG21: \citet{gautam.2021} \\
+\vspace{1cm}
+\href{https://aclanthology.org/2021.sigmorphon-1.16/}{\underline{Link}}}& \multirow[t]{7}{0.5\textwidth}{Dialpad-1: large majority-vote ensemble consisting of three different public models (weighted \ac{fst}, joint-sequence model trained with \ac{em} and a neural \ac{s2s}) two \ac{s2s} variants (LSTM and transformer) and two variations of the baseline. The \ac{wer} could have been reduced to around 25 if the  model had always chosen the gold reference when it was present in the predictions.
+}& \multicolumn{2}{c|}{high (41,000 pairs)} \\\cline{3-4}
+& & eng (eng\_us)  &  37.43 \\
 & &   &   \\
 & &   &   \\
 & &   &   \\
