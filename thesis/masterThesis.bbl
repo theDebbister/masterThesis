@@ -1,4 +1,4 @@
-\begin{thebibliography}{29}
+\begin{thebibliography}{30}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -174,6 +174,15 @@ S.~Moran and M.~Cysouw.
 \newblock 06 2018.
 \newblock ISBN 978-3-96110-090-3.
 \newblock \doi{10.5281/zenodo.1296780}.
+
+\bibitem[Mortensen et~al.(2018)Mortensen, Dalmia, and
+  Littell]{mortensen-etal-2018-epitran}
+D.~R. Mortensen, S.~Dalmia, and P.~Littell.
+\newblock {E}pitran: Precision {G}2{P} for many languages.
+\newblock In \emph{Proceedings of the Eleventh International Conference on
+  Language Resources and Evaluation ({LREC} 2018)}, Miyazaki, Japan, May 2018.
+  European Language Resources Association (ELRA).
+\newblock URL \url{https://aclanthology.org/L18-1429}.
 
 \bibitem[Peters and Martins(2020)]{peters-martins-2020-one}
 B.~Peters and A.~F.~T. Martins.
