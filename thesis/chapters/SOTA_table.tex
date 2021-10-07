@@ -1,3 +1,53 @@
+\thispagestyle{empty}
+
+{  
+\footnotesize
+\sffamily
+\renewcommand{\arraystretch}{1.8}
+
+\begin{tabularx}{\textwidth}{l  >{\raggedright\arraybackslash}r >{\raggedright\arraybackslash}X 
+>{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X  >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}r  >{\raggedright\arraybackslash}r >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X }
+\hline
+\textbf{ISO396-3} & \multicolumn{6}{c}{\textbf{Baseline20}} & \textbf{Baseline21} & \multicolumn{1}{c}{\textbf{CLUZH 21}} & \multicolumn{2}{r}{\textbf{UBC 21}} & \multicolumn{1}{c}{\textbf{Dialpad 21}} & \multicolumn{1}{c}{\textbf{DeepSPIN 20}} & \multicolumn{1}{c}{\textbf{IMS 20}} & & \\
+
+ & \multicolumn{2}{c}{\textbf{LSTM}} & \multicolumn{2}{c}{\textbf{transformer}} & \multicolumn{2}{c}{\textbf{pair n-gram}} & & CL & UBC-1 &  UBC-2 & & & & & \\
+
+& WER & PER & WER & PER & WER & PER & WER & WER & WER & WER & WER & WER & & \\\cline{2-17}
+
+ady & 28.00 &  & &6.49 &&&&&&&&&&& \\
+bul & 31.11 & 5.94 &&&&&&&&&&&&& \\
+cym (wel) &  &&&&&&&&&&&&&& \\
+ell (gre) & 18.89 & & 18.89 & 3.06 &&&&&&&&&&&& \\
+eng(\_us)  & &&&&&&&&&&&&&& \\
+fra (fre) & 6.22 & 1.32 &&&&&&&&&&&& \\
+hin & 6.67 & 1.47 &&&&&&&&&&&& \\
+hun & 5.33 & 1.18 & 5.33 &&&&&&&&&&& \\
+hye (arm) & & & 14.22 & 3.29 &&&&&&&&&& \\
+ice & 10.00 & &  &  2.21 &&&&&&&&&& \\
+jpn(\_hira) &  & 1.79 & 7.33 &  &&&&&&&&&& \\
+kat (geo) & 26.44 & 5.14&&&&&&&&&&&& \\
+khm & &&&&&&&&&&&&& \\
+kor &  & 16.78& 43.78 &&&&&&&&&&& \\
+lav &  &&&&&&&&&&&&& \\
+lit & 19.11 & 3.55&&&&&&&&&&&& \\
+mlt(\_ltn) & &&&&&&&&&&&&& \\
+nld (dut) & & &16.44 & 2.89&&&&&&&&&& \\
+rum & 10.67 & 2.53&&&&&&&&&&&& \\
+slv & &&&&&&&&&&&&& \\
+vie  & 4.67 & 1.52&&&&&&&&&&&& \\
+
+\hline
+macro & 16.84 & 3.99 & 17.51 & 4.30 & 22.00 & 4.92 &&&&&&&&& \\
+
+
+\end{tabularx}
+
+
+}
+
+
+
+
 
 \tab{tab:sota}{SOTA models: I report the best results per model over all models in the table. Many models achieved comparable results if they were trained on the same languages. The mentioned baseline has the same architecture like the one in the first row.}{
 \begin{tabularx}{\textwidth}{
@@ -61,5 +111,7 @@ Achieved good results in nld (14.7), ice (10), jpn (5.0), fra (7.5) and vie (2.0
 & &   &   \\
 \hline
 \end{tabularx}}{SOTA \ac{g2p} models}
+
+
 
 
