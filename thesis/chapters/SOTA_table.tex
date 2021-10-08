@@ -5,45 +5,49 @@
 \sffamily
 \renewcommand{\arraystretch}{1.8}
 
-\begin{tabularx}{\textwidth}{l  >{\raggedright\arraybackslash}r >{\raggedright\arraybackslash}X 
->{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X  >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}r  >{\raggedright\arraybackslash}r >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X }
+\begin{tabularx}{\textwidth}{l  >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X 
+>{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
 \hline
-\textbf{ISO396-3} & \multicolumn{6}{c}{\textbf{Baseline20}} & \textbf{Baseline21} & \multicolumn{1}{c}{\textbf{CLUZH 21}} & \multicolumn{2}{r}{\textbf{UBC 21}} & \multicolumn{1}{c}{\textbf{Dialpad 21}} & \multicolumn{1}{c}{\textbf{DeepSPIN 20}} & \multicolumn{1}{c}{\textbf{IMS 20}} & & \\
+\textbf{ISO396-3} & \multicolumn{6}{c}{\textbf{BS20}} & \multicolumn{2}{c}{\textbf{DeepSPIN}} & \multicolumn{2}{c}{\textbf{IMS}} & \textbf{BS21} & \multicolumn{1}{c}{\textbf{CL21}} & \multicolumn{2}{c}{\textbf{UBC21}} & \multicolumn{1}{c}{\textbf{DP21}}   \\
 
- & \multicolumn{2}{c}{\textbf{LSTM}} & \multicolumn{2}{c}{\textbf{transformer}} & \multicolumn{2}{c}{\textbf{pair n-gram}} & & CL & UBC-1 &  UBC-2 & & & & & \\
+ & \multicolumn{2}{c}{\textbf{LSTM}} & \multicolumn{2}{c}{\textbf{transformer}} & \multicolumn{2}{c}{\textbf{pair n-gram}} & & & & & & CL & UBC-1 &  UBC-2 & \\
 
-& WER & PER & WER & PER & WER & PER & WER & WER & WER & WER & WER & WER & & \\\cline{2-17}
+		  & WER   & PER  & WER   & PER  & WER   & PER  & WER     & PER & WER   & PER  & WER   & WER          & WER   & WER   & \\\cline{2-17}
 
-ady & 28.00 &  & &6.49 &&&&&&&&&&& \\
-bul & 31.11 & 5.94 &&&&&&&&&&&&& \\
-cym (wel) &  &&&&&&&&&&&&&& \\
-ell (gre) & 18.89 & & 18.89 & 3.06 &&&&&&&&&&&& \\
-eng(\_us)  & &&&&&&&&&&&&&& \\
-fra (fre) & 6.22 & 1.32 &&&&&&&&&&&& \\
-hin & 6.67 & 1.47 &&&&&&&&&&&& \\
-hun & 5.33 & 1.18 & 5.33 &&&&&&&&&&& \\
-hye (arm) & & & 14.22 & 3.29 &&&&&&&&&& \\
-ice & 10.00 & &  &  2.21 &&&&&&&&&& \\
-jpn(\_hira) &  & 1.79 & 7.33 &  &&&&&&&&&& \\
-kat (geo) & 26.44 & 5.14&&&&&&&&&&&& \\
-khm & &&&&&&&&&&&&& \\
-kor &  & 16.78& 43.78 &&&&&&&&&&& \\
-lav &  &&&&&&&&&&&&& \\
-lit & 19.11 & 3.55&&&&&&&&&&&& \\
-mlt(\_ltn) & &&&&&&&&&&&&& \\
-nld (dut) & & &16.44 & 2.89&&&&&&&&&& \\
-rum & 10.67 & 2.53&&&&&&&&&&&& \\
-slv & &&&&&&&&&&&&& \\
-vie  & 4.67 & 1.52&&&&&&&&&&&& \\
+ady 	  & 28.00 & 6.53 & 28.44 & 6.49 & 32.00 & 7.56 & 24.67$^3$   & & 25.00 & 5.79 & 22.00 & 22.00$^{23}$ & 25.00 & 22.00 & \\
+bul 	  & 31.11 & 5.94 & 34.00 & 7.89 & 41.33 & 9.05 &    -        & & 22.22 & 4.85 & 18.30 & 18.80$^6$    &       &       & \\
+cym (wel) &       &      &       &      &       &      &             & &       &      & 10.00 & 10.00$^1$    & 13.00 & 12.00 & \\
+ell (gre) & 18.89 & 3.30 & 18.89 & 3.06 & 21.78 & 4.05 & -           & & 18.67 & 2.97 & 21.00 & 20.00$^{13}$ & 22.00 & 22.00 & \\
+eng(\_us) &       &      &       &      &       &      &             & &       &      & 41.94 &              &       &       & \textbf{37.43}\\
+fra (fre) & 6.22  & 1.32 & 6.89  & 1.72 & 13.56 & 3.12 &  5.11$^3$   & & 6.89  & 1.60 & 8.50  & 7.50$^{456}$ &       &       & \\
+hin 	  & 6.67  & 1.47 & 9.56  & 2.40 & 12.67 & 4.05 & -           & &  5.11 & 1.20 &       &              &       &       & \\
+hun 	  & 5.33  & 1.18 & 5.33  & 1.28 & 6.67  & 1.51 &        -    & &  5.11 & 1.12 & 1.80  &  1.00$^{67}$ &       &       & \\
+hye (arm) & 14.67 & 3.49 & 14.22 & 3.29 & 18.00 & 3.90 & -           & & 12.67 & 2.94 & 7.00  &  6.40$^{7}$  &       &       & \\
+ice 	  & 10.00 & 2.36 & 10.22 & 2.21 & 17.56 & 3.62 &    -        & & 9.33  & 2.04 & 12.00 & 10.00$^{13}$ & 13.00 & 11.00 & \\
+ita       &       &      &       &      &       &      &             & &       &      & 19.00 & 31.00$^{3}$  & 20.00 & 22.00 & \\
+jpn(\_hira)& 7.56 & 1.79 & 7.33  & 1.86 & 9.56  & 2.07 &  4.89$^4$   & & 5.33  & 1.26 & 5.20  &  5.00$^{7}$  &       &       & \\
+kat (geo) & 26.44 & 5.14 & 28.00 & 5.43 & 37.78 & 6.48 &       -     & & 24.89 & 4.57 & 0.00  &0.00$^{4567}$ &       &       & \\
+khm 	  &       &      &       &      &       &      &             & &       &      & 34.00 & 32.00$^{13}$ & 31.00 & 28.00 & \\
+kor 	  & 46.89 & 16.78& 43.78 & 17.50& 52.22 & 15.88& 24.00$^{13}$& & 26.22 & 4.38 & 16.30 & 16.20$^{4}$  &       &       & \\
+lav 	  &       &      &       &      &       &      &             & &       &      & 55.00 & 49.00$^{23}$ & 58.00 & 49.00 & \\
+lit 	  & 19.11 & 3.55 & 20.67 & 3.65 & 23.11 & 4.43 & -           & & 20.00 & 3.63 &       &              &       &       & \\
+mlt(\_ltn)&       &      &       &      &       &      &             & &       &      & 19.00 & 12.00$^{1}$  & 19.00 & 18.00 & \\
+nld (dut) & 16.44 & 2.94 & 15.78 & 2.89 & 23.78 & 3.97 &  -          & & 13.56 & 2.36 & 14.70 & 14.70$^{7}$  &       &       & \\
+rum 	  & 10.67 & 2.53 & 12.00 & 3.62 & 11.56 & 3.55 &  9.78$^3$   & & 10.22 & 2.23 & 10.00 & 12.00$^{3}$  & 14.00 & 10.00 & \\
+slv 	  &       &      &       &      &       &      &             & &       &      & 49.00 & 50.00$^{1}$  & 56.00 & 47.00 & \\
+vie  	  & 4.67  & 1.52 & 7.56  & 2.27 & 8.44  & 1.79 &  0.89$^2$   & &  1.56 & 0.48 & 2.50  &  2.00$^{57}$ &       &       & \\
 
 \hline
-macro & 16.84 & 3.99 & 17.51 & 4.30 & 22.00 & 4.92 &&&&&&&&& \\
+macro 	  & 16.84 & 3.99 & 17.51 & 4.30 & 22.00 & 4.92 & 14.15 & 2.92  & 13.81 & 2.76  &       &             &       &       & \\
+macro l	  &       &      &       &      &       &      &       &       &       &       & 25.10 &             & 27.10 & 24.10 & \\
+macro m	  &       &      &       &      &       &      &       &       &       &       & 10.60 &             &       &       & \\
+
 
 
 \end{tabularx}
-
-
 }
+
+DeepSPIN: They did not report any results on the languages separately. Neither are the PER scores available. 
 
 
 
