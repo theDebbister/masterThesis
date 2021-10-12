@@ -5,116 +5,70 @@
 \sffamily
 \renewcommand{\arraystretch}{1.8}
 
-\begin{tabularx}{\textwidth}{l  >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X 
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X  >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X 
 >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
 \hline
-\textbf{ISO396-3} & \multicolumn{6}{c}{\textbf{BS20}} & \multicolumn{2}{c}{\textbf{DeepSPIN}} & \multicolumn{2}{c}{\textbf{IMS}} & \textbf{BS21} & \multicolumn{1}{c}{\textbf{CL21}} & \multicolumn{2}{c}{\textbf{UBC21}} & \multicolumn{1}{c}{\textbf{DP21}}   \\
+\textbf{ISO396-3} & \multicolumn{6}{c}{\textbf{BS20}} & \multicolumn{2}{c}{\textbf{DeepSPIN20}} & \multicolumn{2}{c}{\textbf{IMS20}} & \textbf{BS21} & \multicolumn{1}{c}{\textbf{CL21}} & \multicolumn{2}{c}{\textbf{UBC21}} & \multicolumn{1}{c}{\textbf{DP21}}   \\
 
  & \multicolumn{2}{c}{\textbf{LSTM}} & \multicolumn{2}{c}{\textbf{transformer}} & \multicolumn{2}{c}{\textbf{pair n-gram}} & & & & & & CL & UBC-1 &  UBC-2 & \\
 
 		  & WER   & PER  & WER   & PER  & WER   & PER  & WER     & PER & WER   & PER  & WER   & WER          & WER   & WER   & \\\cline{2-17}
 
-ady 	  & 28.00 & 6.53 & 28.44 & 6.49 & 32.00 & 7.56 & 24.67$^3$   & & 25.00 & 5.79 & 22.00 & 22.00$^{23}$ & 25.00 & 22.00 & \\
-bul 	  & 31.11 & 5.94 & 34.00 & 7.89 & 41.33 & 9.05 &    -        & & 22.22 & 4.85 & 18.30 & 18.80$^6$    &       &       & \\
-cym (wel) &       &      &       &      &       &      &             & &       &      & 10.00 & 10.00$^1$    & 13.00 & 12.00 & \\
-ell (gre) & 18.89 & 3.30 & 18.89 & 3.06 & 21.78 & 4.05 & -           & & 18.67 & 2.97 & 21.00 & 20.00$^{13}$ & 22.00 & 22.00 & \\
-eng(\_us) &       &      &       &      &       &      &             & &       &      & 41.94 &              &       &       & \textbf{37.43}\\
-fra (fre) & 6.22  & 1.32 & 6.89  & 1.72 & 13.56 & 3.12 &  5.11$^3$   & & 6.89  & 1.60 & 8.50  & 7.50$^{456}$ &       &       & \\
-hin 	  & 6.67  & 1.47 & 9.56  & 2.40 & 12.67 & 4.05 & -           & &  5.11 & 1.20 &       &              &       &       & \\
-hun 	  & 5.33  & 1.18 & 5.33  & 1.28 & 6.67  & 1.51 &        -    & &  5.11 & 1.12 & 1.80  &  1.00$^{67}$ &       &       & \\
-hye (arm) & 14.67 & 3.49 & 14.22 & 3.29 & 18.00 & 3.90 & -           & & 12.67 & 2.94 & 7.00  &  6.40$^{7}$  &       &       & \\
-ice 	  & 10.00 & 2.36 & 10.22 & 2.21 & 17.56 & 3.62 &    -        & & 9.33  & 2.04 & 12.00 & 10.00$^{13}$ & 13.00 & 11.00 & \\
-ita       &       &      &       &      &       &      &             & &       &      & 19.00 & 31.00$^{3}$  & 20.00 & 22.00 & \\
-jpn(\_hira)& 7.56 & 1.79 & 7.33  & 1.86 & 9.56  & 2.07 &  4.89$^4$   & & 5.33  & 1.26 & 5.20  &  5.00$^{7}$  &       &       & \\
-kat (geo) & 26.44 & 5.14 & 28.00 & 5.43 & 37.78 & 6.48 &       -     & & 24.89 & 4.57 & 0.00  &0.00$^{4567}$ &       &       & \\
-khm 	  &       &      &       &      &       &      &             & &       &      & 34.00 & 32.00$^{13}$ & 31.00 & 28.00 & \\
-kor 	  & 46.89 & 16.78& 43.78 & 17.50& 52.22 & 15.88& 24.00$^{13}$& & 26.22 & 4.38 & 16.30 & 16.20$^{4}$  &       &       & \\
-lav 	  &       &      &       &      &       &      &             & &       &      & 55.00 & 49.00$^{23}$ & 58.00 & 49.00 & \\
-lit 	  & 19.11 & 3.55 & 20.67 & 3.65 & 23.11 & 4.43 & -           & & 20.00 & 3.63 &       &              &       &       & \\
-mlt(\_ltn)&       &      &       &      &       &      &             & &       &      & 19.00 & 12.00$^{1}$  & 19.00 & 18.00 & \\
-nld (dut) & 16.44 & 2.94 & 15.78 & 2.89 & 23.78 & 3.97 &  -          & & 13.56 & 2.36 & 14.70 & 14.70$^{7}$  &       &       & \\
-rum 	  & 10.67 & 2.53 & 12.00 & 3.62 & 11.56 & 3.55 &  9.78$^3$   & & 10.22 & 2.23 & 10.00 & 12.00$^{3}$  & 14.00 & 10.00 & \\
-slv 	  &       &      &       &      &       &      &             & &       &      & 49.00 & 50.00$^{1}$  & 56.00 & 47.00 & \\
-vie  	  & 4.67  & 1.52 & 7.56  & 2.27 & 8.44  & 1.79 &  0.89$^2$   & &  1.56 & 0.48 & 2.50  &  2.00$^{57}$ &       &       & \\
+ady$^B$ 	  & 28.00 & \textit{6.53} & 28.44 & \textit{6.49} & 32.00 & \textit{7.56} & 24.67$^3$   & & 25.00 & \textit{5.79} & \textbf{22.00} & \textbf{22.00$^{23}$} & 25.00 & \textbf{22.00} & \\
+bul$^A$ 	  & 31.11 & \textit{5.94} & 34.00 & \textit{7.89} & 41.33 & \textit{9.05} &    -        & & 22.22 & \textit{4.85} & \textbf{18.30} & 18.80$^6$    &       &       & \\
+cym (wel)$^B$ &       &      &       &      &       &      &             & &       &      & \textbf{10.00} & \textbf{10.00$^1$}    & 13.00 & 12.00 & \\
+\textbf{ell (gre)$^B$} & 18.89 & \textit{3.30} & 18.89 & \textit{3.06} & 21.78 & \textit{4.05} & -           & & \textbf{18.67} & \textit{2.97} & 21.00 & 20.00$^{13}$ & 22.00 & 22.00 & \\
+\textbf{eng(\_us)} &       &      &       &      &       &      &             & &       &      & 41.94 &              &       &       & \textbf{37.43}\\
+\textbf{fra (fre)$^A$} & 6.22  & \textit{1.32} & 6.89  & \textit{1.72} & 13.56 & \textit{3.12} &  \textbf{5.11$^3$}   & & 6.89  & \textit{1.60} & 8.50  & 7.50$^{456}$ &       &       & \\
+hbs$^A$       &       &      &       &      &       &      &             & &       &      & \textbf{32.10} & 35.3$^7$    & & & \\
+\textbf{hin} 	  & 6.67  & \textit{1.47} & 9.56  & \textit{2.40} & 12.67 & \textit{4.05} & -           & &  \textbf{5.11} & \textit{1.20} &       &              &       &       & \\
+hun$^A$ 	  & 5.33  & \textit{1.18} & 5.33  & \textit{1.28} & 6.67  & \textit{1.51} &        -    & &  5.11 & \textit{1.12} & 1.80  &  \textbf{1.00$^{67}$} &       &       & \\
+hye (arm)$^A$ & 14.67 & \textit{3.49} & 14.22 & \textit{3.29} & 18.00 & \textit{3.90} & -           & & 12.67 & \textit{2.94} & 7.00  &  \textbf{6.40$^{7}$}  &       &       & \\
+ice$^B$ 	  & 10.00 & \textit{2.36} & 10.22 & \textit{2.21} & 17.56 & \textit{3.62} &    -        & & \textbf{9.33}  & \textit{2.04} & 12.00 & 10.00$^{13}$ & 13.00 & 11.00 & \\
+ita$^B$       &       &      &       &      &       &      &             & &       &      & \textbf{19.00} & 31.00$^{3}$  & 20.00 & 22.00 & \\
+\textbf{jpn(\_hira)$^A$}& 7.56 & \textit{1.79} & 7.33  & \textit{1.86} & 9.56  & \textit{2.07} &  \textbf{4.89$^4$}   & & 5.33  & \textit{1.26} & 5.20  &  5.00$^{7}$  &       &       & \\
+\textbf{kat (geo)$^A$} & 26.44 & \textit{5.14} & 28.00 & \textit{5.43} & 37.78 & \textit{6.48} &       -     & & 24.89 & \textit{4.57} & \textbf{0.00}  &\textbf{0.00$^{4567}$} &       &       & \\
+khm$^B$ 	  &       &      &       &      &       &      &             & &       &      & 34.00 & 32.00$^{13}$ & 31.00 & \textbf{28.00} & \\
+\textbf{kor$^A$ }	  & 46.89 & \textit{16.78}& 43.78 & \textit{17.50}& 52.22 & \textit{15.88}& 24.00$^{13}$& & 26.22 & \textit{4.38} & 16.30 & \textbf{16.20$^{4}$}  &       &       & \\
+lav$^B$ 	  &       &      &       &      &       &      &             & &       &      & 55.00 & \textbf{49.00$^{23}$} & 58.00 & \textbf{49.00} & \\
+lit 	  & \textbf{19.11} & \textit{3.55} & 20.67 & \textit{3.65} & 23.11 & \textit{4.43} & -           & & 20.00 & \textit{3.63} &       &              &       &       & \\
+mlt(\_ltn)$^B$&       &      &       &      &       &      &             & &       &      & 19.00 & 12.00$^{1}$  & 19.00 & 18.00 & \\
+nld (dut)$^A$ & 16.44 & \textit{2.94} & 15.78 & \textit{2.89} & 23.78 & \textit{3.97} &  -          & & \textbf{13.56} & \textit{2.36} & 14.70 & 14.70$^{7}$  &       &       & \\
+rum$^B$ 	  & 10.67 & \textit{2.53} & 12.00 & \textit{3.62} & 11.56 & \textit{3.55} &  \textbf{9.78$^3$}   & & 10.22 & \textit{2.23} & 10.00 & 12.00$^{3}$  & 14.00 & 10.00 & \\
+slv$^B$ 	  &       &      &       &      &       &      &             & &       &      & 49.00 & 50.00$^{1}$  & 56.00 & \textbf{47.00} & \\
+\textbf{vie$^A$ } 	  & 4.67  & \textit{1.52} & 7.56  & \textit{2.27} & 8.44  & \textit{1.79} &  \textbf{0.89$^2$}   & &  1.56 & \textit{0.48} & 2.50  &  2.00$^{57}$ &       &       & \\
 
 \hline
-macro 	  & 16.84 & 3.99 & 17.51 & 4.30 & 22.00 & 4.92 & 14.15 & 2.92  & 13.81 & 2.76  &       &             &       &       & \\
-macro l	  &       &      &       &      &       &      &       &       &       &       & 25.10 &             & 27.10 & 24.10 & \\
-macro m	  &       &      &       &      &       &      &       &       &       &       & 10.60 &             &       &       & \\
+macro 	  & 16.84 & \textit{3.99 }& 17.51 & \textit{4.30} & 22.00 & \textit{4.92} & 14.15 & \textit{2.92}  & 13.81 & \textit{2.76}  &       &             &       &       & \\
+macro low	  &       &      &       &      &       &      &       &       &       &       & 25.10 &             & 27.10 & 24.10 & \\
+macro medium	  &       &      &       &      &       &      &       &       &       &       & 10.60 &             &       &       & \\
 
 
 
 \end{tabularx}
 }
 
-DeepSPIN: They did not report any results on the languages separately. Neither are the PER scores available. 
+
+
+{\small
+\noindent
+Superscript numbers denote model numbers. Numbers in bold denote best model for one language (only WER). Languages in bold are in the 100LC corpus. $^A$: medium resource languages in 2021. $^B$: low resource languages in 2021\\ 
+
+\noindent
+\textbf{BS20:} \href{https://aclanthology.org/2020.sigmorphon-1.2/}{\underline{Link}}\\
+\textbf{DeepSPIN:} Transformer- or LSTM-based enc-dec seq2seq models with sparse attention. Add language embedding to enc and dec states instead of language token. They did not report any results on the languages separately. Neither are the PER scores available. \href{https://aclanthology.org/2020.sigmorphon-1.4/}{\underline{Link}}\\
+\textbf{IMS:} Self training ensemble of one n-gram-based FST and 3 seq2seq (vanilla with attention, hard monotonic attention with pointer, hybrid of hard monotonic attention and tagging model) \href{https://aclanthology.org/2020.sigmorphon-1.5/}{\underline{Link}} \\
+\textbf{BS21:} similar to CL21 \href{https://aclanthology.org/2021.sigmorphon-1.13/}{\underline{Link}}\\
+\textbf{CL21:} LSTM-based neural transducer with pointer network-like monotonic hard attention trained with imitation learning 7 different, but still very similar ensembles of one model. \href{https://aclanthology.org/2021.sigmorphon-1.17/}{\underline{Link}}\\
+\textbf{UBC21:} UBC-2 baseline variant with vowel error punishment. UBC-1 baseline variant with syllable prediction. \href{https://aclanthology.org/2021.sigmorphon-1.15/}{\underline{Link}}\\
+\textbf{DP21:} Majority-vote ensemble consisting of 7 different models \href{https://aclanthology.org/2021.sigmorphon-1.16/}{\underline{Link}}
+\noindent
+
+
+}
 
 
 
-
-
-\tab{tab:sota}{SOTA models: I report the best results per model over all models in the table. Many models achieved comparable results if they were trained on the same languages. The mentioned baseline has the same architecture like the one in the first row.}{
-\begin{tabularx}{\textwidth}{
-| 	>{\raggedright\arraybackslash}l | 
-	>{\raggedright\arraybackslash}l | 
-	X | 
-	>{\raggedright\arraybackslash}r |}
-\hline
-\textbf{Author} & \textbf{Model Architecture} & \textbf{ISO 639-3} & \textbf{WER} \\
-\hline
-\hline
-\multirow[t]{11}{0.14\textwidth}{SIG21: Clematide and Makarov (2021) \\
-\vspace{0.5cm}
-\href{https://aclanthology.org/2021.sigmorphon-1.17/}{\underline{Link}}}& \multirow[t]{11}{0.5\textwidth}{CLUZH models 1-7. LSTM-based neural transducer with pointer network-like monotonic hard attention trained with imitation learning. All models 1-7 are majority-vote ensembles with different number of models (5-30) and different inputs (characters or segments). \\
-\vspace{0.5cm}
-Achieved good results in nld (14.7), ice (10), jpn (5.0), fra (7.5) and vie (2.0) but not better than SIG20.
-
-}& \multicolumn{2}{c|}{medium (8.000 train pairs)} \\\cline{3-4}
-& & hye (arm\_e) & 6.4 \\
-& & hun & 1.0 \\
-& & kat (geo) & 0.0 \\
-& & kor & 16.2 \\\cline{3-4}
-& & \multicolumn{2}{c|}{low (800 train pairs)} \\\cline{3-4}
-& & ell (gre) & 20 \\
-& & ady & 22 \\
-& & lav & 49 \\
-& & mlt(\_ltn) & 12 \\
-& & cym (wel\_sw) & 10 \\
-\hline
-\multirow[t]{4}{0.14\textwidth}{SIG21: Lo and Nicolai (2021) \\
-\vspace{0.5cm}
-\href{https://aclanthology.org/2021.sigmorphon-1.15/}{\underline{Link}}}& \multirow[t]{4}{0.5\textwidth}{UBC-2: baseline variant. They analysed the errors of the baseline and extend it by adding penalties for wrong vowels and wrong diacritics. Errors on vowels actually decreased. Best macro average (low-resource).
-}& ady & 22 \\
-& & khm & 28 \\
-& & lav & 49 \\
-& & slv & 47 \\
-\hline
-\multirow[t]{4}{0.14\textwidth}{SIG21: Gautam et al. (2021) \\
-\vspace{0.5cm}
-\href{https://aclanthology.org/2021.sigmorphon-1.16/}{\underline{Link}}}& \multirow[t]{4}{0.5\textwidth}{Dialpad-1: Majority-vote ensemble consisting of three different public models (weighted FST, joint-sequence model trained with EM and a neural seq2seq), two seq2seq variants (LSTM and transformer) and two baseline variations. 
-}& \multicolumn{2}{c|}{high (32.800 train pairs)} \\\cline{3-4}
-& & eng(\_us)  &  37.43 \\
-& &   &   \\
-& &   &   \\
-\hline
-\multirow[t]{5}{0.14\textwidth}{SIG20: Peters and Martins (2020) \\
-\vspace{0.5cm}
-\href{https://aclanthology.org/2020.sigmorphon-1.4/}{\underline{Link}}}& \multirow[t]{5}{0.5\textwidth}{DeepSPIN-2,-3,-4: Transformer- or LSTM-based enc-dec seq2seq models with sparse attention. Add language embedding to enc and dec states instead of language token.
-}& \multicolumn{2}{c|}{3.600 train pairs} \\\cline{3-4}
-& & jpn(\_hira) & 4.89 \\
-& & fra (fre) & 5.11 \\
-& & rum & 9.78  \\
-& & vie  & 0.89  \\
-\hline
-\multirow[t]{4}{0.14\textwidth}{SIG20: Yu et al. (2020) \\
-\vspace{0.2cm}
-\href{https://aclanthology.org/2020.sigmorphon-1.5/}{\underline{Link}}}& \multirow[t]{4}{0.5\textwidth}{IMS: Self training ensemble of one n-gram-based FST and 3 seq2seq (vanilla with attention, hard monotonic attention with pointer, hybrid of hard monotonic attention and tagging model). Best macro score.
-}& hin &  5.11 \\
-& & nld (dut) & 13.56  \\
-& &   &   \\
-& &   &   \\
-\hline
-\end{tabularx}}{SOTA \ac{g2p} models}
 
 
 
