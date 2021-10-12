@@ -44,5 +44,8 @@ For languages where the type of the transcriptions was unclear but two lists for
 \section{Automatic \ac{g2p}}
 As there is only very little data available as full texts, we decided to use the short stories as test set for the experiments with \ac{g2p} models. Those texts are all manually created and are specifically created by linguists for the purpose of studying phonetics of many languages. 
 
-\subsection*{Preprocessing}
+\subsection{Preprocessing}
 Before any of the data can be used, it needs to be preprocessed. As I am going to use the pronunciation dictionaries which consist of single words per line, the full texts need to be prepared like that as well.
+
+\subsection{g2p-seq2seq CMUSphinx}
+I tested a git repo where they make an already pretrained \ac{g2p} model available. Setting it up was not very easy as there were issues with tensorflow version and some other dependencies. Also, they do have a pre-trained model but this uses a completely different transcription than IPA. So we cannot use this model. But I still tested it to see how it works. 
