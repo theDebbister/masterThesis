@@ -48,4 +48,9 @@ As there is only very little data available as full texts, we decided to use the
 Before any of the data can be used, it needs to be preprocessed. As I am going to use the pronunciation dictionaries which consist of single words per line, the full texts need to be prepared like that as well.
 
 \subsection{g2p-seq2seq CMUSphinx}
-I tested a git repo where they make an already pretrained \ac{g2p} model available. Setting it up was not very easy as there were issues with tensorflow version and some other dependencies. Also, they do have a pre-trained model but this uses a completely different transcription than IPA. So we cannot use this model. But I still tested it to see how it works. 
+I tested a git repo where they make an already pretrained \ac{g2p} model available. Setting it up was not very easy as there were issues with tensorflow version and some other dependencies. Also, they do have a pre-trained model but this uses a completely different transcription than IPA. So we cannot use this model. But to test the model and have a baseline we trained in on the data we have to see how it performs. The experiments we intend to do with all different models can be split into different settings. The first setting is the most basic one to simply train the CMU model on the data with no additional changes. \review{I will put it into a table later.}
+
+\subparagraph{Setting 1}
+Test all languages with the CMU model where we have data for to have a baseline for all languages. We train a model for all languages separately. 
+
+kor Korean 
