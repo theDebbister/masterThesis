@@ -50,9 +50,10 @@
 \contentsline {subparagraph}{\nonumberline Chinese}{30}{subparagraph*.47}%
 \contentsline {subparagraph}{\nonumberline Hebrew}{30}{subparagraph*.49}%
 \contentsline {section}{\numberline {6.3}Automatic \ac {g2p}}{30}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Preprocessing}{30}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}g2p-seq2seq CMUSphinx}{31}{subsection.6.3.2}%
-\contentsline {subparagraph}{\nonumberline Setting 1}{32}{subparagraph*.51}%
+\contentsline {subsection}{\numberline {6.3.1}Training settings}{30}{subsection.6.3.1}%
+\contentsline {subparagraph}{\nonumberline Setting 1}{30}{subparagraph*.51}%
+\contentsline {subsection}{\numberline {6.3.2}Preprocessing}{31}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}g2p-seq2seq CMUSphinx}{32}{subsection.6.3.3}%
 \contentsline {chapter}{References}{33}{section*.52}%
 \contentsline {chapter}{\numberline {A}Tables}{37}{appendix.A}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

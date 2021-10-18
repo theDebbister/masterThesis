@@ -44,13 +44,35 @@ For languages where the type of the transcriptions was unclear but two lists for
 \section{Automatic \ac{g2p}}
 As there is only very little data available as full texts, we decided to use the short stories as test set for the experiments with \ac{g2p} models. Those texts are all manually created and are specifically created by linguists for the purpose of studying phonetics of many languages. 
 
+\subsection{Training settings}
+There are different settings which I will used to train the models.
+
+\subparagraph{Setting 1}
+Test all languages with the CMU model where we have data for to have a baseline for all languages. We train a model for all languages separately
+
 \subsection{Preprocessing}
 Before any of the data can be used, it needs to be preprocessed. As I am going to use the pronunciation dictionaries which consist of single words per line, the full texts need to be prepared like that as well.
 
 \subsection{g2p-seq2seq CMUSphinx}
-I tested a git repo where they make an already pretrained \ac{g2p} model available. Setting it up was not very easy as there were issues with tensorflow version and some other dependencies. Also, they do have a pre-trained model but this uses a completely different transcription than IPA. So we cannot use this model. But to test the model and have a baseline we trained in on the data we have to see how it performs. The experiments we intend to do with all different models can be split into different settings. The first setting is the most basic one to simply train the CMU model on the data with no additional changes. \review{I will put it into a table later.}
+I tested a git repo where they make an already pretrained \ac{g2p} model available. Setting it up was not very easy as there were issues with tensorflow version and some other dependencies. Also, they do have a pre-trained model but this uses a completely different transcription than IPA. So we cannot use this model. But to test the model and have a baseline we trained in on the data we have to see how it performs. First, I trained it on those languages where I have results from the \ac{sigm} 2021 challenge. The results are compared in \ref{tab:baseline_cmu}. 
 
-\subparagraph{Setting 1}
-Test all languages with the CMU model where we have data for to have a baseline for all languages. We train a model for all languages separately. 
-
-kor Korean 
+\tab{tab:baseline_cmu}{Baseline CMUSphinx results compared with \ac{sigm} 2021 results. All models have been trained with 10000 steps and the default settings. The framework provides a WER implementation which has been used to evaluate the models.}{
+\begin{tabularx}{\columnwidth}{
+| 	>{\raggedright\arraybackslash}l | 
+	>{\raggedleft\arraybackslash}r | 
+	>{\raggedleft\arraybackslash}r  | 
+	>{\raggedright\arraybackslash}X |}
+\hline
+\textbf{ISO396-3} & \textbf{Baseline WER} & \textbf{other model WER} & \textbf{Notes} \\
+\hline
+\hline
+eng (us) & 54.40 & 37.43 & broad \\
+fra & 7.20 & 5.11 & broad \\
+ell & 9.80 & 18.67 & broad \\
+kat & 0.30 & 0.00 & broad \\
+hin & 5.60 & 5.11 & broad \\
+jpn & 6.60 & 4.89 & narrow \\
+kor & 28.70 & 16.20 & narrow \\
+vie & 7.50 & 0.89 & narrow \\
+\hline
+\end{tabularx}}{Baseline Results}
