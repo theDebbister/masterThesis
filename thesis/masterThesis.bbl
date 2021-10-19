@@ -1,4 +1,4 @@
-\begin{thebibliography}{30}
+\begin{thebibliography}{31}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -31,6 +31,15 @@ L.~F. Ashby, T.~M. Bartley, S.~Clematide, L.~{Del Signore}, C.~Gibson,
   Computational Research in Phonetics, Phonology, and Morphology}},
   Stroudsburg, PA, USA, 2021. {Association for Computational Linguistics}.
 \newblock \doi{10.18653/v1/2021.sigmorphon-1.13}.
+
+\bibitem[Baird et~al.(2021)Baird, Evans, and
+  Greenhill]{baird_evans_greenhill_2021}
+L.~Baird, N.~Evans, and S.~J. Greenhill.
+\newblock Blowing in the wind: Using ‘north wind and the sun’ texts to
+  sample phoneme inventories.
+\newblock \emph{Journal of the International Phonetic Association}, page
+  1–42, 2021.
+\newblock \doi{10.1017/S002510032000033X}.
 
 \bibitem[Bisani and Ney(2008)]{ney-joint-sequence2008}
 M.~Bisani and H.~Ney.
