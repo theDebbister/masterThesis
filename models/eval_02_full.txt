@@ -1,0 +1,1643 @@
+the ð e ɪ
+
+north n ɔ ɹ θ
+
+wind w ɪ n d
+
+and æ n d
+
+the ð e ɪ
+
+sun s ʌ n
+
+were w ɪ ə ɹ
+
+disputing d ɪ s p j uː t ɪ ŋ
+
+which h w ɪ t͡ʃ
+
+was w ɑ z
+
+the ð e ɪ
+
+stronger s t ɹ ɔ ŋ ɡ ɚ
+
+when h w ɛ n
+
+a e ɪ
+
+traveler t ɹ æ v ə l ɚ
+
+came k e ɪ m
+
+along ə l ɒ ŋ
+
+wrapped ɹ æ p t
+
+in ɪ n
+
+a e ɪ
+
+warm w ɔ ɹ m
+
+cloak k l o ʊ k
+
+they θ e ɪ
+
+agreed ə ɡ ɹ iː d
+
+that θ æ t
+
+the ð e ɪ
+
+one o ʊ n
+
+who h uː
+
+first f ɝ s t
+
+succeeded s ə k s iː d ɪ d
+
+in ɪ n
+
+making m e ɪ k ɪ ŋ
+
+the ð e ɪ
+
+traveler t ɹ æ v ə l ɚ
+
+take t e ɪ k
+
+his h ɪ s
+
+cloak k l o ʊ k
+
+off ɑ f
+
+should ʃ a ʊ l d
+
+be b e ɪ
+
+considered k ɑ n s ɪ d ɚ d
+
+stronger s t ɹ ɔ ŋ ɡ ɚ
+
+than θ æ n
+
+the ð e ɪ
+
+other ʌ ð ɚ
+
+then ð ɛ n
+
+the ð e ɪ
+
+north n ɔ ɹ θ
+
+wind w ɪ n d
+
+blew b l uː
+
+as e ɪ s
+
+hard h ɑ ɹ d
+
+as e ɪ s
+
+he h i
+
+could k ʊ d
+
+but b ʌ t
+
+the ð e ɪ
+
+more m ɔː ɹ
+
+he h i
+
+blew b l uː
+
+the ð e ɪ
+
+more m ɔː ɹ
+
+closely k l o ʊ s l i
+
+did d ɪ d
+
+the ð e ɪ
+
+traveler t ɹ æ v ə l ɚ
+
+fold f o ʊ l d
+
+his h ɪ s
+
+cloak k l o ʊ k
+
+around ə ɹ a ʊ n d
+
+him h ɪ m
+
+and æ n d
+
+at æ t
+
+last l æ s t
+
+the ð e ɪ
+
+north n ɔ ɹ θ
+
+wind w ɪ n d
+
+gave ɡ e ɪ v
+
+up ʌ p
+
+the ð e ɪ
+
+attempt ə t ɛ m p t
+
+then ð ɛ n
+
+the ð e ɪ
+
+sun s ʌ n
+
+shined ʃ a ɪ n d
+
+out a ʊ t
+
+warmly w ɔ ɹ m l i
+
+and æ n d
+
+immediately ɪ m i d i ə t l i
+
+the ð e ɪ
+
+traveler t ɹ æ v ə l ɚ
+
+took t ʊ k
+
+off ɑ f
+
+his h ɪ s
+
+cloak k l o ʊ k
+
+and æ n d
+
+so s o ʊ
+
+the ð e ɪ
+
+north n ɔ ɹ θ
+
+wind w ɪ n d
+
+was w ɑ z
+
+obliged ə b l ɪ d ʒ d
+
+to t ə ʊ
+
+confess k ɑ n f ɛ s
+
+that θ æ t
+
+the ð e ɪ
+
+sun s ʌ n
+
+was w ɑ z
+
+the ð e ɪ
+
+stronger s t ɹ ɔ ŋ ɡ ɚ
+
+of ɑ f
+
+the ð e ɪ
+
+two t u
+
+Words: 113
+Errors: 99
+WER: 0.876
+Accuracy: 0.124
+Lang: eng_latn_us_broad_filtered
+
+la l a
+
+bise b i z
+
+et ɛ t
+
+le l
+
+soleil s ɔ l ɛ j
+
+se s ə
+
+disputaient d i s p y t ɛ
+
+chacun ʃ a k œ̃
+
+assurant a s y ʁ ɑ̃
+
+qu'il k ‿ i l
+
+était e t ɛ
+
+le l
+
+plus p l y
+
+fort f ɔ ʁ
+
+quand k ɑ̃
+
+ils i l
+
+ont ɔ̃
+
+vu v y
+
+un œ̃
+
+voyageur v w a j a ʒ œ ʁ
+
+qui k i
+
+s'avançait s ‿ a v ɑ̃ s ɛ
+
+enveloppé ɑ̃ v l ɔ p e
+
+dans d ɑ̃
+
+son s ɔ̃
+
+manteau m ɑ̃ t o
+
+ils i l
+
+sont s ɔ̃
+
+tombés t ɔ̃ b e
+
+d'accord d ‿ a k ɔ ʁ
+
+que k
+
+celui s ə l ɥ i
+
+qui k i
+
+arriverait a ʁ i v ʁ ɛ
+
+le l
+
+premier p ʁ ə m j e
+
+à a
+
+le l
+
+lui l ɥ i
+
+faire f ɛ ʁ
+
+ôter o t e
+
+serait s ə ʁ ɛ
+
+reconnu ʁ ə k ɔ n y
+
+comme k ɔ m
+
+le l
+
+plus p l y
+
+fort f ɔ ʁ
+
+alors a l ɔ ʁ
+
+la l a
+
+bise b i z
+
+s'est s ‿ ɛ s t
+
+mise m i z
+
+à a
+
+souffler s u f l e
+
+de d ə
+
+toutes t u t
+
+ses s ɛ s
+
+forces f ɔ ʁ s
+
+mais m ɛ
+
+plus p l y
+
+elle ɛ l
+
+soufflait s u f l ɛ
+
+plus p l y
+
+le l
+
+voyageur v w a j a ʒ œ ʁ
+
+serrait s ɛ ʁ ɛ
+
+son s ɔ̃
+
+manteau m ɑ̃ t o
+
+autour o t u ʁ
+
+de d ə
+
+lui l ɥ i
+
+finalement f i n a l m ɑ̃
+
+elle ɛ l
+
+renonça ʁ ə n ɔ̃ s a
+
+à a
+
+le l
+
+lui l ɥ i
+
+faire f ɛ ʁ
+
+ôter o t e
+
+alors a l ɔ ʁ
+
+le l
+
+soleil s ɔ l ɛ j
+
+commença k ɔ m ɑ̃ s a
+
+à a
+
+briller b ʁ i j e
+
+et ɛ t
+
+au o
+
+bout b u
+
+d'un d ‿ œ̃
+
+moment m ɔ m ɑ̃
+
+le l
+
+voyageur v w a j a ʒ œ ʁ
+
+réchauffé ʁ e ʃ o f e
+
+ôta o t a
+
+son s ɔ̃
+
+manteau m ɑ̃ t o
+
+ainsi ɛ̃ s i
+
+la l a
+
+bise b i z
+
+dut d y
+
+reconnaître ʁ ə k ɔ n ɛ t ʁ
+
+que k
+
+le l
+
+soleil s ɔ l ɛ j
+
+était e t ɛ
+
+le l
+
+plus p l y
+
+fort f ɔ ʁ
+
+Words: 108
+Errors: 62
+WER: 0.574
+Accuracy: 0.426
+Lang: fre_latn_broad_filtered
+바람과 p a̠ ɾ a̠ m ɡ w a̠
+
+해님이 h ɛː n i m i
+
+서로 sʰ ʌ̹ ɾ o̞
+
+더 t ʌ̹
+
+세다고 sʰ e̞ː d a̠ ɡ o̞
+
+다투고 t a̠ tʰ u ɡ o̞
+
+있을 i n ɯ ɭ
+
+한 h a̠ː n
+
+나그네가 n a̠ ɡ ɯ n e̞ ɡ a̠
+
+따뜻한 t͈ a̠ t͈ ɯ tʰ a̠ n
+
+외투를 w e̞ tʰ u ɾ ɯ ɭ
+
+입고 i p̚ k͈ o̞
+
+걸어 k ʌ̹ ɾ ʌ̹
+
+그들은 k ɯ d ɯ ɾ ɯ n
+
+누구든지 n u ɡ u d ɯ ɲ d͡ʑ i
+
+나그네의 n a̠ ɡ ɯ n e̞ ɰ i
+
+외투를 w e̞ tʰ u ɾ ɯ ɭ
+
+먼저 m ʌ̹ ɲ d͡ʑ ʌ̹
+
+벗기는 p ʌ̹ t̚ k͈ i n ɯ n
+
+이가 i ɡ a̠
+
+더 t ʌ̹
+
+세다고 sʰ e̞ː d a̠ ɡ o̞
+
+하기로 h a̠ ɡ i ɾ o̞
+
+북풍은 p u k̚ pʰ u ŋ ɯ n
+
+불었으나 p u ɾ ʌ̹ tʰ ɯ n a̠
+
+불면 p u ɭ m j ʌ̹ n
+
+불수록 p u ɭ s͈ u ɾ o̞ k̚
+
+나그네는 n a̠ ɡ ɯ n e̞ n ɯ n
+
+외투를 w e̞ tʰ u ɾ ɯ ɭ
+
+단단히 t a̠ n d a̠ n ʝ i
+
+여몄습니다 j ʌ̹ sʰ ɯ m ɲ j ʌ̹ n i d a̠
+
+그 k ɯ
+
+뜨거운 t͈ ɯ ɡ ʌ̹ u n
+
+가만히 k a̠ m a̠ n ʝ i
+
+나그네는 n a̠ ɡ ɯ n e̞ n ɯ n
+
+외투를 w e̞ tʰ u ɾ ɯ ɭ
+
+얼른 ʌ̹ ɭ ɭ ɯ n
+
+벗었습니다 p ʌ̹ sʰ ʌ̹ n sʰ ɯ m n i d a̠
+
+이리하여 i ɾ i ɦ a̠ j ʌ̹
+
+북풍은 p u k̚ pʰ u ŋ ɯ n
+
+둘중에 t u ʎ d͡ʑ u ŋ e̞
+
+더 t ʌ̹
+
+세다고 sʰ e̞ː d a̠ ɡ o̞
+
+인정하지 i ɲ d͡ʑ ʌ̹ ŋ ɦ a̠ d͡ʑ i
+
+않을 a̠ n ɯ ɭ
+
+수 sʰ uː
+
+없었습니다 ʌ̹ p s͈ ʌ̹ n sʰ ɯ m n i d a̠
+
+Words: 47
+Errors: 47
+WER: 1.000
+Accuracy: 0.000
+Lang: kor_hang_narrow_filtered
+उत्तरी ʊ t̪̚ t̪ ə ɾ iː
+
+हवा ɦ ə ʋ äː
+
+और ɔː ɾ
+
+सूरज s̪ uː ɾ ə d͡ʒ
+
+इस ɪ s̪
+
+बात b äː t̪
+
+पर p ə ɾ
+
+झगड़ d͡ʒʱ ə ɡ ə ɽ
+
+रहे ɾ ə ɦ eː
+
+थे t̪ʰ eː
+
+कि k iː
+
+हम ɦ ə̃ m
+
+दोनों d̪ oː n̪ õː
+
+में m ẽː
+
+ज्यादा d͡ʒ j äː d̪ äː
+
+बलवान b ə l̪ ʋ ä̃ː n̪
+
+कौन k ɔ̃ː n̪
+
+है ɦ ɛː
+
+इतने ɪ t̪̚ n̪ eː
+
+में m ẽː
+
+गरम ɡ ə ɾ ə̃ m
+
+चोगा t͡ʃ oː ɡ äː
+
+पहने p ɛ ɦ n̪ eː
+
+एक eː k
+
+मुसाफिर m ʊ s̪ äː pʰ ɪ ɾ
+
+उधर ʊ d̪ʱ ə ɾ
+
+आ äː
+
+आ äː
+
+हवा ɦ ə ʋ äː
+
+और ɔː ɾ
+
+सूरज s̪ uː ɾ ə d͡ʒ
+
+दोनों d̪ oː n̪ õː
+
+इस ɪ s̪
+
+बात b äː t̪
+
+पर p ə ɾ
+
+राज़ी ɾ äː z iː
+
+हो ɦ oː
+
+गये ɡ ə j eː
+
+कि k iː
+
+दोनों d̪ oː n̪ õː
+
+में m ẽː
+
+से s̪ eː
+
+जो d͡ʒ oː
+
+पहले p ɛ ɦ l̪ eː
+
+मुसाफिर m ʊ s̪ äː pʰ ɪ ɾ
+
+का k äː
+
+चोगा t͡ʃ oː ɡ äː
+
+उतरवा ʊ t̪ ə ɾ ʋ äː
+
+देगा d̪ eː ɡ äː
+
+वही ʋ ə ɦ iː
+
+ज़्यादा z j äː d̪ äː
+
+बलवान b ə l̪ ʋ ä̃ː n̪
+
+समझा s̪ ə̃ m d͡ʒʱ äː
+
+जायेगा d͡ʒ äː j eː ɡ äː
+
+इस ɪ s̪
+
+पर p ə ɾ
+
+उत्तरी ʊ t̪̚ t̪ ə ɾ iː
+
+हवा ɦ ə ʋ äː
+
+अपना ə p n̪ äː
+
+पूरा p uː ɾ äː
+
+जोर d͡ʒ oː ɾ
+
+लगाकर l̪ ə ɡ äː k ə ɾ
+
+चलने t͡ʃ ə l̪ n̪ eː
+
+लगी l̪ ə ɡ iː
+
+लेकिन l̪ eː k ɪ̃ n̪
+
+वह ʋ ɛ ɦ
+
+जेसे d͡ʒ eː s̪ eː
+
+जेसे d͡ʒ eː s̪ eː
+
+अपना ə p n̪ äː
+
+जोर d͡ʒ oː ɾ
+
+बढ़ाती b ə ɽʱ äː t̪ iː
+
+गई ɡ ə iː
+
+वैसे ʋ ɛː s̪ eː
+
+वेसे ʋ eː s̪ eː
+
+मुसाफिर m ʊ s̪ äː pʰ ɪ ɾ
+
+अपने ə p n̪ eː
+
+बदन b ə d̪ ə̃ n̪
+
+पर p ə ɾ
+
+चोगे t͡ʃ oː ɡ eː
+
+को k oː
+
+और ɔː ɾ
+
+भी bʱ iː
+
+कस k ə s̪
+
+कर k ə ɾ
+
+लपेटता l̪ ə p eː ʈ t̪ äː
+
+गया ɡ ə j äː
+
+अन्त ə̃ n̪ t̪
+
+में m ẽː
+
+हवा ɦ ə ʋ äː
+
+ने n̪ eː
+
+अपनी ə p n̪ iː
+
+कोशिश k oː ʃ ɪ ʃ
+
+बन्द b ə̃ n̪ d̪
+
+कर k ə ɾ
+
+दी d̪ iː
+
+फिर pʰ ɪ ɾ
+
+सूरज s̪ uː ɾ ə d͡ʒ
+
+तेज़ी t̪ eː z iː
+
+के k eː
+
+साथ s̪ äː t̪ʰ
+
+निकला n̪ ɪ k l̪ äː
+
+और ɔː ɾ
+
+मुसाफिर m ʊ s̪ äː pʰ ɪ ɾ
+
+ने n̪ eː
+
+तुरन्त t̪ ʊ ɾ ə̃ n̪ t̪
+
+अपना ə p n̪ äː
+
+चोगा t͡ʃ oː ɡ äː
+
+उतार ʊ t̪ äː ɾ
+
+दिया d̪ i j äː
+
+इस ɪ s̪
+
+लिये l̪ i j eː
+
+हवा ɦ ə ʋ äː
+
+को k oː
+
+मानना m ä̃ː n̪ n̪ äː
+
+पड़ा p ə ɽ äː
+
+कि k iː
+
+उन ʊ̃ n̪
+
+दोनों d̪ oː n̪ õː
+
+में m ẽː
+
+सूरज s̪ uː ɾ ə d͡ʒ
+
+ही ɦ iː
+
+ज्यादा d͡ʒ j äː d̪ äː
+
+बलवान b ə l̪ ʋ ä̃ː n̪
+
+हे ɦ eː
+
+Words: 124
+Errors: 118
+WER: 0.952
+Accuracy: 0.048
+LAng: hin_deva_narrow
+
+
+उत्तरी ʊ t̪ t̪ ə ɾ iː
+
+हवा ɦ ə ʋ ɑː
+
+और ɔː ɾ
+
+सूरज s uː ɾ ə d͡ʒ
+
+इस ɪ s
+
+बात b ɑː t̪
+
+पर p ə ɾ
+
+झगड़ d͡ʒʱ ə ɡ ə ɽ
+
+रहे ɾ ə ɦ eː
+
+थे t̪ʰ eː
+
+कि k eː
+
+हम ɦ ə m
+
+दोनों d̪ oː n õː
+
+में m ẽː
+
+ज्यादा d͡ʒ j ɑː d̪ ɑː
+
+बलवान b ə l ʋ ɑː n
+
+कौन k ɔː n
+
+है ɦ ɛː
+
+इतने ɪ t̪ n eː
+
+में m ẽː
+
+गरम ɡ ə ɾ ə m
+
+चोगा t͡ʃ oː ɡ ɑː
+
+पहने p ə ɦ n eː
+
+एक eː k
+
+मुसाफिर m ʊ s ɑː pʰ ɪ ɾ
+
+उधर ʊ d̪ʱ ə ɾ
+
+आ ɑː
+
+आ ɑː
+
+हवा ɦ ə ʋ ɑː
+
+और ɔː ɾ
+
+सूरज s uː ɾ ə d͡ʒ
+
+दोनों d̪ oː n õː
+
+इस ɪ s
+
+बात b ɑː t̪
+
+पर p ə ɾ
+
+राज़ी ɾ ɑː z iː
+
+हो ɦ oː
+
+गये ɡ ə j eː
+
+कि k eː
+
+दोनों d̪ oː n õː
+
+में m ẽː
+
+से s eː
+
+जो d͡ʒ oː
+
+पहले p ə ɦ l eː
+
+मुसाफिर m ʊ s ɑː pʰ ɪ ɾ
+
+का k ɑː
+
+चोगा t͡ʃ oː ɡ ɑː
+
+उतरवा ʊ t̪ ə ɾ ʋ ɑː
+
+देगा d̪ eː ɡ ɑː
+
+वही ʋ ə ɦ iː
+
+ज़्यादा z j ɑː d̪ ɑː
+
+बलवान b ə l ʋ ɑː n
+
+समझा s ə m d͡ʒʱ ɑː
+
+जायेगा d͡ʒ ɑː j eː ɡ ɑː
+
+इस ɪ s
+
+पर p ə ɾ
+
+उत्तरी ʊ t̪ t̪ ə ɾ iː
+
+हवा ɦ ə ʋ ɑː
+
+अपना ə p n ɑː
+
+पूरा p uː ɾ ɑː
+
+जोर d͡ʒ oː ɾ
+
+लगाकर l ə ɡ ɑː k ə ɾ
+
+चलने t͡ʃ ə l n eː
+
+लगी l ə ɡ iː
+
+लेकिन l eː k ɪ n
+
+वह ʋ oː
+
+जेसे d͡ʒ eː s eː
+
+जेसे d͡ʒ eː s eː
+
+अपना ə p n ɑː
+
+जोर d͡ʒ oː ɾ
+
+बढ़ाती b ə ɽʱ ɑː t̪ iː
+
+गई ɡ ə iː
+
+वैसे ʋ ɛː s eː
+
+वेसे ʋ eː s eː
+
+मुसाफिर m ʊ s ɑː pʰ ɪ ɾ
+
+अपने ə p n eː
+
+बदन b ə d̪ ə n
+
+पर p ə ɾ
+
+चोगे t͡ʃ oː ɡ eː
+
+को k oː
+
+और ɔː ɾ
+
+भी bʱ iː
+
+कस k ə s
+
+कर k ə ɾ
+
+लपेटता l ə p eː ʈ t̪ ɑː
+
+गया ɡ ə j ɑː
+
+अन्त ə n t̪
+
+में m ẽː
+
+हवा ɦ ə ʋ ɑː
+
+ने n eː
+
+अपनी ə p n iː
+
+कोशिश k oː ʃ ɪ ʃ
+
+बन्द b ə n d̪
+
+कर k ə ɾ
+
+दी d̪ iː
+
+फिर pʰ ɪ ɾ
+
+सूरज s uː ɾ ə d͡ʒ
+
+तेज़ी t̪ eː z iː
+
+के k eː
+
+साथ s ɑː t̪ʰ
+
+निकला n ɪ k l ɑː
+
+और ɔː ɾ
+
+मुसाफिर m ʊ s ɑː pʰ ɪ ɾ
+
+ने n eː
+
+तुरन्त t̪ ʊ ɾ ə n t̪
+
+अपना ə p n ɑː
+
+चोगा t͡ʃ oː ɡ ɑː
+
+उतार ʊ t̪ ɑː ɾ
+
+दिया d̪ ɪ j ɑː
+
+इस ɪ s
+
+लिये l ɪ j eː
+
+हवा ɦ ə ʋ ɑː
+
+को k oː
+
+मानना m ɑː n n ɑː
+
+पड़ा p ə ɽ ɑː
+
+कि k eː
+
+उन ʊ n
+
+दोनों d̪ oː n õː
+
+में m ẽː
+
+सूरज s uː ɾ ə d͡ʒ
+
+ही ɦ iː
+
+ज्यादा d͡ʒ j ɑː d̪ ɑː
+
+बलवान b ə l ʋ ɑː n
+
+हे ɦ eː
+
+Words: 124
+Errors: 108
+WER: 0.871
+Accuracy: 0.129
+Lang: hin_deva_broad_filtered
+ο o
+
+βοριάσ v o ɾ ʝ a s
+
+κι c i
+
+μάλωναν m a l o n a n
+
+για ʝ a
+
+το t o
+
+ποιοσ p i o s
+
+απ'τουσ a p t u s
+
+δυο ð i o
+
+είναι i n e
+
+ο o
+
+δυνατότεροσ ð i n a t o t e r o s
+
+όταν o t a n
+
+έτνχε e t d a ç e
+
+να n a
+
+περάσει p e ɾ a s i
+
+από a p o
+
+μπροστά b ɾ o s t a
+
+τουσ t u s
+
+ένασ e n a s
+
+ταξιδιώτησ t a k s i ð i o t i s
+
+που p u
+
+φορούσε f o ɾ u s e
+
+κάπα k a p a
+
+όταν o t a n
+
+τον t o n
+
+είδαν i ð a n
+
+ο o
+
+βοριάσ v o ɾ ʝ a s
+
+κι c i
+
+συμφώνησαν s i ɱ f o n i s a n
+
+ότ o t
+
+έκανε e k a n e
+
+τον t o n
+
+ταξιδιώτη t a k s i ð ʝ o t i
+
+να n a
+
+βγάλει v ɣ a l i
+
+την t i n
+
+κάπα k a p a
+
+του t u
+
+θαα θ a a
+
+θεωρούνταν θ e o r u n d a n
+
+ο o
+
+πιο p i o
+
+δυνατόσ ð i n a t o s
+
+ο o
+
+βοριάσ v o ɾ ʝ a s
+
+άρχισε a r ç i s e
+
+τότε t o t e
+
+να n a
+
+φυσάει f i s a i
+
+με m e
+
+μανία m a n i a
+
+αλλά a l a
+
+όσο o s o
+
+περισσότερο p e ɾ i s o t e r o
+
+φυσούσε f i s u s e
+
+τόσο t o s o
+
+περισσότερο p e ɾ i s o t e r o
+
+τυλιγόταν t i l i ɣ o t a n
+
+με m e
+
+την t i n
+
+κάπα k a p a
+
+του t u
+
+ο o
+
+ταξιδιώτησ t a k s i ð i o t i s
+
+ώσπον o s p o n
+
+ο o
+
+βοριάσ v o ɾ ʝ a s
+
+κουράστηκε k u ɾ a s t i c e
+
+και c e
+
+σταμάτησε s t a m a t i s e
+
+να n a
+
+φυσάει f i s a i
+
+τότε t o t e
+
+ο o
+
+άρχισε a r ç i s e
+
+με m e
+
+τη t i
+
+σειρά s i ɾ a
+
+του t u
+
+να n a
+
+λάμπει l a m b i
+
+δυνατά ð i n a t a
+
+και c e
+
+γρήγορα ɣ r i ɣ o r a
+
+ο o
+
+ταξιδιώτησ t a k s i ð i o t i s
+
+ζεστάθηκε z e s t a θ i c e
+
+κι c i
+
+έβγαλε e v ɣ a l e
+
+την t i n
+
+κάπα k a p a
+
+του t u
+
+έτσι e t s i
+
+ο o
+
+βοριάσ v o ɾ ʝ a s
+
+αναγκάστηκε a n a ŋ ɡ a s t i c e
+
+να n a
+
+παραδεχτεί p a ɾ a ð e x t i
+
+ότι o t i
+
+ο o
+
+είναι i n e
+
+πιο p i o
+
+δυνατόσ ð i n a t o s
+
+απ' a p
+
+αυτόν a f t o n
+
+Words: 107
+Errors: 89
+WER: 0.832
+Accuracy: 0.168
+Lang: gre_grek_broad_filtered
+
+
+ο o̞
+
+βοριάσ v ɔ ɾ i a s
+
+κι c i
+
+μάλωναν m a l ɔ n a n a
+
+για ʝ a
+
+το t o̞
+
+ποιοσ p o̞ ç i o̞ s
+
+απ a p
+
+δυο ð ʝ o
+
+είναι i n e̞ a
+
+ο o̞
+
+δυνατότεροσ ð i n a t ɔ t i ɾ ɔ s
+
+όταν o̞ t a n
+
+έτνχε e̞ t i ç i
+
+να n a
+
+περάσει p ɛ r a s i
+
+από a p ɔ
+
+μπροστά b r o̞ s t a
+
+τουσ t u s
+
+ένασ e̞ n a s
+
+ταξιδιώτησ t a k s i ð ɔ t i s
+
+που p u ʎ
+
+φορούσε f u r o s e̞
+
+κάπα k a p a
+
+όταν o̞ t a n
+
+τον t o̞ n
+
+είδαν i ð a n
+
+ο o̞
+
+βοριάσ v ɔ ɾ i a s
+
+κι c i
+
+συμφώνησαν s i m o̞ n i s a n a
+
+ότ o̞ t
+
+έκανε e̞ c e̞ n o̞
+
+τον t o̞ n
+
+ταξιδιώτη t a k s i ð ɔ t i
+
+να n a
+
+βγάλει v ɣ a l i
+
+την t i n
+
+κάπα k a p a
+
+του t u
+
+θαα θ a
+
+θεωρούνταν θ e r o θ i n d a
+
+ο o̞
+
+πιο p ç o
+
+δυνατόσ ð i n a t o s
+
+ο o̞
+
+βοριάσ v ɔ ɾ i a s
+
+άρχισε a r ç i s e
+
+τότε t ɔ t i
+
+να n a
+
+φυσάει f a s i
+
+με m e̞
+
+μανία m a n i a
+
+αλλά a l a l a
+
+όσο o̞ s o̞
+
+περισσότερο p ɛ r i s ɔ t i r ɔ
+
+φυσούσε f i s u s e̞
+
+τόσο t o̞ s o̞
+
+περισσότερο p ɛ r i s ɔ t i r ɔ
+
+τυλιγόταν t i l i ɣ o̞ n
+
+με m e̞
+
+την t i n
+
+κάπα k a p a
+
+του t u
+
+ο o̞
+
+ταξιδιώτησ t a k s i ð ɔ t i s
+
+ώσπον o p o p n
+
+ο o̞
+
+βοριάσ v ɔ ɾ i a s
+
+κουράστηκε k u ɾ a s t i k ɔ
+
+και k a
+
+σταμάτησε s t a m a t i s
+
+να n a
+
+φυσάει f a s i
+
+τότε t ɔ t i
+
+ο o̞
+
+άρχισε a r ç i s e
+
+με m e̞
+
+τη t i
+
+σειρά s i r a
+
+του t u
+
+να n a
+
+λάμπει l a m i p i
+
+δυνατά ð i n a t a
+
+και k a
+
+γρήγορα ɣ r i ɣ r a
+
+ο o̞
+
+ταξιδιώτησ t a k s i ð ɔ t i s
+
+ζεστάθηκε z ɛ s t a θ i k ɔ
+
+κι c i
+
+έβγαλε v e ŋ ɡ a l e
+
+την t i n
+
+κάπα k a p a
+
+του t u
+
+έτσι e̞ t i s i
+
+ο o̞
+
+βοριάσ v ɔ ɾ i a s
+
+αναγκάστηκε a n a k a s t i k ɔ
+
+να n a
+
+παραδεχτεί p a r a ð ɛ t e
+
+ότι i t i
+
+ο o̞
+
+είναι i n e̞ a
+
+πιο p ç o
+
+δυνατόσ ð i n a t o s
+
+απ a p
+
+αυτόν a v t ɔ n
+
+Words: 107
+Errors: 100
+WER: 0.935
+Accuracy: 0.065
+Lang: gre_grek_narrow
+ნრდილოეთის n r d i l ɔ ɛ tʰ i s
+
+ქარი kʰ ɑ r i
+
+და d ɑ
+
+მპე m pʼ ɛ
+
+ვამათობდნენ v ɑ m ɑ tʰ ɔ b d n ɛ n
+
+თუ tʰ u
+
+რომელი r ɔ m ɛ l i
+
+იყო i qʼ ɔ
+
+უფრო u pʰ r ɔ
+
+ძლიერი d͡z l i ɛ r i
+
+ამ ɑ m
+
+დროს d r ɔ s
+
+ვაიარა v ɑ i ɑ r ɑ
+
+ერთმა ɛ r tʰ m ɑ
+
+ნაბდწაოხურულმა n ɑ b d t͡sʼ ɑ ɔ x u r u l m ɑ
+
+მგზავრმა m ɡ z ɑ v r m ɑ
+
+ისინი i s i n i
+
+შეთანხმდნენ ʃ ɛ tʰ ɑ n x m d n ɛ n
+
+უძლიერესად u d͡z l i ɛ r ɛ s ɑ d
+
+ეცნოთ ɛ t͡s n ɔ tʰ
+
+ის i s
+
+რომელიც r ɔ m ɛ l i t͡s
+
+მგზავრს m ɡ z ɑ v r s
+
+პირველი pʼ i r v ɛ l i
+
+მოახდევინებდა m ɔ ɑ x d ɛ v i n ɛ b d ɑ
+
+ნაბადს n ɑ b ɑ d s
+
+ჯერ d͡ʒ ɛ r
+
+ჩრდილეთის t͡ʃ r d i l ɛ tʰ i s
+
+ქარმა kʰ ɑ r m ɑ
+
+დაუბერა d ɑ u b ɛ r ɑ
+
+მთელი m tʰ ɛ l i
+
+ძალღონით d͡z ɑ l ɣ ɔ n i tʰ
+
+მარამ m ɑ r ɑ m
+
+რაც r ɑ t͡s
+
+უფრო u pʰ r ɔ
+
+ძლიერ d͡z l i ɛ r
+
+უბერავდა u b ɛ r ɑ v d ɑ
+
+მგზავრი m ɡ z ɑ v r i
+
+მით m i tʰ
+
+უფრო u pʰ r ɔ
+
+მაგრად m ɑ ɡ r ɑ d
+
+ეხვეოდა ɛ x v ɛ ɔ d ɑ
+
+ნაბადში n ɑ b ɑ d ʃ i
+
+ბოლოს b ɔ l ɔ s
+
+ჩრდილოეთის t͡ʃ r d i l ɔ ɛ tʰ i s
+
+ქარი kʰ ɑ r i
+
+დაცხრა d ɑ t͡s x r ɑ
+
+ახლა ɑ x l ɑ
+
+მზემ m z ɛ m
+
+გამოაბრწყინა ɡ ɑ m ɔ ɑ b r t͡sʼ qʼ i n ɑ
+
+და d ɑ
+
+დააცხუნა d ɑ ɑ t͡s x u n ɑ
+
+მგზავრმა m ɡ z ɑ v r m ɑ
+
+ნაბადი n ɑ b ɑ d i
+
+მაშინვე m ɑ ʃ i n v ɛ
+
+მოიხდა m ɔ i x d ɑ
+
+ამრიგად ɑ m r i ɡ ɑ d
+
+ჩრდილოეთის t͡ʃ r d i l ɔ ɛ tʰ i s
+
+ქარი kʰ ɑ r i
+
+იძულებული i d͡z u l ɛ b u l i
+
+გახდა ɡ ɑ x d ɑ
+
+ედიარებინა ɛ d i ɑ r ɛ b i n ɑ
+
+რომ r ɔ m
+
+მათ m ɑ tʰ
+
+შორს ʃ ɔ r s
+
+მზე m z ɛ
+
+უფრო u pʰ r ɔ
+
+ძლიერი d͡z l i ɛ r i
+
+იყო i qʼ ɔ
+
+Words: 69
+Errors: 45
+WER: 0.652
+Accuracy: 0.348
+Lang: geo_geor_broad_filtered

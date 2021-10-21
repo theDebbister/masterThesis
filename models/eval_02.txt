@@ -1,0 +1,54 @@
+Words: 113
+Errors: 99
+WER: 0.876
+Accuracy: 0.124
+Lang: eng_latn_us_broad_filtered
+
+Words: 108
+Errors: 62
+WER: 0.574
+Accuracy: 0.426
+Lang: fre_latn_broad_filtered
+
+Words: 47
+Errors: 47
+WER: 1.000
+Accuracy: 0.000
+Lang: kor_hang_narrow_filtered
+
+Words: 69
+Errors: 45
+WER: 0.652
+Accuracy: 0.348
+Lang: geo_geor_broad_filtered
+
+Words: 107
+Errors: 89
+WER: 0.832
+Accuracy: 0.168
+Lang: gre_grek_broad_filtered
+
+Words: 107
+Errors: 100
+WER: 0.935
+Accuracy: 0.065
+Lang: gre_grek_narrow
+
+Words: 124
+Errors: 108
+WER: 0.871
+Accuracy: 0.129
+Lang: hin_deva_broad_filtered
+
+Words: 124
+Errors: 118
+WER: 0.952
+Accuracy: 0.048
+Lang: hin_deva_narrow
+
+
+Lang: jpn_hira_narrow_filtered
+
+
+Lang: vie_latn_hanoi_narrow_filtered
+

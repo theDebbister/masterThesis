@@ -23,8 +23,10 @@ def transform_into_dict(transcript:str, ortho: str, output):
             for t, o in zip(trans_tokens, ortho_tokens):
                 output.write(o.strip(' .') + '\t' + t.strip(' .') + '\n')
     else:
-        print('COULD NOT CREATE DICT FOR', transcript.strip('.txt').strip("\theNorthWindAndTheSun\\").upper()) 
-            
+        print('COULD NOT CREATE DICT FOR', output)
+        for t in trans_tokens:
+            print(t)
+        print(len(trans_tokens), len(ortho_tokens))
         
         
 
