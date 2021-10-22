@@ -195,9 +195,13 @@ It is crucial that all data files, be it phonetic or `normal' scripts, are forma
 
 \section{Representing phonemes}
 \label{phon-features}
-In order to input phonemes to any kind of mathematics-based model, they need to be represented numerically. Instead of representing the phoneme directly it is possible to represent one phoneme as a feature vector. \review{I could add this section here, if so, explain more on how it is done, add examples from Steves summary etc.}
+In order to input phonemes to any kind of mathematics-based model, they need to be represented numerically. Instead of representing the phoneme directly it is possible to represent one phoneme as a feature vector. This idea is not new as there is the idea that we can represent words as a vector of numbers which we then input to a model. Each number in that vector is what is called a \textit{feature}. \citet{tulkens-etal-2018-wordkit} note that a problem of such featurization is that the words are no longer comparable across different models as the words are possibly featurized in different ways. This is why the present a tool called \textit{WordKit} which is a Python library that allows to featurize words in a standardized way.
 
-There are models that make use of such features vectors. There is features data found \href{https://github.com/uiuc-sst/g2ps}{here}.
+
+
+There are models that make use of such features vectors. Tan example of feature data can be found \href{https://github.com/uiuc-sst/g2ps}{here}.
+
+
 
 
 \section{Random background}

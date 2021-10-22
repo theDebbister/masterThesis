@@ -52,8 +52,8 @@
 \contentsline {section}{\numberline {6.3}Automatic \ac {g2p}}{31}{section.6.3}%
 \contentsline {subsection}{\numberline {6.3.1}Training settings}{31}{subsection.6.3.1}%
 \contentsline {subparagraph}{\nonumberline Setting 1}{31}{subparagraph*.51}%
-\contentsline {subsection}{\numberline {6.3.2}Preprocessing}{32}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.2}Preprocessing}{33}{subsection.6.3.2}%
 \contentsline {subsection}{\numberline {6.3.3}g2p-seq2seq CMUSphinx}{33}{subsection.6.3.3}%
-\contentsline {chapter}{References}{34}{section*.52}%
-\contentsline {chapter}{\numberline {A}Tables}{38}{appendix.A}%
+\contentsline {chapter}{References}{35}{section*.52}%
+\contentsline {chapter}{\numberline {A}Tables}{39}{appendix.A}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
