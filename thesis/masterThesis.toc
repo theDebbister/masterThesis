@@ -54,6 +54,8 @@
 \contentsline {subparagraph}{\nonumberline Setting 1}{31}{subparagraph*.51}%
 \contentsline {subsection}{\numberline {6.3.2}Preprocessing}{33}{subsection.6.3.2}%
 \contentsline {subsection}{\numberline {6.3.3}g2p-seq2seq CMUSphinx}{33}{subsection.6.3.3}%
-\contentsline {chapter}{References}{35}{section*.52}%
+\contentsline {section}{\numberline {6.4}Things to include and sort out later}{33}{section.6.4}%
+\contentsline {subparagraph}{\nonumberline Data Stats}{33}{subparagraph*.53}%
+\contentsline {chapter}{References}{35}{section*.54}%
 \contentsline {chapter}{\numberline {A}Tables}{39}{appendix.A}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

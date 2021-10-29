@@ -80,7 +80,7 @@ vie & 7.50 & - & 0.89 & narrow \\
 
 
 
-\tab{tab:baseline_cmu}{Baseline CMUSphinx results compared with \ac{sigm} 2021 results. All models have been trained with 10,000 steps and the default settings. I used the WikiPron pronunciation dictionaries to train the model. While some of the data has been down-sampled in the shared task, I used all that was available. Whenever a filtered version was available I used that one. CMUSphinx provides a WER implementation which has been used to evaluate the models.}{
+\tab{tab:baseline_cmu}{Baseline CMUSphinx results compared with \ac{sigm} 2021 results. All models have been trained with the 200,000 steps and the default settings. I used the WikiPron pronunciation dictionaries to train the model. While some of the data has been down-sampled in the shared task, I used all that was available. Whenever a filtered version was available I used that one. CMUSphinx provides a WER implementation which has been used to evaluate the models.}{
 \begin{tabularx}{\columnwidth}{
 | 	>{\raggedright\arraybackslash}l | 
 	>{\raggedleft\arraybackslash}r | 
@@ -101,6 +101,16 @@ kor & - && 16.20 & narrow \\
 vie & - & & 0.89 & narrow \\
 \hline
 \end{tabularx}}{BaselineBig Results}
+
+
+\section{Things to include and sort out later}
+\subparagraph{Data Stats}
+In order to get a feeling of the data and what it covers, I collected phoneme and grapheme profiles of the data and compared it to the Phoible dataset. For each language that I am working with, I have two different types of data: first the short story and second the WikiPron \ac{g2p} dictionary. For each language and each data type I got three lists:
+\begin{itemize}
+ \item Grapheme list: contains all graphemes in that language
+ \item Phoneme list: contains all phonemes in that language. 
+ \item Phoneme cluster list: 
+\end{itemize}
 
 
 
