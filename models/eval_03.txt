@@ -1,0 +1,83 @@
+Words: 6023
+Errors: 2742
+WER: 0.455
+Accuracy: 0.545
+Lang: eng_latn_uk_broad_filtered
+--
+Words: 134
+Errors: 121
+WER: 0.903
+Accuracy: 0.097
+Lang: eng_latn_uk_narrow
+--
+Words: 5711
+Errors: 2898
+WER: 0.507
+Accuracy: 0.493
+Lang: eng_latn_us_broad_filtered
+--
+Words: 156
+Errors: 132
+WER: 0.846
+Accuracy: 0.154
+Lang: eng_latn_us_narrow
+--
+Words: 5682
+Errors: 303
+WER: 0.053
+Accuracy: 0.947
+Lang: fre_latn_broad_filtered
+--
+Words: 20
+Errors: 16
+WER: 0.800
+Accuracy: 0.200
+Lang: fre_latn_narrow
+--
+Words: 1512
+Errors: 0
+WER: 0.000
+Accuracy: 1.000
+Lang: geo_geor_broad_filtered
+--
+Words: 1056
+Errors: 75
+WER: 0.071
+Accuracy: 0.929
+Lang: gre_grek_broad_filtered
+--
+Words: 40
+Errors: 28
+WER: 0.700
+Accuracy: 0.300
+Lang: gre_grek_narrow
+--
+Words: 1065
+Errors: 47
+WER: 0.044
+Accuracy: 0.956
+Lang: hin_deva_broad_filtered
+--
+Words: 955
+Errors: 74
+WER: 0.077
+Accuracy: 0.923
+Lang: hin_deva_narrow
+--
+Words: 1972
+Errors: 129
+WER: 0.065
+Accuracy: 0.935
+Lang: jpn_hira_narrow_filtered
+--
+Words: 1413
+Errors: 330
+WER: 0.234
+Accuracy: 0.766
+Lang: kor_hang_narrow_filtered
+--
+Words: 1593
+Errors: 113
+WER: 0.071
+Accuracy: 0.929
+Lang: vie_latn_hanoi_narrow_filtered
