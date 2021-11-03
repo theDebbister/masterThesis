@@ -13,11 +13,16 @@ def transform_into_dict(transcript:str, ortho: str, output):
         
     trans_tokens = []
     lang_profile = seg.Profile().from_textfile(transcript)
+    tokenizer = seg.Tokenizer(lang_profile)
+
     for line in transcript_lines:
-        tokenizer = seg.Tokenizer(lang_profile)
-        tokens = tokenizer(line)
-        trans_tokens.extend(tokens.split('#'))
-        
+        token = tokenizer(line, ipa=True)
+        if token.strip() not in ['|', '‖']:
+            trans_tokens.extend(token.split('#'))
+        # add phonetic 'punctuation marks' to the last token
+        else:
+            trans_tokens[-1] += token.strip()
+
     if len(trans_tokens) == len(ortho_tokens):
         with open(output + '.dict', 'w', encoding='utf8') as output:
             for t, o in zip(trans_tokens, ortho_tokens):
@@ -26,9 +31,8 @@ def transform_into_dict(transcript:str, ortho: str, output):
         print('COULD NOT CREATE DICT FOR', output)
         for t in trans_tokens:
             print(t)
-        print(len(trans_tokens), len(ortho_tokens))
-        
-        
+        print(f'Num tokens phonetic: {len(trans_tokens)}\t Num tokens orthographic: {len(ortho_tokens)}')
+
 
 if __name__ == '__main__':
     t = sys.argv[1]

@@ -51,11 +51,12 @@
 \contentsline {subparagraph}{\nonumberline Hebrew}{31}{subparagraph*.49}%
 \contentsline {section}{\numberline {6.3}Automatic \ac {g2p}}{31}{section.6.3}%
 \contentsline {subsection}{\numberline {6.3.1}Training settings}{31}{subsection.6.3.1}%
-\contentsline {subparagraph}{\nonumberline Setting 1}{31}{subparagraph*.51}%
+\contentsline {subparagraph}{\nonumberline Setting 1: Baseline Small}{31}{subparagraph*.51}%
+\contentsline {subparagraph}{\nonumberline Setting 2: Baseline Large}{33}{subparagraph*.53}%
 \contentsline {subsection}{\numberline {6.3.2}Preprocessing}{33}{subsection.6.3.2}%
 \contentsline {subsection}{\numberline {6.3.3}g2p-seq2seq CMUSphinx}{33}{subsection.6.3.3}%
 \contentsline {section}{\numberline {6.4}Things to include and sort out later}{33}{section.6.4}%
-\contentsline {subparagraph}{\nonumberline Data Stats}{33}{subparagraph*.53}%
-\contentsline {chapter}{References}{35}{section*.54}%
+\contentsline {subparagraph}{\nonumberline Data Stats}{33}{subparagraph*.55}%
+\contentsline {chapter}{References}{35}{section*.56}%
 \contentsline {chapter}{\numberline {A}Tables}{39}{appendix.A}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

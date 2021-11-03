@@ -47,16 +47,23 @@ As there is only very little data available as full texts, we decided to use the
 \subsection{Training settings}
 There are different settings which I will used to train the models.
 
-\subparagraph{Setting 1}
-Test all languages with the CMU model where we have data available. We want to have a baseline for all languages. All models are trained separately. Broad and narrow transcriptions are treated as separate languages and thus trained separately as well. The same is true for dialects if there is any information available. American and British English are trained in different models as well. The model is trained with the least amount of effort. Default settings are used and no hyperparameter
+\subparagraph{Setting 1: Baseline Small}
+Test all languages with the CMU model where we have data available. We want to have a baseline for all languages. All models are trained separately. Broad and narrow transcriptions are treated as separate languages and thus trained separately as well. The same is true for dialects if there is any information available. American and British English are trained in different models as well. I used the WikiPron pronunciation dictionaries to train the model. While some of the data has been down-sampled in the shared task, I used all that was available. Whenever a filtered version was available I used that one. The model is trained with the least amount of effort. Default settings are used and no hyperparameters are changed. The model is trained for the minimum number of steps which is 10,000 in this case. 
+
+\subparagraph{Setting 2: Baseline Large}
+This setting is similar to setting 1 except that the model is trained as long as possible for each language. All models have been trained for 200,000 steps and the default settings. 
 
 \subsection{Preprocessing}
-Before any of the data can be used, it needs to be preprocessed. As I am going to use the pronunciation dictionaries which consist of single words per line, the full texts need to be prepared like that as well.
+Before any of the data can be used, it needs to be preprocessed. As I am going to use the pronunciation dictionaries which consist of single words per line, the full texts need to be prepared like that as well. I did the following steps to convert the full short story texts into pronunciation dictionaries:
+
+\begin{itemize}
+\item Conversion of \textipa{\textvertline   \textvertline} to \textipa{\textdoublevertline}. Some transcriptions include the double vertical line to mark a major intonation groups in the text. In some transcriptions this is a written as two single vertical lines. Those were replaced by the former to be consistent. 
+\end{itemize}
 
 \subsection{g2p-seq2seq CMUSphinx}
 I tested a git repo where they make an already pretrained \ac{g2p} model available. Setting it up was not very easy as there were issues with the tensorflow version and some other dependencies. Also, they do have a pre-trained model, but this uses a completely different transcription convention than IPA. So we cannot use this model. But to test the model and have a baseline, we trained in on the data we have, to see how it performs. First, I trained it on those languages where I have results from the \ac{sigm} 2021 challenge. The results are compared in table \ref{tab:baseline_cmu}. 
 
-\tab{tab:baseline_cmu}{Baseline CMUSphinx results compared with \ac{sigm} 2021 results. All models have been trained with 10,000 steps and the default settings. I used the WikiPron pronunciation dictionaries to train the model. While some of the data has been down-sampled in the shared task, I used all that was available. Whenever a filtered version was available I used that one. CMUSphinx provides a WER implementation which has been used to evaluate the models.}{
+\tab{tab:baseline_cmu}{Baseline CMUSphinx results compared with \ac{sigm} 2021 results. The table shows the results for setting 1. CMUSphinx provides a WER implementation which has been used to evaluate the models.}{
 \begin{tabularx}{\columnwidth}{
 | 	>{\raggedright\arraybackslash}l | 
 	>{\raggedleft\arraybackslash}r | 
@@ -80,7 +87,7 @@ vie & 7.50 & - & 0.89 & narrow \\
 
 
 
-\tab{tab:baseline_cmu}{Baseline CMUSphinx results compared with \ac{sigm} 2021 results. All models have been trained with the 200,000 steps and the default settings. I used the WikiPron pronunciation dictionaries to train the model. While some of the data has been down-sampled in the shared task, I used all that was available. Whenever a filtered version was available I used that one. CMUSphinx provides a WER implementation which has been used to evaluate the models.}{
+\tab{tab:baseline_cmu}{Baseline CMUSphinx results compared with \ac{sigm} 2021 results.  The table shows the results for setting 2. CMUSphinx provides a WER implementation which has been used to evaluate the models.}{
 \begin{tabularx}{\columnwidth}{
 | 	>{\raggedright\arraybackslash}l | 
 	>{\raggedleft\arraybackslash}r | 
@@ -96,9 +103,9 @@ fra & 5.30 & & 5.11 & broad \\
 ell & 7.10 & & 18.67 & broad \\
 kat & 0.00 & & 0.00 & broad \\
 hin & 4.40 & & 5.11 & broad \\
-jpn & - & & 4.89 & narrow \\
-kor & - && 16.20 & narrow \\
-vie & - & & 0.89 & narrow \\
+jpn & 6.50 & & 4.89 & narrow \\
+kor & 23.40 && 16.20 & narrow \\
+vie & 7.10 & & 0.89 & narrow \\
 \hline
 \end{tabularx}}{BaselineBig Results}
 
