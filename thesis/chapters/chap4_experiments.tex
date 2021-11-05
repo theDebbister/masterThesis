@@ -25,7 +25,7 @@ The results from this experiment are summarized in table \ref{tab:coverage}. Gen
 
 
 \subparagraph{Chinese} Although the Chinese coverage is rather high, the \ac{wer} is very bad. This is due to the fact, that in the lists the tones are represented differently than in the reference text. It needs to be analysed if one of these formats can be converted into another format. \review{check the different tone transcriptions}
-\subparagraph{Hebrew} The only language that is not covered at all is Hebrew. A closer examination showed that the words in the text have many diacritics, while the words in the list do not have many diacritics. Additionally, the list if very short. 
+\subparagraph{Hebrew} The only language that is not covered at all is Hebrew. A closer examination showed that the words in the text have many diacritics, while the words in the list do not have many diacritics. Additionally, the list is very short. 
 
 Whenever there were four experiments per language, the combination of the broad reference text written with the broad list had the best \ac{wer} and \ac{cer} or in the case of English the best \ac{wer} and a slightly worse \ac{cer}. However, this finding needs to be analysed with caution as the narrow word lists contain always less words than the broad ones. Interestingly enough, sometimes it does not matter if the text written with the broad word list is compared to the narrow transcription or the broad. In fact, for English, the text written with the broad list compared to the narrow reference shows a better \ac{cer}. This suggests that the differences in broad and narrow transcriptions are not great.
 For languages where the type of the transcriptions was unclear but two lists for available, the broad list produced the better results if there was any difference. 
@@ -54,10 +54,12 @@ Test all languages with the CMU model where we have data available. We want to h
 This setting is similar to setting 1 except that the model is trained as long as possible for each language. All models have been trained for 200,000 steps and the default settings. 
 
 \subsection{Preprocessing}
-Before any of the data can be used, it needs to be preprocessed. As I am going to use the pronunciation dictionaries which consist of single words per line, the full texts need to be prepared like that as well. I did the following steps to convert the full short story texts into pronunciation dictionaries:
+Before any of the data can be used, it needs to be preprocessed. As I am going to use the pronunciation dictionaries which consist of single words per line with their pronunciation, the full texts need to be prepared like that as well. I did the following steps to convert the full short story texts into pronunciation dictionaries:
 
 \begin{itemize}
 \item Conversion of \textipa{\textvertline   \textvertline} to \textipa{\textdoublevertline}. Some transcriptions include the double vertical line to mark a major intonation groups in the text. In some transcriptions this is a written as two single vertical lines. Those were replaced by the former to be consistent. 
+\item Removal of ties bars in the phonetic transcriptions. Tie bars are not adding any valuable information. \review{get quote for this!}
+\item Removal of suprasegmentals, except long and half long mark, and the extra short mark. 
 \end{itemize}
 
 \subsection{g2p-seq2seq CMUSphinx}
@@ -114,9 +116,18 @@ vie & 7.10 & & 0.89 & narrow \\
 \subparagraph{Data Stats}
 In order to get a feeling of the data and what it covers, I collected phoneme and grapheme profiles of the data and compared it to the Phoible dataset. For each language that I am working with, I have two different types of data: first the short story and second the WikiPron \ac{g2p} dictionary. For each language and each data type I got three lists:
 \begin{itemize}
- \item Grapheme list: contains all graphemes in that language
- \item Phoneme list: contains all phonemes in that language. 
- \item Phoneme cluster list: 
+ \item Grapheme list: contains all graphemes in that language. Characters that need a base character like diacritics are shown together with their base character. 
+ \item Phoneme list: contains all phonemes in that language. Again, diacritics and similar characters are shown with their base characters.
+ \item Phoneme cluster list: Phonemes can be clustered into bigger sound groups. How to do this, is an ongoing discussion, but I used the segments library to get the clusters (compare \citet{unicode-lingu})
+\end{itemize}
+
+Having those overview for the characters for each language allowed me to compare the character vocabulary to the characters or character clusters available in the Phoible dataset. This comparison showed that quite a few characters are missing that are included in the WikiPron data and the short stories. Some problems and potential strategies to solve it:
+
+\begin{itemize}
+\item No real \ac{ipalpha}: There are sometimes characters included that are no part of the \ac{ipalpha}. There might be a reason why the authors of the transcriptions decided to use this special character to denote a particular sound, but this is not always known. A possibility is to try and map it to a character that is available in Phoible and that represents a similar sound (or even the same sound actually). 
+\item Tie bars: The creators of Phoible decided to exclude tie bars because they add no real value to the transcriptions. \review{add source for this?}
+\item Stress marks: Stress marks are not represented in Phoible as they do not represent a sound. 
+\item Tones: Even within the \ac{ipalpha} there exist different conventions of how to represent tones. Some are better suited for different languages. Apart from different ways of representing tones, it is not always sensible to have tones represented. Mostly, tones are not written as speakers of that language know how to pronounce the tones. So, the questions is whether it is necessary to include the tones at all. When looking at the written representation it does not matter what the tones are as the basic phonemes do not change. This is of course different when the phonetic representation is mapped to a spoken representation. \review{add more on that, maybe in background chap}
 \end{itemize}
 
 

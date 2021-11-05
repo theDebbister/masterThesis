@@ -1,27 +1,8 @@
 
-\newchap{Models for Phonetic Transcription}
-\label{chap:3_model}
-This chapter introduces to the various methods and models that can be used to create phonetic transcription of various languages out of plain text.
-
-
-\section{Evaluation metrics}
-The most common metric to evaluate phonetic transcriptions is the \ac{wer}. This is the percentage of predicted transcriptions that deviate from the gold standard. The lower, the better the model. The idea is that we can capture the cost that it takes to transform the system text into the reference text. If the \ac{wer} is 0, this means that the texts are exactly the same. The following formula is used to calculate \ac{wer}:    
-
-\begin{equation} 
-\label{eq:wer}
-WER = \frac{S+I+D}{N}
-\end{equation}
-
-In equation \ref{eg:wer} the $S$ stands for substitution, $I$ for insertion, $D$ for deletion and $N$ denotes the total number of words in the reference sequence. If you want the percentage the number needs to be multiplied with $100$. Note that the \ac{wer} can be more than $100$\%. This happens if, for example, the are a lot of additional insertions or deletions in the system text. Another metric that is used quite often is the \ac{cer}. It is caculated in the exact same way as the \ac{wer}, but instead of words everything is calculated on character basis. In a multilingual setting, it is sometimes necessary to have a score for the entire system covering more than one language. In such cases it is custom to use a macro-averaged \ac{wer} or \ac{cer}. \review{explain macro average (and micro to be complete)}
-
-\review{quote \href{https://towardsdatascience.com/evaluating-ocr-output-quality-with-character-error-rate-cer-and-word-error-rate-wer-853175297510\#5aec}{Blog link} }
-
-\section{Neural \ac{g2p}}
  
 
 
-\section{Low-resource setting}
-Apart from a few well-studied examples, for most languages there is only little available data. It is therefore highly interesting and important to find solutions of how to deal with lack of data. \cite{hammond-2021-data} submitted a system to the 2021 SIGMORPHON edition focusing on data augmentation methods. The primary goal of their approach was to test how successful a minimalist data augmentation model would be, knowing it would most probably not outperform any of the other models. They identified two approaches that might improve low-resource models. The first one is to use as much as possible of the development set for training. The second to train all languages together differentiating the languages only by a tag added to the word representations. The model they used was purposefully a very simple model that does not use a lot of resources. They used a \ac{s2s} neural net with a LSTM decoder and encoder. Both LSTMs have two levels. 
+
 
 
 

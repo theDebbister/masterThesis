@@ -1,62 +1,63 @@
-\babel@toc {english}{}\relax 
+\babel@toc {english}{}
 \contentsline {chapter}{Abstract}{i}{section*.1}%
-\babel@toc {ngerman}{}\relax 
-\babel@toc {english}{}\relax 
-\babel@toc {ngerman}{}\relax 
-\babel@toc {english}{}\relax 
+\babel@toc {ngerman}{}
+\babel@toc {english}{}
+\babel@toc {ngerman}{}
+\babel@toc {english}{}
 \contentsline {chapter}{Acknowledgement}{ii}{section*.4}%
 \contentsline {chapter}{Contents}{iii}{section*.6}%
-\contentsline {chapter}{List of Figures}{v}{section*.9}%
-\contentsline {chapter}{List of Tables}{vi}{section*.11}%
-\contentsline {chapter}{List of Acronyms}{vii}{section*.13}%
+\contentsline {chapter}{List of Figures}{iv}{section*.8}%
+\contentsline {chapter}{List of Tables}{v}{section*.10}%
+\contentsline {chapter}{List of Acronyms}{vi}{section*.12}%
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Research questions \& goals}{2}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Thesis structure}{2}{section.1.2}%
 \contentsline {chapter}{\numberline {2}Linguistic Background}{4}{chapter.2}%
 \contentsline {section}{\numberline {2.1}The relation of spoken and written language}{4}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Phonemes and syllables}{4}{section.2.2}%
-\contentsline {subparagraph}{\nonumberline Vowels and consonants}{5}{subparagraph*.20}%
+\contentsline {subparagraph}{\nonumberline Vowels and consonants}{5}{subparagraph*.19}%
 \contentsline {subparagraph}{\nonumberline Syllables}{5}{subparagraph*.22}%
+\contentsline {subparagraph}{\nonumberline Tones}{6}{subparagraph*.24}%
 \contentsline {section}{\numberline {2.3}Mappings of written and spoken language}{6}{section.2.3}%
 \contentsline {section}{\numberline {2.4}The corpus}{8}{section.2.4}%
 \contentsline {section}{\numberline {2.5}Corpus phonetics}{9}{section.2.5}%
 \contentsline {chapter}{\numberline {3}Technical Background}{11}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Automated phonetic transcription}{11}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Rule-based models}{12}{subsection.3.1.1}%
-\contentsline {subparagraph}{\nonumberline Epitran}{13}{subparagraph*.29}%
-\contentsline {subsection}{\numberline {3.1.2}N-gram Models / Statistical models}{13}{subsection.3.1.2}%
-\contentsline {subsection}{\numberline {3.1.3}Neural models}{14}{subsection.3.1.3}%
-\contentsline {subparagraph}{\nonumberline LSTM}{14}{subparagraph*.31}%
-\contentsline {subparagraph}{\nonumberline Transformer}{14}{subparagraph*.33}%
-\contentsline {subparagraph}{\nonumberline Neural Transducer}{14}{subparagraph*.35}%
-\contentsline {subsection}{\numberline {3.1.4}SIGMORPHON task 2020}{15}{subsection.3.1.4}%
-\contentsline {subsection}{\numberline {3.1.5}SIGMORPHON task 2021}{15}{subsection.3.1.5}%
-\contentsline {section}{\numberline {3.2}Data quality considerations}{18}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Unicode}{19}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Representing phonemes}{20}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Random background}{21}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Data Collection}{23}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Transcription Conventions}{23}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Transcription Sources \& Formats}{24}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Full Text}{24}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Pronunciation Dictionaries}{26}{subsection.4.2.2}%
-\contentsline {chapter}{\numberline {5}Models for Phonetic Transcription}{27}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Evaluation metrics}{27}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Neural \ac {g2p}}{28}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Low-resource setting}{28}{section.5.3}%
-\contentsline {chapter}{\numberline {6}Experiments}{29}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Typewriting pdf phonetic transcriptions}{29}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Pronunciation dictionary coverage}{30}{section.6.2}%
-\contentsline {subparagraph}{\nonumberline Chinese}{31}{subparagraph*.47}%
-\contentsline {subparagraph}{\nonumberline Hebrew}{31}{subparagraph*.49}%
-\contentsline {section}{\numberline {6.3}Automatic \ac {g2p}}{31}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Training settings}{31}{subsection.6.3.1}%
-\contentsline {subparagraph}{\nonumberline Setting 1: Baseline Small}{31}{subparagraph*.51}%
-\contentsline {subparagraph}{\nonumberline Setting 2: Baseline Large}{33}{subparagraph*.53}%
-\contentsline {subsection}{\numberline {6.3.2}Preprocessing}{33}{subsection.6.3.2}%
-\contentsline {subsection}{\numberline {6.3.3}g2p-seq2seq CMUSphinx}{33}{subsection.6.3.3}%
-\contentsline {section}{\numberline {6.4}Things to include and sort out later}{33}{section.6.4}%
-\contentsline {subparagraph}{\nonumberline Data Stats}{33}{subparagraph*.55}%
-\contentsline {chapter}{References}{35}{section*.56}%
+\contentsline {section}{\numberline {3.2}Evaluation metrics}{12}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Rule-based models}{13}{subsection.3.2.1}%
+\contentsline {subparagraph}{\nonumberline Epitran}{14}{subparagraph*.33}%
+\contentsline {subsection}{\numberline {3.2.2}N-gram Models / Statistical models}{14}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Neural models}{14}{subsection.3.2.3}%
+\contentsline {subparagraph}{\nonumberline LSTM}{15}{subparagraph*.35}%
+\contentsline {subparagraph}{\nonumberline Transformer}{15}{subparagraph*.37}%
+\contentsline {subparagraph}{\nonumberline Neural Transducer}{15}{subparagraph*.39}%
+\contentsline {subsection}{\numberline {3.2.4}SIGMORPHON shared tasks}{15}{subsection.3.2.4}%
+\contentsline {subparagraph}{\nonumberline Results}{17}{subparagraph*.42}%
+\contentsline {subparagraph}{\nonumberline Error analysis}{17}{subparagraph*.44}%
+\contentsline {section}{\numberline {3.3}CMUSphinx}{18}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Data quality considerations}{18}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Unicode}{19}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Representing phonemes}{21}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Low-resource setting}{21}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Random background}{22}{section.3.8}%
+\contentsline {chapter}{\numberline {4}Data Collection}{24}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Transcription Conventions}{24}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Transcription Sources \& Formats}{25}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Full Text}{25}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Pronunciation Dictionaries}{27}{subsection.4.2.2}%
+\contentsline {chapter}{\numberline {5}Experiments}{28}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Typewriting pdf phonetic transcriptions}{28}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Pronunciation dictionary coverage}{29}{section.5.2}%
+\contentsline {subparagraph}{\nonumberline Chinese}{30}{subparagraph*.49}%
+\contentsline {subparagraph}{\nonumberline Hebrew}{30}{subparagraph*.51}%
+\contentsline {section}{\numberline {5.3}Automatic \ac {g2p}}{30}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Training settings}{30}{subsection.5.3.1}%
+\contentsline {subparagraph}{\nonumberline Setting 1: Baseline Small}{30}{subparagraph*.53}%
+\contentsline {subparagraph}{\nonumberline Setting 2: Baseline Large}{32}{subparagraph*.55}%
+\contentsline {subsection}{\numberline {5.3.2}Preprocessing}{32}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}g2p-seq2seq CMUSphinx}{32}{subsection.5.3.3}%
+\contentsline {section}{\numberline {5.4}Things to include and sort out later}{32}{section.5.4}%
+\contentsline {subparagraph}{\nonumberline Data Stats}{32}{subparagraph*.57}%
+\contentsline {chapter}{References}{35}{section*.58}%
 \contentsline {chapter}{\numberline {A}Tables}{39}{appendix.A}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
