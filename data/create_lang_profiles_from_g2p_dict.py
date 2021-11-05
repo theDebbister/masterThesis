@@ -7,6 +7,9 @@ from collections import Counter
 import re
 import unicodedata
 
+# example:
+# python
+
 
 def wikipron_to_lang_profiles(directory: str, output_directory: str):
 
@@ -19,7 +22,7 @@ def wikipron_to_lang_profiles(directory: str, output_directory: str):
         phonemes = '\n'.join(tsv['phonemes'].to_list())
         graphemes = '\n'.join(tsv['graphemes'].to_list())
 
-        profile_grapheme = Profile.from_text(' '.join(graphemes))
+        profile_grapheme = Profile.from_text(graphemes)
 
         with open(output_directory + '/' + name + '_graph.tsv', 'w', encoding='utf8', newline='') as output:
             output.write(str(profile_grapheme))
@@ -42,8 +45,6 @@ def wikipron_to_lang_profiles(directory: str, output_directory: str):
 
         with open(output_directory + '/' + name + '_phon.tsv', 'w', encoding='utf8', newline='') as output:
             output.write(str(profile_phoneme))
-
-
 
 
 if __name__ == '__main__':
