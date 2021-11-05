@@ -1,0 +1,32 @@
+WikiPron - phoneme clusters
+
+Num phons phoible: 3164
+Num phons profiles: 842
+Num phons intersection: 397
+Num phons only in profiles: 445
+
+
+WikiPron - phonemes
+
+Num phons phoible: 3164
+Num phons profiles: 473
+Num phons intersection: 219
+Num phons only in profiles: 254
+
+
+
+JIPA - phoneme clusters
+
+Num phons phoible: 3164
+Num phons profiles: 134
+Num phons intersection: 86
+Num phons only in profiles: 48
+
+
+JIPA - phonemes
+
+Num phons phoible: 3164
+Num phons profiles: 88
+Num phons intersection: 70
+Num phons only in profiles: 18
+

@@ -447,10 +447,13 @@ plus p l y
 fort f ɔ ʁ
 
 Words: 108
-Errors: 62
-WER: 0.574
-Accuracy: 0.426
-Lang: fre_latn_broad_filtered
+Errors: 51
+WER: 0.472
+Accuracy: 0.528
+Lang: fra_latn_unk
+Model: fre_latn_broad_filtered
+
+
 바람과 p a̠ ɾ a̠ m ɡ w a̠
 
 해님이 h ɛː n i m i

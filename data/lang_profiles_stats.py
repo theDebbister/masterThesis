@@ -2,53 +2,91 @@ import os
 from segments import Profile
 import argparse
 import pandas as pd
+import re
 
 
 def get_parser():
     parser = argparse.ArgumentParser(description='Get different statistics of grapheme-to-phoneme data.')
 
-    parser.add_argument('input',
+    parser.add_argument('inpath',
                         help='Either tsv file [Grapheme, mapping, frequency] or dir, if dir specify by adding --dir')
     parser.add_argument('--output_dir', '-o',
-                        help='Name of dir where output is directed to')
+                        help='Name of dir where output is directed to',
+                        type=str)
     parser.add_argument('--compare', '-c',
                         required=False,
                         help='Either tsv file [Grapheme, mapping, frequency] or dir, if dir specify by adding --dir. '
                              'If this is specified it will '
                              'be used to compare to the first input argument file(s)')
-    parser.add_argument('--global',
+    parser.add_argument('--global_stats', '-g',
                         help='Collect global counts. If there is a compare file/dir, both will be '
-                             'calculated separately and compared.')
-    parser.add_argument('--dir',
+                             'calculated separately and compared.',
+                        action='store_true')
+    parser.add_argument('--directory', '-d',
                         action='store_true',
                         help='Specifies if the input is a directory with files',
+                        )
+    parser.add_argument('--cluster',
+                        action='store_true',
+                        help='Specifies the counts for the phoneme clusters should be calculated or for the phonemes',
                         )
 
     return parser
 
 
-def get_global_counts(path: str, compare='', directory=False):
+def get_global_counts(path: str, compare='', directory=False, cluster=False):
+
+    character_set = []
 
     if directory:
-        character_set = __get_chars_from_profile_dir(path)
+        character_set += __get_chars_from_profile_dir(path, cluster)
         if compare:
-            character_set_compare = __get_chars_from_profile_dir(compare)
+            character_set_compare = __get_chars_from_profile_dir(compare, cluster)
 
     else:
         character_set = __get_chars_from_profile_file(path)
         if compare:
             character_set_compare = __get_chars_from_profile_file(compare)
 
+    phoible = pd.read_csv('phoible.csv')
+    phons = set(phoible['Phoneme'])
+    all_chars = set(character_set)
+    intersection = phons.intersection(all_chars)
+    difference = all_chars.difference(intersection)
+
+    if cluster:
+        with open('phon_clusters_not_in_phoible.txt', 'w', encoding='utf8') as out_clusters:
+            for p in difference:
+                out_clusters.write(p + '\n')
+    else:
+        with open('phons_not_in_phoible.txt', 'w', encoding='utf8') as out_phon:
+            for p in difference:
+                out_phon.write(p + '\n')
+
+    print(difference)
+    print(f'Num phons phoible: {len(phons)}')
+    print(f'Num phons profiles: {len(all_chars)}')
+    print(f'Num phons intersection: {len(intersection)}')
+    print(f'Num phons only in profiles: {len(difference)}')
+
 
 def __get_chars_from_profile_file(filename: str) -> list:
-    tsv = pd.read_csv(filename, sep='\t')
-    return tsv['Graphemes'].to_list()
+    tsv = pd.read_csv(filename, sep='\t', index_col=False)
+    return [re.sub(r'\s', '', g) for g in tsv['Grapheme'].to_list()]
 
 
-def __get_chars_from_profile_dir(directory: str) -> list:
+def __get_chars_from_profile_dir(directory: str, cluster=False) -> list:
     chars = []
     for filename in os.listdir(directory):
-        chars.extend(__get_chars_from_profile_file(filename))
+        if cluster:
+            if 'phon' in filename and 'clusters' in filename:
+                print(filename)
+                chars.extend(__get_chars_from_profile_file(directory + '/' + filename))
+
+        else:
+            if 'phon' in filename and 'clusters' not in filename:
+                print(filename)
+                chars.extend(__get_chars_from_profile_file(directory + '/' + filename))
 
     return chars
 
@@ -73,8 +111,16 @@ def get_stats(profile1, profile2):
     print(f'Percentage of characters profile 2 (test) that is not in profile 1 (train): {round(percentage_l2_not_in_l1, 2)}%')
 
 
+def get_statistics(inpath, directory=False, global_stats=False, output_dir='', compare=False, cluster=False):
+    get_global_counts(inpath, directory=directory, cluster=cluster)
+
+
 if __name__ == '__main__':
     p = get_parser()
     args = p.parse_args()
+
+    print(args)
+
+    get_statistics(**vars(args))
 
 

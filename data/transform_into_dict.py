@@ -1,15 +1,19 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 import sys
 import segments as seg
+import re
 
 
-def transform_into_dict(transcript:str, ortho: str, output):
+def transform_into_dict(transcript, ortho, output):
     with open(transcript, 'r', encoding='utf8') as trans, open(ortho, 'r', encoding='utf8') as ortho:
         transcript_lines = trans.readlines()
         ortho_lines = ortho.readlines()
         
     ortho_tokens = []
     for line in ortho_lines:
-        ortho_tokens.extend(line.lower().split())
+        ortho_tokens.extend(re.sub(r'[,.?!]', '', line.lower()).split())
         
     trans_tokens = []
     lang_profile = seg.Profile().from_textfile(transcript)
@@ -20,8 +24,8 @@ def transform_into_dict(transcript:str, ortho: str, output):
         if token.strip() not in ['|', '‖']:
             trans_tokens.extend(token.split('#'))
         # add phonetic 'punctuation marks' to the last token
-        else:
-            trans_tokens[-1] += token.strip()
+        # else:
+        #    trans_tokens[-1] += token.strip()
 
     if len(trans_tokens) == len(ortho_tokens):
         with open(output + '.dict', 'w', encoding='utf8') as output:
