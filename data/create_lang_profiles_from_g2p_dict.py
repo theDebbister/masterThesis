@@ -8,7 +8,7 @@ import re
 import unicodedata
 
 # example:
-# python
+# python create_lang_profiles_from_g2p_dict.py wikipron_100LC\high\ mock_files\
 
 
 def wikipron_to_lang_profiles(directory: str, output_directory: str):
