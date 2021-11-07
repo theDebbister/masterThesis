@@ -1,6 +1,6 @@
 \newchap{Data Collection}
 \label{chap:2_data}
-The first important part of this thesis is concerned with data collection. Although phonetics is an important sub-area in linguistics, phonetic transcriptions are hard to find. If there are any transcriptions available, there are various hindrances that prevent it from being used as is. The following chapter outlines the different data types which are available and the different strategies that are used to convert the data into one well-formatted corpus. Apart from hindrances concerning sources and format, there are issues concerning the data itself. There are generally many more different pronunciations of a word than there are spellings. It is thus important to specify clearly what dialect or pronunciation convention a phonetic transcription follows.
+The first practical part of this thesis is concerned with data collection. Although phonetics is an important sub-area in linguistics, phonetic transcriptions are hard to find. If there are any transcriptions available, there are various hindrances that prevent it from being used as is. The following chapter outlines the different data types which are available and the different strategies that are used to convert the data into one well-formatted corpus. Apart from hindrances concerning sources and format, there are issues concerning the data itself. There are generally many more different pronunciations of a word than there are spellings. It is thus important to specify clearly what dialect or pronunciation convention a phonetic transcription follows. 
 
 \section{Transcription Conventions}
 \label{transcb-conventions}
@@ -34,7 +34,7 @@ Phonetic transcriptions of various languages are available from different source
 \subsection{Full Text}
 For the task at hand, phonetic transcriptions in the form of fully transcribed texts would be ideal. As became clear, it is hardly possible to find those. There is plenty of material describing how different languages can be transcribed but those rarely contain fully transcribed text. If they do, it is mostly limited to one or a few sentences. The JIPA continuously published different phonetic transcriptions of a short story called ``The North Wind and the Sun". A collection of those is available in a handbook of the JIPA which is only available as a pdf scan of the original book \citep{JIPA2010}. While OCR is technically possible it turns out to be very difficult for IPA characters. The tools that exist do sometimes include IPA character recognition like the ABBYY FineReader which can be acquired for a fee. The CL institute at the UZH owns a version of the ABBYY tool but this version does not include the IPA module although ABBYY generally supports IPA character recognition. This ABBYY version was run on a JIPA pdf containing said phonetic transcriptions but the result could not be used. Mostly diacritics and special phonetic symbols were not correctly transcribed. There are also open source tools. One of which is called tesseract. tesseract does not include the IPA alphabet. It is possible to train the model to include the IPA alphabet but this would need appropriate training data. \review{Add quote}
 
-Some transcriptions have been published in separate issues as part of a collection of articles called "Illustrations of the IPA". While some of them are available in plain text format most of them are only available as pdfs or even images in text books. It is of course possible to manually type-write those which is what I did. More on how this is best done is explained in chapter \ref{chap:exp} on experiments. Table \ref{north-wind-stories} shows the languages for which the short story is available and which are also in the corpus.
+
 
 \begin{table}[h!]
 \begin{center}
@@ -62,7 +62,12 @@ Another data type that is found quite often are lists of words' pronunciation. T
 There exist databases of pronunciation dictionaries. Many of those do not release the mining software used to extend the database with more languages \citep{Lee&Ashby.2020}. A very recent project that publishes pronunciation lists is WikiPron. The WikiPron project \citep{Lee&Ashby.2020} is an open-source Python mining tool to retrieve pronunciation data from Wiktionary. Their database contains 1.7 million word/pronunciation pairs in 165 languages. Both, the database and the tool, are freely available online. Apart from the mining tool and the database, WikiPron can be used for grapheme-to-phoneme modelling. More on this subject will be discussed in chapter \ref{chap:3_model}.
 In both G2P shared tasks organized by SIGMORPHON (see \ref{chap:3_model}, data provided by WikiPron was used. For the 2021 task, WikiPron was improved and additional scripts were added based on feedback and findings in the 2020 task. One major improvement was concerned with languages written in different scripts. WikiPron supports now the detection of different scripts and languages can be sorted according to those scripts.
 
- 
+
+\section{The North Wind and the Sun}
+\label{nws}
+Quite a well-known phonetic corpus is a collection of short stories `\ac{nws}'. The story is a fable said to be written by Aesop and has been translated in many languages. Additionally, for many languages there exits a phonetic transcription. 
+Some transcriptions have been published in separate issues as part of a collection of articles called "Illustrations of the IPA". While some of them are available in plain text format most of them are only available as pdfs or even images in text books. It is of course possible to manually type-write those which is what I did. More on how this is best done is explained in chapter \ref{chap:exp} on experiments. Table \ref{north-wind-stories} shows the languages for which the short story is available and which are also in the corpus.
+\citep{baird_evans_greenhill_2021}
 
 
  	

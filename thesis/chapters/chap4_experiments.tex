@@ -65,7 +65,7 @@ Before any of the data can be used, it needs to be preprocessed. As I am going t
 \subsection{g2p-seq2seq CMUSphinx}
 I tested a git repo where they make an already pretrained \ac{g2p} model available. Setting it up was not very easy as there were issues with the tensorflow version and some other dependencies. Also, they do have a pre-trained model, but this uses a completely different transcription convention than IPA. So we cannot use this model. But to test the model and have a baseline, we trained in on the data we have, to see how it performs. First, I trained it on those languages where I have results from the \ac{sigm} 2021 challenge. The results are compared in table \ref{tab:baseline_cmu}. 
 
-\tab{tab:baseline_cmu}{Baseline CMUSphinx results compared with \ac{sigm} 2021 results. The table shows the results for setting 1. CMUSphinx provides a WER implementation which has been used to evaluate the models.}{
+\tab{tab:baseline_cmu}{Baseline CMUSphinx results compared with \ac{sigm} 2020 and 2021 results. For each language the best score is reported no matter what year or what model. The table shows the results for setting 1. CMUSphinx provides a WER implementation which has been used to evaluate the models.}{
 \begin{tabularx}{\columnwidth}{
 | 	>{\raggedright\arraybackslash}l | 
 	>{\raggedleft\arraybackslash}r | 
@@ -73,7 +73,7 @@ I tested a git repo where they make an already pretrained \ac{g2p} model availab
 	>{\raggedleft\arraybackslash}X |
 	>{\raggedright\arraybackslash}X |}
 \hline
-\textbf{ISO396-3} & \textbf{BS WER} & \textbf{BS WER short stories} & \textbf{SIG21 WER} & \textbf{Notes} \\
+\textbf{ISO396-3} & \textbf{BS WER} & \textbf{BS WER \ac{nws}} & \textbf{SIG WER} & \textbf{Notes} \\
 \hline
 \hline
 eng (us) & 54.40 & 87.60 & 37.43 & broad \\
@@ -89,7 +89,7 @@ vie & 7.50 & 100.00 & 0.89 & narrow \\
 
 
 
-\tab{tab:baseline_cmu}{Baseline CMUSphinx results compared with \ac{sigm} 2021 results.  The table shows the results for setting 2. CMUSphinx provides a WER implementation which has been used to evaluate the models.}{
+\tab{tab:baseline_cmu}{Baseline CMUSphinx results compared with \ac{sigm} 2020 and 2021 results. For each language the best score is reported no matter what year or what model. The table shows the results for setting 2. CMUSphinx provides a WER implementation which has been used to evaluate the models.}{
 \begin{tabularx}{\columnwidth}{
 | 	>{\raggedright\arraybackslash}l | 
 	>{\raggedleft\arraybackslash}r | 
@@ -97,7 +97,7 @@ vie & 7.50 & 100.00 & 0.89 & narrow \\
 	>{\raggedleft\arraybackslash}X |
 	>{\raggedright\arraybackslash}X |}
 \hline
-\textbf{ISO396-3} & \textbf{BS WER} & \textbf{BS WER short stories} & \textbf{SIG21 WER} & \textbf{Notes} \\
+\textbf{ISO396-3} & \textbf{BS WER} & \textbf{BS WER \ac{nws}} & \textbf{SIG21 WER} & \textbf{Notes} \\
 \hline
 \hline
 eng (us) & 50.70 & & 37.43 & broad \\
