@@ -8,7 +8,6 @@ import re
 # python lang_profiles_stats.py lang_profiles_JIPA_SIG\ --dir --cluster
 
 
-
 def get_parser():
     parser = argparse.ArgumentParser(description='Get different statistics of grapheme-to-phoneme data.')
 
@@ -46,12 +45,14 @@ def get_global_counts(path: str, directory=False, cluster=False, output_dir=''):
     difference = all_chars.difference(intersection)
 
     if cluster:
-        with open(output_dir + 'phon_clusters_not_in_phoible.txt' if output_dir else 'phon_clusters_not_in_phoible.txt',
+        with open(output_dir + 'clusters_l3_not_in_phoible.txt'
+                  if output_dir else 'clusters_l3_not_in_phoible.txt',
                   'w', encoding='utf8') as out_clusters:
             for p in difference:
                 out_clusters.write(p + '\n')
     else:
-        with open(output_dir + 'phons_not_in_phoible.txt' if output_dir else 'phons_not_in_phoible.txt',
+        with open(output_dir + 'code_points_l1_not_in_phoible.txt'
+                  if output_dir else 'code_points_l1_not_in_phoible.txt',
                   'w', encoding='utf8') as out_phon:
             for p in difference:
                 out_phon.write(p + '\n')
@@ -71,12 +72,12 @@ def __get_chars_from_profile_dir(directory: str, cluster=False) -> list:
     chars = []
     for filename in os.listdir(directory):
         if cluster:
-            if 'phon' in filename and 'clusters' in filename:
+            if 'l3' in filename:
                 print(filename)
                 chars.extend(__get_chars_from_profile_file(directory + '/' + filename))
 
         else:
-            if 'phon' in filename and 'clusters' not in filename:
+            if 'l1' in filename:
                 print(filename)
                 chars.extend(__get_chars_from_profile_file(directory + '/' + filename))
 
