@@ -1,9 +1,7 @@
-import sys
-
 from pathlib import Path
 import pandas as pd
 from segments.tokenizer import Tokenizer
-from collections import Counter
+from collections import Counter, OrderedDict
 
 p = Path('wikipron_100LC/high/').rglob('*.tsv')
 
@@ -31,5 +29,7 @@ print(intersection)
 
 with open('phons_not_in_PHOIBLE.txt', 'w', encoding='utf8') as out:
     for phon in intersection:
-        out.write(phon + '\n')
+        out.write(phon + '\t' + str(ord(phon)) + '\n')
 
+df = pd.DataFrame.from_dict(OrderedDict(c.most_common()), orient="index")
+df.to_csv('phons_in_wikipron.csv')
