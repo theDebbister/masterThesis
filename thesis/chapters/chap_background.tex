@@ -1,6 +1,6 @@
 \newchap{Technical Background}
 \label{chap:tech-background}
-This chapter presents the technical background that is needed for this thesis. I will first present general architectures and frameworks that are commonly used and then present current models used for creating phonetic transcriptions. Table \ref{tab:sota} shows the state-of-the-art models for \ac{g2p} modelling.
+This chapter presents the technical background that is needed for this thesis. It explores everything around automated models that can be used to create phonetic transcriptions. I will first set the basis and dive into evaluation metrics and general architectures and frameworks that are commonly used and then present current state-of-the-art models. Table \ref{tab:sota} shows the state-of-the-art models for \ac{g2p} modelling.
 
 \tab{tab:sota}{This table presents the state-of-the-art \ac{g2p} models. Models that are important for this thesis will be explained in more detail. The language code in parenthesis is the code used in the respective paper.}{
 \begin{tabularx}{\textwidth}{
@@ -179,13 +179,21 @@ Data quality is crucial in any machine learning application. Authors mostly incl
 
 Especially the task of finding errors in the transcriptions is quite tricky. It requires a lot of knowledge about the phonology and phonetics of a specific language. 
 
-\section{Unicode}
+\section{Unicode and the \ac{ipalpha}}
 When it comes to representing characters in a machine-readable format things get very tricky, very quickly. In order to understand this fundamental problem it is necessary to understand the basic concept behind unicode and encodings in general. As discussed in chapter \ref{chap:ling-background}, there are many different kinds of what we typically call letters or graphemes or characters. Just as a human writer must be able to uniquely identify each different letter or sign, so must a computer. The most widely spread standard to represent scripts is called Unicode. Letters are mapped to unique numbers that can be rendered differently depending on the font and the context. There are different stages of representation until a letter can be represented on screen:
 
 \begin{description}
 \item[\textsc{Code point}] A unique numerical, non-negative value usually expressed as a hexadecimal number (U+0000). Allows one-to-one mapping between letters and codes. Each code point has a set of properties attributed to it. Properties like the script, uppercase or not, etc.
 \item[\textsc{Character}] An abstract representation of the shape of the grapheme. Can in theory not be represented visually, as this includes a font. A Unicode character is \textit{not} the same as what we would call a letter or a sign in different writing systems.
-\item[\textsc{Glyph}] The rendered and therefore visual representation of one or more Unicode characters that can be identified by its code point(s). A glyph is rendered in a specific font in a specific context. No matter how different it looks to the user, for Unicode all different representations of one code point are exactly the same. Sometimes one character is represented as two glyphs.
+\item[\textsc{Glyph}] The rendered and therefore visual representation of one or more Unicode characters that can be identified by its code point(s). A glyph is rendered in a specific font in a specific context. No matter how different it looks to the user, for Unicode all different representations of one code point are exactly the same. Sometimes one character is represented as two glyphs. It is important to note here, that the exact visual representation of a glyph is not at all defined by its code point. This means that the exact same glyph can represent more than one code points. This happens sometimes in the \ac{ipalpha}. An example is the post-alveolar click:
+
+\begin{itemize}
+\item ǃ: this glyph represents an exclamation mark with unicode code point U+0021.
+\item !: the glyph represents an post-alveolar click with unicode code point U+01C3.
+\end{itemize}
+
+It is striking that these two look exactly the same. 
+
 \end{description}
 
 Unicode code points are often organized in blocks. A block can, for example, contain all letters of the Latin script. Those blocks are helpful although not always consistent. The \ac{ipalpha} is represented in a basic block but many \ac{ipalpha} symbols are actually found in other blocks. Confusion often arises from the fact, that one human-perceived letter/character/grapheme is sometimes represented as more than one code point. 

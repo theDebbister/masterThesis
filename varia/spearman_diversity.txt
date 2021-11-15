@@ -1,0 +1,37 @@
+## NOTES
+# In total there are 21 different languages. 
+# Whenever two transcriptions were available the narrow transciption what used. 
+# For Amele (aey) the text is not the NWS story but a short ceremonial text of about the same length. 
+# Punctuation symbols in both orhographic and phonemic texts were excluded as well as tone markers in the phonemic text.
+
+# Spearman's rho, ortho and phonemes: 	 0.6584415584415585
+
+
+
+\begin{tabular}{rlrrl}
+\hline
+    & Iso396-3   &   Avg len orthographic &   Avg len phonemes & Type   \\
+\hline
+  0 & aey        &                   5.21 &               5.5  & unk    \\
+  1 & arn        &                   4.81 &               4.65 & narrow \\
+  2 & cmn        &                   1.59 &               4.44 & unk    \\
+  3 & deu        &                   5    &               4.35 & narrow \\
+  4 & ell        &                   4.62 &               4.23 & unk    \\
+  5 & eng        &                   4.19 &               3.46 & narrow \\
+  6 & eus        &                   5.3  &               4.98 & narrow \\
+  7 & fra        &                   4.55 &               3.18 & broad  \\
+  8 & hau        &                   3.8  &               4.07 & narrow \\
+  9 & heb        &                   6.62 &               6.57 & unk    \\
+ 10 & hin        &                   3.53 &               3.93 & narrow \\
+ 11 & ind        &                   5.92 &               5.25 & unk    \\
+ 12 & jpn        &                   1.59 &               3.77 & unk    \\
+ 13 & kat        &                   5.99 &               6.32 & narrow \\
+ 14 & kor        &                   2.85 &               6.56 & unk    \\
+ 15 & mya        &                  10.22 &               8.15 & unk    \\
+ 16 & pes        &                   3.99 &               5.03 & unk    \\
+ 17 & spa        &                   4.62 &               4.36 & narrow \\
+ 18 & tha        &                   3.25 &               3.03 & unk    \\
+ 19 & tur        &                   6.74 &               7.02 & broad  \\
+ 20 & vie        &                   3.24 &               3.87 & unk    \\
+\hline
+\end{tabular}
