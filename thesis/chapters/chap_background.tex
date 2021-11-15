@@ -180,19 +180,19 @@ Data quality is crucial in any machine learning application. Authors mostly incl
 Especially the task of finding errors in the transcriptions is quite tricky. It requires a lot of knowledge about the phonology and phonetics of a specific language. 
 
 \section{Unicode and the \ac{ipalpha}}
-When it comes to representing characters in a machine-readable format things get very tricky, very quickly. In order to understand this fundamental problem it is necessary to understand the basic concept behind unicode and encodings in general. As discussed in chapter \ref{chap:ling-background}, there are many different kinds of what we typically call letters or graphemes or characters. Just as a human writer must be able to uniquely identify each different letter or sign, so must a computer. The most widely spread standard to represent scripts is called Unicode. Letters are mapped to unique numbers that can be rendered differently depending on the font and the context. There are different stages of representation until a letter can be represented on screen:
+When it comes to representing characters in a machine-readable format things get very tricky, very quickly. In order to understand this fundamental problem it is necessary to understand the basic concept behind unicode and encodings in general. \citet{unicode-lingu} present a neat overview in their book. As discussed in chapter \ref{chap:ling-background}, there are many different kinds of what we typically call letters, graphemes, characters or signs\myfootnote{Please note that I will from now on use grapheme to denote the smallest meaningful element of any writing system. Grapheme does not imply any specific writing system nor does is take the Unicode background into consideration. If I wish to distinguish the Unicode specifications I will use the correct Unicode term as described in this section.}. Just as a human writer must be able to uniquely identify each different graphemes, so must a computer. The most widely spread standard to represent scripts is called Unicode. Graphemes are mapped to unique numbers that can be rendered differently depending on the font and the context. There are different stages of representation until a graphemes can be represented on screen:
 
 \begin{description}
 \item[\textsc{Code point}] A unique numerical, non-negative value usually expressed as a hexadecimal number (U+0000). Allows one-to-one mapping between letters and codes. Each code point has a set of properties attributed to it. Properties like the script, uppercase or not, etc.
-\item[\textsc{Character}] An abstract representation of the shape of the grapheme. Can in theory not be represented visually, as this includes a font. A Unicode character is \textit{not} the same as what we would call a letter or a sign in different writing systems.
+\item[\textsc{Character}] An abstract representation of the shape of the grapheme. Can in theory not be represented visually, as this includes a font. A Unicode character is \textit{not} the same as what we would call a grapheme in different writing systems.
 \item[\textsc{Glyph}] The rendered and therefore visual representation of one or more Unicode characters that can be identified by its code point(s). A glyph is rendered in a specific font in a specific context. No matter how different it looks to the user, for Unicode all different representations of one code point are exactly the same. Sometimes one character is represented as two glyphs. It is important to note here, that the exact visual representation of a glyph is not at all defined by its code point. This means that the exact same glyph can represent more than one code points. This happens sometimes in the \ac{ipalpha}. An example is the post-alveolar click:
 
 \begin{itemize}
-\item ǃ: this glyph represents an exclamation mark with unicode code point U+0021.
-\item !: the glyph represents an post-alveolar click with unicode code point U+01C3.
+\item ! : this glyph represents an exclamation mark with unicode code point U+0021.
+\item \textipa{!} : this glyph represents an post-alveolar click with unicode code point U+01C3.
 \end{itemize}
 
-It is striking that these two look exactly the same. 
+It is striking that these two look exactly the same. Things like this become important when, for example, I want to count the different characters in a text.
 
 \end{description}
 
@@ -202,22 +202,30 @@ Unicode code points are often organized in blocks. A block can, for example, con
 \item[\textsc{Grapheme clusters}] A grapheme cluster is one visual letter that is represented as more than one code point. This is the case for diacritic marks. Note that sometimes, these can be precomposed and the combination of those two or more characters is assigned a new number. These clusters can be problematic if in a specific context, the graphemes should not be clustered but read separately. Unicode has ways to solve this but it is still important to be aware of it.
 \end{description} 
 
-Additional complexity is added through the possibility of Unicode to create Unicode locales. These allow users to specify language- or writing-system-specific cases. An additional challange is that of picking the right font. Our standard font format can only contain about half of all the Unicode code point. It is therefore simply not possible to display the entire set of Unicode characters with one font. Many problems encountered with displaying writing systems are somehow connected to the font rather than Unicode itself \citep{unicode-lingu}. \citet{unicode-lingu} list a few more `pitfalls' that one might encounter when dealing with Unicode.
+Additional complexity is added through the possibility of Unicode to create Unicode locales. These allow users to specify language- or writing-system-specific cases. An additional challenge is that of picking the right font. Our standard font format can only contain about half of all the Unicode code point. It is therefore simply not possible to display the entire set of Unicode characters with one font. Many problems encountered with displaying writing systems are somehow connected to the font rather than Unicode itself \citep{unicode-lingu}. \citet{unicode-lingu} list a few more `pitfalls' that one might encounter when dealing with Unicode.
 
-For the present thesis, this topic is relevant for two reasons: 
+For the present thesis, this topic is relevant for multiple reasons: 
 \begin{enumerate}
 \item The \ac{ipalpha} contains many special characters and many diacritics.
 \item The language data is available in many different scripts.
 \end{enumerate} 
 
-It is crucial that all data files, be it phonetic or `normal' scripts, are formatted and read correctly.
+It is crucial that all data files, be it phonetic or `normal' scripts, are formatted and read correctly. Or rather that the encoding and processing is made transparent as often there is not one correct way of how to treat \ac{ipalpha} characters. 
+
+\subsection{\ac{ipalpha} segments}
+For \ac{g2p} tasks it is necessary that phonemic transcriptions are split in some way or other as the models typically do not output entire texts but single phonemes. \citet{unicode-lingu} present three different levels of segmentation of Unicode strings:
+
+
+
+They also present a python library called \textit{segments} in their book that can be used to segment Unicode strings. 
+ 
 
 \section{Representing phonemes}
 \label{phon-features}
 In order to input phonemes to any kind of mathematics-based model, they need to be represented numerically. Instead of representing the phoneme directly it is possible to represent one phoneme as a feature vector. This idea is not new as there is the idea that we can represent words as a vector of numbers which we then input to a model. Each number in that vector is what is called a \textit{feature}. \citet{tulkens-etal-2018-wordkit} note that a problem of such featurization is that the words are no longer comparable across different models as the words are possibly featurized in different ways. This is why the present a tool called \textit{WordKit} which is a Python library that allows to featurize words in a standardized way.
 
 
-There are models that make use of such features vectors. Tan example of feature data can be found \href{https://github.com/uiuc-sst/g2ps}{here}.
+There are models that make use of such features vectors. An example of feature data can be found \href{https://github.com/uiuc-sst/g2ps}{here}.
 
 \section{Low-resource setting}
 Apart from a few well-studied examples, for most languages there is only little available data. It is therefore highly interesting and important to find solutions of how to deal with lack of data. \cite{hammond-2021-data} submitted a system to the 2021 SIGMORPHON edition focusing on data augmentation methods. The primary goal of their approach was to test how successful a minimalist data augmentation model would be, knowing it would most probably not outperform any of the other models. They identified two approaches that might improve low-resource models. The first one is to use as much as possible of the development set for training. The second to train all languages together differentiating the languages only by a tag added to the word representations. The model they used was purposefully a very simple model that does not use a lot of resources. They used a \ac{s2s} neural net with a LSTM decoder and encoder. Both LSTMs have two levels. 
