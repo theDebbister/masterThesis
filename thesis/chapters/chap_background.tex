@@ -196,10 +196,11 @@ It is striking that these two look exactly the same. Things like this become imp
 
 \end{description}
 
-Unicode code points are often organized in blocks. A block can, for example, contain all letters of the Latin script. Those blocks are helpful although not always consistent. The \ac{ipalpha} is represented in a basic block but many \ac{ipalpha} symbols are actually found in other blocks. Confusion often arises from the fact, that one human-perceived letter/character/grapheme is sometimes represented as more than one code point. 
+Unicode code points are often organized in blocks. A block can, for example, contain all letters of the Latin script. Those blocks are helpful although not always consistent. The \ac{ipalpha} is represented in a basic block but many \ac{ipalpha} symbols are actually found in other blocks. Confusion often arises from the fact, that one human-perceived grapheme is sometimes represented as more than one code point. 
 
 \begin{description}
-\item[\textsc{Grapheme clusters}] A grapheme cluster is one visual letter that is represented as more than one code point. This is the case for diacritic marks. Note that sometimes, these can be precomposed and the combination of those two or more characters is assigned a new number. These clusters can be problematic if in a specific context, the graphemes should not be clustered but read separately. Unicode has ways to solve this but it is still important to be aware of it.
+\item[\textsc{Grapheme clusters}] A grapheme cluster is one visual letter that is represented in Unicode as more than one code point. This is the case for diacritic marks. Diacritic marks like
+\item[\textsc{Precomposed characters}] Note that sometimes, grapheme clusters can be precomposed and the combination of those two or more characters is assigned a new number. These clusters can be problematic if in a specific context, the graphemes should not be clustered but read separately. An example is the German `ä'. 
 \end{description} 
 
 Additional complexity is added through the possibility of Unicode to create Unicode locales. These allow users to specify language- or writing-system-specific cases. An additional challenge is that of picking the right font. Our standard font format can only contain about half of all the Unicode code point. It is therefore simply not possible to display the entire set of Unicode characters with one font. Many problems encountered with displaying writing systems are somehow connected to the font rather than Unicode itself \citep{unicode-lingu}. \citet{unicode-lingu} list a few more `pitfalls' that one might encounter when dealing with Unicode.
@@ -211,6 +212,9 @@ For the present thesis, this topic is relevant for multiple reasons:
 \end{enumerate} 
 
 It is crucial that all data files, be it phonetic or `normal' scripts, are formatted and read correctly. Or rather that the encoding and processing is made transparent as often there is not one correct way of how to treat \ac{ipalpha} characters. 
+
+\subsection{Normalization forms}
+The above explanations make clear that there are considerable differences in what a human reader perceives and in what happens in the background. Unicode therefore provides normalization forms that can help to 
 
 \subsection{\ac{ipalpha} segments}
 For \ac{g2p} tasks it is necessary that phonemic transcriptions are split in some way or other as the models typically do not output entire texts but single phonemes. \citet{unicode-lingu} present three different levels of segmentation of Unicode strings:
