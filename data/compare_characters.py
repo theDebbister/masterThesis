@@ -9,12 +9,11 @@ p = Path('wikipron_100LC/high/').rglob('*.tsv')
 t = Tokenizer()
 c = Counter()
 
-
 for filepath in p:
     print(filepath)    
     df = pd.read_csv(filepath, delimiter='\t', names=['graphemes', 'phonemes'],
                           dtype={'graphemes': str, 'phonemes': str}, na_filter=False)
-    s = df['phonemes'].to_string(index=False)
+    s = unicodedata.normalize('NFD', df['phonemes'].to_string(index=False))
     chars = t.characters(s)
     c.update(s)
 
@@ -24,17 +23,18 @@ phonemes = phoible['Phoneme'].to_string(index=False)
 chars = t.characters(phonemes)
 pc = Counter(chars)
 
-intersection = [phon for phon in c.keys() if phon not in pc.keys()]
+difference = [phon for phon in c.keys() if phon not in pc.keys()]
 
-print(intersection)
+print(difference)
+print(f'Number of phones not in Phoible (after normalization): {len(difference)}')
 
-with open('phons_not_in_PHOIBLE.tsv', 'w', encoding='utf8') as out:
+with open('phons_not_in_PHOIBLE_raw.tsv', 'w', encoding='utf8') as out:
     out.write('phoneme' + '\t' + 'name' + '\n')
-    for phon in intersection:
+    for phon in difference:
         # Value error raised when there is no Unicode name
         try:
             name = unicodedata.name(phon)
-        except:
+        except ValueError:
             name = 'NO NAME'
         out.write(phon + '\t' + name + '\n')
 
