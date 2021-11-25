@@ -47,20 +47,66 @@ As there is only very little data available as full texts, we decided to use the
 \subsection{Training settings}
 There are different settings which I will used to train the models.
 
+\review{put the high, low resource list in the appendix and explain the distinction}
+
 \subparagraph{Setting 1: Baseline Small}
 Test all languages with the CMU model where we have data available. We want to have a baseline for all languages. All models are trained separately. Broad and narrow transcriptions are treated as separate languages and thus trained separately as well. The same is true for dialects if there is any information available. American and British English are trained in different models as well. I used the WikiPron pronunciation dictionaries to train the model. While some of the data has been down-sampled in the shared task, I used all that was available. Whenever a filtered version was available I used that one. The model is trained with the least amount of effort. Default settings are used and no hyperparameters are changed. The model is trained for the minimum number of steps which is 10,000 in this case. 
 
 \subparagraph{Setting 2: Baseline Large}
 This setting is similar to setting 1 except that the model is trained as long as possible for each language. All models have been trained for 200,000 steps and the default settings. 
 
+\subparagraph{Setting 3: WikiPron clean}
+I will train another model that is the same like the Baseline Large, but I will use the cleaned WikiPron data. What I will clean is described below (section \ref{preprocess}).
+
+\subparagraph{Setting 4: Feature input}
+The final experiment will be with the features as input.  
+
 \subsection{Preprocessing}
-Before any of the data can be used, it needs to be preprocessed. As I am going to use the pronunciation dictionaries which consist of single words per line with their pronunciation, the full texts need to be prepared like that as well. I did the following steps to convert the full short story texts into pronunciation dictionaries:
+\label{preprocess}
+I will be working with WikiPron data and with the small \ac{nws} corpus. For my experiments I will replace the phonemes by their features from PHOIBLE. In order to make sure that this works well, I will clean the data and check that the phonemes are in PHOIBLE. Although the \ac{ipalpha} has many conventions and covers a lot of sounds, there are still some cases where a specific sound might not be covered. This becomes clear when, for example, looking at the vowel chart (see section \review{add section}). The tongue does not `click into place' for the vowels on the chart. Vowel characterisation happens on a continuum. This means that it is always possible to characterize a vowel as in between two vowels on the chart. How exactly a sound is mapped to a \ac{ipalpha} symbol depends on whoever transcribes a particular text. That said I will carefully examine and clean the dataset.
+
+\subparagraph{\ac{nws} corpus}
+Before any of the data can be used, it needs to be preprocessed. As I am going to use the WikiPron data which consist of single words per line with their pronunciation, the full texts need to be prepared like that as well. I did the following steps to convert the full short story texts into pronunciation dictionaries:
 
 \begin{itemize}
-\item Conversion of \textipa{\textvertline   \textvertline} to \textipa{\textdoublevertline}. Some transcriptions include the double vertical line to mark a major intonation groups in the text. In some transcriptions this is a written as two single vertical lines. Those were replaced by the former to be consistent. 
+\item Conversion of \textipa{\textvertline \textvertline} to \textipa{\textdoublevertline}. Some transcriptions include the double vertical line to mark a major intonation groups in the text. In some transcriptions this is a written as two single vertical lines. Those were replaced by the former to be consistent. 
 \item Removal of ties bars in the phonetic transcriptions. Tie bars are not adding any valuable information. \review{get quote for this!}
 \item Removal of suprasegmentals, except long and half long mark, and the extra short mark. 
 \end{itemize}
+
+
+\subparagraph{WikiPron} Some of the WikiPron data has already been filtered as has been explained in section \ref{data_qual}. However, as I am not only using their filtered data I will have to do some preprocessing as well and also make some additional changes also to the filtered versions. 
+\tab{tab:preprocessing}{The table shows what phonemes where changed or excluded and what the reason is for this preprocessing. All characters that were excluded are replaced by a NULL value. }{
+\begin{tabularx}{\textwidth}{
+| 	>{\raggedright\arraybackslash}l | 
+	>{\raggedright\arraybackslash\hsize=.5\hsize\linewidth=\hsize}X | 
+	>{\raggedright\arraybackslash}l  | 
+	>{\raggedright\arraybackslash\hsize=1.5\hsize\linewidth=\hsize}X |}
+\hline
+\textbf{Phon.} & \textbf{Unicode name} & \textbf{Repl.} & \textbf{Explanation} \\
+\hline
+\hline
+ \textipa{"} 					& \scriptsize{MODIFIER LETTER VERTICAL LINE} 				& NULL 						& \multirow[t]{6}{\hsize}{These are all \ac{ipalpha} suprasegmentals except the long and half long marker and the extra short (\textipa{: ; \u{}}). The reason why these were excluded is that they don't carry any meaning on the character level. The vertical lines, for example, mark intonation groups which only matter in a larger sentence or text context.} \\
+ 
+\textipa{""} 					& \scriptsize{MODIFIER LETTER LOW VERTICAL LINE}			& NULL						&  \\
+\textipa{\textvertline} 		& \scriptsize{VERTICAL LINE} 								& NULL						&  \\
+\textipa{\textdoublevertline} 	& \scriptsize{DOUBLE VERTICAL LINE} 						& NULL 						&  \\
+\textipa{.} 					& \scriptsize{FULL STOP} 									& NULL 						&  \\
+\textipa{\t*{}}					& \scriptsize{UNDERTIE} 									& NULL 						&  \\\hline
+\textipa{\t{}}					& \scriptsize{COMBINING DOUBLE INVERTED BREVE} 				& NULL						&  \review{add explanation} \\\hline
+\textipa{\t*{}}					& \scriptsize{COMBINING DOUBLE BREVE BELOW} 				& NULL						&  \review{add explanation} \\\hline
+\textipa{3\textrhoticity} 		& \scriptsize{LATIN SMALL LETTER REVERSED OPEN E WITH HOOK} & \textipa{@\textrhoticity} &  \review{add explanation} \\\hline
+g						 		& \scriptsize{LATIN SMALL LETTER G} 						& \textipa{g} 				&  The \ac{ipalpha} \textipa{g} has a different code point and is a different character than the typical keyboard small Latin `g'. This is just an \ac{ipalpha} decision. For some fonts the two characters do not look different for some they do.  \\\hline
+\textipa{"} 					& \scriptsize{COMBINING VERTICAL LINE ABOVE}				& NULL						& This is not the same code point as the MODIFIER LETTER LOW VERTICAL LINE but it is most probably meant to be that. It occurs very rarely in the datasets. \\\hline
+$\sim$							& \scriptsize{SWUNG DASH} 									& NULL 						& \multirow[t]{3}{\hsize}{All of these are characters that occur less than 10 times in a dataset for one language. As these experiments were conducted on the high resource languages, all of the languages contain at least 1,000 samples.}  \\
+,							 	& \scriptsize{COMMA} 										& NULL 						&  \\
+\textipa{\~v} 					& \scriptsize{TILDE} 										& NULL 						&  \\\hline
+$^x$						& \scriptsize{MODIFIER LETTER SMALL X} 						& NULL 						&  \review{add explanation} \\
+\hline
+( ) 						& \scriptsize{(SUPERSCRIPT) [LEFT | RIGHT] PARENTHESIS}		& NULL							& Parentheses are typically used to denote optionality. In Chinese the superscript parentheses are used to denote optional tones. Those might be typical cases for non-standard varieties (see \href{https://www.hackingchinese.com/optional-obligatory-tone-change-rules-mandarin/}{example}). As ambiguities cannot be handled, parentheses and what they contain will be excluded. 
+\end{tabularx}}{Preprocessing}
+
+\href{https://en.wikipedia.org/wiki/Roundedness}{jpn} In Japanese there is the superscript letter b. This actually means compression, it is a type of rounding. This is not official, but we should actually leave it. 
 
 \subsection{g2p-seq2seq CMUSphinx}
 I tested a git repo where they make an already pretrained \ac{g2p} model available. Setting it up was not very easy as there were issues with the tensorflow version and some other dependencies. Also, they do have a pre-trained model, but this uses a completely different transcription convention than IPA. So we cannot use this model. But to test the model and have a baseline, we trained in on the data we have, to see how it performs. First, I trained it on those languages where I have results from the \ac{sigm} 2021 challenge. The results are compared in table \ref{tab:baseline_cmu}. To train the models I used the WikiPron data. Whenever it was available I used the data that has been filtered for the \ac{sigm} task. As the model expects the graphemes no to contain any whitespace I had to change the implementation a bit such that white space would be removed in the graphemes. This was necessary only for Vietnamese. The alternative to removing the white space would have been to splitting the grapheme at white space and align the phonemes. However, this is firstly much more work as it is not clear where to split the phonemes and it might be that the word on its own is pronounced differently. 
@@ -73,7 +119,7 @@ I tested a git repo where they make an already pretrained \ac{g2p} model availab
 	>{\raggedleft\arraybackslash}X |
 	>{\raggedright\arraybackslash}X |}
 \hline
-\textbf{ISO396-3} & \textbf{BS WER} & \textbf{BS WER \ac{nws}} & \textbf{SIG WER} & \textbf{Notes} \\
+\textbf{ISO396-3} & \textbf{BS WER} & \textbf{BS WER \ac{nws}} & \textbf{SIG WER} & \textbf{Transcription type} \\
 \hline
 \hline
 eng (us) & 54.40 & 87.60 & 37.43 & broad \\
@@ -97,7 +143,7 @@ vie & 7.50 & 100.00 & 0.89 & narrow \\
 	>{\raggedleft\arraybackslash}X |
 	>{\raggedright\arraybackslash}X |}
 \hline
-\textbf{ISO396-3} & \textbf{BS WER} & \textbf{BS WER \ac{nws}} & \textbf{SIG21 WER} & \textbf{Notes} \\
+\textbf{ISO396-3} & \textbf{BS WER} & \textbf{BS WER \ac{nws}} & \textbf{SIG21 WER} & \textbf{Transcription type} \\
 \hline
 \hline
 eng (us) & 50.70 & & 37.43 & broad \\
