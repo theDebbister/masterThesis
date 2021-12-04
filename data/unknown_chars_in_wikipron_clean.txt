@@ -1,6 +1,3 @@
-hin_deva_narrow.tsv
-ᵊ	302	MODIFIER LETTER SMALL SCHWA
-
 ind_latn_broad.tsv
 ʸ	3	MODIFIER LETTER SMALL Y
 
