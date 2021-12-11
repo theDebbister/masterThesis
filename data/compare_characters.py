@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 import unicodedata
 import pandas as pd
 from pathlib import Path

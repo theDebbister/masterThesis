@@ -47,7 +47,8 @@ def extract_phoible_phonemes():
 
     df = pd.DataFrame(l)
 
-    df.to_csv('phoible_features.csv', index=False, header=['Phoneme', "tone", "stress", "syllabic", "short", "long", "consonantal",
+    df.to_csv('phoible_features.csv',
+              index=False, header=['Phoneme', "tone", "stress", "syllabic", "short", "long", "consonantal",
                                           "sonorant", "continuant", "delayedRelease", "approximant", "tap", "trill",
                                           "nasal",
                                           "lateral", "labial", "round", "labiodental", "coronal", "anterior",

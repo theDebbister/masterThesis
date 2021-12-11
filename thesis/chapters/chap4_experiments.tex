@@ -42,15 +42,15 @@ For languages where the type of the transcriptions was unclear but two lists for
 \end{table}
 
 \section{Automatic \ac{g2p}}
-As there is only very little data available as full texts, we decided to use the short stories as test set for the experiments with \ac{g2p} models. Those texts are all manually created and are specifically created by linguists for the purpose of studying phonetics of many languages. 
+The model that I am using for my \ac{g2p} experiments is explained in section \ref{sec:cmu}. Setting it up was not very easy as there were issues with the tensorflow version and some other dependencies. Also, they do have a pre-trained model, but this uses a completely different transcription convention than IPA. So we cannot use this model. But to test the model and have a baseline, we trained in on the data we have, to see how it performs. As there is only very little data available as full texts, we decided to use the short stories as test set for the experiments with \ac{g2p} models. Those texts are all manually created and are specifically created by linguists for the purpose of studying phonetics of many languages. 
 
 \subsection{Training settings}
-There are different settings which I will used to train the models.
+There are different settings which I will use to train the models and analyse their performance.
 
 \review{put the high, low resource list in the appendix and explain the distinction}
 
 \subparagraph{Setting 1: Baseline Small}
-Test all languages with the CMU model where we have data available. We want to have a baseline for all languages. All models are trained separately. Broad and narrow transcriptions are treated as separate languages and thus trained separately as well. The same is true for dialects if there is any information available. American and British English are trained in different models as well. I used the WikiPron pronunciation dictionaries to train the model. While some of the data has been down-sampled in the shared task, I used all that was available. Whenever a filtered version was available I used that one. The model is trained with the least amount of effort. Default settings are used and no hyperparameters are changed. The model is trained for the minimum number of steps which is 10,000 in this case. 
+Test all languages with the CMU model where we have data available. We want to have a baseline for all languages. All models are trained separately. Broad and narrow transcriptions are treated as separate languages and thus trained separately as well. The same is true for dialects if there is any information available. American and British English are trained in different models. I used the WikiPron pronunciation dictionaries to train the model. While some of the data has been down-sampled in the shared task, I used all that was available. Whenever a filtered version used in the \ac{sigm} task was available I used that one. The model is trained with the least amount of effort. Default settings are used and no hyperparameters are changed. The model is trained for the minimum number of steps which is 10,000 in this case.  First, I trained it on those languages where I have results from the \ac{sigm} 2021 challenge. The results are compared in table \ref{tab:baseline_cmu}.
 
 \subparagraph{Setting 2: Baseline Large}
 This setting is similar to setting 1 except that the model is trained as long as possible for each language. All models have been trained for 200,000 steps and the default settings. 
@@ -107,10 +107,12 @@ $\sim$							& \scriptsize{SWUNG DASH} 									& NULL 						& \multirow[t]{4}{\
 ( ) 						& \scriptsize{( SUPERSCRIPT ) [ LEFT | RIGHT ] PARENTHESIS}		& NULL							& Parentheses are used to denote optionality for phonemes or tones. WikiPron actually discards those but keeps the content (\review{add GitHub reference}). I will do the same for all parenthesis found.  \\\hline
 \end{tabularx}}{Preprocessing}
 
+As the model expects the graphemes no to contain any whitespace, I replaced any whitespace in the input with underscores. This was necessary only for Vietnamese. The alternative to removing the white space would have been to splitting the grapheme at white space and align the phonemes. However, this is firstly much more work as it is not clear where to split the phonemes and it might be that the word on its own is pronounced differently. 
+
 \href{https://en.wikipedia.org/wiki/Roundedness}{jpn} In Japanese there is the superscript letter b. This actually means compression, it is a type of rounding. This is not official, but we should actually leave it. 
 
-\subsection{g2p-seq2seq CMUSphinx}
-I tested a git repo where they make an already pretrained \ac{g2p} model available. Setting it up was not very easy as there were issues with the tensorflow version and some other dependencies. Also, they do have a pre-trained model, but this uses a completely different transcription convention than IPA. So we cannot use this model. But to test the model and have a baseline, we trained in on the data we have, to see how it performs. First, I trained it on those languages where I have results from the \ac{sigm} 2021 challenge. The results are compared in table \ref{tab:baseline_cmu}. To train the models I used the WikiPron data. Whenever it was available I used the data that has been filtered for the \ac{sigm} task. As the model expects the graphemes no to contain any whitespace I had to change the implementation a bit such that white space would be removed in the graphemes. This was necessary only for Vietnamese. The alternative to removing the white space would have been to splitting the grapheme at white space and align the phonemes. However, this is firstly much more work as it is not clear where to split the phonemes and it might be that the word on its own is pronounced differently. 
+\subsection{Results}
+
 
 \tab{tab:baseline_cmu}{Baseline CMUSphinx results compared with \ac{sigm} 2020 and 2021 results. For each language the best score is reported no matter what year or what model. The table shows the results for setting 1. CMUSphinx provides a WER implementation which has been used to evaluate the models.}{
 \begin{tabularx}{\columnwidth}{

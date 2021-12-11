@@ -1,0 +1,197 @@
+Words: 13284
+Errors: 2337
+WER: 0.176
+PER: 0.039
+Accuracy: 0.824
+--
+Words: 3418
+Errors: 1267
+WER: 0.371
+PER: 0.048
+Accuracy: 0.629
+--
+Words: 1100
+Errors: 574
+WER: 0.522
+PER: 0.071
+Accuracy: 0.478
+--
+Words: 170
+Errors: 36
+WER: 0.212
+PER: 0.027
+Accuracy: 0.788
+--
+Words: 6893
+Errors: 195
+WER: 0.028
+PER: 0.002
+Accuracy: 0.972
+--
+Words: 6891
+Errors: 220
+WER: 0.032
+PER: 0.003
+Accuracy: 0.968
+--
+Words: 153
+Errors: 58
+WER: 0.379
+PER: 0.053
+Accuracy: 0.621
+--
+Words: 262
+Errors: 103
+WER: 0.393
+PER: 0.053
+Accuracy: 0.607
+--
+Words: 1512
+Errors: 0
+WER: 0.000
+PER: 0.000
+Accuracy: 1.000
+--
+Words: 459
+Errors: 161
+WER: 0.351
+PER: 0.065
+Accuracy: 0.649
+--
+Words: 40247
+Errors: 771
+WER: 0.019
+PER: 0.002
+Accuracy: 0.981
+--
+Words: 6075
+Errors: 66
+WER: 0.011
+PER: 0.001
+Accuracy: 0.989
+--
+Words: 5221
+Errors: 121
+WER: 0.023
+PER: 0.003
+Accuracy: 0.977
+--
+Words: 4865
+Errors: 66
+WER: 0.014
+PER: 0.001
+Accuracy: 0.986
+--
+Words: 1413
+Errors: 330
+WER: 0.234
+PER: 0.041
+Accuracy: 0.766
+--
+Words: 4185
+Errors: 110
+WER: 0.026
+PER: 0.003
+Accuracy: 0.974
+--
+Words: 331
+Errors: 94
+WER: 0.284
+PER: 0.046
+Accuracy: 0.716
+--
+Words: 189
+Errors: 86
+WER: 0.455
+PER: 0.064
+Accuracy: 0.545
+--
+Words: 1508
+Errors: 189
+WER: 0.125
+PER: 0.026
+Accuracy: 0.875
+--
+Words: 176
+Errors: 89
+WER: 0.506
+PER: 0.078
+Accuracy: 0.494
+--
+Words: 178
+Errors: 98
+WER: 0.551
+PER: 0.076
+Accuracy: 0.449
+--
+Words: 167
+Errors: 110
+WER: 0.659
+PER: 0.107
+Accuracy: 0.341
+--
+Words: 1522
+Errors: 23
+WER: 0.015
+PER: 0.008
+Accuracy: 0.985
+--
+Words: 6023
+Errors: 2742
+WER: 0.455
+PER: 0.086
+Accuracy: 0.545
+--
+Words: 134
+Errors: 121
+WER: 0.903
+PER: 0.302
+Accuracy: 0.097
+--
+Words: 5711
+Errors: 2898
+WER: 0.507
+PER: 0.095
+Accuracy: 0.493
+--
+Words: 156
+Errors: 132
+WER: 0.846
+PER: 0.314
+Accuracy: 0.154
+--
+Words: 1056
+Errors: 75
+WER: 0.071
+PER: 0.006
+Accuracy: 0.929
+--
+Words: 40
+Errors: 28
+WER: 0.700
+PER: 0.152
+Accuracy: 0.300
+--
+Words: 5682
+Errors: 303
+WER: 0.053
+PER: 0.007
+Accuracy: 0.947
+--
+Words: 1065
+Errors: 47
+WER: 0.044
+PER: 0.007
+Accuracy: 0.956
+--
+Words: 955
+Errors: 74
+WER: 0.077
+PER: 0.012
+Accuracy: 0.923
+--
+Words: 1972
+Errors: 129
+WER: 0.065
+PER: 0.006
+Accuracy: 0.935

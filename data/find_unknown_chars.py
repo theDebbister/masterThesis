@@ -6,8 +6,9 @@ import pandas as pd
 from pathlib import Path
 from segments.tokenizer import Tokenizer
 from collections import Counter, OrderedDict
+from tqdm import tqdm
 
-p_wikipron = Path('wikipron_100LC/high/').rglob('*.tsv')
+p_wikipron = Path('wikipron_clean/v2/').rglob('*.tsv')
 p_unknown_chars = 'phons_not_in_PHOIBLE_raw.tsv'
 
 chars_unknown = pd.read_csv(p_unknown_chars, sep='\t', na_filter=False)['phoneme'].to_list()
@@ -17,8 +18,7 @@ t = Tokenizer()
 d = {}
 
 
-for filepath in p_wikipron:
-    print(filepath)
+for filepath in tqdm(list(p_wikipron)):
     df = pd.read_csv(filepath, delimiter='\t', names=['graphemes', 'phonemes'],
                           dtype={'graphemes': str, 'phonemes': str}, na_filter=False)
     s = unicodedata.normalize('NFD', df['phonemes'].to_string(index=False))

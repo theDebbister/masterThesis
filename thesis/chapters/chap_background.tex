@@ -156,6 +156,7 @@ In order to find the most common errors of the systems, there were two types of 
 The other type of analysis is to create a covering grammar. This means that a grammar is created that includes all possible combinations of grapheme-to-phoneme mappings that are allowed in this language. This set is constructed manually. This error analysis was only conducted for three languages in the medium setting and four of the low-resource languages. Then, words were considered that were predicted wrongly by the system. For those words it was checked whether the prediction by the system was completely wrong or if it was one of many possible transcriptions of that word. If so, the error was that system did not guess the correct transcription for this word. These errors could be considered ambiguities in the language. Another error type that can be identified by this analysis is when the reference transcription cannot be derived from the covering grammar. This can either mean that the covering grammar is incomplete or that the reference is a word that is very atypical for the language (e.g. borrowed word but not yet adapted to pronunciation rules) or simply wrong. 
 
 \section{CMUSphinx}
+\label{sec:cmu}
 This model has been used in the \ac{sigm} task. It was not used on many language but promised a good performance which is why I decided to use this model for this present thesis. \review{add explanation of model}
 
 Attention: \href{https://papers.nips.cc/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html}{link to paper}
