@@ -1,20 +1,21 @@
 # DATA
 
-## DATA TYPES
-### JIPA
 ### WikiPron
+I used the WikiPron pronunciation dictionaries to train the models. Those have been 
+used in the SIGMORPHON G2P [2020](https://github.com/sigmorphon/2020/tree/master/task1) and [2021](https://github.com/sigmorphon/2021-task1) tasks as well. For a few languages there exists a cleaned
+version. 
 
+### JIPA
+The Journal of the IPA published *Illustrations of the IPA*. These
+are short journal articles explaining the phonetics and phonology of one particular
+language. Together with theoretical explanations comes a transcription. Mostly this is 
+Aesop's short story *The North Wind and the Sun* that has been translated in many 
+different languages. As those are human created texts, I used them to test the models
+I created. 
 
 ## SCRIPTS
 
-## DATA INFORMATION CSV
+I used the following scripts to process and work with the data:
 
-All information on the data collected can be found in the [phoneticData.csv](https://github.com/theDebbister/masterThesis/blob/main/data/phoneticData.tsv) file. Details on the csv are foound below.
-
-WikiPron data has been added up to commit f1a49165b9ddef6eec0ad06d0aedb7c12c679c02
-
-### availability
-- 0 = unrestricted access
-- 1 = institutional access (through UZH)
-- 2 = restricted access by personal contact
+* 
 
