@@ -112,21 +112,23 @@ Transducers are like finite-state automatons. But instead of just telling whethe
 
 \citep{Rao2015GraphemetophonemeCU}
 
-\citep{ney-joint-sequence2008} 
-
 \subsection{Neural models}
-Neural G2P models have been reported to outperform most other models \citep{Lee&Ashby.2020}. Many researchers experiment with different variants of LSTM models \citep{Lee&Ashby.2020, hammond-2021-data, gautam.2021, Rao2015GraphemetophonemeCU}. But there are also other models that have been used. All of those will be introduced in the following.
+Neural G2P models have been reported to outperform most other models \citep{Lee&Ashby.2020}. Many researchers experiment with different variants of LSTM models \citep{Lee&Ashby.2020, hammond-2021-data, gautam.2021, Rao2015GraphemetophonemeCU}. But there are also other models that have been used. The most important of those will be introduced in the following.
 
 \subparagraph{\ac{s2s}}
-\ac{s2s} is not a model type as such but rather an architecture. \ac{s2s} models include an encoder and a decoder or more than one of each depending on the exact implementation. Both encoder and decoder can be the same model type or different ones but all of them are \acp{rnn} or some variant of it. What makes such a model architecture powerful is that they can map an input sequence to a output sequence of a different length 
+\ac{s2s} is not a model type as such but rather an architecture. \ac{s2s} models include an encoder and a decoder or more than one of each depending on the exact implementation. Both encoder and decoder can be the same model type or different ones but all of them are \acp{rnn} or some variant of it. What makes such a model architecture powerful is that they can map an input sequence to a output sequence of a different length and different type \citep{Kostadinov.2019, DBLP:journals/corr/SutskeverVL14}. 
 
-\review{add this \href{https://towardsdatascience.com/understanding-encoder-decoder-sequence-to-sequence-model-679e04af4346}{source} to references and quote this as well: \href{https://arxiv.org/abs/1409.3215}{original paper}}
+Generally, there is a difference between models that assume conditional independence between each output step (e.g. Hidden Markov Models) and there are models that do not make this assumption but condition the current output on the entire sequence before. Depending on what model type is used as encoder or decoder this can get tricky if the input sequence is really long. This is true especially for \ac{rnn} models. Apart form that, \ac{s2s} models have to wait until the full input sequence is processed before they can start decoding. This does not work well for input that gets continuously longer. 
 
-Generally, there is a difference between models that assume conditional independence between the each output step (e.g. Hidden Markov Models) and there are models that do not make this assumption but condition the current output on the entire sequence before. \ac{s2s} models have to wait until the full input sequence is processed before they can start decoding. They condition the output sequence on entire input sequence. This does not work well for input that gets continuously longer or very long input sequences. 
+\subparagraph{RNN}
+A \acp{rnn} processes each input unit (in our case a single grapheme as part of the grapheme sequence) and produce a weighted output representation of that unit. The next unit is processed in a similar way using different weights and a weighted version of the output of the last unit which is added to this representation. This makes sure that the context (i.e. a representation of the units preceding the current unit) is included. This is done iteratively for each input unit until the last unit is processed. The output of such an \ac{rnn} is a manipulated version of the input sequence of the same length.
 
-\subparagraph{LSTM}
-LSTM means long short-term memory. They are inspired by the simpler \acp{rnn}. As their name suggests they include what we could call a memory. Instead of just updating the state with all the at every step through the sequence, LSTMs can more flexibly decide what information is added to the state and what information should be forgotten.
+\review{\href{https://towardsdatascience.com/learn-how-recurrent-neural-networks-work-84e975feaaf7}{quote this for RNN}}
+
+A special kind of \ac{rnn} is the LSTM. LSTM means long short-term memory. As their name suggests they include what we could call a memory. Instead of just updating the state with all the information at every step through the sequence, LSTMs can more flexibly decide what information is added to the state and what information should be forgotten.
 Many earlier neural LSTM models use a connectionist temporal classification layer to include alignment information \citep{lo-nicolai-2021-linguistic}. 
+
+\review{\href{http://colah.github.io/posts/2015-08-Understanding-LSTMs/}{quote this for LSTM}}
 
 \subparagraph{Transformer}
 
