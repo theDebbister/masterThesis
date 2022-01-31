@@ -85,7 +85,7 @@ def calc_errors(inputs, decodes, words, pronunciations):
     return correct, errors, num_edits, len_reference
 
 
-def clean_data(predictions, gold):
+def clean_data(predictions):
 
     with open(predictions, 'r', encoding='utf8') as pred:
 
@@ -104,22 +104,22 @@ def clean_data(predictions, gold):
                 end_of_data = False
                 lang = re.sub(r'Lang: ', '', last_lines[-1])
 
-                if not lang == 'vie_latn_hanoi_narrow_filtered':
+                #if not lang == 'vie_latn_hanoi_narrow_filtered':
 
-                    gold_df = pd.read_csv('gold/' + lang + '.tsv.part.test', sep='\t', names=['word', 'pron'])
+                gold_df = pd.read_csv('gold/' + lang + '.tsv.part.test', sep='\t', names=['word', 'pron'])
 
-                    words = gold_df['word'].to_list()
-                    pron = gold_df['pron'].to_list()
+                words = gold_df['word'].to_list()
+                pron = gold_df['pron'].to_list()
 
-                    correct, errors, edits, len_reference = calc_errors(inputs, dec, words, pron)
+                correct, errors, edits, len_reference = calc_errors(inputs, dec, words, pron)
 
-                    print(f'Lang: {lang}')
-                    print("Words: %d" % (correct + errors))
-                    print("Errors: %d" % errors)
-                    print("WER: %.3f" % (float(errors) / (correct + errors)))
-                    print("PER: %.3f" % (float(edits) / len_reference))
-                    print("Accuracy: %.3f" % float(1. - (float(errors) / (correct + errors))))
-                    print('------------------------')
+                print(f'Lang: {lang}')
+                print("Words: %d" % (correct + errors))
+                print("Errors: %d" % errors)
+                print("WER: %.3f" % (float(errors) / (correct + errors)))
+                print("PER: %.3f" % (float(edits) / len_reference))
+                print("Accuracy: %.3f" % float(1. - (float(errors) / (correct + errors))))
+                print('------------------------')
 
                 inputs = []
                 dec = []
@@ -146,7 +146,6 @@ def clean_data(predictions, gold):
 
 if __name__ == '__main__':
     predictions_path = sys.argv[1]
-    gold_path = sys.argv[1]
 
-    clean_data(predictions_path, gold_path)
+    clean_data(predictions_path)
 
