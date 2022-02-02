@@ -99,45 +99,27 @@ The first systems to create phonetic transcriptions of text were rule-based syst
 
 
 \subsection{N-gram Models / Statistical models}
-N-gram models, statistical models or joint-sequence models were used before neural models took over the field. These are sometimes referred to as traditional models. One reason why they were outperformed by neural models is that it is necessary to construct alignments between grapheme and phonemes. This is needed because one grapheme can be realized as multiple phonemes or vice versa. It is not possible to simply have a one-to-one alignment. Joint-sequence models were often used with different versions of the \acf{em} algorithm. A variant of joint-sequence models are weighted \acfp{fst} \citep{lo-nicolai-2021-linguistic}.
+N-gram models, statistical models or joint-sequence models were used before neural models took over the field. These are sometimes referred to as traditional models. One reason why they were outperformed by neural models is that it is necessary to construct alignments between grapheme and phonemes. This is needed because one grapheme can be realized as multiple phonemes or vice versa. It is not possible to simply have a one-to-one alignment. Joint-sequence models were often used with different versions of the \acf{em} algorithm \citep{lo-nicolai-2021-linguistic}. The main intuition about those models is that they in some way or other try to statistically model the relationship between graphemes and phonemes. Typically, those models consist of two parts: first an alignment model. Second, a model that captures the relationship between graphemes and phonemes using clearly defined statistical methods. A very common model is the joint-sequence model.
 
-\subparagraph{Joint-sequence model}
-\citep{ney-joint-sequence2008}
-
-\subparagraph{(Weighted) finite-state transducer}
-Transducers are like finite-state automatons. But instead of just telling whether a certain sequence belongs to a certain language, they output something at every step. This means that in the process of iterating over the sequence, they produce another sequence. 
-
-\review{check \cite{lo-nicolai-2021-linguistic} they include a lot of references about this topic}
-
-
-\citep{Rao2015GraphemetophonemeCU}
+\subparagraph{Joint-sequence model} The term \textit{joint-sequence} hints already at the underlying architecture of those models: the idea is to process \textit{joint} sequences of input and output symbols. In order to do that they must be aligned. We can then concatenate those alignments, which means to concatenate the grapheme and the phoneme which it is mapped to, and receive what is called a graphone. Using the concept of \ac{fst}, we can build a model. \acp{fst} are similar to finite-state automatons. But instead of just telling whether a certain sequence belongs to a certain language (which is pattern matching), they can output none or many symbols at every step as well. This means that in the process of iterating over the sequence, they produce another sequence. Knowing that, it is easily understandable that this works well for our given \ac{g2p} task. The idea is now, that we model the joint-probability of the input graphemes and output phonemes or rather our graphones. Doing this we can use the \ac{em} algorithm to find a mapping of graphemes to phonemes that is most probable. As those graphones consist of n-grams of both the input and output sequence, they themselves can be considered a n-grams which is why those models are sometimes referred to as n-gram models \citep{ney-joint-sequence2008, lo-nicolai-2021-linguistic}.
 
 \subsection{Neural models}
 Neural G2P models have been reported to outperform most other models \citep{Lee&Ashby.2020}. Many researchers experiment with different variants of LSTM models \citep{Lee&Ashby.2020, hammond-2021-data, gautam.2021, Rao2015GraphemetophonemeCU}. But there are also other models that have been used. The most important of those will be introduced in the following.
 
-\subparagraph{\ac{s2s}}
-\ac{s2s} is not a model type as such but rather an architecture. \ac{s2s} models include an encoder and a decoder or more than one of each depending on the exact implementation. Both encoder and decoder can be the same model type or different ones but all of them are \acp{rnn} or some variant of it. What makes such a model architecture powerful is that they can map an input sequence to a output sequence of a different length and different type \citep{Kostadinov.2019, DBLP:journals/corr/SutskeverVL14}. 
-
-Generally, there is a difference between models that assume conditional independence between each output step (e.g. Hidden Markov Models) and there are models that do not make this assumption but condition the current output on the entire sequence before. Depending on what model type is used as encoder or decoder this can get tricky if the input sequence is really long. This is true especially for \ac{rnn} models. Apart form that, \ac{s2s} models have to wait until the full input sequence is processed before they can start decoding. This does not work well for input that gets continuously longer. 
+\subparagraph{Sequence-to-sequence}
+\ac{s2s} is not a model type as such but rather an architecture. \ac{s2s} models include an encoder and a decoder or more than one of each depending on the exact implementation. Both encoder and decoder can be the same model type or different ones but all of them are \acp{rnn} or some variant of it. The output of the (last) encoder \ac{rnn} is used as input for the decoder \ac{rnn}. What makes such a model architecture powerful is that they can map an input sequence to a output sequence of a different length and different type. 
+Generally, there is a difference between models that assume conditional independence between each output step (e.g. Hidden Markov Models) and there are models that do not make this assumption but condition the current output on the entire sequence before. Depending on what model type is used as encoder or decoder considering the entire preceding input can get tricky if the input sequence is really long. This is true especially for \ac{rnn} models. Apart form that, \ac{s2s} models have to wait until the full input sequence is processed before they can start decoding. This does not work well for input that gets continuously longer \citep{Kostadinov.2019, DBLP:journals/corr/SutskeverVL14}. 
 
 \subparagraph{RNN}
-A \acp{rnn} processes each input unit (in our case a single grapheme as part of the grapheme sequence) and produce a weighted output representation of that unit. The next unit is processed in a similar way using different weights and a weighted version of the output of the last unit which is added to this representation. This makes sure that the context (i.e. a representation of the units preceding the current unit) is included. This is done iteratively for each input unit until the last unit is processed. The output of such an \ac{rnn} is a manipulated version of the input sequence of the same length.
-
-\review{\href{https://towardsdatascience.com/learn-how-recurrent-neural-networks-work-84e975feaaf7}{quote this for RNN}}
-
-A special kind of \ac{rnn} is the LSTM. LSTM means long short-term memory. As their name suggests they include what we could call a memory. Instead of just updating the state with all the information at every step through the sequence, LSTMs can more flexibly decide what information is added to the state and what information should be forgotten.
-Many earlier neural LSTM models use a connectionist temporal classification layer to include alignment information \citep{lo-nicolai-2021-linguistic}. 
-
-\review{\href{http://colah.github.io/posts/2015-08-Understanding-LSTMs/}{quote this for LSTM}}
+The important intuition about \acp{rnn} is that they process each unit of an input sequence one unit at a time. In our case, we can think of one unit as one grapheme in the input sequence. This sequential processing is crucial as it means that each unit gets information about the units preceding it. This makes sure that information about the preceding context is included. The output of such an \ac{rnn} is therefore a manipulated version of the input sequence of the same length.
+A special kind of \ac{rnn} is the LSTM. LSTM means long short-term memory. As their name suggests they include what we could call a memory. Instead of just adding some representation of the preceding units at each time step, LSTMs can more flexibly decide what information is added and what information should be forgotten \citep{Olah.29.01.2022, Kostadinov.2017}.
+Many earlier neural LSTM models use a connectionist temporal classification layer to include alignment information \citep{lo-nicolai-2021-linguistic}. This is a special methodology that can deal with n-to-m alignments which is the case in \ac{g2p} modelling.
 
 \subparagraph{Transformer}
+Transformers are \ac{s2s} models as well. 
 
 \subparagraph{Neural Transducer}
 Neural transducers, as presented by \citet{jaitly2016neural}, extend previously used \ac{s2s} models. They can treat more arriving input without having to redo the entire calculation for the entire updated sequence. At each time step, the neural transducer can output zero to many output symbols. 
-
-
- 
-
 
 
 \section{SIGMORPHON shared tasks}
