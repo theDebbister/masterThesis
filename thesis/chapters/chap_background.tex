@@ -80,7 +80,8 @@ In the case of \ac{g2p} conversion, the \ac{wer} actually just reflects the rate
 
 
 \section{Automated phonetic transcription}
-Today's technologies allow to build models that create phonetic transcriptions automatically given an original text. There are several approaches which I will discuss below. Creating phonetic transcriptions is essentially a \acf{s2s} task. Like other \ac{nlp} tasks its goal is to transform a sequence of characters into another sequence of characters. In particular, it is very similar to machine translation which is such a task as well \citep{Rao2015GraphemetophonemeCU}. In the present case, the input sequence is a sequence of graphemes. These can look very differently depending on the script (see section \ref{writing-sys}). The output sequence is a sequence of phonemes\myfootnote{Please refer to section \ref{phonology} in order to understand the terminological implications of  phoneme. As it is common in research, I will stick to the term \textit{phoneme} although strictly speaking it is not always correct. Phoneme in this case just refers to any symbol that is used to represent a sound.}. This process is typically referred to as \ac{g2p}. There are a few problems and characteristics of the \ac{g2p} task that are important:
+\label{model_theory}
+In this section I set the stage for understanding the technical background of \ac{g2p} models. Today's technologies allow to build models that create phonetic transcriptions automatically given an original text. There are several approaches which I will discuss below. Creating phonetic transcriptions is essentially a \acf{s2s} task. Like other \ac{nlp} tasks its goal is to transform a sequence of characters into another sequence of characters. In particular, it is very similar to machine translation which is such a task as well \citep{Rao2015GraphemetophonemeCU}. In the present case, the input sequence is a sequence of graphemes. These can look very differently depending on the script (see section \ref{writing-sys}). The output sequence is a sequence of phonemes\myfootnote{Please refer to section \ref{phonology} in order to understand the terminological implications of  phoneme. As it is common in research, I will stick to the term \textit{phoneme} although strictly speaking it is not always correct. Phoneme in this case just refers to any symbol that is used to represent a sound.}. This process is typically referred to as \ac{g2p}. There are a few problems and characteristics of the \ac{g2p} task that are important:
 
 \begin{itemize}
 \item The input and output sequences are not always of the same length. It is difficult to align input and output. Not all systems rely on aligning input and output but often it is needed to analyse the results (for example to create confusion matrices). 
@@ -99,7 +100,7 @@ The first systems to create phonetic transcriptions of text were rule-based syst
 
 
 \subsection{N-gram Models / Statistical models}
-N-gram models, statistical models or joint-sequence models were used before neural models took over the field. These are sometimes referred to as traditional models. One reason why they were outperformed by neural models is that it is necessary to construct alignments between grapheme and phonemes. This is needed because one grapheme can be realized as multiple phonemes or vice versa. It is not possible to simply have a one-to-one alignment. Joint-sequence models were often used with different versions of the \acf{em} algorithm \citep{lo-nicolai-2021-linguistic}. The main intuition about those models is that they in some way or other try to statistically model the relationship between graphemes and phonemes. Typically, those models consist of two parts: first an alignment model. Second, a model that captures the relationship between graphemes and phonemes using clearly defined statistical methods. A very common model is the joint-sequence model.
+N-gram models, statistical models or joint-sequence models were used before neural models took over the field. These are sometimes referred to as traditional models. One reason why they were outperformed by neural models is that it is necessary to construct alignments between grapheme and phonemes. This is needed because one grapheme can be realized as multiple phonemes or vice versa. It is not possible to simply have a one-to-one alignment. Joint-sequence models were often used with different versions of the \acf{em} algorithm \citep{lo-nicolai-2021-linguistic}. The main intuition about those models is that they, in some way or other, try to statistically model the relationship between graphemes and phonemes. Typically, those models consist of two parts: first an alignment model. Second, a model that captures the relationship between graphemes and phonemes using clearly defined statistical methods. A very common model is the joint-sequence model.
 
 \subparagraph{Joint-sequence model} The term \textit{joint-sequence} hints already at the underlying architecture of those models: the idea is to process \textit{joint} sequences of input and output symbols. In order to do that they must be aligned. We can then concatenate those alignments, which means to concatenate the grapheme and the phoneme which it is mapped to, and receive what is called a graphone. Using the concept of \ac{fst}, we can build a model. \acp{fst} are similar to finite-state automatons. But instead of just telling whether a certain sequence belongs to a certain language (which is pattern matching), they can output none or many symbols at every step as well. This means that in the process of iterating over the sequence, they produce another sequence. Knowing that, it is easily understandable that this works well for our given \ac{g2p} task. The idea is now, that we model the joint-probability of the input graphemes and output phonemes or rather our graphones. Doing this we can use the \ac{em} algorithm to find a mapping of graphemes to phonemes that is most probable. As those graphones consist of n-grams of both the input and output sequence, they themselves can be considered a n-grams which is why those models are sometimes referred to as n-gram models \citep{ney-joint-sequence2008, lo-nicolai-2021-linguistic}.
 
@@ -111,58 +112,70 @@ Neural G2P models have been reported to outperform most other models \citep{Lee&
 Generally, there is a difference between models that assume conditional independence between each output step (e.g. Hidden Markov Models) and there are models that do not make this assumption but condition the current output on the entire sequence before. Depending on what model type is used as encoder or decoder considering the entire preceding input can get tricky if the input sequence is really long. This is true especially for \ac{rnn} models. Apart form that, \ac{s2s} models have to wait until the full input sequence is processed before they can start decoding. This does not work well for input that gets continuously longer \citep{Kostadinov.2019, DBLP:journals/corr/SutskeverVL14}. 
 
 \subparagraph{RNN}
-The important intuition about \acp{rnn} is that they process each unit of an input sequence one unit at a time. In our case, we can think of one unit as one grapheme in the input sequence. This sequential processing is crucial as it means that each unit gets information about the units preceding it. This makes sure that information about the preceding context is included. The output of such an \ac{rnn} is therefore a manipulated version of the input sequence of the same length.
+The important intuition about \acp{rnn} is that they process each unit of an input sequence one unit at a time. In our case, we can think of one unit as one grapheme in the input sequence. Instead of only outputting something at each time step, a hidden representation is passed on to be processed in the next time step. This sequential processing is crucial as it means that each unit gets information about the units preceding it. This makes sure that information about the preceding context is included. The output of such an \ac{rnn} is therefore a manipulated version of the input sequence of the same length.
 A special kind of \ac{rnn} is the LSTM. LSTM means long short-term memory. As their name suggests they include what we could call a memory. Instead of just adding some representation of the preceding units at each time step, LSTMs can more flexibly decide what information is added and what information should be forgotten \citep{Olah.29.01.2022, Kostadinov.2017}.
 Many earlier neural LSTM models use a connectionist temporal classification layer to include alignment information \citep{lo-nicolai-2021-linguistic}. This is a special methodology that can deal with n-to-m alignments which is the case in \ac{g2p} modelling.
 
 \subparagraph{Transformer}
-Transformers are \ac{s2s} models as well. 
+Transformers are \ac{s2s} models as well. A central concept and what makes transformers powerful models is their self-attention mechanism. Also, they can process the entire input sequence in one go such that each unit is processed by a separate part of the model instead of just using the same cell for every unit. This allows to have dependencies between the different input units which means that we can model any dependencies within a sentence or a grapheme sequence. This is the reason why we call it \textit{self}-attention as the attention is focused on other parts of the input sequence, but still on the sequence itself \citep{Alammar.03.01.2022}.
 
 \subparagraph{Neural Transducer}
 Neural transducers, as presented by \citet{jaitly2016neural}, extend previously used \ac{s2s} models. They can treat more arriving input without having to redo the entire calculation for the entire updated sequence. At each time step, the neural transducer can output zero to many output symbols. 
 
 
-\section{SIGMORPHON shared tasks}
+\begin{landscape}
+
+\thispagestyle{empty}
+\begin{figure}[h]
+\vspace*{-2.8cm}
+    \begin{center}
+    \hspace*{-2cm}
+      \includegraphics[page=1,width=1.1\linewidth]{SOTA.pdf}
+    \end{center}
+  \end{figure}
+ \end{landscape}
+ 
+\begin{landscape}
+\begin{figure}[h]
+  \thispagestyle{empty}
+\vspace*{-2.8cm}
+    \begin{center}
+    \hspace*{-2cm}
+      \includegraphics[page=2,width=1.1\linewidth]{SOTA.pdf}
+    \end{center}
+    \stepcounter{myfigure}
+    \vspace*{-1.5cm}
+    \caption[State-of-the-art models]{The table lists the SOTA models from the SIGMORPHON tasks in 2020 and 2021.}
+    \label{fig:sota_table_long}
+  \end{figure}
+ \end{landscape}
+ 
+\section{State-of-the-art G2P models}
 \label{section:sig}
-The \ac{sigm} \citep{Sigmorphon.2021} regularly organizes shared tasks concerned with morphology and phonology. For the years 2020 and 2021 they organized a \ac{g2p} conversion task \citep{Ashby&Bartley.2021, gorman-etal-2020-sigmorphon}. The tasks represent a first attempt at creating benchmarks for multilingual \ac{g2p} conversion. Although there is other research on \ac{g2p}, many recent publications have been made within the \ac{sigm} shared tasks. As the \ac{sigm} tasks are the most recent and probably most influential contributions to \ac{g2p} research, both tasks will be discussed below. 
+As I have to decide what model I will use to train on my language set, I will now have a look at the state-of-the-art models that can be used for \ac{g2p} conversion.  
+The \ac{sigm} \citep{Sigmorphon.2021} regularly organizes shared tasks concerned with morphology and phonology. For the years 2020 and 2021 they organized a \ac{g2p} conversion task \citep{Ashby&Bartley.2021, gorman-etal-2020-sigmorphon}. The tasks represent a first attempt at creating benchmarks for multilingual \ac{g2p} conversion. Although there is other research on \ac{g2p}, many recent publications have been made within the \ac{sigm} shared tasks. 
+In the next sections, I will summarize the results and insights from \ac{g2p} research.
 
-\citet{yu-etal-2020} contributed to the 2020 \ac{sigm} \ac{g2p} task. Their contribution is of particular interest for this thesis as it proposes a data augmentation model for low-resource settings. As there are many languages in the corpus that have only very little available data, such a model could be of great use. The methodology applied in their approach is ensemble learning combined with a self-learning strategy. \review{finish summary on 2020 sig task}
+\subsection{Model architectures}
+An essential part of \ac{g2p} modelling is the actual model. In section \ref{model_theory} I explained the most important theoretical basics. For this part here, I familiarized myself a bit more with works well in practice and what some concrete problems are. 
 
+\subparagraph{Ensembles}
+Many models that are used and achieve peek performance for \ac{g2p} modelling are ensemble models. An ensemble is essentially just a pool of different models that are trained on the data with different settings or they are completely different models. The way such a model can be used for inference is that all of the models process the input and present their predicted results. Out of all possibilities, one prediction will be chosen that is then the final model output. In order to get the final output, an ensemble needs some kind of decision algorithm to output the best result. A disadvantage of ensembles is that the models need a lot of storage. Also, it is to some extent a bit of a \textit{brute-force} approach as it could lead to preferring quantity over quality. 
 
-The second iteration of this \ac{g2p} task attempts at outperforming the models of the previous task. An additional challenge is its separation into high-, medium- and low-resource languages. This reflects the needs of this present research well, as many languages in the corpus are low resource languages. In preparation for the task, the WikiPron data (see chapter \ref{chap:2_data}) was cleaned to exclude foreign words that include phones that are not in the actual language's native phone inventory. If a word contained foreign phones, it was excluded. This was the case for words whose pronunciation was not adapted to the language at hand but the transcription of the foreign language was used. This cleaning was only applied to medium- and low-resource languages. Additionally, the lists were sorted according to scripts. There are many languages that use multiple scripts and using them in the same dataset does not produce good results. There were other steps done to ensure good quality of the datasets. I collected more on that subject in section \ref{data_qual}. 
-The final datasets have to following sizes: The high-resource subtask consisted of about 41,000 word-transcription pairs of American English only. The medium-resource task provided 10,000 word-transcription pairs for ten languages and the low-resource task another 1,000 for ten different languages \citep{Ashby&Bartley.2021}. The datasets were split into 80\% training data, 10\% development data and another 10\% test data. 
+\subparagraph{Learning edit actions}
+Instead of learning the output phoneme sequence, a model can also learn how to edit the input sequence in order to get the output sequence. such a model would then output an edit sequence which can be applied to the input sequence in order to obtain the final phoneme output. The model therefore learns to create sequences of edit actions. The problem with this approach is that there are many possible sequences of edit actions that produce the same result. For example, it is always correct to delete every unit in the input sequence and then insert every unit from the output sequence. Imitation learning is proposed as a solution for this problem. \review{explain imitation learning better and more precise}. 
 
-The baseline for this year's G2P task is an adapted version of last year's submission by \citet{makarov-clematide-2020-cluzh}. The baseline model has been made available for this year's task. The model they use is a neural transducer that is trained with imitation learning. The basis of the neural transducer was originally designed for morphological inflection \citep{Aharoni&Goldberg.2016}. Instead of just learning to output the correct string, the model learns to produce an optimal sequence of edit actions needed to transform the input string into the output string. Due to the nature of inflection (overlapping alphabets of input and output sequences), the original model was encouraged to copy the input. This does not work well for G2P tasks as the input and the output alphabet are not always the same (especially for non-Latin scripts like Korean). \review{explain neural transducer, the model more in depth}.
+\subparagraph{Multi-task learning}
+What has worked well for Yac{g2p} models is to use multi-task learning. This means that the model is not only trained on one task but on multiple tasks that are related. In the present case, a model was trained on phoneme-to-grapheme conversion as well. \citep{gorman-etal-2020-sigmorphon}
 
-\citet{lo-nicolai-2021-linguistic} chose to perform an error analysis on the baseline and try to minimize the frequent errors for the low-resource setting only. The analysis showed that often the model gets vowels and diacritics wrong. The extended the baseline in a way such that wrong vowel and diacritics predictions are punished more than other errors. This model outperformed the baseline for some languages (ice, khm, lav, mlt, slv) and was level for another (ady). The predictions with their model, shows an improvement in vowel prediction. A further analysis showed that many errors still happen with vowels. Vowels get often confused with similar vowels. Their conclusion is that many of these errors make sense in a linguistic sense.   
-They also tested augmenting the input data with syllable boundaries and using the baseline model as-is which did not improve the results. 
+\subparagraph{Neural models}
+Not surprisingly, models that achieve peek performance are almost exclusively neural models. Due to their ability to process increasingly longer sequences and the above discussed techniques like attention, the are ideal for almost all \ac{nlp} tasks.
 
-As explained above, the model learns to create sequences of edit actions. The problem with this approach is that there are many possible sequences of edit actions that produce the same result. Imitation learning is proposed as a solution for this problem. \review{explain imitation learning better and more precise}. 
+\subsection{Data manipulation}
+A model is only as good as the data that is used to train it. While this is a very basic paradigm, in reality assuring data quality is not always easy. In this section I list a few strategies that are used preprocess and prepare \ac{g2p} data and deal with too little available data. 
 
-\subparagraph{Results}
-\review{add 2020 results}
-The results of the 2021 task show that there are great differences in languages. One possible explanation is that the datasets were a mix between broad and narrow transcriptions. As narrow transcriptions contain much more detail, it can be argued that this is more difficult for any system. The authors doubt the influence of this but they could not (yet) quantify this impression. 
-
-Results in the low-resource setting are still worse compared to the medium-resource setting. This means that current systems seem to be unable to achieve a good performance when only using 800 samples for training. More research needs to be done in data augmentation techniques and improving the systems to cope with only little available data.
-
-The differing performance for various languages calls for the questions what makes a language hard to pronounce. Especially as for Georgian which was in the medium-resource setting all submissions and the baseline reached a \ac{wer} of $0.0$. Interestingly enough, the \ac{wer} for the language in the high-resource setting, English, reached one of the highest \ac{wer}s.
-
-  
-\subparagraph{Error analysis}
-\review{add 2020 error analysis}
-In order to find the most common errors of the systems, there were two types of analysis conducted. The first one is to simply find the most common wrongly transcribed grapheme-phoneme pairs. This analysis showed that many errors are due to language internal ambiguities. Some errors go back to errors or inconsistency in the data. 
-The other type of analysis is to create a covering grammar. This means that a grammar is created that includes all possible combinations of grapheme-to-phoneme mappings that are allowed in this language. This set is constructed manually. This error analysis was only conducted for three languages in the medium setting and four of the low-resource languages. Then, words were considered that were predicted wrongly by the system. For those words it was checked whether the prediction by the system was completely wrong or if it was one of many possible transcriptions of that word. If so, the error was that system did not guess the correct transcription for this word. These errors could be considered ambiguities in the language. Another error type that can be identified by this analysis is when the reference transcription cannot be derived from the covering grammar. This can either mean that the covering grammar is incomplete or that the reference is a word that is very atypical for the language (e.g. borrowed word but not yet adapted to pronunciation rules) or simply wrong. 
-
-\section{CMUSphinx}
-\label{sec:cmu}
-This model has been used in the \ac{sigm} task. It was not used on many language but promised a good performance which is why I decided to use this model for this present thesis. \review{add explanation of model}
-
-Attention: \href{https://papers.nips.cc/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html}{link to paper}
-TEnsorflow: \href{https://arxiv.org/abs/1603.04467}{link to paper}
-
-\section{Data quality}
+\subparagraph{Data quality}
 \label{data_qual}
-\review{not sure where to put this, but I think it makes sense to have a separate section on data quality. Most papers include some things}
 Data quality is crucial in any machine learning application. Authors mostly include a section about their preprocessing and what should be done to ensure high quality datasets. The list given below is an incomplete list of potential problems and measures taken in different settings for \ac{g2p} data:
 
 \begin{itemize}
@@ -178,7 +191,44 @@ Data quality is crucial in any machine learning application. Authors mostly incl
 
 Especially the task of finding errors in the transcriptions is quite tricky. It requires a lot of knowledge about the phonology and phonetics of a specific language. 
 
-\section{Unicode and the \ac{ipalpha}}
+\subparagraph{Low-resource setting}
+Apart from a few well-studied examples, for most languages there is only little data available. It is therefore highly interesting and important to find solutions of how to deal with lack of data. \cite{hammond-2021-data} submitted a system to the 2021 SIGMORPHON edition focusing on data augmentation methods. The primary goal of their approach was to test how successful a minimalist data augmentation model would be, knowing it would most probably not outperform any of the other models. They identified two approaches that might improve low-resource models. The first one is to use as much as possible of the development set for training. The second, to train all languages together differentiating the languages only by a tag added to the word representations. The model they used was purposefully a very simple model that does not use a lot of resources. They used a \ac{s2s} neural net with a LSTM decoder and encoder. Both LSTMs have two levels. 
+
+\citet{yu-etal-2020} contributed to the 2020 \ac{sigm} \ac{g2p} task. Their contribution is of particular interest for this thesis as it proposes a data augmentation model for low-resource settings. As there are many languages in the corpus that have only very little available data, such a model could be of great use. The methodology applied in their approach is ensemble learning combined with a self-learning strategy. \review{finish summary on 2020 sig task}
+
+Results in the low-resource setting are still worse compared to the medium-resource setting. This means that current systems seem to be unable to achieve a good performance when only using 800 samples for training. More research needs to be done in data augmentation techniques and improving the systems to cope with only little available data.
+
+
+\subsection{Error and result analysis}
+In this section I will list different types of analysis that have been performed to improve the models further. Some of them work, some do not.
+\review{add 2020 results}
+\subparagraph{Broad and narrow transcriptions}
+In the \ac{sigm} tasks, there are great differences in the performance of models for different languages. One possible explanation is that the datasets were a mix between broad and narrow transcriptions. As narrow transcriptions contain much more detail, it can be argued that this is more difficult for any system \citep{Ashby&Bartley.2021}. This assumption still needs to be analysed more closely. This differing performance for various languages calls for the questions what makes a language hard to pronounce. Especially as for Georgian all models from the \ac{sigm} task reached a \ac{wer} of $0.0$. Interestingly enough, the \ac{wer} for the language in the high-resource setting, English, reached one of the highest \ac{wer}s.
+
+\subparagraph{Linguistic analysis} \citet{lo-nicolai-2021-linguistic} chose to perform an error analysis and try to minimize the frequent errors of a model in a multilingual low-resource setting. The analysis showed that often the model gets vowels and diacritics wrong. They extended the model in a way such that wrong vowel and diacritics predictions are punished more than other errors. Compared with the unchanged model, this extended model reached a better performance for some languages. The predictions with their model shows an improvement in vowel prediction. A further analysis showed that many errors still happen with vowels. Vowels get often confused with similar vowels. Their conclusion is that many of these errors make sense in a linguistic sense. They also tested augmenting the input data with syllable boundaries which did not improve the results. 
+
+Another type of linguistic analysis that can be performed is to analyse the data and check for uncommon pronunciations or language internal ambiguities. If a model produces a lot of wrong output because of ambiguities or uncommon data, then this is not necessarily the models fault but just a language inherent inconsistency. As languages are generally ambiguous, this type of analysis is very insightful to find out about \textit{real} errors of the model. These are errors that could be derived from the data, but the model did not get there. \cite{Ashby&Bartley.2021} did such an analysis for the \ac{sigm} 2021 task which showed that many errors are due to language internal ambiguities.
+
+
+\subparagraph{Include linguistic information} What has been suggested by \cite{gorman-etal-2020-sigmorphon}, is to make use of phonetic resources or rule-based systems to improve the quality of current models.
+
+As is always the case with such research there are many different aspects that can be tuned in order to improve model results. For my thesis I will have a closer look at how we can use phonetic features to improve models. 
+
+
+%The second iteration of this \ac{g2p} task attempts at outperforming the models of the previous task. An additional challenge is its separation into high-, medium- and low-resource languages. This reflects the needs of this present research well, as many languages in the corpus are low resource languages. 
+%The final datasets have to following sizes: The high-resource subtask consisted of about 41,000 word-transcription pairs of American English only. The medium-resource task provided 10,000 word-transcription pairs for ten languages and the low-resource task another 1,000 for ten different languages \citep{Ashby&Bartley.2021}. The datasets were split into 80\% training data, 10\% development data and another 10\% test data. 
+
+%The baseline for this year's G2P task is an adapted version of last year's submission by \citet{makarov-clematide-2020-cluzh}. The baseline model has been made available for this year's task. The model they use is a neural transducer that is trained with imitation learning. The basis of the neural transducer was originally designed for morphological inflection \citep{Aharoni&Goldberg.2016}. Instead of just learning to output the correct string, the model learns to produce an optimal sequence of edit actions needed to transform the input string into the output string. Due to the nature of inflection (overlapping alphabets of input and output sequences), the original model was encouraged to copy the input. This does not work well for G2P tasks as the input and the output alphabet are not always the same (especially for non-Latin scripts like Korean). \review{explain neural transducer, the model more in depth}.
+
+
+\section{CMUSphinx}
+\label{sec:cmu}
+This model has been used in the \ac{sigm} task. It was not used on many language but promised a good performance which is why I decided to use this model for this present thesis. \review{add explanation of model}
+
+Attention: \href{https://papers.nips.cc/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html}{link to paper}
+TEnsorflow: \href{https://arxiv.org/abs/1603.04467}{link to paper}
+
+\section{Unicode and the International Phonetic Alphabet}
 When it comes to representing characters in a machine-readable format things get very tricky, very quickly. In order to understand this fundamental problem it is necessary to understand the basic concept behind unicode and encodings in general. \citet{unicode-lingu} present a neat overview in their book. As discussed in chapter \ref{chap:ling-background}, there are many different kinds of what we typically call letters, graphemes, characters or signs\myfootnote{Please note that I will from now on use grapheme to denote the smallest meaningful element of any writing system. Grapheme does not imply any specific writing system nor does is take the Unicode background into consideration. If I wish to distinguish the Unicode specifications I will use the correct Unicode term as described in this section.}. Just as a human writer must be able to uniquely identify each different graphemes, so must a computer. The most widely spread standard to represent scripts is called Unicode. Graphemes are mapped to unique numbers that can be rendered differently depending on the font and the context. There are different stages of representation until a graphemes can be represented on screen:
 
 \begin{description}
@@ -215,7 +265,7 @@ It is crucial that all data files, be it phonetic or `normal' scripts, are forma
 \subsection{Normalization forms}
 The above explanations make clear that there are considerable differences in what a human reader perceives and in what happens in the background. Unicode therefore provides normalization forms that can help to 
 
-\subsection{\ac{ipalpha} segments}
+\subsection{IPA segments}
 For \ac{g2p} tasks it is necessary that phonemic transcriptions are split in some way or other as the models typically do not output entire texts but single phonemes. \citet{unicode-lingu} present three different levels of segmentation of Unicode strings:
 
 
@@ -231,9 +281,6 @@ In order to input phonemes to any kind of mathematics-based model, they need to 
 
 
 There are models that make use of such features vectors. An example of feature data can be found \href{https://github.com/uiuc-sst/g2ps}{here}.
-
-\section{Low-resource setting}
-Apart from a few well-studied examples, for most languages there is only little available data. It is therefore highly interesting and important to find solutions of how to deal with lack of data. \cite{hammond-2021-data} submitted a system to the 2021 SIGMORPHON edition focusing on data augmentation methods. The primary goal of their approach was to test how successful a minimalist data augmentation model would be, knowing it would most probably not outperform any of the other models. They identified two approaches that might improve low-resource models. The first one is to use as much as possible of the development set for training. The second to train all languages together differentiating the languages only by a tag added to the word representations. The model they used was purposefully a very simple model that does not use a lot of resources. They used a \ac{s2s} neural net with a LSTM decoder and encoder. Both LSTMs have two levels. 
 
 
 \section{Random background}

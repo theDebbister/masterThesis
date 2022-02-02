@@ -41,7 +41,7 @@ For languages where the type of the transcriptions was unclear but two lists for
 \end{center}
 \end{table}
 
-\section{Automatic \ac{g2p}}
+\section{Automatic grapheme-to-phoneme}
 The model that I am using for my \ac{g2p} experiments is explained in section \ref{sec:cmu}. Setting it up was not very easy as there were issues with the tensorflow version and some other dependencies. Also, they do have a pre-trained model, but this uses a completely different transcription convention than IPA. So we cannot use this model. But to test the model and have a baseline, we trained in on the data we have, to see how it performs. As there is only very little data available as full texts, we decided to use the short stories as test set for the experiments with \ac{g2p} models. Those texts are all manually created and are specifically created by linguists for the purpose of studying phonetics of many languages. 
 
 \subsection{Training settings}

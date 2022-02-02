@@ -48,7 +48,7 @@ macro medium	  &       &      &       &      &       &      &       &       &   
 \end{tabularx}
 }
 
-
+\thispagestyle{empty}
 
 {\small
 \noindent
@@ -56,7 +56,7 @@ Superscript numbers denote model numbers. Numbers in bold denote best model for 
 
 \noindent
 \textbf{BS20:} \href{https://aclanthology.org/2020.sigmorphon-1.2/}{\underline{Link}}\\
-\textbf{DeepSPIN:} Transformer- or LSTM-based enc-dec seq2seq models with sparse attention. Add language embedding to enc and dec states instead of language token. They did not report any results on the languages separately. Neither are the PER scores available. \href{https://aclanthology.org/2020.sigmorphon-1.4/}{\underline{Link}}\\
+\textbf{DeepSPIN:} Transformer- or LSTM-based enc-dec seq2seq models with sparse attention. Add language embedding to enc and dec states instead of language token. The WER scores are not available for all languages. Neither are the PER scores available. \href{https://aclanthology.org/2020.sigmorphon-1.4/}{\underline{Link}}\\
 \textbf{IMS:} Self training ensemble of one n-gram-based FST and 3 seq2seq (vanilla with attention, hard monotonic attention with pointer, hybrid of hard monotonic attention and tagging model) \href{https://aclanthology.org/2020.sigmorphon-1.5/}{\underline{Link}} \\
 \textbf{BS21:} similar to CL21 \href{https://aclanthology.org/2021.sigmorphon-1.13/}{\underline{Link}}\\
 \textbf{CL21:} LSTM-based neural transducer with pointer network-like monotonic hard attention trained with imitation learning 7 different, but still very similar ensembles of one model. \href{https://aclanthology.org/2021.sigmorphon-1.17/}{\underline{Link}}\\
