@@ -157,29 +157,32 @@ The \ac{sigm} \citep{Sigmorphon.2021} regularly organizes shared tasks concerned
 In the next sections, I will summarize the results and insights from \ac{g2p} research.
 
 \subsection{Model architectures}
-An essential part of \ac{g2p} modelling is the actual model. In section \ref{model_theory} I explained the most important theoretical basics. For this part here, I familiarized myself a bit more with works well in practice and what some concrete problems are. 
+An essential part of \ac{g2p} modelling is the actual model. In section \ref{model_theory} I explained the most important theoretical basics. For this part here, I familiarized myself a bit more with strategies that work well in practice and what some concrete problems are. The methodologies mentioned below are to the most part task-agnostic. This means that they often improve results on most \ac{nlp} tasks and are not specifically developed for the \ac{g2p} task. Still, I think it is insightful to be aware of the great variety of approaches that nowadays technology offers. 
 
 \subparagraph{Ensembles}
 Many models that are used and achieve peek performance for \ac{g2p} modelling are ensemble models. An ensemble is essentially just a pool of different models that are trained on the data with different settings or they are completely different models. The way such a model can be used for inference is that all of the models process the input and present their predicted results. Out of all possibilities, one prediction will be chosen that is then the final model output. In order to get the final output, an ensemble needs some kind of decision algorithm to output the best result. A disadvantage of ensembles is that the models need a lot of storage. Also, it is to some extent a bit of a \textit{brute-force} approach as it could lead to preferring quantity over quality. 
 
 \subparagraph{Learning edit actions}
-Instead of learning the output phoneme sequence, a model can also learn how to edit the input sequence in order to get the output sequence. such a model would then output an edit sequence which can be applied to the input sequence in order to obtain the final phoneme output. The model therefore learns to create sequences of edit actions. The problem with this approach is that there are many possible sequences of edit actions that produce the same result. For example, it is always correct to delete every unit in the input sequence and then insert every unit from the output sequence. Imitation learning is proposed as a solution for this problem. \review{explain imitation learning better and more precise}. 
+Instead of learning the output phoneme sequence, a model can also learn how to edit the input sequence in order to get the output sequence. Such a model would then output an edit sequence which can be applied to the input sequence in order to obtain the final phoneme output. The model therefore learns to create sequences of edit actions. The problem with this approach is that there are many possible sequences of edit actions that produce the same result. For example, it is always correct to delete every unit in the input sequence and then insert every unit from the output sequence. But this does not tell us anything about how graphemes and phonemes relate. To this end, we would also want to use substitution actions to see whether one grapheme is always substituted by the same phoneme. Imitation learning is proposed as a solution for this problem. Easily put, imitation learning is a variant of reinforcement learning. The idea is that the model learns to imitate the behaviour of an expert (for example, a human expert that provides correct samples of the task in question) \citep{Ai.2019}. 
 
 \subparagraph{Multi-task learning}
-What has worked well for Yac{g2p} models is to use multi-task learning. This means that the model is not only trained on one task but on multiple tasks that are related. In the present case, a model was trained on phoneme-to-grapheme conversion as well. \citep{gorman-etal-2020-sigmorphon}
+What has worked well for \ac{g2p} models is to use multi-task learning. This means that the model is not only trained on one task but on multiple tasks that are related. In the present case, a model was trained on phoneme-to-grapheme conversion as well \citep{gorman-etal-2020-sigmorphon}.
 
 \subparagraph{Neural models}
-Not surprisingly, models that achieve peek performance are almost exclusively neural models. Due to their ability to process increasingly longer sequences and the above discussed techniques like attention, the are ideal for almost all \ac{nlp} tasks.
+Not surprisingly, models that achieve peek performance are almost exclusively neural models \citep{gorman-etal-2020-sigmorphon}. Due to their ability to process increasingly longer sequences and the above discussed techniques like attention, the are ideal for almost all \ac{nlp} tasks. What type of neural model is chosen also depends on the amount of data available. Transformers are suggested to work better for larger datasets, while they are outperformed by LSTMs on medium-size datasets (a few thousand training pairs) \citep{gorman-etal-2020-sigmorphon}.
+
+\subparagraph{Reduce vocabulary size}
+Some syllabary languages like Korean allow the decomposition into smaller units that make up the signs. Many other languages that do not use the Latin alphabet allow to be written with Latin letters. If a reduction of the vocabulary size is possible in one of these ways, it almost always improves performance as smaller vocabulary sizes are easier to handle for models \citep{gorman-etal-2020-sigmorphon}. 
 
 \subsection{Data manipulation}
-A model is only as good as the data that is used to train it. While this is a very basic paradigm, in reality assuring data quality is not always easy. In this section I list a few strategies that are used preprocess and prepare \ac{g2p} data and deal with too little available data. 
+A model is only as good as the data that is used to train it. While this is a very basic paradigm, in reality assuring data quality is not always easy. In this section I list a few strategies that are used to preprocess and prepare \ac{g2p} data and how to deal with too little available data. 
 
 \subparagraph{Data quality}
 \label{data_qual}
-Data quality is crucial in any machine learning application. Authors mostly include a section about their preprocessing and what should be done to ensure high quality datasets. The list given below is an incomplete list of potential problems and measures taken in different settings for \ac{g2p} data:
+Authors mostly include a section about their preprocessing and what should be done to ensure high quality datasets. The list given below is an incomplete list of potential problems and measures taken in different settings for \ac{g2p} data:
 
 \begin{itemize}
-\item \textbf{Exclusion of words with less than two Unicode characters or less than two phone segments} \citep{Ashby&Bartley.2021} \review{add an explanation}
+\item \textbf{Exclusion of words with less than two Unicode characters or less than two phone segments} \citep{Ashby&Bartley.2021} 
 \item \textbf{Separation by script} \citep{Ashby&Bartley.2021}: It is very straightforward why this is done. There is no obvious connection between the different scripts of a language and its pronunciation. It makes sense to treat different scripts as different languages. 
 \item \textbf{Exclude foreign words with foreign pronunciations} \citep{Ashby&Bartley.2021}: Foreign words in a language with their original pronunciation can add phonemes that are not in that language's phoneme inventory. If they were to be included it would make sense to include a pronunciation adapted to the actual language.
 \item \textbf{Words with multiple pronunciations in word lists}: \cite{Ashby&Bartley.2021} excluded those words, however, it might also be possible to add \ac{pos} tags or other linguistic information to distinguish these words.
@@ -194,39 +197,30 @@ Especially the task of finding errors in the transcriptions is quite tricky. It 
 \subparagraph{Low-resource setting}
 Apart from a few well-studied examples, for most languages there is only little data available. It is therefore highly interesting and important to find solutions of how to deal with lack of data. \cite{hammond-2021-data} submitted a system to the 2021 SIGMORPHON edition focusing on data augmentation methods. The primary goal of their approach was to test how successful a minimalist data augmentation model would be, knowing it would most probably not outperform any of the other models. They identified two approaches that might improve low-resource models. The first one is to use as much as possible of the development set for training. The second, to train all languages together differentiating the languages only by a tag added to the word representations. The model they used was purposefully a very simple model that does not use a lot of resources. They used a \ac{s2s} neural net with a LSTM decoder and encoder. Both LSTMs have two levels. 
 
-\citet{yu-etal-2020} contributed to the 2020 \ac{sigm} \ac{g2p} task. Their contribution is of particular interest for this thesis as it proposes a data augmentation model for low-resource settings. As there are many languages in the corpus that have only very little available data, such a model could be of great use. The methodology applied in their approach is ensemble learning combined with a self-learning strategy. \review{finish summary on 2020 sig task}
+\citet{yu-etal-2020} propose a data augmentation model for low-resource settings. The methodology applied in their approach is ensemble learning combined with a self-learning strategy. They use their ensemble to make predictions on unlabelled data. This newly created data is then added to the training data and the models are trained for another epoch on the extended data. This strategy worked well and produced good results. 
 
-Results in the low-resource setting are still worse compared to the medium-resource setting. This means that current systems seem to be unable to achieve a good performance when only using 800 samples for training. More research needs to be done in data augmentation techniques and improving the systems to cope with only little available data.
+Results in a low-resource setting are still bad when only using 800 samples for training. More research needs to be done in data augmentation techniques and improving the systems to cope with only little available data.
 
 
 \subsection{Error and result analysis}
-In this section I will list different types of analysis that have been performed to improve the models further. Some of them work, some do not.
-\review{add 2020 results}
-\subparagraph{Broad and narrow transcriptions}
-In the \ac{sigm} tasks, there are great differences in the performance of models for different languages. One possible explanation is that the datasets were a mix between broad and narrow transcriptions. As narrow transcriptions contain much more detail, it can be argued that this is more difficult for any system \citep{Ashby&Bartley.2021}. This assumption still needs to be analysed more closely. This differing performance for various languages calls for the questions what makes a language hard to pronounce. Especially as for Georgian all models from the \ac{sigm} task reached a \ac{wer} of $0.0$. Interestingly enough, the \ac{wer} for the language in the high-resource setting, English, reached one of the highest \ac{wer}s.
+In this section I will list different types of analysis that have been performed on a trained model to improve future research.
 
-\subparagraph{Linguistic analysis} \citet{lo-nicolai-2021-linguistic} chose to perform an error analysis and try to minimize the frequent errors of a model in a multilingual low-resource setting. The analysis showed that often the model gets vowels and diacritics wrong. They extended the model in a way such that wrong vowel and diacritics predictions are punished more than other errors. Compared with the unchanged model, this extended model reached a better performance for some languages. The predictions with their model shows an improvement in vowel prediction. A further analysis showed that many errors still happen with vowels. Vowels get often confused with similar vowels. Their conclusion is that many of these errors make sense in a linguistic sense. They also tested augmenting the input data with syllable boundaries which did not improve the results. 
+\subparagraph{Broad and narrow transcriptions}
+In the \ac{sigm} tasks, there are great differences in the performance of models for different languages. One possible explanation is that the datasets were a mix between broad and narrow transcriptions. As narrow transcriptions contain much more detail, it can be argued that this is more difficult for any system \citep{Ashby&Bartley.2021}. This assumption still needs to be analysed more closely. This differing performance for various languages calls for the questions what makes a language hard to pronounce. Especially as for Georgian all models from the \ac{sigm} task reached a \ac{wer} of $0.0$. Interestingly enough, the \ac{wer} for the language in the high-resource setting, English, reached one of the highest \acp{wer}.
+
+\subparagraph{Linguistic error analysis} \citet{lo-nicolai-2021-linguistic} chose to perform an error analysis and try to minimize the frequent errors of a model in a multilingual low-resource setting. The analysis showed that often the model gets vowels and diacritics wrong. They extended the model in a way such that wrong vowel and diacritics predictions are punished more than other errors. Compared with the unchanged model, this extended model reached a better performance for some languages. The predictions with their model shows an improvement in vowel prediction. A further analysis showed that many errors still happen with vowels. Vowels get often confused with similar vowels. Their conclusion is that many of these errors make sense in a linguistic sense. They also tested augmenting the input data with syllable boundaries which did not improve the results. 
 
 Another type of linguistic analysis that can be performed is to analyse the data and check for uncommon pronunciations or language internal ambiguities. If a model produces a lot of wrong output because of ambiguities or uncommon data, then this is not necessarily the models fault but just a language inherent inconsistency. As languages are generally ambiguous, this type of analysis is very insightful to find out about \textit{real} errors of the model. These are errors that could be derived from the data, but the model did not get there. \cite{Ashby&Bartley.2021} did such an analysis for the \ac{sigm} 2021 task which showed that many errors are due to language internal ambiguities.
 
 
-\subparagraph{Include linguistic information} What has been suggested by \cite{gorman-etal-2020-sigmorphon}, is to make use of phonetic resources or rule-based systems to improve the quality of current models.
+\subparagraph{Include linguistic information} What has been suggested by \cite{gorman-etal-2020-sigmorphon}, is to make use of phonetic resources or rule-based systems to improve the quality of current models. The advantage of such an approach is that it is specifically tailored to the problem at hand and not at all task-agnostic. \cite{makarov-clematide-2020-cluzh} confirm this suggestion as they performed an error analysis which showed that including linguistic information such as \ac{pos}-tags might be useful. 
 
 As is always the case with such research there are many different aspects that can be tuned in order to improve model results. For my thesis I will have a closer look at how we can use phonetic features to improve models. 
 
 
-%The second iteration of this \ac{g2p} task attempts at outperforming the models of the previous task. An additional challenge is its separation into high-, medium- and low-resource languages. This reflects the needs of this present research well, as many languages in the corpus are low resource languages. 
-%The final datasets have to following sizes: The high-resource subtask consisted of about 41,000 word-transcription pairs of American English only. The medium-resource task provided 10,000 word-transcription pairs for ten languages and the low-resource task another 1,000 for ten different languages \citep{Ashby&Bartley.2021}. The datasets were split into 80\% training data, 10\% development data and another 10\% test data. 
-
-%The baseline for this year's G2P task is an adapted version of last year's submission by \citet{makarov-clematide-2020-cluzh}. The baseline model has been made available for this year's task. The model they use is a neural transducer that is trained with imitation learning. The basis of the neural transducer was originally designed for morphological inflection \citep{Aharoni&Goldberg.2016}. Instead of just learning to output the correct string, the model learns to produce an optimal sequence of edit actions needed to transform the input string into the output string. Due to the nature of inflection (overlapping alphabets of input and output sequences), the original model was encouraged to copy the input. This does not work well for G2P tasks as the input and the output alphabet are not always the same (especially for non-Latin scripts like Korean). \review{explain neural transducer, the model more in depth}.
-
-
 \section{CMUSphinx}
 \label{sec:cmu}
-This model has been used in the \ac{sigm} task. It was not used on many language but promised a good performance which is why I decided to use this model for this present thesis. \review{add explanation of model}
-
-Attention: \href{https://papers.nips.cc/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html}{link to paper}
-TEnsorflow: \href{https://arxiv.org/abs/1603.04467}{link to paper}
+For my personal experiments, I decided to use the CMUSphinx \ac{s2s} \ac{g2p} model. This model has been used in the \ac{sigm} task. It was not used on many languages but promised a good performance which is why I decided to use this model for this present thesis. the CMUSphinx model is a transformer-based ac{as2s} model implemented with tensorflow. There exists a pre-trained version of the model for ac{g2p}, however, they use a transcription format other than \ac{ipalpha} which means it cannot be used for our dataset \citep{GitHub.03.02.2022}. 
 
 \section{Unicode and the International Phonetic Alphabet}
 When it comes to representing characters in a machine-readable format things get very tricky, very quickly. In order to understand this fundamental problem it is necessary to understand the basic concept behind unicode and encodings in general. \citet{unicode-lingu} present a neat overview in their book. As discussed in chapter \ref{chap:ling-background}, there are many different kinds of what we typically call letters, graphemes, characters or signs\myfootnote{Please note that I will from now on use grapheme to denote the smallest meaningful element of any writing system. Grapheme does not imply any specific writing system nor does is take the Unicode background into consideration. If I wish to distinguish the Unicode specifications I will use the correct Unicode term as described in this section.}. Just as a human writer must be able to uniquely identify each different graphemes, so must a computer. The most widely spread standard to represent scripts is called Unicode. Graphemes are mapped to unique numbers that can be rendered differently depending on the font and the context. There are different stages of representation until a graphemes can be represented on screen:
@@ -248,7 +242,7 @@ It is striking that these two look exactly the same. Things like this become imp
 Unicode code points are often organized in blocks. A block can, for example, contain all letters of the Latin script. Those blocks are helpful although not always consistent. The \ac{ipalpha} is represented in a basic block but many \ac{ipalpha} symbols are actually found in other blocks. Confusion often arises from the fact, that one human-perceived grapheme is sometimes represented as more than one code point. 
 
 \begin{description}
-\item[\textsc{Grapheme clusters}] A grapheme cluster is one visual letter that is represented in Unicode as more than one code point. This is the case for diacritic marks. Diacritic marks like
+\item[\textsc{Grapheme clusters}] A grapheme cluster is one visual letter that is represented in Unicode as more than one code point. This is the case for diacritic marks. A problem with grapheme clusters is that some diacritic marks, so marks that cannot really exists without any base character are underspecified. This means that when we want to split into clusters, we do not know if that character belongs to the left or the right base character. This is the case for many characters in the \ac{ipalpha}. Unicode does not specify these but leaves it to the user to create tailored grapheme clusters. 
 \item[\textsc{Precomposed characters}] Note that sometimes, grapheme clusters can be precomposed and the combination of those two or more characters is assigned a new number. These clusters can be problematic if in a specific context, the graphemes should not be clustered but read separately. An example is the German `ä'. 
 \end{description} 
 
@@ -262,25 +256,23 @@ For the present thesis, this topic is relevant for multiple reasons:
 
 It is crucial that all data files, be it phonetic or `normal' scripts, are formatted and read correctly. Or rather that the encoding and processing is made transparent as often there is not one correct way of how to treat \ac{ipalpha} characters. 
 
-\subsection{Normalization forms}
-The above explanations make clear that there are considerable differences in what a human reader perceives and in what happens in the background. Unicode therefore provides normalization forms that can help to 
+\subsection{Unicode normalization forms}
+The above explanations make clear that there are considerable differences in what a human reader perceives and in what happens in the background. Unicode therefore provides normalization forms that can help to process written data.  Unicode publishes extensive explanations along with their standards which also includes those normalization forms. I will therefore not explain everything in full detail as this is done so already online \citep{Unicode.27.08.2021}. What is important is that each normalization form results in very different behaviour if a text is processes. There are two important aspects to normalization. One is that we can have decomposed or composed characters. The second is that we have a compatibility form and a non-compatibility form. In a decomposed string, we split the characters into their individual components. This means that characters with diacritics are split up into two or more characters. This means that a characters that had originally assigned one code point can in a decomposed form have more than one code points. In a composed normalization usually precomposed forms are kept. This means that some parts can be similar or the same to the decomposed version but if for a character there exists a precomposed version, this one is usually used. If a normalization is according to compatibility decomposition, this means that any formatting is removed such that we receive the underlying character in its original form. Superscript characters are then shown normal. How exactly these normal forms work is not always equally important, but what is absolutely crucial to make sure that when characters are compared or counted, the same normalization form is used.  The names for these normalization form are as follows:
 
-\subsection{IPA segments}
-For \ac{g2p} tasks it is necessary that phonemic transcriptions are split in some way or other as the models typically do not output entire texts but single phonemes. \citet{unicode-lingu} present three different levels of segmentation of Unicode strings:
-
-
-
-They also present a python library called \textit{segments} in their book that can be used to segment Unicode strings. 
-
-\review{summarize everything from Steve's emails and your notes from the meetings.}
- 
-
-\section{Representing phonemes}
-\label{phon-features}
-In order to input phonemes to any kind of mathematics-based model, they need to be represented numerically. Instead of representing the phoneme directly it is possible to represent one phoneme as a feature vector. This idea is not new as there is the idea that we can represent words as a vector of numbers which we then input to a model. Each number in that vector is what is called a \textit{feature}. \citet{tulkens-etal-2018-wordkit} note that a problem of such featurization is that the words are no longer comparable across different models as the words are possibly featurized in different ways. This is why the present a tool called \textit{WordKit} which is a Python library that allows to featurize words in a standardized way.
+\begin{description}
+\item[NFD] : Canonical Decomposition
+\item[NFC] : Canonical Decomposition, followed by Canonical composition
+\item[NFKD] : Compatibility Decomposition
+\item[NFKC] : Compatibility Decomposition, followed by Canonical Composition
+\end{description}
 
 
-There are models that make use of such features vectors. An example of feature data can be found \href{https://github.com/uiuc-sst/g2ps}{here}.
+%\section{Representing phonemes}
+%\label{phon-features}
+%In order to input phonemes to any kind of mathematics-based model, they need to be represented numerically. Instead of representing the phoneme directly it is possible to represent one phoneme as a feature vector. This idea is not new as there is the idea that we can represent words as a vector of numbers which we then input to a model. Each number in that vector is what is called a \textit{feature}. \citet{tulkens-etal-2018-wordkit} note that a problem of such featurization is that the words are no longer comparable across different models as the words are possibly featurized in different ways. This is why the present a tool called \textit{WordKit} which is a Python library that allows to featurize words in a standardized way.
+
+
+%There are models that make use of such features vectors. An example of feature data can be found \href{https://github.com/uiuc-sst/g2ps}{here}.
 
 
 \section{Random background}
