@@ -1,0 +1,649 @@
+eng_latn_uk_broad_filtered
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		continuant
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+h AA j AB ɪ̯ AB ɹ AB k AC t AC d AC ɡ AC l AD ɫ AD m AE n AF ŋ AF p AG b AG s AH z AH ʃ AH ʒ AH ð AH θ AH w AI ʊ̯ AI ʔ AJ a AK e AK i AK æ AK ɜ AK ɪ AK ə AK ɑ AK ɛ AK ʌ AK ɚ AK aː AL eː AL iː AL æː AL əː AL ɛː AL ɪː AL ɑː AL ɜː AL ɚː AL o AM u AM ɔ AM ʊ AM ɒ AM oː AN uː AN ɔː AN r BA f BB v BB ʍ BC m̩ BD n̩ BE l̩ BF 
+
+eng_latn_uk_narrow
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		continuant
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		loweredLarynxImplosive
+h AA ɦ AA j AB ɪ̯ AB j̥ AB ɹ AB e̯ AB ə̯ AB j̊ AB i̯ AB ɹ̥ AB k AC t AC d AC q AC ɡ AC d̪ AC t̪ AC kʲ AC tˤ AC t̠ AC d̠ AC d̥ AC kʰ AD tʰ AD kʲʰ AD t̠ʰ AD l AE l̥ AE l̪ AE ɫ AE m AF m̥ AF ɱ AF n AG ŋ AG nʲ AG n̪ AG n̠ AG p AH b AH kʷ AH pʷ AH b̥ AH pʰ AI s AJ x AJ z AJ ʃ AJ ʒ AJ ʁ AJ ç AJ ɻ AJ ð AJ θ AJ z̥ AJ w AK ʊ̯ AK ɥ AK w̥ AK u̯ AK ʔ AL dˀ AL a AM e AM i AM æ AM ɨ AM ɜ AM ɪ AM ə AM ɑ AM ɛ AM ɪ̈ AM ʌ AM ɘ AM ə̥ AM ä AM ɚ AM aː AN eː AN iː AN æː AN əː AN ɛː AN ɪː AN ɑː AN ɜː AN o BA u BA ø BA ɔ BA ʊ BA ɒ BA ɐ BA u̥ BA ʉ BA ʊ̈ BA ɵ BA ʏ BA oː BB uː BB ɔː BB o̞ː BB ʊː BB yː BB ʉː BB u̟ː BB pʼ BC r BD f BE v BE ɸ BE fʷ BE jː BF kː BG tː BG ĩː BH ɾ BI ɾ̪̊ BI ɛ̃ BJ æ̃ BJ ɪ̃ BJ ɑ̃ BJ ʌ̃ BJ ʍ BK m̩ BL n̩ BM ɔ̃ BN ʉ̃ BN l̩ CA r̩ CB ɽ̃ CC ɾ̃ CC ʊ̆ CD ʃʰ CE nʰ CF m̩ː CG 
+
+eng_latn_us_broad_filtered
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		continuant
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+h AA j AB ɪ̯ AB ɹ AB k AC t AC d AC ɡ AC l AD ɫ AD m AE n AF ŋ AF p AG b AG s AH z AH ʃ AH ʒ AH ð AH θ AH w AI ʊ̯ AI ʔ AJ a AK e AK i AK æ AK ɜ AK ɪ AK ə AK ɑ AK ɛ AK ʌ AK ɚ AK aː AL eː AL iː AL æː AL ɛː AL ɪː AL ɑː AL ɜː AL ɚː AL o AM u AM ɔ AM ʊ AM ɒ AM oː AN uː AN ɔː AN r BA f BB v BB ʍ BC m̩ BD n̩ BE l̩ BF 
+
+eng_latn_us_narrow
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		continuant
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		loweredLarynxImplosive
+h AA ɦ AA j AB ɪ̯ AB j̥ AB ɹ AB e̯ AB ə̯ AB j̊ AB i̯ AB ɹ̥ AB k AC t AC d AC q AC ɡ AC ɖ AC d̪ AC t̪ AC kʲ AC tˤ AC t̠ AC d̠ AC d̥ AC kʰ AD tʰ AD kʲʰ AD t̠ʰ AD l AE l̥ AE l̪ AE ɫ AE ɫ̥ AE m AF m̥ AF ɱ AF n AG ŋ AG nʲ AG n̪ AG n̠ AG p AH b AH kʷ AH pʷ AH b̥ AH pʰ AI s AJ x AJ z AJ ʃ AJ ʒ AJ χ AJ ʁ AJ ç AJ ɻ AJ ð AJ θ AJ ɕ AJ z̥ AJ w AK ʊ̯ AK w̥ AK u̯ AK ʔ AL dˀ AL a AM e AM i AM æ AM ɨ AM ɜ AM ɪ AM ə AM ɑ AM ɛ AM ɪ̈ AM ʌ AM ɘ AM ə̥ AM ɨ̞ AM ä AM ɪ̞ AM ɚ AM aː AN eː AN iː AN æː AN ɛː AN ɪː AN ɑː AN ɜː AN ɚː AN o BA u BA ø BA ɔ BA ʊ BA o̞ BA ɒ BA ɐ BA u̥ BA ʊ̈ BA ɵ BA ʏ BA ü BA ö̞ BA u̟ BA oː BB uː BB ɔː BB ɒː BB ʊː BB yː BB ʉː BB u̟ː BB pʼ BC r BD f BE v BE ɸ BE fʷ BE ɻʷ BE v̥ BE ə̆ BF ă BF jː BG ĩ BH ɛ̃ BH æ̃ BH ɪ̃ BH ə̃ BH ẽ BH ɑ̃ BH ɨ̃ BH ʌ̃ BH ĩː BI ə̃ː BI ʌ̃ː BI ɾ BJ ɽ BJ ɾ̪̊ BJ ʍ BK m̩ BL n̩ BM l̩ BN r̩ CA ɽ̃ CB ɾ̃ CB ŏ CC ɾʱ CD ʉ̃ CE ʃʰ CF nʰ CG ɑˑ CH m̩ː CI 
+
+fra_latn_broad_filtered
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+j AA k AB s AB t AB d AB z AB ɡ AB ʃ AB ʒ AB ʁ AB l AC m AD n AE ŋ AE ɲ AE p AF b AF f AF v AF w AG ɥ AG a AH e AH i AH ə AH ɑ AH ɛ AH o AI u AI y AI ø AI ɔ AI œ AI r AJ ɛː AK ɛ̃ AL ɑ̃ AL ɔ̃ AM œ̃ AM 
+
+ell_grek_broad_filtered
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		sonorant
+		continuant
+		delayedRelease
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		coronal
+		dorsal
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+k AA ɡ AA l AB m AC ɱ AC n AD p AE b AE s AF z AF ð AF θ AF t AG d AG ŋ AH a AI e AI i AI o AJ u AJ ʝ AK ç AK r AL x AM ɣ AM f AN v AN ɾ BA ɲ BB c BC ɟ BC ʎ BD i̯ BE 
+
+cmn_hani_broad
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		continuant
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+j AA ɪ̯ AA ə̯ AA k AB t AB d AB ɖ AB ʈ AB d̥ AB ɡ̊ AB kʰ AC tʰ AC l AD m AE n AF ŋ AF nʲ AF p AG b̥ AG pʰ AH s AI x AI z AI ʂ AI ʐ AI ɻ AI ɕ AI z̥ AI w AJ ʊ̯ AJ ɥ AJ a AK e AK i AK ɤ AK ə AK ɑ AK ɛ AK ä AK ɚ AK o AL u AL y AL ɔ AL ʊ AL ɔː AM f AN v AN ɻʷ AN m̩ BA æ̃ BB ɑ̃ BB ɤ̃ BB n̩ BC sʰ BD ɕʰ BD ʂʰ BD ʊ̃ BE nˀ BF ŋˀ BF z̩ BG iˀ BH uˀ BI 
+
+deu_latn_broad_filtered
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		continuant
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+h AA j AB ɪ̯ AB k AC t AC d AC ɡ AC ɡ̊ AC kʰ AD tʰ AD l AE m AF n AG ŋ AG p AH b AH b̥ AH pʰ AI s AJ x AJ z AJ ʃ AJ χ AJ ʁ AJ ç AJ ʔ AK a AL e AL i AL ɪ AL ə AL ɛ AL ɘ AL aː AM eː AM iː AM ɛː AM ɑː AM o AN u AN y AN ø AN ɔ AN ʊ AN ɐ AN œ AN ʏ AN oː BA uː BA ɔː BA ɒː BA øː BA œː BA yː BA r BB ʀ BB f BC v BC õ BD ɛ̃ BE ʊ̯ BF ʋ BF u̯ BF m̩ BG ŋ̩ BH n̩ BH l̩ BI 
+
+deu_latn_narrow
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		continuant
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+h AA ɦ AA j AB ɪ̯ AB e̯ AB ə̯ AB ɛ̯ AB i̯ AB k AC t AC d AC ɡ AC c AC kʲ AC d̥ AC ɡ̊ AC kʰ AD tʰ AD l AE l̥ AE ɫ AE l̺ AE m AF ɱ AF n AG ŋ AG ɲ AG n̺ AG p AH b AH b̥ AH pʰ AI s AJ ʝ AJ x AJ z AJ ħ AJ ʃ AJ ʒ AJ χ AJ ʁ AJ ç AJ θ AJ ɕ AJ ʑ AJ z̥ AJ w AK ʊ̯ AK ʋ AK o̯ AK u̯ AK ʔ AL a AM e AM i AM æ AM ɪ AM ə AM ɑ AM ɛ AM ʌ AM ɘ AM a̠ AM e̝ AM ä AM ɑ̈ AM aː AN eː AN iː AN ɛː AN ɪː AN ɑː AN ɑ̈ː AN äː AN o BA u BA y BA ø BA ɔ BA ʊ BA ɐ BA œ BA ɵ BA ʏ BA oː BB uː BB ɔː BB øː BB œː BB yː BB ʏː BB r BC ʀ BC r̺ BC f BD v BD ɸ BD ã BE ɑ̃ BE ɾ BF õ BG ɔ̃ BG m̩ BH ŋ̩ BI n̩ BI l̩ BJ sː BK ɛ̃ː BL ɑ̃ː BL õː BM ɔ̃ː BM aˑ BN oˑ CA u̯ː CB ɪ̯ː CC 
+
+eus_latn_broad
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		continuant
+		delayedRelease
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+h AA ɦ AA j AB i̯ AB k AC t AC d AC ɡ AC kʰ AD tʰ AD l AE ʎ AE m AF n AG ɲ AG p AH b AH s AI ʝ AI x AI ʃ AI ʒ AI s̻ AI s̪ AI s̺ AI ʃ̺ AI w AJ u̯ AJ a AK e AK i AK o AL u AL y AL r AM f AN β AN ã BA ũ BB ɾ BC h̃ BD 
+
+fin_latn_broad
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		continuant
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+h AA j AB e̯ AB i̯ AB k AC t AC d AC ɡ AC c AC l AD m AE n AF ŋ AF p AG b AG s AH z AH ʃ AH ʒ AH w AI ʋ AI o̯ AI u̯ AI ʔ AJ e AK i AK æ AK ɤ AK ɑ AK eː AL iː AL æː AL ɑː AL o AM u AM y AM ø AM oː AN uː AN øː AN yː AN r BA f BB jː BC e̯ː BC i̯ː BC kː BD dː BD tː BD ɡː BD lː BE pː BF bː BF rː BG mː BH nː BI ŋː BI sː BJ ʃː BJ fː BK hː BL 
+
+fin_latn_narrow
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		continuant
+		delayedRelease
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+h AA ɦ AA j AB i̯ AB k AC t AC d AC ɡ AC t̪ AC c AC l AD m AE n AF ŋ AF n̪ AF p AG b AG w AH ʋ AH u̯ AH ʔ AI i AJ æ AJ ɤ AJ e̞ AJ ɑ AJ iː AK æː AK e̞ː AK ɑː AK u AL y AL o̞ AL ø̞ AL uː AM o̞ː AM yː AM ø̞ː AM r AN x BA z BA ʃ BA ʒ BA ç BA s̠ BA f BB jː BC i̯ː BC kː BD t̪ː BD dː BD ɡː BD lː BE pː BF bː BF rː BG mː BH nː BI ŋː BI fː BJ ʃː BK s̠ː BK hː BL ʋː BM ʙː BN 
+
+ind_latn_broad
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		continuant
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+h AA j AB ɪ̯ AB i̯ AB k AC t AC d AC q AC ɡ AC c AC ɡʲ AC l AD m AE n AF ŋ AF ɲ AF p AG b AG s AH x AH z AH ʃ AH ʒ AH ɣ AH xʲ AH ɣʲ AH w AI ʊ̯ AI ʋ AI u̯ AI ʔ AJ a AK e AK i AK ɪ AK ə AK ɑ AK ɛ AK ʌ AK ɘ AK ä AK aʲ AK aː AL ɑː AL o AM u AM y AM ɔ AM ʊ AM r AN f BA v BA ə̆ BB bʰ BC 
+
+ind_latn_narrow
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		continuant
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+h AA hʲ AA j AB ɪ̯ AB e̯ AB i̯ AB k AC t AC d AC ɡ AC d̪ AC t̪ AC c AC ɟ AC kʰ AD l AE ɫ AE m AF n AG ŋ AG ɲ AG p AH b AH s AI x AI z AI ʃ AI ʒ AI w AJ o̯ AJ u̯ AJ ʔ AK a AL e AL i AL ɪ AL ə AL ɛ AL ä AL i̽ AL o AM u AM y AM ɔ AM ʊ AM ɐ AM r AN f BA v BA ə̆ BB ɾ BC 
+
+kat_geor_broad_filtered
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		continuant
+		delayedRelease
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		coronal
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		loweredLarynxImplosive
+h AA kʰ AB l AC m AD n AE pʰ AF s AG z AG ʃ AG ʒ AG t AH d AH tʰ AI i AJ ɑ AJ ɛ AJ u AK ɔ AK b AL kʼ AM qʼ AM pʼ AN r BA tʼ BB x BC ɣ BC ɡ BD v BE ʃʼ BF sʼ BF 
+
+mya_mymr_broad_filtered
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		delayedRelease
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+h AA j AB ɹ AB k AC t AC ʔ AC d AC ɡ AC kʰ AD tʰ AD l AE l̥ AE m AF m̥ AF n AG ŋ AG ɲ AG n̥ AG ɴ AG ŋ̊ AG ɲ̊ AG p AH b AH pʰ AI s AJ z AJ ʃ AJ ð AJ θ AJ ɕ AJ ʑ AJ w AK a AL e AL i AL ɪ AL ə AL ɛ AL a̰ AL ḛ AL ḭ AL ɛ̰ AL ɪ̰ AL o AM u AM ɔ AM ʊ AM o̰ AM ṵ AM ɔ̰ AM ʊ̰ AM ʍ AN sʰ BA ɕʰ BA 
+
+spa_latn_ca_broad_filtered
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		sonorant
+		continuant
+		delayedRelease
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		dorsal
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+j AA k AB ɡ AB ɟ AB l AC m AD n AE p AF b AF s AG ʃ AG θ AG t AH d AH w AI ŋ AJ ɲ AJ a AK e AK i AK o AL u AL ʝ AM x AM r AN f BA β BA ɾ BB ʎ BC 
+
+spa_latn_ca_narrow
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		sonorant
+		continuant
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+j AA ɰ AA ɹ AA e̯ AA ð̞ AA i̯ AA k AB t AB d AB ɡ AB d̪ AB t̪ AB ɟ AB l AC lʲ AC l̪ AC ʎ AC l̟ AC m AD ɱ AD n AE ŋ AE nʲ AE n̪ AE ɲ AE p AF b AF s AG ʝ AG x AG z AG ʃ AG ɣ AG ç AG ð AG θ AG ɣ̊ AG w AH β̞ AH u̯ AH a AI e AI i AI e̞ AI ɪ AI ə AI ɑ AI ɛ AI a̠ AI ä AI o AJ u AJ ʊ AJ o̞ AJ r AK f AL v AL β AL ɦ AM ã AN ẽ̞ AN ĩ AN ẽ AN õ̞ BA ũ BA õ BA ɾ BB ɛː BC ɬ BD ĩ̯ BE ũ̯ BF 
+
+spa_latn_la_broad_filtered
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		sonorant
+		continuant
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		coronal
+		dorsal
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+j AA k AB ɡ AB l AC m AD n AE p AF b AF s AG ʃ AG t AH d AH w AI ŋ AJ a AK e AK i AK o AL u AL ʝ AM r AN x BA f BB β BB ɾ BC ɲ BD ɟ BE 
+
+kor_hang_narrow_filtered
+		tone
+		stress
+		syllabic
+		short
+		consonantal
+		continuant
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+h AA ɦ AA j AB ɰ AB k AC t AC d AC k͈ AC t͈ AC ɡ AC kʰ AD tʰ AD m AE n AF ŋ AF ɲ AF p AG b AG p͈ AG pʰ AH w AI ɥ AI i AJ iː AJ ɯ AJ ɯː AJ e̞ː AJ e̞ AJ ɛː AJ ɘː AJ a̠ AJ a̠ː AJ o AK oː AK u AK uː AK o̞ː AK o̞ AK ʝ AL s͈ AL x AL ɣ AL ɕ AL ʑ AL β AM ɸ AM ɸʷ AM ɭ AN ʎ AN ɾ BA sʰ BB ʃʰ BB ɕʰ BB 
+
+jpn_hira_narrow_filtered
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		delayedRelease
+		tap
+		trill
+		lateral
+		labial
+		coronal
+		dorsal
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+h AA j AB ɰ̃ AB k AC ɡ AC kʲ AC ɡʲ AC m AD n AE p AF b AF s AG z AG t AH d AH ŋ AI ŋʲ AI ɴ AI i AJ e̞ AJ ẽ̞ AJ ĩ AJ i̥ AJ a̠ AJ iː AK e̞ː AK a̠ː AK o̞ː AL o̞ AM õ̞ AM mː AN nː BA ɾ BB ç BC ɕ BC ʑ BC sː BD ɸ BE ɲ̟ BF mʲ BG pʲ BH bʲ BH ɾʲ BI ɕː BJ mʲː BK 
+
+spa_latn_la_narrow
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		sonorant
+		continuant
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+j AA ɰ AA ɹ AA e̯ AA ð̞ AA i̯ AA k AB t AB d AB ɡ AB d̪ AB t̪ AB ɟ AB l AC lʲ AC l̪ AC ʎ AC m AD ɱ AD n AE ŋ AE nʲ AE n̪ AE ɲ AE p AF b AF s AG ʝ AG x AG z AG ʃ AG ɣ AG ç AG ð AG θ AG ɣ̊ AG w AH β̞ AH u̯ AH a AI e AI i AI e̞ AI ɪ AI ə AI ɑ AI ɛ AI a̠ AI ä AI o AJ u AJ ʊ AJ o̞ AJ r AK f AL v AL β AL ɦ AM ã AN ẽ̞ AN ĩ AN ẽ AN õ̞ BA ũ BA õ BA ɾ BB ɛː BC ɬ BD ĩ̯ BE ũ̯ BF 
+
+tgl_latn_broad
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		continuant
+		delayedRelease
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+h AA ɦ AA j AB k AC t AC d AC dʲ AC tʲ AC ɡ AC c AC ɟ AC l AD ʎ AD m AE n AF ŋ AF ɲ AF p AG b AG s AH ʝ AH z AH ʃ AH ʒ AH ʕ AH ɕ AH ʑ AH w AI ʔ AJ a AK e AK i AK ɪ AK ɑ AK ɛ AK aː AL eː AL iː AL ɛː AL ɪː AL o AM u AM y AM ɔ AM ʊ AM ɐ AM oː AN uː AN ɔː AN r BA rʲ BA f BB nː BC ɾ BD 
+
+tgl_latn_narrow
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		sonorant
+		continuant
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		dorsal
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+h AA j AB ɪ̯ AB ɰ AB i̯ AB k AC ɡ AC l AD m AE n AF p AG b AG s AH ʃ AH ʒ AH t AI d AI w AJ ʊ̯ AJ ŋ AK ɲ AK ʔ AL a AM i AM ɪ AM ɛ AM aː AN o BA u BA ʊ BA ɐ BA r BB x BC ç BC ɕ BC f BD ɾ BE 
+
+tha_thai_broad
+		tone
+		stress
+		syllabic
+		short
+		consonantal
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+h AA j AB k AC s AC t AC d AC ɕ AC kʰ AD tʰ AD ɕʰ AD l AE m AF n AG ŋ AG p AH b AH f AH pʰ AI w AJ ʔ AK a AL aː AL e AL eː AL i AL iː AL ɤ AL ɤː AL ɯ AL ɯː AL ɨ AL ə AL ɛ AL ɛː AL o AM oː AM u AM uː AM ɔ AM ɔː AM r AN ɓ BA ɗ BB 
+
+tur_latn_broad
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		continuant
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+h AA j AB ɰ AB ɹ AB k AC t AC d AC dʲ AC ɡ AC d̪ AC t̪ AC c AC ɟ AC l AD lʲ AD ɫ AD m AE n AF ŋ AF p AG b AG s AH x AH z AH ʃ AH ʒ AH ɣ AH ç AH ʐ AH z̟ AH w AI ʋ AI ʔ AJ a AK e AK i AK æ AK ɤ AK ɯ AK ɨ AK a̟ AK ɪ AK ə AK ɑ AK ɛ AK ɯ̞ AK ʌ AK ä AK aː AL eː AL iː AL ɯː AL ɛː AL ɑː AL ʌː AL äː AL o AM u AM y AM ø AM ɔ AM ʊ AM œ AM ʏ AM oː AN uː AN ɔː AN øː AN yː AN r BA ʀ BA f BB v BB β BB lː BC mː BD ɾ BE ɾ̥ BE cʰ BF 
+
+tur_latn_narrow_filtered
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+h AA j AB ɰ AB k AC s AC t AC d AC z AC ɡ AC ʃ AC ʒ AC c AC ɟ AC l AD ɫ AD m AE n AF ŋ AF ɳ AF p AG b AG f AG v AG β AG a AH e AH i AH æ AH ɯ AH e̞ AH ɪ AH ɑ AH ɛ AH aː AI iː AI ɑː AI o AJ u AJ y AJ ø AJ ɔ AJ ʊ AJ o̞ AJ œ AJ ʏ AJ uː AK r AL ɾ AM 
+
+hin_deva_broad_filtered
+		tone
+		stress
+		syllabic
+		short
+		consonantal
+		tap
+		trill
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+j AA k AB n AB s AB t AB ŋ AB d AB q AB x AB z AB ɡ AB ʃ AB ʒ AB ɖ AB ʂ AB ʈ AB d̪ AB t̪ AB ɳ AB ɣ AB kʰ AC ʈʰ AC t̪ʰ AC d̪ʱ AC ɡʱ AC ɖʱ AC ʃʰ AC l AD m AE p AE b AE f AE pʰ AF bʱ AF eː AG iː AG ɪ AG ĩː AG ə AG ɛː AG ɪ̃ AG ɑː AG ɛ̃ː AG ə̃ AG ẽː AG ɑ̃ː AG oː AH uː AH ɔː AH ʊ AH ũː AH ʊ̃ AH õː AH ɔ̃ː AH ɦ AI ɾ AJ ɽ AJ ʋ AK ɽʱ AL 
+
+hin_deva_narrow
+		tone
+		stress
+		syllabic
+		short
+		consonantal
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+j AA ɪ̯ AA ə̯ AA k AB s AB t AB d AB q AB x AB z AB ɡ AB ʃ AB ʒ AB ɖ AB ʂ AB ʈ AB d̪ AB s̪ AB t̪ AB ɣ AB d̪̚ AB kʰ AC ʈʰ AC t̪ʰ AC d̪ʱ AC ɡʱ AC ɖʱ AC ʃʰ AC l AD ɭ AD l̪ AD m AE n AF ŋ AF n̪ AF ɳ AF ɴ AF p AG b AG f AG v AG pʰ AH bʱ AH w AI ʋ AI ɔ̯ AI aː AJ eː AJ i AJ iː AJ æ AJ ɪ AJ ə AJ ɑ AJ ɛ AJ ɛː AJ ɪː AJ ɑː AJ äː AJ oː AK u AK uː AK ɔ AK ɔː AK ʊ AK ɦ AL ũː AM ʊ̃ AM ɔ̃ AM õː AM ɔ̃ː AM ĩː AN ɛ̃ AN æ̃ AN ɪ̃ AN ɛ̃ː AN ə̃ AN ẽː AN ɾ BA ɽ BA ɽʱ BB 
+
+zul_latn_broad
+		tone
+		stress
+		syllabic
+		short
+		consonantal
+		continuant
+		delayedRelease
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		coronal
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+h AA ɦ AA j AB k AC ɡ AC kʰ AD l AE m AF n AG ɲ AG p AH b AH pʰ AI s AJ z AJ ʃ AJ ʒ AJ t AK d AK tʰ AL w AM ŋ AN ʔ BA a BB aː BB e BB eː BB i BB iː BB o BC oː BC u BC uː BC ɔː BC r BD x BE f BF v BF ɓ BG m̩ BH ɬ BI ɮ BI ɠ BJ jʱ BK mʱ BL nʱ BM 
+
+vie_latn_hanoi_narrow_filtered
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		coronal
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+h AA j AB k AC x AC ɣ AC l AD m AE n AF ɲ AF p AG f AG v AG s AH t AH z AH ɕ AH tʰ AI w AJ ŋ AK ŋ̟ AK ʔ AL a AM e AM i AM ɨ AM ə AM ɛ AM ï AM aː AN əː AN o BA u BA ɔ BA ʊ BA ɓ BB ɗ BC mˀ BD nˀ BE ŋˀ BF ɹ BG jˀ BH wˀ BI eˀ BJ iˀ BJ oˀ BK uˀ BK 
+
+rus_cyrl_narrow
+		tone
+		stress
+		syllabic
+		short
+		long
+		consonantal
+		continuant
+		tap
+		trill
+		nasal
+		lateral
+		labial
+		coronal
+		dorsal
+		epilaryngealSource
+		spreadGlottis
+		constrictedGlottis
+		raisedLarynxEjective
+		loweredLarynxImplosive
+j AA k AB ɡ AB kʲ AB ɡʲ AB m AC m̥ AC n AD p AE b AE s AF z AF ʂ AF ʐ AF t AG d AG ʔ AH a AI e AI i AI æ AI ɨ AI ɪ AI ə AI ɛ AI ɛ̠ AI o AJ u AJ ʊ AJ ɐ AJ ʉ AJ ɵ AJ dʲ AK tʲ AK lʲ AL ɫ AL nʲ AM sʲ AN zʲ AN ɕ AN r BA x BB ʕ BB ɣ BB xʲ BB f BC v BC ɦ BD jː BE kː BF ɡː BF kʲː BF pː BG bː BG rː BH dː BI tː BI mː BJ nː BK m̩ BL sː BM zː BM ʂː BM ʐː BM ɑː BN ə̃ CA mʲ CB pʲ CC bʲ CC fʲ CD vʲ CD rʲ CE vː CF ɕː CG ʑː CG sʲː CG zʲː CG uˑ CH lʲː CI ɫː CI nʲː CJ tʲː CK dʲː CK bʲː CL pʲː CL fʲː CM vʲː CM mʲː CN rʲː DA ʙː DB 
+

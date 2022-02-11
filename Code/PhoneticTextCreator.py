@@ -4,11 +4,9 @@ import unicodedata
 
 import pandas as pd
 import csv
-import jiwer
+import numpy as np
+from tabulate import tabulate
 import Levenshtein as lev
-import hebrew_tokenizer as heb_tok
-from spacy.lang.zh import Chinese
-from spacy.lang.en import English
 
 
 # Applies to lines 31 - 44
@@ -35,6 +33,79 @@ from spacy.lang.en import English
 # SOFTWARE.
 #
 # https://github.com/jpuigcerver/xer --> source of lines 31 - 44
+def per_score(gold, hypo) -> (int, int):
+    """Computes sufficient statistics for LER calculation."""
+    edits = edit_distance(gold, hypo)
+    return edits, len(gold)
+
+
+def edit_distance(x, y) -> int:
+    # For a more expressive version of the same, see:
+    #
+    #     https://gist.github.com/kylebgorman/8034009
+    idim = len(x) + 1
+    jdim = len(y) + 1
+    table = np.zeros((idim, jdim), dtype=np.uint8)
+    table[1:, 0] = 1
+    table[0, 1:] = 1
+    for i in range(1, idim):
+        for j in range(1, jdim):
+            if x[i - 1] == y[j - 1]:
+                table[i][j] = table[i - 1][j - 1]
+            else:
+                c1 = table[i - 1][j]
+                c2 = table[i][j - 1]
+                c3 = table[i - 1][j - 1]
+                table[i][j] = min(c1, c2, c3) + 1
+    return int(table[-1][-1])
+
+
+def create_g2p_gt_map(words, pronunciations):
+    """Create grapheme-to-phoneme ground true mapping."""
+    g2p_gt_map = {}
+    for word, pronunciation in zip(words, pronunciations):
+        if word in g2p_gt_map:
+            g2p_gt_map[word].append(pronunciation)
+        else:
+            g2p_gt_map[word] = [pronunciation]
+    return g2p_gt_map
+
+
+def calc_errors(inputs, decodes, words, pronunciations):
+    """Calculate a number of prediction errors."""
+
+    g2p_gt_map = create_g2p_gt_map(words, pronunciations)
+
+    correct, errors = 0, 0
+    num_edits, len_reference = 0, 0
+    not_in_test = 0
+
+    for index, word in enumerate(inputs):
+
+        try:
+            if decodes[index] in g2p_gt_map[word]:
+                correct += 1
+                num_edits += 0
+                len_reference += len(decodes[index])
+            else:
+                errors += 1
+                smallest_per = 200
+                best_len = 0
+                best_edit = 0
+                for ref in g2p_gt_map[word]:
+                    temp_edit, temp_len = per_score(ref, decodes[index])
+                    temp_per = 100 * temp_edit / temp_len
+                    if temp_per < smallest_per:
+                        smallest_per = temp_per
+                        best_len = temp_len
+                        best_edit = temp_edit
+                num_edits += best_edit
+                len_reference += best_len
+        except KeyError:
+            not_in_test += 1
+
+    return correct, errors, num_edits, len_reference
+
 def cer(hypothesis, reference):
     cer_s, cer_i, cer_d, cer_n = 0, 0, 0, 0
     # update CER statistics
@@ -99,31 +170,40 @@ class PhoneticTextCreator:
                 new_file_name = 'output/' + lang + '_' + str(num) + '_phonetic' + (
                     '_' if self.name else '') + self.name + '.txt'
 
-                phonetic_text, per_transcribed, per_concat, per_unk = self._create_phonetic_text(path_org,
+                phonetic_text, per_transcribed, per_concat, per_unk, original_tokens = self._create_phonetic_text(path_org,
                                                                                                  path_wordlist,
                                                                                                  lang)
+                inputs = original_tokens
+                dec = phonetic_text.split()
+                words = original_tokens
+                pron = ref_text.split()
 
-                wer = round(jiwer.wer(ref_text, phonetic_text), 2)
+                correct, errors, edits, len_reference = calc_errors(inputs, dec, words, pron)
 
-                cer_val = round(cer(ref_text, phonetic_text), 2)
+                wer = round(float(errors) / (correct + errors) * 100, 2)
+                per = round((float(edits) / len_reference) * 100, 2)
 
                 with open(new_file_name, 'w', encoding='utf8') as new_phonetic:
                     new_phonetic.write(phonetic_text)
 
-                new_row = [lang, per_transcribed, per_concat, per_unk, wer, cer_val,
+                new_row = [lang, per_transcribed, per_concat, per_unk, wer, per,
                            path_org, path_wordlist, new_file_name, type_ref, type_list]
 
                 data_writer.writerow(new_row)
 
-                new_stats_row = [lang, per_transcribed, wer, cer_val, type_ref, type_list, num_w]
+                new_stats_row = [lang, per_transcribed, wer, per, type_ref, type_list, num_w]
 
                 stats_writer.writerow(new_stats_row)
 
+        # print stats as latex table to include into thesis
+        s = pd.read_csv(self.stats_name, index_col=False)
+        print(s.to_latex(index=False))
+
     def _prepare_output_file(self):
-        header = ['lang-code (iso 639-3)', 'coverage', 'per-concat', 'per-unk', 'WER', 'CER', 'path-original',
+        header = ['lang-code (iso 639-3)', 'coverage', 'per-concat', 'per-unk', 'WER', 'PER', 'path-original',
                   'path-wordlist', 'path-phonetic-text', 'type-ref', 'type-list']
 
-        stats_header = ['Iso 639-3', 'Coverage', 'WER', 'CER', 'Type ref', 'Type list', 'Num words list']
+        stats_header = ['Iso 639-3', 'Coverage', 'WER', 'PER', 'Type ref', 'Type list', 'Num words list']
 
         with open(self.output_name, 'w', newline='') as output:
             writer = csv.writer(output, delimiter='\t')
@@ -146,19 +226,14 @@ class PhoneticTextCreator:
         try:
             with open(path_original, 'r', encoding='utf8') as text_file:
                 text = text_file.read()
-            # Language specific tokenizers
-            if lang == 'cmn':
-                nlp = Chinese()
-                tokenizer = nlp.tokenizer
-                for token in tokenizer(text):
-                    tokens.append(str(token))
-            else:
-                text = text.lower()
-                text = re.sub(r'[\?!:;\.,\"\(\)]', "", text)
-                text = re.sub(r'[\'\-。，]', " ", text)
-                tokens = text.split()
 
-        # in case that the fil encoding is wrong
+            text = text.lower()
+            text = re.sub(r'[\?!:;\.,\"\(\)]', "", text)
+            text = re.sub(r'[\'\-。，]', " ", text)
+            tokens = text.split()
+
+
+        # in case that the file encoding is wrong
         except UnicodeDecodeError:
             print(path_original)
 
@@ -176,7 +251,7 @@ class PhoneticTextCreator:
         pass
 
     def _create_phonetic_text(self, path_original, wordlist, lang):
-        text = self._preprocess_text(path_original, lang)
+        tokens = self._preprocess_text(path_original, lang)
 
         wordlist = self._prepare_wordlist(wordlist)
 
@@ -186,7 +261,7 @@ class PhoneticTextCreator:
         count_not_exist = 0
         count_concat = 0
 
-        for word in text:
+        for word in tokens:
             splittable = False
 
             if word.strip() in wordlist:
@@ -218,4 +293,4 @@ class PhoneticTextCreator:
         self.percentage.append(per_transcribed)
         self.phonetic_text.append(phonetic_text)
 
-        return phonetic_text, per_transcribed, per_concat, per_unk
+        return phonetic_text, per_transcribed, per_concat, per_unk, tokens

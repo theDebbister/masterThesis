@@ -1,0 +1,161 @@
+\newchap{Experiments: Data Collection}
+\label{chap:data_collection}
+The first practical part of this thesis is concerned with data collection. Although phonetics is an important sub-area in linguistics, phonetic transcriptions are hard to find. If there are any transcriptions available, there are various hindrances that prevent it from being used as is. In the following, I outline the different data types which are available and the different strategies that are used to convert the data into one well-formatted corpus. There is quite a famous set of phonetic texts which is a collection of short stories called \textit{The North Wind and the Sun}. Those stories were the starting point for my search for data. The reason for this is that the short stories are available in many different languages. As the corpus  this thesis is based on is a large multilingual corpus, the availability of data in many languages was one of the key criteria to look choose the datasets. 
+
+
+\subsection{Transcription Sources \& Formats}
+Phonetic transcriptions of various languages are available from different sources in different formats. From what I have found out in my research phonetic transcriptions are available as either full texts or a word lists.
+
+\subparagraph{Full Text}
+For the task of \ac{g2p} conversion, phonetic transcriptions in the form of fully transcribed texts would be ideal. As became clear, it is hardly possible to find those. There is plenty of material describing how different languages can be transcribed but those rarely contain fully transcribed text. If they do, it is mostly limited to one or a few sentences. Additionally, some texts include short descriptions where certain pronunciations rules are explained which are not included in the transcriptions (especially stress). Apart from \ac{nws} short texts described in section, there are no full texts available in multiple languages that could be used.
+
+\subparagraph{Pronunciation Dictionaries}
+Another data type that is found quite often are word lists. Those are sometimes referred to as pronunciation dictionaries. However, these often mean that there are words mapped to an audio representation which is not what is meant in this present case. Pronunciation dictionary in this present case refers to the mapping of an orthographic word to its pronunciation using phonetic symbols. Although such lists are very handy, especially as they can easily be used to train a transcription model, transcriptions of individual words and of entire texts are not exactly the same. There are two major problems:
+
+\begin{itemize}
+\item Pronunciation depends on the context of the word in question. Word forms are ambiguous and sometimes their pronunciation differs given on their specific context. \review{add example} 
+\item Phonetic boundaries are not always equivalent with word boundaries. Spoken language sometimes merges certain words which leads to one phonetic unit. \review{There are phonetic symbols to represent such merging which often happens in, for example, French.}
+\end{itemize} 
+
+\subparagraph{Transcription conventions}
+No matter how the transcriptions are formatted, a crucial factor is the transcription convention. The \ac{ipalpha} is a well-known convention but there is a lot of data that is available using a different convention. Although it might be possible to convert one convention into another convention this is very tedious and often those conventions are made specifically for one language or a group of related languages. 
+
+\tab{tab:all_langs}{In this table I list all languages that I am using for my experiments.}{
+\begin{tabularx}{\textwidth}{|Xll >{\raggedright}rl|}
+\hline
+\textbf{Iso 639-3} & \textbf{Language name}  & \textbf{Type WikiPron} & \textbf{\# Words WikiPron} & \textbf{Type NWS} \\ \hline
+\hline
+cmn                & Chinese                 & broad                  & 133,686                    & unk               \\
+deu                & German                  & broad                  & 34,145                     & broad             \\
+deu                & German                  & narrow                 & 10,984                     & narrow            \\
+ell                & Greek (Modern)          & broad                  & 10,547                     & unk               \\
+eng                & English US              & broad                  & 57,230                     & broad             \\
+eng                & English US              & narrow                 & 1,633                      & narrow            \\
+eng                & English UK              & broad                  & 60,422                     & -                 \\
+eng                & English UK              & narrow                 & 1,284                      & -                 \\
+eus                & Basque (Goizueta)       & broad                  & 1,742                      & broad             \\
+fin                & Finnish                 & broad                  & 69,015                     & -                 \\
+fin                & Finnish                 & narrow                 & 69,008                     & -                 \\
+fra                & French                  & broad                  & 56,911                     & unk               \\
+hin                & Hindi                   & narrow                 & 9,563                      & -                 \\
+hin                & Hindi                   & broad                  & 10,812                     & unk               \\
+ind                & Indonesian              & broad                  & 1,555                      & unk               \\
+ind                & Indonesian              & narrow                 & 2,637                      & -                 \\
+jpn                & Japanese (Hiragana)     & narrow                 & 19,689                     & -                 \\
+kat                & Georgian                & broad                  & 15,123                     & broad             \\
+kor                & Korean                  & narrow                 & 14,141                     & unk               \\
+mya                & Burmese                 & broad                  & 4,631                      & broad             \\
+rus                & Russian                 & narrow                 & 402,586                    & unk               \\
+spa                & Spanish (Castilian)     & broad                  & 60,677                     & broad             \\
+spa                & Spanish (Castilian)     & narrow                 & 52,190                     & narrow            \\
+spa                & Spanish (Latin America) & broad                  & 48,649                     & -                 \\
+spa                & Spanish (Latin America) & narrow                 & 41,845                     & -                 \\
+tgl                & Tagalog                 & broad                  & 3,321                      & -                 \\
+tgl                & Tagalog                 & narrow                 & 1,915                      & -                 \\
+tha                & Thai                    & broad                  & 15,050                     & unk               \\
+tur                & Turkish                 & broad                  & 1,789                      & unk               \\
+tur                & Turkish                 & narrow                 & 1,812                      & -                 \\
+vie                & Vietnamese              & narrow                 & 15,240                     & unk               \\
+zul                & Zulu                    & broad                  & 1,677                      & -                 \\ \hline
+\end{tabularx}}{Languages for experiments}
+
+
+\section{Data used for this thesis}
+\label{sec:dataset}
+Based on the outcome of my research on the availability of phonetic data, I decided to use two datasets for my experiments in this thesis. I will introduce both of them below. 
+
+\subsection{WikiPron}
+A very recent project that publishes pronunciation lists is WikiPron. The WikiPron project \citep{Lee&Ashby.2020} is an open-source Python mining tool to retrieve pronunciation data from Wiktionary. Their database contains 1.7 million word/pronunciation pairs in 165 languages. Both, the database and the tool, are freely available online. Apart from the mining tool and the database, WikiPron can be used for grapheme-to-phoneme modelling. The WikiPron data for one language is always structured the same. It is a tsv-file that has graphemes as a first column and corresponding phonemes as the second column. While the graphemes are just listed as-is, the phonemes are split using the segments library which I shortly presented in section \ref{sec:unicode_ipa}. The phoneme segments are separated by white spaces. 
+The WikiPron data has already been used in shared tasks which means that results on this data can easily be compared to other results. For a shared task in 2021 organized by \ac{sigm}, the WikiPron data was improved and additional scripts were added based on feedback and findings from a similar task in 2020. One major improvement was concerned with languages written in different scripts. WikiPron supports now the detection of different scripts and languages can be sorted according to those scripts. For some languages, there is a filtered version of either the broad or the narrow transcription available. Whenever possible, I used this one.
+
+
+\subsection{The North Wind and the Sun}
+\label{nws}
+Quite a well-known phonetic corpus is a collection of short stories `\acf{nws}'. The \ac{jpa} continuously published different phonetic transcriptions of a short story called \textit{The North Wind and the Sun}. The story is a fable said to be written by Aesop and has been translated into many languages. Additionally, for many languages there exits a phonetic transcription. As I have mentioned before, many of these texts are available already transcribed and free to use \citep{GitHub.04.02.2022}. Table \ref{north-wind-stories} shows the languages for which the short story is available and which are also in the 100 language corpus \citep{baird_evans_greenhill_2021}.
+
+\begin{table}[h!]
+\begin{center}
+\stepcounter{mytable}
+\csvautotabular{tables/overview.csv}
+\caption[The North Wind and the Sun]{The table shows a list of all the short stories \textit{The North Wind and the Sun} that are available as phonetic text and whose languages are in the 100 language corpus.}
+\label{north-wind-stories}
+\end{center}
+\end{table}
+
+
+\subsubsection{Transcription of NWS stories}
+A collection of the \ac{nws} stories is available in a handbook of the \ac{jpa} which is only available as a pdf scan of the original book \citep{JIPA2010}. Luckily, most of those texts have been transcribed and made available by Simon Greenhill \citep{GitHub.04.02.2022}. At least the phonetic part of it, the original version was still not available already transcribed. Before I knew about the availability of these texts, I did some research on \ac{ocr} for \ac{ipalpha} texts and manual transcription. While \ac{ocr} is technically possible it turns out to be very difficult for IPA characters. There are tools that include \ac{ipalpha} character recognition like the ABBYY FineReader which can be acquired for a fee. The CL institute at the \ac{uzh} owns a version of the ABBYY tool but this version does not include the IPA module. I ran the ABBYY version on a \ac{jpa} pdf containing said phonetic transcriptions but the result could not be used. Mostly diacritics and special phonetic symbols were not correctly transcribed. These are exactly those characters that make it difficult to transcribe \ac{ipalpha} manually, so there is not point in using this tool. There are also open source tools. One of which is called tesseract. tesseract does not include the IPA alphabet. It is possible to train the model to include the IPA alphabet but this would need appropriate training data. \review{Add quote}
+
+As it was not possible to use \ac{ocr} to get the texts, a next approach is to transcribe them. I experimented with a software called Transkribus\myfootnote{https://readcoop.eu/de/transkribus/} to manually transcribe the pdf scans. The software allows to make use of neural \ac{htr} models. There exists no pre-trained model for transcribing \ac{ipalpha} charachters, but I trained my own while transcribing some of the documents. On the website they mention that, ideally, training needs 5,000 - 10,000 words already transcribed. Although my available data is not nearly enough to train a reliable model (the short stories have around 40 - 100 tokens), it was a great help to transcribe. As the scans where not handwritten but machine typed text, the model still reached a surprisingly good quality. As an example: For the Hebrew transcription, the model reached a \ac{wer} of 34.52 and a \ac{cer} of 6.11. The two main mistakes were made for two characters that were not even in the training data. The quality of the scans differed quite a lot which had an influence on the performance of the model as well. After transcribing another document I trained the model again and transcribed a few more documents. The transcriptions got continuously better such that in the end I did not take me nearly as much time as in the beginning. Most of the errors resulted from characters that had not been in the previously described documents. 
+
+It was interesting to see that it is relatively easy to transcribe \ac{ipalpha} text when using the right software. The original texts were easier to transcribe as they do not contain as many diacritics or other special characters. Still, for some texts like Chinese or Hindi, I needed help from native speakers as it is nearly impossible to find the matching sign if the language is unknown. 
+
+\section{Pronunciation dictionary coverage}
+As I am using two different datasets I want to find out how these two datasets relate. I order to do that , I am using the WikiPron lists to write the \ac{nws} stories. In a way, I used the WikiPron data as a look-up table to create phonetic transcriptions for the \ac{nws} stories. By comparing the text produced by the WikiPron data to the reference transcriptions form the \ac{jpa} articles, I  could calculate the coverage, the \ac{wer} and the \ac{per} score. The comparison and the analysis of the metrics gives the following insights. In addition, I manually checked some errors which gave me insights about the word lists in general:
+
+\begin{itemize}
+\item For some \ac{nws} transcriptions it is not clear whether their transcription is narrow or broad. On the other hand, sometimes there is no broad or narrow word list available for a specific language but only one of those. For the short stories where the type was unclear, I tried both word list types if those are available. The analysis shows that transcriptions written with broad lists give better results if the type of the reference is unclear. See, for example, Indonesian (ind) or Hindi (hin) in table \ref{tab:coverage}. As this is the case, it makes sense to treat the unknown transcriptions as broad. 
+\item The IPA allows to transcribe intonation segments. In German, those correspond mostly to punctuation marks like end of sentence symbols or commas. But this must not be true for every case. It needs to be decided if those should be kept or potentially deleted.
+\item The pronunciation dictionaries sometimes included duplicates with different pronunciations. This is not surprising but still it needs to be handled well. A solution is to simply delete duplicate words.
+\item In order to do this very simple experiment, it is necessary to tokenize the texts. This works well for languages using the Latin script. For languages like Chinese or Korean this is more difficult to accomplish. However, this issue needs to be tackled to create \ac{g2p} models anyway. I will therefore not explore this issue here.
+\item Interestingly enough, for some language the coverage is really low although there are quite a lot of words in the word list. This is the case for German (narrow) where the coverage is only at 22\% and the word list contains more than 10,000 words. A manual analysis showed that some frequent words like `sich' and `und' are not in the word list. It becomes clear that a few thousand words are not enough to reach reasonable coverage. 10,000 - 15,000 words seem to be a lower bound for covering around 50\% of this short text.
+\item For most of the languages the \ac{per} is lower than the \ac{wer}. This is a good sign, as it suggests that if a word is in the list, it is at least partially spelled the same as in the reference text. Still, it is surprising that for broad Spanish, the \ac{wer} is actually lower than the \ac{per}. Results like this show that even if the words are covered, their phonetic transcription might be spelled differently. This is related to the fact that the \ac{ipalpha} is not really standardized. It always depends on the person who transcribe a text.
+\end{itemize}
+
+The results from this experiment are summarized in table \ref{tab:coverage}. Generally it is good to see that most texts are at least partially covered by the pronunciation dictionary. It will later be interesting to see how the neural models perform on these short texts. 
+
+\tab{tab:coverage}{The table shows the coverage, WER and PER when the pronunciation
+dictionaries are used to write \textit{The North Wind and the Sun}.}{
+\begin{tabularx}{\textwidth}{|lrrrXXr|}
+\hline
+\textbf{Iso 639-3} &  \textbf{Coverage} &     \textbf{WER} &     \textbf{PER} & \textbf{Type ref} & \textbf{Type list} & \textbf{\# Words list} \\
+\hline
+\hline
+cmn &     85.15 &   93.07 &   59.26 &      unk &     broad &       133,686 \\
+deu &     75.00 &   72.22 &   52.67 &    broad &     broad &        34,145 \\
+deu &     22.22 &   97.22 &   84.85 &   narrow &    narrow &        10,984 \\
+ell &     26.32 &   84.21 &   87.74 &      unk &     broad &        10,547 \\
+eng &     92.04 &   83.19 &   37.27 &    broad &     broad &        57,230 \\
+eng &      7.08 &  100.00 &  108.35 &   narrow &    narrow &         1,633 \\
+eus &      5.75 &   96.55 &   97.95 &    broad &     broad &         1,742 \\
+ind &     22.22 &   96.30 &   88.04 &      unk &     broad &         1,555 \\
+ind &      1.85 &  100.00 &  101.69 &      unk &    narrow &         2,637 \\
+kat &     44.29 &   90.00 &   73.85 &    broad &     broad &        15,123 \\
+mya &      7.50 &   97.50 &   97.70 &    broad &     broad &         4,631 \\
+spa &     64.95 &   46.39 &   48.64 &    broad &     broad &        60,677 \\
+spa &     35.05 &   98.97 &   65.92 &   narrow &    narrow &        52,190 \\
+tha &     83.85 &   88.20 &   40.62 &      unk &     broad &        15,050 \\
+tur &     18.46 &  100.00 &   88.89 &      unk &     broad &         1,789 \\
+tur &      6.15 &  100.00 &   92.53 &      unk &    narrow &         1,812 \\
+hin &     31.75 &  100.00 &   84.00 &      unk &    narrow &         9,563 \\
+hin &     57.94 &   93.65 &   69.81 &      unk &     broad &        10,812 \\
+kor &     18.64 &  100.00 &   51.97 &      unk &    narrow &        14,141 \\
+fra &     86.11 &   51.85 &   40.76 &      unk &     broad &        56,911 \\
+vie &     96.58 &   79.49 &   48.66 &      unk &    narrow &        15,240 \\
+rus &     94.79 &   95.83 &   56.30 &      unk &    narrow &       402,586 \\
+\hline
+\end{tabularx}}{Coverage}
+
+\section{Language profiles}
+In order to get a feeling of the data and what it covers, I collected phoneme and grapheme profiles of the data and compared it to the Phoible dataset. For each language that I am working with, I have two different types of data: first the short story and second the WikiPron \ac{g2p} dictionary. For each language and each data type I got three lists:
+\begin{itemize}
+ \item Grapheme list: contains all graphemes in that language. Characters that need a base character like diacritics are shown together with their base character. 
+ \item Phoneme list: contains all phonemes in that language. Again, diacritics and similar characters are shown with their base characters.
+ \item Phoneme cluster list: Phonemes can be clustered into bigger sound groups. How to do this, is an ongoing discussion, but I used the segments library to get the clusters (compare \citet{unicode-lingu})
+\end{itemize}
+
+Having those overview for the characters for each language allowed me to compare the character vocabulary to the characters or character clusters available in the Phoible dataset. This comparison showed that quite a few characters are missing that are included in the WikiPron data and the short stories. Some problems and potential strategies to solve it:
+
+\begin{itemize}
+\item No real \ac{ipalpha}: There are sometimes characters included that are no part of the \ac{ipalpha}. There might be a reason why the authors of the transcriptions decided to use this special character to denote a particular sound, but this is not always known. A possibility is to try and map it to a character that is available in Phoible and that represents a similar sound (or even the same sound actually). 
+\item Tie bars: The creators of Phoible decided to exclude tie bars because they add no real value to the transcriptions. \review{add source for this?}
+\item Stress marks: Stress marks are not represented in Phoible as they do not represent a sound. 
+\item Tones: Even within the \ac{ipalpha} there exist different conventions of how to represent tones. Some are better suited for different languages. Apart from different ways of representing tones, it is not always sensible to have tones represented. Mostly, tones are not written as speakers of that language know how to pronounce the tones. So, the questions is whether it is necessary to include the tones at all. When looking at the written representation it does not matter what the tones are as the basic phonemes do not change. This is of course different when the phonetic representation is mapped to a spoken representation. \review{add more on that, maybe in background chap}
+\end{itemize}
+
+
+
+
+
+
+

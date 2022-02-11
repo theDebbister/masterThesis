@@ -1,0 +1,221 @@
+
+\newchap{Experiments: Automatic Grapheme-to-Phoneme Conversion}
+\label{chap:exp}
+In this chapter, I present the experiments I conducted to obtain models for phonetic transcription. As a result of my first practical part in chapter \ref{chap:data_collection} I presented two datasets that I will now use to perform these experiments. The \ac{nws} corpus is much smaller which is why I will use it as a test dataset only. This means that I will train any model on the WikiPron dataset. As the \ac{nws} corpus is quite well known among linguists or at least among phoneticians, it will hopefully give interesting insights when testing the models on these short texts. Table \ref{tab:all_langs} shows all languages that I am using in my experiments. Note that WikiPron continuously adds data to their repository. This means that there might be new languages that are in the 100 language corpus and that I did not use. Additionally, there were languages which had a WikiPron dictionary that was smaller than 1,000 pairs. This is simply not enough to train a decent model which is why I excluded these. If the transcription type of the \ac{nws} story is unknown, I only added it to the broad type of the WikiPron dictionary, such that there are no duplicates in the table. 
+
+The model that I am using for my \ac{g2p} experiments is explained in section \ref{sec:cmu}. Setting it up was not very easy as there were issues with the tensorflow version and some other dependencies. Also, they do have a pre-trained model, but this uses a completely different transcription convention than IPA. So we cannot use this pre-trained model. But it is of course well possible to train  new models for the languages I am using. Generally, broad and narrow transcriptions are treated as separate languages and thus trained separately as well. The same is true for dialects if there is any information available. American and British English are trained in different models. In order to compare my results to already existing models, I will use the results of the \ac{sigm} tasks in 2020 and 2020. They present results for quite a few languages. Also, they use the same data type. They cleaned some of the data for some languages and made these datasets available. Whenever a filtered version is available I use that one as the basis for my experiments. 
+
+\section{Training settings}
+As I have shortly mentioned before, some WikiPron word lists have less than one thousand word pairs. I marked them as low resource and only used the high resource languages to train my models. There are different settings which I will use to train the models and analyse their performance. The settings are chosen in a way such that they are built on each other. The first experiments are set up very simply and without much effort. Then I continuously add more complexity. Below I added a short description of each setting as a n overview. I will add more details on the individual steps in separate sections. 
+
+\subparagraph{Setting 1: Baseline Short}
+This is the most basic setting. I will train a model for each language to get a baseline result. The model is trained with the least amount of effort. Default settings are used and no hyperparameters are changed. The model is trained for the minimum number of steps which is 10,000 steps in this case. First, I trained it on those languages where I have results from the \ac{sigm} 2021 challenge. The results are compared in table \ref{tab:baseline_cmu}.
+
+\subparagraph{Setting 2: Baseline Long}
+This setting is similar to setting 1 except that the model is trained as long as possible for each language. All models have been trained for 200,000 steps and the default settings. This setting is supposed to show if training for a considerably longer time changes the results a lot or not.
+
+\subparagraph{Setting 3: Baseline clean short}
+I will train another model that is the same like the Baseline Large, but I will use the cleaned WikiPron data. What I will clean is described below (section \ref{preprocess}).
+
+\subparagraph{Setting 4: Baseline clean long}
+The same as setting 3 except that the models were trained for as long as possible like in setting 2.
+
+\subparagraph{Setting 5: Feature input version 1 short}
+The final experiments will be with phonetic features as input. I use the cleaned WikiPron data from setting 3 and add the features to it. In section \ref{sec:feature_enc}, I explain how I encode the features. Before training this set of models, I did some experiments with other features than the final ones I used here. All of this is explained in section \ref{sec:feature_enc} as well.
+
+\subparagraph{Setting 6: Feature input version 1 long}
+The same as setting 5, but again the models for trained for 200,000 steps like in setting 2.
+
+\section{Preprocessing}
+\label{preprocess}
+In section \ref{sec:ipa} I talked about the incompleteness and difficulties of transcribing using the \ac{ipalpha}. How exactly a sound is mapped to an \ac{ipalpha} symbol also depends on whoever transcribes a particular text. The WikiPron data has been put together by many different people. There are conventions on how to add transcriptions by Wiktionary, but there still might be inconsistencies. Other than that, it is always possible that something is correct, but neural models just cannot handle it well. That said I will carefully examine and clean the datasets. There is preprocessing that is done for both datasets, further down I will describe some preprocessing that had to be done for each individual dataset.
+
+The first analysis is a character based comparison. This means that I used the python segments library\myfootnote{https://pypi.org/project/segments/} to split up all the phonemes into unicode characters. Then I compared those characters to the PHOIBLE character set. This way I can identify characters that are a bit suspicious in the context of \ac{ipalpha} as the PHOIBLE dataset is very extensive. While it is possible that a correctly used phoneme is not in PHOIBLE, it still gives a good overview of potential ambiguities in the transcription or even points out mistakes. This character based cleaning is done for both datasets. The more detailed list of what needs to be cleaned is found in table \ref{tab:preprocessing}.
+
+There are two more general things that I removed from the datasets. The first is \textbf{tones}. The reason for that is that it is not possible to infer tones from graphemes. Although they are used to distinguish meaning, they are not written down, but usually just known. This means that there are grapheme sequences that look exactly the same and their transcription is the same as well \textit{except} for the tones. There are different ways to represent tones and I excluded all of them. The second additional preprocessing step I took is to remove all \textbf{punctuation symbols}. This accounts mostly for the \ac{nws} short stories. For a character-based modelling, punctuation does not add any valuable information as this only becomes relevant, and can only be inferred, on a word, respectively, sentence basis.    
+
+\tab{tab:preprocessing}{The table shows what phonemes where changed or excluded and what the reason is for this preprocessing. All characters that were excluded are replaced by a NULL value. }{
+\begin{tabularx}{\textwidth}{
+| 	>{\raggedright\arraybackslash}l | 
+	>{\raggedright\arraybackslash\hsize=.5\hsize\linewidth=\hsize}X | 
+	>{\raggedright\arraybackslash}l  | 
+	>{\raggedright\arraybackslash\hsize=1.5\hsize\linewidth=\hsize}X |}
+\hline
+\textbf{Phon.} & \textbf{Unicode name} & \textbf{Repl.} & \textbf{Explanation} \\
+\hline
+\hline
+ \textipa{"} 					& \scriptsize{MODIFIER LETTER VERTICAL LINE} 				& NULL 						& \multirow[t]{6}{\hsize}{These are all \ac{ipalpha} suprasegmentals except the long and half long marker and the extra short (\textipa{: ; \u{}}). The reason why these were excluded is that they don't carry any meaning on the character level. The vertical lines, for example, mark intonation groups which only matter in a larger sentence or text context. There are a few rare occurrences of COMBINING VERTICAL LINE ABOVE which is probably meant to be MODIFIER LETTER VERTICAL LINE as they look similar. It is excluded as well.} \\
+ 
+\textipa{""} 					& \scriptsize{MODIFIER LETTER LOW VERTICAL LINE}			& NULL						&  \\
+\textipa{\textvertline} 		& \scriptsize{VERTICAL LINE} 								& NULL						&  \\
+\textipa{\textdoublevertline} 	& \scriptsize{DOUBLE VERTICAL LINE} 						& NULL 						&  \\
+\textipa{.} 					& \scriptsize{FULL STOP} 									& NULL 						&  \\
+\textipa{\t*{}}					& \scriptsize{UNDERTIE} 									& NULL 						&  \\\hline
+\textipa{\t{}}					& \scriptsize{COMBINING DOUBLE INVERTED BREVE} 				& NULL						&  \multirow[t]{2}{\hsize}{Both tie bars below and above are excluded in PHOIBLE\myfootnote{https://phoible.org/conventions} which is why I am excluding it as well. Put plainly, those do not add any additional information that cannot be derived otherwise.} \\
+\textipa{\t*{}}					& \scriptsize{COMBINING DOUBLE BREVE BELOW} 				& NULL						&  \\\hline
+\textipa{3\textrhoticity} 		& \scriptsize{LATIN SMALL LETTER REVERSED OPEN E WITH HOOK} & \textipa{@\textrhoticity} &  Both base letters are very similar vowels. It is just more common to use the latter than the former. \\\hline
+g						 		& \scriptsize{LATIN SMALL LETTER G} 						& \textipa{g} 				&  The \ac{ipalpha} `\textipa{g}' has a different code point and is a different character than the typical keyboard small Latin `g'. This is just an \ac{ipalpha} decision. For some fonts the two characters do not look different, for some they do.  \\\hline
+$\sim$							& \scriptsize{SWUNG DASH} 									& NULL 						& \multirow[t]{4}{\hsize}{All of characters make out less than 1\% of their respective dataset, most of the time it is less than 0.1\%. A close examination of the dataset and the Wiktionary transcription conventions for the respective language did not show any reason why to keep the phoneme. Note that the `v' for the tilde is only there for correct representation.}  \\
+,							 	& \scriptsize{COMMA} 										& NULL 						&  \\
+\textipa{\~v} 					& \scriptsize{TILDE} 										& NULL 						& \\
+\textsuperscript{\textipa{@}}	& \scriptsize{MODIFIER LETTER SMALL SCHWA} 					& NULL &  \\\hline
+\textsuperscript{x}				& \scriptsize{MODIFIER LETTER SMALL X} 						& \textipa{P}				&  The \textsuperscript{x} only occurred in the broad Finnish transcription and is used to denote possible gemination. In the narrow transcriptions there is a glottal stop instead. The occurrence of glottal stops and gemination follows the same rules. Therefore, for consistency, the gemination \textsuperscript{x} is mapped to a LATIN LETTER GLOTTAL STOP.   \\
+\hline
+( ) 						& \scriptsize{( SUPERSCRIPT ) [ LEFT | RIGHT ] PARENTHESIS}		& NULL							& Parentheses are used to denote optionality for phonemes or tones. WikiPron actually discards those but keeps the content\myfootnote{\url{https://github.com/CUNY-CL/wikipron}}. I will do the same for all parenthesis found.  \\\hline
+\end{tabularx}}{Preprocessing}
+
+\subsection*{NWS corpus}
+Apart from cleaning the stories as described in table\ref{preprocess}, I had to transform them into dictionary format in order to be able to use them as testing data. I order to do that it is necessary to tokenize both orthographic and phonetic texts and then align them. As the number of tokens (when split naively at blanks) is not always the same for orthographic and phonetic text, it was necessary to align some of them manually. While this is not a problem when talking about languages that I know, it is a bit tricky for languages completely unknown to me. Luckily there are tools online that provide a rough pronunciation of a word in a given language or even a phonetic transcription (although rarely in \ac{ipalpha})\myfootnote{For most languages I could use Google translator (\url{https://translate.google.com/?hl=de&sl=ko&tl=de&op=translate}), for languages like Hebrew, I could ask someone who knows the language to help me out.}. 
+
+Chinese and Thai required special tokenization. To tokenize Chinese and Thai I used \textit{polyglot}\myfootnote{\url{https://polyglot.readthedocs.io/en/latest/}}, a Python library.
+
+
+\subsection*{WikiPron} 
+As the CMU model does not expect the graphemes to contain any whitespace, I replaced any whitespace in the input with underscores. This was necessary only for Vietnamese. In a first run, I did not do this. When running the evaluation on the Vietnamese model, it did not work but showed an error message. As the model creates a vocabulary file, I had a look at it which revealed the following: 
+\begin{itemize}
+\item The model does not actually split the input file at tab characters, but splits it at spaces and then uses the first item of the resulting list as input grapheme and the rest as a list containing the output phonemes. Consequently, if the input grapheme contains a white space, everything following it will be in the phoneme part. Part of the input will be treated as a phoneme character in the training which results in a huge vocabulary and wrong predictions.
+\end{itemize}
+
+The alternative to removing the white space would have been to split the grapheme at white space and align the phonemes. However, this is firstly much more work as it is not clear where to split the phonemes and it might be that the word on its own is pronounced differently. 
+
+In Japanese there is the superscript letter $^\beta$. This actually means compression, which is a special type of rounding\myfootnote{\url{https://en.wikipedia.org/wiki/Roundedness}}. This is one of these things where the difficulties of transcribing texts becomes clear. This special case is not reflected in PHOIBLE nor in the official \ac{ipalpha} but this does not mean it is wrong. As it is quite common in the Japanese data, I decided to keep it.
+
+A last thing I did to clean the datasets was to exclude duplicate graphemes with different pronunciations. Although ambiguities and multiple possible pronunciations for one word are linguistically speaking very common, it is not possible for a neural model to distinguish such cases without any context. As \ac{g2p} modelling happens on character basis and not on word basis there is no context available in our case that could account for at least some ambiguities. Also, in the WikiPron data that was preprocessed for the \ac{sigm} task, duplicates were excluded as well. It makes sense to clean all datasets in the same way.
+
+
+\section{Feature encoding}
+\label{sec:feature_enc}
+In order to incorporate the phonetic features into the dataset, we decided to add what we refer to as `flags' to the phonemes. Generally, the idea is to encode the phonetic features that PHOIBLE provides and add them to the WikiPron dataset. All the PHOIBLE features are listed in table \ref{tab:phoible_features}. Some of them might sound familiar from the linguistic background chapter. The exact description of each and every feature is not important at this point. The main point is that these features allow to uniquely describe each phoneme. In total, there are 37 features that are used to describe more than 3,000 phonemes. Each of the features can take on three values: either `+' (applies to this phoneme), `-' (does not apply) or `0' (not applicable). There are still a few phonemes that are not in the PHOIBLE set that are in my data. These will jsut not b encoded in the following experiments. An exception is the length marker. There are a few long vowels that are not like that in the PHOIBLE data. As there is the `long' feature, it is easily possible to use use the base character feature vector and mark the `long' as `+'. This is the only thing I changed for the following experiments. All other features vectors are just used as is. I encoded the features in a jupyter notebook which is in my GitHub repository\myfootnote{\url{https://github.com/theDebbister/masterThesis/blob/main/data/MA_Encode_features.ipynb}}.
+
+I experimented with several things before I trained a first set of models. I will list the steps of my experiments in the following. For all feature experiments I used the cleaned WikiPron data.
+
+\tab{tab:phoible_features}{This table displays all the features that are use in PHOIBLE to describe one phoneme. Each feature is either `+' (applies to this phoneme), `-' (does not apply to this phoneme) or `0' (not applicable).}{
+\begin{tabular}{llll}
+tone           & tap         & strident              & epilaryngealSource     \\
+stress         & trill       & dorsal                & spreadGlottis          \\
+syllabic       & nasal       & high                  & constrictedGlottis     \\
+short          & lateral     & low                   & fortis                 \\
+long           & labial      & front                 & raisedLarynxEjective   \\
+consonantal    & round       & back                  & loweredLarynxImplosive \\
+sonorant       & labiodental & tense                 & click                  \\
+continuant     & coronal     & retractedTongueRoot   &                        \\
+delayedRelease & anterior    & advancedTongueRoot    &                        \\
+approximant    & distributed & periodicGlottalSource &                       
+\end{tabular}
+}{PHOIBLE features}
+
+\subsection*{Version 1}
+
+The first thing I tried was to add two flags to every phoneme. In order to do this, I encoded the features as two strings. This means that I split the features into two sets and then used a different set of random capital letters to encode all of these uniquely. After each phoneme I will add two flags that describe that phoneme. The combination of the two flags will be unique for each phoneme. The individual flags can overlap between the phonemes, if one half of the features is the same for that phoneme. The example below shows a possible encoding of a phonetic text:
+
+\begin{covexamples}
+\item \label{ex1} \textipa{p} AB CD \textipa{k\super h} AA BC
+\item \label{ex2} \textipa{k\super h} AA BC  \ipa{U} BF CC
+\end{covexamples}
+
+A problem with this approach is that the sequences get really long if all phonemes are represented as three strings. The CMU model cuts the sequence off at 30 characters. This means that only phoneme sequences that no longer than 10 characters will be represented in full. This is way to short to account for many words. It is possible to increase that limit. However, 30 characters is already quite long and there is no point in setting this limit too high as those models still experience difficulties in processing sequences that are too long. Not only the sequence length is influenced but also the vocabulary size. Each flag will be added to the vocabulary.  
+
+It is therefore not surprising that the model did not perform well. In fact, the \ac{wer} was about double the \ac{wer} of the long model trained on the uncleaned data. Given this results, I decided not to train any more models and look for another way of how to encode the features.
+
+\subsection*{Version 2}
+For the second attempt at encoding phonetic features I tried a different approach. Instead of adding two flags, I added only one flag after each phoneme. Also, this time the idea was not to add a unique flag to each phoneme but to encode only some features for all phonemes. This means that for some phonemes the same flag was added. As the phonemes were not replaced by the flags, but the phonemes were kept in the text, there is no information lost. The intuition behind it is to encode high-level patterns in phoneme sequences. For example, as vowels typically have some overlapping features, very similar vowels will be encoded using the same flag. In order to choose appropriate features for each language, I calculated the pearson correlation between the features. I only used those features whose correlation with all other features is not above a certain threshold. The reason for this is that all languages only use a relatively small subset of phonemes. This means that many features are not important for a language as those features are not used to distinguish meaning. In order to recognize high-level patterns, only the most distinctive features are important. Other than that I encoded the features in the same way as for version one. First results for this version reached similar scores as the baselines ones. I trained a full set of models for this version.
+
+While encoding these features, I noticed that some phonemes are not listed as individual phonemes in PHOIBLE but are listed as allophones of one phoneme that is in there. This means that some broad transcriptions contain allophones which, ideally, should not be the case. Also, it means that I did not have features for these phonemes which means that those were not encoded.  
+
+
+\section{Results}
+
+\subparagraph{Setting 1: Baseline Short}
+\tab{tab:baseline_short}{Baseline CMUSphinx results compared with \ac{sigm} 2020 and 2021 results. For each language the best score is reported no matter what year or what model. The table shows the results for setting 1. CMUSphinx provides a WER implementation which has been used to evaluate the models.}{
+\begin{tabularx}{\columnwidth}{
+| 	>{\raggedright\arraybackslash}l | 
+	>{\raggedleft\arraybackslash}r | 
+	>{\raggedleft\arraybackslash}r  | 
+	>{\raggedleft\arraybackslash}X |
+	>{\raggedright\arraybackslash}X |}
+\hline
+\textbf{ISO396-3} & \textbf{BS WER} & \textbf{BS WER \ac{nws}} & \textbf{SIG WER} & \textbf{Transcription type} \\
+\hline
+\hline
+eng (us) & 54.40 & 87.60 & 37.43 & broad \\
+fra & 7.20 & 47.20 & 5.11 & broad \\
+ell & 9.80 & 83.20 & 18.67 & broad \\
+kat & 0.30 & 65.20 & 0.00 & broad \\
+hin & 5.60 & 87.10 & 5.11 & broad \\
+jpn & 6.60 & - & 4.89 & narrow \\
+kor & 28.70 & 100.00 & 16.20 & narrow \\
+vie & 7.50 & 100.00 & 0.89 & narrow \\
+\hline
+\end{tabularx}}{Baseline Short Results}
+
+
+\tab{tab:res_bs_s_full}{This table shows the results for setting 2 (BS), setting 4 (BS-clean) and setting 6 (F2)}{
+\begin{tabularx}{\textwidth}{|l|X||r|r||X|X||r|r|}
+\hline
+Iso 639-3 & Type WikiPron & WER BS & PER BS & WER BS-clean & PER BS-clean & WER F2 & PER F2 \\ \hline \hline
+cmn       & broad         & 17.6   & 3.9    &              &              & 18.1   & 4.4    \\
+deu       & broad         & 37.1   & 4.8    &              &              & 38.6   & 5.9    \\
+deu       & narrow        & 52.2   & 7.1    &              &              & 55.9   & 9.4    \\
+ell       & broad         & 7.1    & 0.6    &              &              & 9.1    & 0.8    \\
+eng us    & broad         & 50.7   & 9.5    &              &              & 51.3   & 10.4   \\
+eng us    & narrow        & 84.6   & 31.4   &              &              & 84.9   & 32.3   \\
+eng uk    & broad         & 45.5   & 8.6    &              &              & 47.6   & 9.7    \\
+eng uk    & narrow        & 90.3   & 30.2   &              &              & 93.7   & 34.2   \\
+eus       & broad         & 21.2   & 2.7    &              &              & 21.7   & 3.2    \\
+fin       & broad         & 2.8    & 0.2    &              &              & 8.9    & 3.1    \\
+fin       & narrow        & 3.2    & 0.3    &              &              & 9.0    & 3.5    \\
+fra       & broad         & 5.3    & 0.7    &              &              & 5.9    & 0.8    \\
+hin       & narrow        & 7.7    & 1.2    &              &              & 8.4    & 1.3    \\
+hin       & broad         & 4.4    & 0.7    &              &              & 6.3    & 1.0    \\
+ind       & broad         & 37.9   & 5.3    &              &              & 39.3   & 6.1    \\
+ind       & narrow        & 43.1   & 5.4    &              &              & 43.1   & 5.6    \\
+jpn       & narrow        & 6.5    & 0.6    &              &              & 6.6    & 0.7    \\
+kat       & broad         & 0.0    & 0.0    &              &              & 1.0    & 0.8    \\
+kor       & narrow        & 23.4   & 4.1    &              &              & 25.8   & 4.6    \\
+mya       & broad         & 35.1   & 6.5    &              &              & 88.0   & 17.4   \\
+rus       & narrow        & 1.9    & 0.2    &              &              & 5.0    & 1.5    \\
+spa ca    & broad         & 1.1    & 0.1    &              &              & 2.2    & 0.7    \\
+spa ca    & narrow        & 2.3    & 0.3    &              &              & 2.8    & 0.6    \\
+spa la    & broad         & 1.4    & 0.1    &              &              & 1.9    & 0.6    \\
+spa la    & narrow        & 2.6    & 0.3    &              &              & 2.7    & 0.4    \\
+tgl       & broad         & 28.4   & 4.6    &              &              & 33.9   & 5.0    \\
+tgl       & narrow        & 45.5   & 6.4    &              &              & 48.6   & 6.9    \\
+tha       & broad         & 12.5   & 2.6    &              &              & 12.1   & 3.1    \\
+tur       & broad         & 50.6   & 7.8    &              &              & 49.1   & 7.2    \\
+tur       & narrow        & 55.1   & 7.6    &              &              & 54.8   & 8.0    \\
+vie       & narrow        & 1.5    & 0.8    &              &              & 2.6    & 1.5    \\
+zul       & broad         & 65.9   & 10.7   &              &              & 91.4   & 12.0   \\ \hline
+\end{tabularx}
+}{Results: long models}
+
+\subparagraph{Setting 2: Baseline Long}
+
+\tab{tab:baseline_long}{Baseline CMUSphinx results compared with \ac{sigm} 2020 and 2021 results. For each language the best score is reported no matter what year or what model. The table shows the results for setting 2. CMUSphinx provides a WER implementation which has been used to evaluate the models.}{
+\begin{tabularx}{\columnwidth}{
+| 	>{\raggedright\arraybackslash}l | 
+	>{\raggedleft\arraybackslash}r | 
+	>{\raggedleft\arraybackslash}r  | 
+	>{\raggedleft\arraybackslash}X |
+	>{\raggedright\arraybackslash}X |}
+\hline
+\textbf{ISO396-3} & \textbf{BS WER} & \textbf{BS WER \ac{nws}} & \textbf{SIG21 WER} & \textbf{Transcription type} \\
+\hline
+\hline
+eng (us) & 50.70 & & 37.43 & broad \\
+fra & 5.30 & & 5.11 & broad \\
+ell & 7.10 & & 18.67 & broad \\
+kat & 0.00 & & 0.00 & broad \\
+hin & 4.40 & & 5.11 & broad \\
+jpn & 6.50 & & 4.89 & narrow \\
+kor & 23.40 && 16.20 & narrow \\
+vie & 7.10 & & 0.89 & narrow \\
+\hline
+\end{tabularx}}{Baseline Long Results}
+
+\subparagraph{Setting 3: Baseline clean}
+
+\subparagraph{Setting 4: Feature input}
+
+
+
+

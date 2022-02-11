@@ -1,14 +1,17 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import unicodedata
 import pandas as pd
 import sys
 import numpy as np
-from pathlib import Path
 import re
-from collections import Counter, OrderedDict
-from tqdm import tqdm
+
+
+"""
+I used this script to calculate the WER and PER scores for those models that were trained on data that contained
+features. I cleaned the test predictions to exclude the features flags and calculated the scores on the phonetic text
+only.
+"""
 
 
 def per_score(gold, hypo) -> (int, int):
@@ -85,7 +88,10 @@ def calc_errors(inputs, decodes, words, pronunciations):
     return correct, errors, num_edits, len_reference
 
 
-def clean_data(predictions):
+def clean_data(predictions: str):
+    """
+    param predictions: path to a file containing all predictions for all languages for the test set.
+    """
 
     with open(predictions, 'r', encoding='utf8') as pred:
 
@@ -103,8 +109,6 @@ def clean_data(predictions):
                 counter = 6
                 end_of_data = False
                 lang = re.sub(r'Lang: ', '', last_lines[-1])
-
-                #if not lang == 'vie_latn_hanoi_narrow_filtered':
 
                 gold_df = pd.read_csv('gold/' + lang + '.tsv.part.test', sep='\t', names=['word', 'pron'])
 
@@ -130,6 +134,7 @@ def clean_data(predictions):
                 counter -= 1
 
             elif line.startswith('Words:'):
+                # clean out statistics after the end of all predictions for one language
                 end_of_data = True
                 last_lines.append(line.strip())
                 counter -= 1
@@ -139,9 +144,17 @@ def clean_data(predictions):
                 inputs.append(line[0])
 
                 phon = line[1].strip()
+                # clean out features that are capital letters
                 phon = re.sub(r'[ABCDEFGHIJKLMNOPQRSTUVWXYZ][ABCDEFGHIJKLMNOPQRSTUVWXYZ]', '', phon)
                 phon = re.sub(r'(\s+)', ' ', phon)
                 dec.append(phon.strip())
+        print(f'Lang: {lang}')
+        print("Words: %d" % (correct + errors))
+        print("Errors: %d" % errors)
+        print("WER: %.3f" % (float(errors) / (correct + errors)))
+        print("PER: %.3f" % (float(edits) / len_reference))
+        print("Accuracy: %.3f" % float(1. - (float(errors) / (correct + errors))))
+        print('------------------------')
 
 
 if __name__ == '__main__':
