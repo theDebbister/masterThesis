@@ -1,72 +1,9 @@
 \newchap{Technical Background}
 \label{chap:tech-background}
-This chapter presents the technical background that is needed for this thesis. It explores everything around automated models that can be used to create phonetic transcriptions. I will first set the basis and dive into evaluation metrics and general architectures and frameworks that are commonly used and then present current state-of-the-art models. Table \ref{tab:sota} shows the state-of-the-art models for \ac{g2p} modelling.
-
-\tab{tab:sota}{This table presents the state-of-the-art \ac{g2p} models. Models that are important for this thesis will be explained in more detail. The language code in parenthesis is the code used in the respective paper.}{
-\begin{tabularx}{\textwidth}{
-| 	>{\raggedright\arraybackslash}l | 
-	>{\raggedright\arraybackslash}l | 
-	X | 
-	>{\raggedright\arraybackslash}r |}
-\hline
-\textbf{Author} & \textbf{Model Architecture} & \textbf{ISO 639-3} & \textbf{WER} \\
-\hline
-\hline
-\multirow[t]{11}{0.14\textwidth}{SIG21: \citet{Clematide&Makarov.2021} \\
-\vspace{0.5cm}
-\href{https://aclanthology.org/2021.sigmorphon-1.17/}{\underline{Link}}}& \multirow[t]{11}{0.5\textwidth}{CLUZH models 1-7. LSTM-based neural transducer with pointer network-like monotonic hard attention trained with imitation learning. All models 1-7 are majority-vote ensembles with different number of models (5-30) and different inputs (characters or segments). \\
-\vspace{0.5cm}
-Achieved good results in nld (14.7), ice (10), jpn (5.0), fra (7.5) and vie (2.0) but not better than SIG20.
-
-}& \multicolumn{2}{c|}{medium (10,000 pairs)} \\\cline{3-4}
-& & hye (arm\_e) & 6.4 \\
-& & hun & 1.0 \\
-& & kat (geo) & 0.0 \\
-& & kor & 16.2 \\\cline{3-4}
-& & \multicolumn{2}{c|}{low (800 train pairs)} \\\cline{3-4}
-& & ell (gre) & 20 \\
-& & ady & 22 \\
-& & lav & 49 \\
-& & mlt\_ltn & 12 \\
-& & cym (wel\_sw) & 10 \\
-\hline
-\multirow[t]{4}{0.14\textwidth}{SIG21: \citet{lo-nicolai-2021-linguistic} \\
-\vspace{0.5cm}
-\href{https://aclanthology.org/2021.sigmorphon-1.15/}{\underline{Link}}}& \multirow[t]{4}{0.5\textwidth}{UBC-2 outperforms the baseline. They analysed the errors of the baseline and extend it by adding penalties for wrong vowels and wrong diacritics. Errors on vowels actually decreased. Best macro average (low -resource).
-}& ady & 22 \\
-& & khm & 28 \\
-& & lav & 49 \\
-& & slv & 47 \\
-\hline
-\multirow[t]{4}{0.14\textwidth}{SIG21: \citet{gautam.2021} \\
-\vspace{0.5cm}
-\href{https://aclanthology.org/2021.sigmorphon-1.16/}{\underline{Link}}}& \multirow[t]{4}{0.5\textwidth}{Dialpad-1: Majority-vote ensemble consisting of three different public models (weighted \ac{fst}, joint-sequence model trained with \ac{em} and a neural \ac{s2s}), two \ac{s2s} variants (LSTM and transformer) and two baseline variations. 
-}& \multicolumn{2}{c|}{high (32.800 train pairs)} \\\cline{3-4}
-& & eng (eng\_us)  &  37.43 \\
-& &   &   \\
-& &   &   \\
-\hline
-\multirow[t]{5}{0.14\textwidth}{SIG20: \citet{peters-martins-2020-one} \\
-\vspace{0.5cm}
-\href{https://aclanthology.org/2020.sigmorphon-1.4/}{\underline{Link}}}& \multirow[t]{5}{0.5\textwidth}{DeepSPIN-2,-3,-4: Transformer- or LSTM-based enc-dec \ac{s2s} models with sparse attention. Add language embedding to enc or dec states instead of language token.
-}& \multicolumn{2}{c|}{3.600 train pairs} \\\cline{3-4}
-& & jpn (jpn\_hira) & 4.89 \\
-& & fra (fre) & 5.11 \\
-& & rum & 9.78  \\
-& & vie  & 0.89  \\
-\hline
-\multirow[t]{4}{0.14\textwidth}{SIG20: \citet{yu-etal-2020} \\
-\vspace{0.2cm}
-\href{https://aclanthology.org/2020.sigmorphon-1.5/}{\underline{Link}}}& \multirow[t]{4}{0.5\textwidth}{IMS: Self training ensemble of one n-gram-based \ac{fst} and 3 \ac{s2s} (vanilla with attention, hard monotonic attention with pointer, hybrid of hard monotonic attention and tagging model). 
-}& hin &  5.11 \\
-& & nld (dut) & 13.56  \\
-& &   &   \\
-& &   &   \\
-\hline
-\end{tabularx}}{SOTA \ac{g2p} models}
+This chapter presents the technical background that is needed for this thesis. It explores everything around automated models that can be used to create phonetic transcriptions. I will first set the basis and dive into evaluation metrics and general architectures and frameworks that are commonly used and then present current state-of-the-art models. Table \ref{tab:sota} shows the state-of-the-art models for \ac{g2p} modelling. Phonetic transcriptions are often used in \ac{asr} and \ac{stt} technologies. There are systems that can produce speech directly from orthography and question the necessity of phonetic transcriptions. When only  little data is available, the training data might not be enough to train an orthography-to-speech system, making the intermediate step of creating phonetic transcriptions necessary. Another reason for creating phonetic transcriptions is that its usage is not limited to speech applications \citep{mortensen-etal-2018-epitran}. They might also be used to compare languages on speech basis. In order to do that, there needs to be a lot of knowledge about how language works. 
 
 \section{Evaluation metrics}
-The evaluation of phonetic transcriptions depends on whether the system output and the reference are sentences or single words, i.e. character sequences. The most common metric to evaluate the former is the \ac{wer}. The lower the score, the better the model. If the \ac{wer} is 0, this means that the texts are exactly the same. The following formula is used to calculate \ac{wer}:    
+In order to judge whether a computational system performs wells or not we need a appropriate metric. Mostly, you need a reference solution and a system solution that can be compared to the reference and then the difference can be quantified and be given a score. The evaluation of phonetic transcriptions depends on whether the system output and the reference are sentences or single words, i.e. character sequences. The most common metric to evaluate the former is the \ac{wer}. The lower the score, the better the model. If the \ac{wer} is 0, this means that the texts are exactly the same. The idea behind the score is that we can capture the cost that it takes to transform the system output into the reference phoneme sequence. The following formula is used to calculate the \ac{wer}:    
 
 \begin{equation}
 \label{eq:wer}
@@ -74,19 +11,19 @@ WER = \frac{S+I+D}{N}
 \end{equation} 
 
 
-In equation \ref{eq:wer} the $S$ stands for substitution, $I$ for insertion, $D$ for deletion and $N$ denotes the total number of words in the reference sequence. Those numbers can be calculated by using an algorithm to get the edit distance. The idea behind the score is that we can capture the cost that it takes to transform the system output into the reference phoneme sequence. If you want the percentage, the number needs to be multiplied with $100$. Note that the \ac{wer} can be more than $100$\%. This happens if, for example, the are a lot of additional insertions or deletions in the system text. If the system output and reference are character sequences, the score is called \acf{cer}. It is calculated in the exact same way as the \ac{wer}, but instead of words everything is calculated on character basis. In the phonetic transcriptions setting, the \ac{cer} is typically replaced by the \acf{per} to match the correct terminology. The calculations are not changed. In a multilingual setting, it is sometimes necessary to have a score for the entire system covering more than one language. In such cases it is custom to use a macro-averaged \ac{wer} or \ac{cer}. This means that the sum of the scores for each language is divided by the number of languages \citep{Leung.2021}.
+In equation \ref{eq:wer} the $S$ stands for substitution, $I$ for insertion, $D$ for deletion and $N$ denotes the total number of words in the reference sequence. Those numbers can be calculated by using an algorithm to get the edit distance. It is quite common to multiply the resulting number with $100$ \citep{gorman-etal-2020-sigmorphon}. Note that the \ac{wer} can be more than $100$\%. This happens if, for example, the are a lot of additional insertions or deletions in the system text. If the system output and reference are character sequences, the score is called \acf{cer}. It is calculated in the exact same way as the \ac{wer}, but instead of words everything is calculated on character basis. In the phonetic transcriptions setting, the \ac{cer} is typically replaced by the \acf{per} to match the correct terminology. The calculations are not changed. In a multilingual setting, it is sometimes necessary to have a score for the entire system covering more than one language. In such cases it is custom to use a macro-averaged \ac{wer} or \ac{cer}. This means that the sum of the scores for each language is divided by the number of languages \citep{Leung.2021}.
 
-In the case of \ac{g2p} conversion, the \ac{wer} actually just reflects the rate of wrongly predicted words, as one sequence consists of only one word. 
+In the case of \ac{g2p} conversion, the \ac{wer} actually just reflects the rate of wrongly predicted words, as one sequence consists of only one word. It is therefore just 1 (or 100) minus the accuracy. The accuracy is the rate of the correctly predicted words (which means we divide all correctly predicted words by the total number of words). It is important to note, the the \ac{wer} and the \ac{per} suggest slightly different things. If each word has exactly one wrong character this means that the \ac{wer} would be 100 as all words are predicted wrongly. Now, if the words are really long, the \ac{per} score would be very good compared to the really bad \ac{wer}. If the words are rather short, the \ac{per} would get worse as well but the \ac{wer} would just stay the same. So, when analysing the results it is important to pay close attention to how those two metrics relate.
 
 
 \section{Automated phonetic transcription}
 \label{model_theory}
-In this section I set the stage for understanding the technical background of \ac{g2p} models. Today's technologies allow to build models that create phonetic transcriptions automatically given an original text. There are several approaches which I will discuss below. Creating phonetic transcriptions is essentially a \acf{s2s} task. Like other \ac{nlp} tasks its goal is to transform a sequence of characters into another sequence of characters. In particular, it is very similar to machine translation which is such a task as well \citep{Rao2015GraphemetophonemeCU}. In the present case, the input sequence is a sequence of graphemes. These can look very differently depending on the script (see section \ref{writing-sys}). The output sequence is a sequence of phonemes\myfootnote{Please refer to section \ref{phonology} in order to understand the terminological implications of  phoneme. As it is common in research, I will stick to the term \textit{phoneme} although strictly speaking it is not always correct. Phoneme in this case just refers to any symbol that is used to represent a sound.}. This process is typically referred to as \ac{g2p}. There are a few problems and characteristics of the \ac{g2p} task that are important:
+In this section I set the stage for understanding the technical background of \ac{g2p} models. Today's technologies allow to build models that create phonetic transcriptions automatically given an original text. There are several approaches which I will discuss below. Creating phonetic transcriptions is essentially a \acf{s2s} task. Like other \ac{nlp} tasks its goal is to transform a sequence of characters into another sequence of characters. In particular, it is very similar to machine translation which is such a task as well \citep{Rao2015GraphemetophonemeCU}. In the present case, the input sequence is a sequence of graphemes. These can look very differently depending on the script (see section \ref{writing-sys}). The output sequence is a sequence of phonemes\myfootnote{Please refer to section \ref{phonology} in order to understand the terminological implications of  phoneme. As it is common in research, I will stick to the term \textit{phoneme} although strictly speaking it is not always correct. Phoneme in this case just refers to any symbol that is used to represent a sound.}. This process is typically referred to as \acf{g2p}. There are a few problems and characteristics of the \ac{g2p} task that are important:
 
 \begin{itemize}
-\item The input and output sequences are not always of the same length. It is difficult to align input and output. Not all systems rely on aligning input and output but often it is needed to analyse the results (for example to create confusion matrices). 
+\item The input and output sequences are not always of the same length. It is difficult to align input and output which measn to map one or more grapheme to one or more phoneme. Not all systems rely on aligning input and output but often it is needed to analyse the results (for example to create confusion matrices). 
 \item Due to the open-vocabulary situation and the impossibility to cover all possible words, all systems must be able to deal with rare and unseen words \citep{Rao2015GraphemetophonemeCU, ney-joint-sequence2008}. 
-\item Most of the research done in this area is limited to the English language. This is not uncommon in \ac{nlp} research. The availability of English data resources and the unavailability and struggles to find data in other languages heavily influences this research. \citet{Ashby&Bartley.2021} report that the \acs{sigm} (\acl{sigm}) \ac{g2p} tasks in 2020 and 2021 are the first attempt to tackle multilingual \ac{g2p}.
+\item Most of the research done in this area is limited to the English language. This is not uncommon in \ac{nlp} research. The availability of English data resources and the unavailability and struggles to find data in other languages heavily influences this research. \citet{Ashby-Bartley.2021} report that the \acs{sigm} (\acl{sigm}) \ac{g2p} shared tasks in 2020 and 2021 are the first attempt to tackle multilingual \ac{g2p}.
 \end{itemize}
 
 In the following, I explain the most important model types. Often, those different types are used in combination as the different models have different advantages which can be used very well in combination. 
@@ -94,13 +31,13 @@ In the following, I explain the most important model types. Often, those differe
 \subsection{Look-up dictionary} The simplest version of a \ac{g2p} model is a look-up table where a grapheme sequence is stored together with its phonetic transcription. Such a dictionary is expensive to create and needs a lot of storage and has a very limited coverage. Although such a system is no longer useful on its own it can still be used in addition to other, for example, statistical models \citep{ney-joint-sequence2008}.
 
 \subsection{Rule-based models}
-The first systems to create phonetic transcriptions of text were rule-based systems. Although rule-based systems are outperformed by more recent neural models \citep{Ashby&Bartley.2021, gorman-etal-2020-sigmorphon}, I will introduce them as they were an important step towards \ac{g2p} modelling. Additionally, rule-based models can be used together with other models to reach a better performance. Rule-based transcriptions models are built using linguistic pronunciation rules. In order to be able to create such a system, one needs to collect pronunciation rules first. While there are only few languages where such rules are ready and available for the general public there are many languages where those rules need to be created first. In order to create the rules in the first place, a lot of linguistic expertise is needed. Apart from this initial effort to create the rules, a problem with rule-based approaches is the maintenance of the systems. To maintain the system, experts need to keep track of language change which is time consuming and expensive. Most languages are irregular in their pronunciation and those irregularities need to be tracked as well. Another drawback of such systems is that they might fail when presented with unseen or rare words \citep{ney-joint-sequence2008}. Many earlier systems published considered only one language and were not multilingual (see e.g. \citet{rule-based2009}). 
+The first systems to create phonetic transcriptions of text were rule-based systems. Although rule-based systems are outperformed by more recent neural models \citep{Ashby-Bartley.2021, gorman-etal-2020-sigmorphon}, I will introduce them as they were an important step towards \ac{g2p} modelling. Additionally, rule-based models can be used together with other models to reach a better performance. Rule-based transcriptions models are built using linguistic pronunciation rules. For example, if in a language, a certain word initial grapheme is always pronounced the same way, we can store a rule, that states that if that grapheme is encountered word initial it should be transcribe using a specific phoneme. This rule must of course be stored in a machine readable way but the idea is the same. In order to be able to create such a system, one needs to collect pronunciation rules first. While there are only few languages where such rules are ready and available for the general public there are many languages where those rules need to be created first. In order to create the rules in the first place, a lot of linguistic expertise is needed. Apart from this initial effort to create the rules, a problem with rule-based approaches is the maintenance of the systems. To maintain the system, experts need to keep track of language change which is time consuming and expensive. Most languages are irregular in their pronunciation and those irregularities need to be tracked as well. Another drawback of such systems is that they might fail when presented with unseen or rare words \citep{ney-joint-sequence2008}. Many earlier systems published considered only one language and were not multilingual (see e.g. \citet{rule-based2009}). 
 
 \subparagraph{Epitran} Epitran is an example of a relatively new rule-based system. It makes use of the fact that there are languages that are more or less regularly pronounced and presents a rule-based system for \ac{g2p} conversion for mostly low-resource languages. The system has the ability to provide a solution for every possible word and is consistent within its transcriptions. Epitran for all languages except English and traditional Chinese works with a map file that allows to map graphemes to phonemes. Additional pre- or post-processing can be applied that follow context specific rules \citep{mortensen-etal-2018-epitran}.
 
 
 \subsection{N-gram Models / Statistical models}
-N-gram models, statistical models or joint-sequence models were used before neural models took over the field. These are sometimes referred to as traditional models. One reason why they were outperformed by neural models is that it is necessary to construct alignments between grapheme and phonemes. This is needed because one grapheme can be realized as multiple phonemes or vice versa. It is not possible to simply have a one-to-one alignment. Joint-sequence models were often used with different versions of the \acf{em} algorithm \citep{lo-nicolai-2021-linguistic}. The main intuition about those models is that they, in some way or other, try to statistically model the relationship between graphemes and phonemes. Typically, those models consist of two parts: first an alignment model. Second, a model that captures the relationship between graphemes and phonemes using clearly defined statistical methods. A very common model is the joint-sequence model.
+N-gram models, statistical models or joint-sequence models were used before neural models took over the field. These are sometimes referred to as traditional models. One reason why they were outperformed by neural models is that it is necessary to construct alignments between graphemes and phonemes. This is needed because one grapheme can be realized as multiple phonemes and vice versa. It is not possible to simply have a one-to-one alignment. Joint-sequence models were often used with different versions of the \acf{em} algorithm \citep{lo-nicolai-2021-linguistic}. The main intuition about those models is that they, in some way or other, try to statistically model the relationship between graphemes and phonemes. Typically, those models consist of two parts: first an alignment model. Second, a model that captures the relationship between graphemes and phonemes using clearly defined statistical methods. A very common model is the joint-sequence model.
 
 \subparagraph{Joint-sequence model} The term \textit{joint-sequence} hints already at the underlying architecture of those models: the idea is to process \textit{joint} sequences of input and output symbols. In order to do that they must be aligned. We can then concatenate those alignments, which means to concatenate the grapheme and the phoneme which it is mapped to, and receive what is called a graphone. Using the concept of \ac{fst}, we can build a model. \acp{fst} are similar to finite-state automatons. But instead of just telling whether a certain sequence belongs to a certain language (which is pattern matching), they can output none or many symbols at every step as well. This means that in the process of iterating over the sequence, they produce another sequence. Knowing that, it is easily understandable that this works well for our given \ac{g2p} task. The idea is now, that we model the joint-probability of the input graphemes and output phonemes or rather our graphones. Doing this we can use the \ac{em} algorithm to find a mapping of graphemes to phonemes that is most probable. As those graphones consist of n-grams of both the input and output sequence, they themselves can be considered a n-grams which is why those models are sometimes referred to as n-gram models \citep{ney-joint-sequence2008, lo-nicolai-2021-linguistic}.
 
@@ -124,40 +61,84 @@ Neural transducers, as presented by \citet{jaitly2016neural}, extend previously 
 
 
 \begin{landscape}
+\thispagestyle{empty}
+\tab{tab:sota_table_long}{The table lists the SOTA models from the SIGMORPHON tasks in 2020 and 2021. Superscript: model numbers. Numbers in bold: best WER. Languages in bold are in the 100LC corpus. $^A$: 10,000 training samples in 2021. $^B$: 800 training samples in 2021. Model explanations: table \ref{tab:sota}.}{
+\begin{tabularx}{1.65\textwidth}{Xrrrrrrrrrr|rrrrr}
+\hline
+\textbf{ISO396-3} & \multicolumn{6}{c}{\textbf{BS20}} & \multicolumn{2}{c}{\textbf{DeepSPIN20}} & \multicolumn{2}{c|}{\textbf{IMS20}} & \textbf{BS21} & \multicolumn{1}{c}{\textbf{CL21}} & \multicolumn{2}{c}{\textbf{UBC21}} & \multicolumn{1}{c}{\textbf{DP21}}   \\
+
+ & \multicolumn{2}{c}{\textbf{LSTM}} & \multicolumn{2}{c}{\textbf{transformer}} & \multicolumn{2}{c}{\textbf{pair n-gram}} & & & & & & CL & UBC-1 &  UBC-2 & \\
+
+		        & WER          & PER          & WER   & PER          & WER   & PER          & WER             &PER& WER        & PER          & WER   & WER          & WER   & WER   & \\\cline{2-16}
+
+ady$^B$         & 28.00        &\textit{6.53} & 28.44 &\textit{6.49} & 32.00 &\textit{7.56} & 24.67$^3$       & & 25.00        &\textit{5.79} &\textbf{22.00} & \textbf{22.00$^{23}$} & 25.00 & \textbf{22.00}& \\
+bul$^A$ 	    & 31.11        &\textit{5.94} & 34.00 &\textit{7.89} & 41.33 &\textit{9.05} &    -            & & 22.22        &\textit{4.85} &\textbf{18.30} & 18.80$^6$    &       &       & \\
+cym (wel\_sw)$^B$   &              &              &       &              &       &              &                 & &              &              &\textbf{10.00} & \textbf{10.00$^1$}    & 13.00 & 12.00 & \\
+\textbf{ell (gre)$^B$}& 18.89  &\textit{3.30} & 18.89 &\textit{3.06} & 21.78 &\textit{4.05} & -               & &\textbf{18.67}&\textit{2.97} & 21.00 & 20.00$^{13}$ & 22.00 & 22.00 & \\
+\textbf{eng(\_us)}&            &              &       &              &       &              &                 & &              &              & 41.94 &              &       &       & \textbf{37.43}\\
+\textbf{fra (fre)$^A$}& 6.22   &\textit{1.32} & 6.89  &\textit{1.72} & 13.56 &\textit{3.12} &\textbf{5.11$^3$} && 6.89         &\textit{1.60} & 8.50  & 7.50$^{456}$ &       &       & \\
+hbs$^A$         &              &              &       &              &       &              &                 & &              &              &\textbf{32.10} & 35.3$^7$    & & & \\
+\textbf{hin} 	& 6.67         &\textit{1.47} & 9.56  &\textit{2.40} & 12.67 &\textit{4.05} & -               & &\textbf{5.11} &\textit{1.20} &       &              &       &       & \\
+hun$^A$ 	    & 5.33         &\textit{1.18} & 5.33  &\textit{1.28} & 6.67  &\textit{1.51} &        -        & &  5.11        &\textit{1.12} & 1.80  &  \textbf{1.00$^{67}$} &       &       & \\
+hye (arm\_e)$^A$   & 14.67        &\textit{3.49} & 14.22 &\textit{3.29} & 18.00 &\textit{3.90} & -               & & 12.67        &\textit{2.94} & 7.00  &  \textbf{6.40$^{7}$}  &       &       & \\
+ice$^B$ 	    & 10.00        &\textit{2.36} & 10.22 &\textit{2.21} & 17.56 &\textit{3.62} &    -            & &\textbf{9.33} &\textit{2.04} & 12.00 & 10.00$^{13}$ & 13.00 & 11.00 & \\
+ita$^B$         &              &              &       &              &       &              &                 & &              &              &\textbf{19.00} & 31.00$^{3}$  & 20.00 & 22.00 & \\
+\textbf{jpn(\_hira)$^A$}& 7.56 &\textit{1.79} & 7.33  &\textit{1.86} & 9.56  &\textit{2.07} &\textbf{4.89$^4$} && 5.33         &\textit{1.26} & 5.20  &  5.00$^{7}$  &       &       & \\
+\textbf{kat (geo)$^A$}& 26.44  &\textit{5.14} & 28.00 &\textit{5.43} & 37.78 &\textit{6.48} &       -         & & 24.89        &\textit{4.57} &\textbf{0.00}  &\textbf{0.00$^{4567}$} &       &       & \\
+khm$^B$ 	    &              &              &       &              &       &              &                 & &              &              & 34.00 & 32.00$^{13}$ & 31.00 & \textbf{28.00} & \\
+\textbf{kor$^A$}& 46.89        &\textit{16.78}& 43.78 &\textit{17.50}& 52.22 &\textit{15.88}& 24.00$^{13}$    & & 26.22        &\textit{4.38} & 16.30 & \textbf{16.20$^{4}$}  &       &       & \\
+lav$^B$ 	    &              &              &       &              &       &              &                 & &              &              & 55.00 & \textbf{49.00$^{23}$} & 58.00 & \textbf{49.00} & \\
+lit 	        &\textbf{19.11}&\textit{3.55} & 20.67 &\textit{3.65} & 23.11 &\textit{4.43} & -               & & 20.00        &\textit{3.63} &       &              &       &       & \\
+mlt(\_ltn)$^B$  &              &              &       &              &       &              &                 & &              &              & 19.00 & 12.00$^{1}$  & 19.00 & 18.00 & \\
+nld (dut)$^A$   & 16.44        &\textit{2.94} & 15.78 &\textit{2.89} & 23.78 &\textit{3.97} &  -              & &\textbf{13.56}&\textit{2.36} & 14.70 & 14.70$^{7}$  &       &       & \\
+rum$^B$ 	    & 10.67        &\textit{2.53} & 12.00 &\textit{3.62} & 11.56 &\textit{3.55} &\textbf{9.78$^3$} && 10.22        &\textit{2.23} & 10.00 & 12.00$^{3}$  & 14.00 & 10.00 & \\
+slv$^B$ 	    &              &              &       &              &       &              &                  &&              &              & 49.00 & 50.00$^{1}$  & 56.00 & \textbf{47.00} & \\
+\textbf{vie$^A$}& 4.67         &\textit{1.52} & 7.56  &\textit{2.27} & 8.44  &\textit{1.79} &\textbf{0.89$^2$} &&  1.56        &\textit{0.48} & 2.50  &  2.00$^{57}$ &       &       & \\
+
+\hline
+%macro 	        & 16.84        &\textit{3.99 }& 17.51 &\textit{4.30} & 22.00 &\textit{4.92} &14.15&\textit{2.92}& 13.81        &\textit{2.76} &       &             &       &       & \\
+%macro low	    &              &              &       &              &       &              &                 & &              &              & 25.10 &             & 27.10 & 24.10 & \\
+%macro medium    &              &              &       &              &       &              &                 & &              &              & 10.60 &             &       &       & \\
+\end{tabularx}
+}{State-of-the-art models}
+\thispagestyle{empty}
+
+\end{landscape}
 
 \thispagestyle{empty}
-\begin{figure}[h]
-\vspace*{-2.8cm}
-    \begin{center}
-    \hspace*{-2cm}
-      \includegraphics[page=1,width=1.1\linewidth]{SOTA.pdf}
-    \end{center}
-  \end{figure}
- \end{landscape}
- 
-\begin{landscape}
-\begin{figure}[h]
-  \thispagestyle{empty}
-\vspace*{-2.8cm}
-    \begin{center}
-    \hspace*{-2cm}
-      \includegraphics[page=2,width=1.1\linewidth]{SOTA.pdf}
-    \end{center}
-    \stepcounter{myfigure}
-    \vspace*{-1.5cm}
-    \caption[State-of-the-art models]{The table lists the SOTA models from the SIGMORPHON tasks in 2020 and 2021.}
-    \label{fig:sota_table_long}
-  \end{figure}
- \end{landscape}
- 
+
+\tab{tab:sota}{This table presents the state-of-the-art \ac{g2p} models. The results for these models can be found in table \ref{tab:sota_table_long}}{
+\begin{tabularx}{\textwidth}{|X|X|p{0.6\textwidth}|}
+\hline
+\textbf{Model name} & \textbf{Authors} & \textbf{Model Architecture} \\
+\hline
+\hline
+CL21  & SIG21: \citet{Clematide-Makarov.2021}      & These are seven models in total. LSTM-based neural transducer with pointer network-like monotonic hard attention trained with imitation learning. All models 1-7 are majority-vote ensembles with different number of models (5-30) and different inputs (characters or segments). \\\hline
+
+UBC21 & SIG21: \citet{lo-nicolai-2021-linguistic}  & UBC-2 outperforms the baseline. They analysed the errors of the baseline and extend it by adding penalties for wrong vowels and wrong diacritics. Errors on vowels actually decreased. UBC-2 achieved the best macro average for low-resource languages in 2021. UBC-1 included syllable prediction which did not improve the results. \\\hline
+
+DP21  & SIG21: \citet{gautam.2021}                 & Dialpad-1: Majority-vote ensemble consisting of three different public models (weighted FST, joint-sequence model trained with EM and a neural seq2seq), two seq2seq variants (LSTM and transformer) and two baseline variations. \\\hline
+
+BS21 &  \citet{Ashby-Bartley.2021}                 & The baseline in 2021 is a neural transducer trained with imitation learning similar to a model submitted in 2020 \citep{makarov-clematide-2020-cluzh}. As they are so similar, I did not include the model twice, but only the newer one. \\\hline
+
+DeepSPIN20 & SIG20: \citet{peters-martins-2020-one}& DeepSPIN-2,-3,-4: Transformer- or LSTM-based seq2seq models with sparse attention. Add language embedding to encoder or decoder states instead of language token. \\\hline
+
+IMS20 & SIG20: \citet{yu-etal-2020}                & IMS: Self training ensemble of one n-gram-based FST and three seq2seq (vanilla with attention, hard monotonic attention with pointer, hybrid of hard monotonic attention and tagging model).\\\hline
+
+BS20 & \citet{gorman-etal-2020-sigmorphon}         & The baseline for the task in 2020 consisted of three different model types. An LSTM, an transformer and a pair-n-gram model that is based on a weighted FST. All of them were outperformed by other models except for Lithuanian. The LSTM performed best among these three. \\\hline
+\end{tabularx}
+}{SOTA G2P models}
+
+
+
+
 \section{State-of-the-art G2P models}
 \label{section:sig}
 As I have to decide what model I will use to train on my language set, I will now have a look at the state-of-the-art models that can be used for \ac{g2p} conversion.  
-The \ac{sigm} \citep{Sigmorphon.2021} regularly organizes shared tasks concerned with morphology and phonology. For the years 2020 and 2021 they organized a \ac{g2p} conversion task \citep{Ashby&Bartley.2021, gorman-etal-2020-sigmorphon}. The tasks represent a first attempt at creating benchmarks for multilingual \ac{g2p} conversion. Although there is other research on \ac{g2p}, many recent publications have been made within the \ac{sigm} shared tasks. 
-In the next sections, I will summarize the results and insights from \ac{g2p} research.
+The \ac{sigm} \citep{Sigmorphon.2021} regularly organizes shared tasks concerned with morphology and phonology. For the years 2020 and 2021 they organized a \ac{g2p} conversion task \citep{Ashby-Bartley.2021, gorman-etal-2020-sigmorphon}. The tasks represent a first attempt at creating benchmarks for multilingual \ac{g2p} conversion. Although there is other research on \ac{g2p}, many recent publications have been made within the \ac{sigm} shared tasks. In the next sections, I will summarize the results and insights from \ac{g2p} research with a focus on those shared tasks.
 
 \subsection{Model architectures}
-An essential part of \ac{g2p} modelling is the actual model. In section \ref{model_theory} I explained the most important theoretical basics. For this part here, I familiarized myself a bit more with strategies that work well in practice and what some concrete problems are. The methodologies mentioned below are to the most part task-agnostic. This means that they often improve results on most \ac{nlp} tasks and are not specifically developed for the \ac{g2p} task. Still, I think it is insightful to be aware of the great variety of approaches that nowadays technology offers. 
+An essential part of \ac{g2p} modelling is the actual model. In section \ref{model_theory}, I explained the most important theoretical basics. For this part here, I familiarized myself a bit more with strategies that work well in practice and what some concrete problems are. The methodologies mentioned below are to the most part task-agnostic. This means that they often improve results on most \ac{nlp} tasks and are not specifically developed for the \ac{g2p} task. Still, I think it is insightful to be aware of the great variety of approaches that nowadays technology offers. 
 
 \subparagraph{Ensembles}
 Many models that are used and achieve peek performance for \ac{g2p} modelling are ensemble models. An ensemble is essentially just a pool of different models that are trained on the data with different settings or they are completely different models. The way such a model can be used for inference is that all of the models process the input and present their predicted results. Out of all possibilities, one prediction will be chosen that is then the final model output. In order to get the final output, an ensemble needs some kind of decision algorithm to output the best result. A disadvantage of ensembles is that the models need a lot of storage. Also, it is to some extent a bit of a \textit{brute-force} approach as it could lead to preferring quantity over quality. 
@@ -182,13 +163,13 @@ A model is only as good as the data that is used to train it. While this is a ve
 Authors mostly include a section about their preprocessing and what should be done to ensure high quality datasets. The list given below is an incomplete list of potential problems and measures taken in different settings for \ac{g2p} data:
 
 \begin{itemize}
-\item \textbf{Exclusion of words with less than two Unicode characters or less than two phone segments} \citep{Ashby&Bartley.2021} 
-\item \textbf{Separation by script} \citep{Ashby&Bartley.2021}: It is very straightforward why this is done. There is no obvious connection between the different scripts of a language and its pronunciation. It makes sense to treat different scripts as different languages. 
-\item \textbf{Exclude foreign words with foreign pronunciations} \citep{Ashby&Bartley.2021}: Foreign words in a language with their original pronunciation can add phonemes that are not in that language's phoneme inventory. If they were to be included it would make sense to include a pronunciation adapted to the actual language.
-\item \textbf{Words with multiple pronunciations in word lists}: \cite{Ashby&Bartley.2021} excluded those words, however, it might also be possible to add \ac{pos} tags or other linguistic information to distinguish these words.
-\item \textbf{Consistent broad transcriptions} \citep{Ashby&Bartley.2021}: With broad transcriptions it is important to be consistent and not use allophones. \cite{Ashby&Bartley.2021} did this specifically for Bulgarian.
-\item \textbf{Linguistic variation and processes} \citep{Ashby&Bartley.2021}: Some transcriptions include examples for monophthongization or deletion which are ongoing linguistic processes but should not be part of a dataset representing a standard variation. \cite{Ashby&Bartley.2021} dealt with monophthongization by choosing the longer to two transcriptions as this logically exclude the monophthonged version. This does of course only work if there are more than one pronunciations available. 
-\item \textbf{Tie bars}: \cite{Ashby&Bartley.2021} notice that some languages (English and Bulgarian) have inconsistent use of tie bars. This can be correct by replacing all inconsistencies by the tie-bar-version.
+\item \textbf{Exclusion of words with less than two Unicode characters or less than two phone segments} \citep{Ashby-Bartley.2021} 
+\item \textbf{Separation by script} \citep{Ashby-Bartley.2021}: It is very straightforward why this is done. There is no obvious connection between the different scripts of a language and its pronunciation. It makes sense to treat different scripts as different languages. 
+\item \textbf{Exclude foreign words with foreign pronunciations} \citep{Ashby-Bartley.2021}: Foreign words in a language with their original pronunciation can add phonemes that are not in that language's phoneme inventory. If they were to be included it would make sense to include a pronunciation adapted to the actual language.
+\item \textbf{Words with multiple pronunciations in word lists}: \cite{Ashby-Bartley.2021} excluded those words, however, it might also be possible to add \ac{pos} tags or other linguistic information to distinguish these words.
+\item \textbf{Consistent broad transcriptions} \citep{Ashby-Bartley.2021}: With broad transcriptions it is important to be consistent and not use allophones. \cite{Ashby-Bartley.2021} did this specifically for Bulgarian.
+\item \textbf{Linguistic variation and processes} \citep{Ashby-Bartley.2021}: Some transcriptions include examples for monophthongization or deletion which are ongoing linguistic processes but should not be part of a dataset representing a standard variation. \cite{Ashby-Bartley.2021} dealt with monophthongization by choosing the longer to two transcriptions as this logically exclude the monophthonged version. This does of course only work if there are more than one pronunciations available. 
+\item \textbf{Tie bars}: \cite{Ashby-Bartley.2021} notice that some languages (English and Bulgarian) have inconsistent use of tie bars. This can be correct by replacing all inconsistencies by the tie-bar-version.
 \item \textbf{Errors in the transcriptions}: \citet{gautam.2021} noticed many errors in the WikiPron English data. They identified errors by looking at the least frequent phones and then check the word-pronunciation pairs where those phones occurred in. As the number of phones in a language is often known this can be used to check the phones in the datasets and identify uncommon ones. 
 \end{itemize}
 
@@ -206,11 +187,11 @@ Results in a low-resource setting are still bad when only using 800 samples for 
 In this section I will list different types of analysis that have been performed on a trained model to improve future research.
 
 \subparagraph{Broad and narrow transcriptions}
-In the \ac{sigm} tasks, there are great differences in the performance of models for different languages. One possible explanation is that the datasets were a mix between broad and narrow transcriptions. As narrow transcriptions contain much more detail, it can be argued that this is more difficult for any system \citep{Ashby&Bartley.2021}. This assumption still needs to be analysed more closely. This differing performance for various languages calls for the questions what makes a language hard to pronounce. Especially as for Georgian all models from the \ac{sigm} task reached a \ac{wer} of $0.0$. Interestingly enough, the \ac{wer} for the language in the high-resource setting, English, reached one of the highest \acp{wer}.
+In the \ac{sigm} tasks, there are great differences in the performance of models for different languages. One possible explanation is that the datasets were a mix between broad and narrow transcriptions. As narrow transcriptions contain much more detail, it can be argued that this is more difficult for any system \citep{Ashby-Bartley.2021}. This assumption still needs to be analysed more closely. This differing performance for various languages calls for the questions what makes a language hard to pronounce. Especially as for Georgian all models from the \ac{sigm} task reached a \ac{wer} of $0.0$. Interestingly enough, the \ac{wer} for the language in the high-resource setting, English, reached one of the highest \acp{wer}.
 
 \subparagraph{Linguistic error analysis} \citet{lo-nicolai-2021-linguistic} chose to perform an error analysis and try to minimize the frequent errors of a model in a multilingual low-resource setting. The analysis showed that often the model gets vowels and diacritics wrong. They extended the model in a way such that wrong vowel and diacritics predictions are punished more than other errors. Compared with the unchanged model, this extended model reached a better performance for some languages. The predictions with their model shows an improvement in vowel prediction. A further analysis showed that many errors still happen with vowels. Vowels get often confused with similar vowels. Their conclusion is that many of these errors make sense in a linguistic sense. They also tested augmenting the input data with syllable boundaries which did not improve the results. 
 
-Another type of linguistic analysis that can be performed is to analyse the data and check for uncommon pronunciations or language internal ambiguities. If a model produces a lot of wrong output because of ambiguities or uncommon data, then this is not necessarily the models fault but just a language inherent inconsistency. As languages are generally ambiguous, this type of analysis is very insightful to find out about \textit{real} errors of the model. These are errors that could be derived from the data, but the model did not get there. \cite{Ashby&Bartley.2021} did such an analysis for the \ac{sigm} 2021 task which showed that many errors are due to language internal ambiguities.
+Another type of linguistic analysis that can be performed is to analyse the data and check for uncommon pronunciations or language internal ambiguities. If a model produces a lot of wrong output because of ambiguities or uncommon data, then this is not necessarily the models fault but just a language inherent inconsistency. As languages are generally ambiguous, this type of analysis is very insightful to find out about \textit{real} errors of the model. These are errors that could be derived from the data, but the model did not get there. \cite{Ashby-Bartley.2021} did such an analysis for the \ac{sigm} 2021 task which showed that many errors are due to language internal ambiguities.
 
 
 \subparagraph{Include linguistic information} What has been suggested by \cite{gorman-etal-2020-sigmorphon}, is to make use of phonetic resources or rule-based systems to improve the quality of current models. The advantage of such an approach is that it is specifically tailored to the problem at hand and not at all task-agnostic. \cite{makarov-clematide-2020-cluzh} confirm this suggestion as they performed an error analysis which showed that including linguistic information such as \ac{pos}-tags might be useful. 
@@ -270,11 +251,6 @@ The above explanations make clear that there are considerable differences in wha
 \end{description}
 
 
-%\section{Representing phonemes}
-%\label{phon-features}
-%In order to input phonemes to any kind of mathematics-based model, they need to be represented numerically. Instead of representing the phoneme directly it is possible to represent one phoneme as a feature vector. This idea is not new as there is the idea that we can represent words as a vector of numbers which we then input to a model. Each number in that vector is what is called a \textit{feature}. \citet{tulkens-etal-2018-wordkit} note that a problem of such featurization is that the words are no longer comparable across different models as the words are possibly featurized in different ways. This is why the present a tool called \textit{WordKit} which is a Python library that allows to featurize words in a standardized way.
 
-
-%There are models that make use of such features vectors. An example of feature data can be found \href{https://github.com/uiuc-sst/g2ps}{here}.
 
 

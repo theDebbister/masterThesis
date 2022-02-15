@@ -8,8 +8,14 @@ The model that I am using for my \ac{g2p} experiments is explained in section \r
 \section{Training settings}
 As I have shortly mentioned before, some WikiPron word lists have less than one thousand word pairs. I marked them as low resource and only used the high resource languages to train my models. There are different settings which I will use to train the models and analyse their performance. The settings are chosen in a way such that they are built on each other. The first experiments are set up very simply and without much effort. Then I continuously add more complexity. Below I added a short description of each setting as a n overview. I will add more details on the individual steps in separate sections. 
 
+There are a few properties that are always the same for all models:
+\begin{itemize}
+\item The CMU model splits the data automatically if no specified otherwise. The automatic split is 85\% training data, 5\% development data and 10\% test data. I did not change this split.
+\item The hyperparameters are left as default if not mentioned otherwise. More on those can be found on their GitHub\myfootnote{\url{https://github.com/cmusphinx/g2p-seq2seq}}. 
+\end{itemize}
+
 \subparagraph{Setting 1: Baseline Short}
-This is the most basic setting. I will train a model for each language to get a baseline result. The model is trained with the least amount of effort. Default settings are used and no hyperparameters are changed. The model is trained for the minimum number of steps which is 10,000 steps in this case. First, I trained it on those languages where I have results from the \ac{sigm} 2021 challenge. The results are compared in table \ref{tab:baseline_cmu}.
+This is the most basic setting. I will train a model for each language to get a baseline result. The model is trained with the least amount of effort. The model is trained for the minimum number of steps which is 10,000 steps in this case. First, I trained it on those languages where I have results from the \ac{sigm} 2021 challenge. The results are compared in table \ref{tab:baseline_cmu}.
 
 \subparagraph{Setting 2: Baseline Long}
 This setting is similar to setting 1 except that the model is trained as long as possible for each language. All models have been trained for 200,000 steps and the default settings. This setting is supposed to show if training for a considerably longer time changes the results a lot or not.
@@ -85,24 +91,9 @@ A last thing I did to clean the datasets was to exclude duplicate graphemes with
 
 \section{Feature encoding}
 \label{sec:feature_enc}
-In order to incorporate the phonetic features into the dataset, we decided to add what we refer to as `flags' to the phonemes. Generally, the idea is to encode the phonetic features that PHOIBLE provides and add them to the WikiPron dataset. All the PHOIBLE features are listed in table \ref{tab:phoible_features}. Some of them might sound familiar from the linguistic background chapter. The exact description of each and every feature is not important at this point. The main point is that these features allow to uniquely describe each phoneme. In total, there are 37 features that are used to describe more than 3,000 phonemes. Each of the features can take on three values: either `+' (applies to this phoneme), `-' (does not apply) or `0' (not applicable). There are still a few phonemes that are not in the PHOIBLE set that are in my data. These will jsut not b encoded in the following experiments. An exception is the length marker. There are a few long vowels that are not like that in the PHOIBLE data. As there is the `long' feature, it is easily possible to use use the base character feature vector and mark the `long' as `+'. This is the only thing I changed for the following experiments. All other features vectors are just used as is. I encoded the features in a jupyter notebook which is in my GitHub repository\myfootnote{\url{https://github.com/theDebbister/masterThesis/blob/main/data/MA_Encode_features.ipynb}}.
+In order to incorporate the phonetic features into the dataset, we decided to add what we refer to as `flags' to the phonemes. Generally, the idea is to encode the phonetic features that PHOIBLE provides and add them to the WikiPron dataset.  There are still a few phonemes that are not in the PHOIBLE set that are in my data. These will jsut not b encoded in the following experiments. An exception is the length marker. There are a few long vowels that are not like that in the PHOIBLE data. As there is the `long' feature, it is easily possible to use use the base character feature vector and mark the `long' as `+'. This is the only thing I changed for the following experiments. All other features vectors are just used as is. I encoded the features in a jupyter notebook which is in my GitHub repository\myfootnote{\url{https://github.com/theDebbister/masterThesis/blob/main/data/MA_Encode_features.ipynb}}.
 
 I experimented with several things before I trained a first set of models. I will list the steps of my experiments in the following. For all feature experiments I used the cleaned WikiPron data.
-
-\tab{tab:phoible_features}{This table displays all the features that are use in PHOIBLE to describe one phoneme. Each feature is either `+' (applies to this phoneme), `-' (does not apply to this phoneme) or `0' (not applicable).}{
-\begin{tabular}{llll}
-tone           & tap         & strident              & epilaryngealSource     \\
-stress         & trill       & dorsal                & spreadGlottis          \\
-syllabic       & nasal       & high                  & constrictedGlottis     \\
-short          & lateral     & low                   & fortis                 \\
-long           & labial      & front                 & raisedLarynxEjective   \\
-consonantal    & round       & back                  & loweredLarynxImplosive \\
-sonorant       & labiodental & tense                 & click                  \\
-continuant     & coronal     & retractedTongueRoot   &                        \\
-delayedRelease & anterior    & advancedTongueRoot    &                        \\
-approximant    & distributed & periodicGlottalSource &                       
-\end{tabular}
-}{PHOIBLE features}
 
 \subsection*{Version 1}
 
@@ -124,6 +115,8 @@ While encoding these features, I noticed that some phonemes are not listed as in
 
 
 \section{Results}
+
+For the evaluation of my models, I first used the test sets that were produced automatically by the model. In addition, I tested each model on the respective \ac{nws} story if available in that language. 
 
 \subparagraph{Setting 1: Baseline Short}
 \tab{tab:baseline_short}{Baseline CMUSphinx results compared with \ac{sigm} 2020 and 2021 results. For each language the best score is reported no matter what year or what model. The table shows the results for setting 1. CMUSphinx provides a WER implementation which has been used to evaluate the models.}{

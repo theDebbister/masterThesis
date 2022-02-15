@@ -71,20 +71,42 @@ The WikiPron data has already been used in shared tasks which means that results
 
 \subsection{The North Wind and the Sun}
 \label{nws}
-Quite a well-known phonetic corpus is a collection of short stories `\acf{nws}'. The \ac{jpa} continuously published different phonetic transcriptions of a short story called \textit{The North Wind and the Sun}. The story is a fable said to be written by Aesop and has been translated into many languages. Additionally, for many languages there exits a phonetic transcription. As I have mentioned before, many of these texts are available already transcribed and free to use \citep{GitHub.04.02.2022}. Table \ref{north-wind-stories} shows the languages for which the short story is available and which are also in the 100 language corpus \citep{baird_evans_greenhill_2021}.
+Quite a well-known phonetic corpus is a collection of short stories. The \ac{jpa} continuously published different phonetic transcriptions of a short story called \textit{The North Wind and the Sun}. The story is a fable said to be written by Aesop and has been translated into many languages. Additionally, for many languages there exits a phonetic transcription. As I have mentioned before, many of these texts are available already transcribed and free to use \citep{GitHub.04.02.2022}. Table \ref{north-wind-stories} shows the languages for which the short story is available and which are also in the 100 language corpus. As I have shortly hinted at in chapter \ref{chap:ling-background}, \citet{baird_evans_greenhill_2021} performed an analysis on these texts to find out how many tokens we need to cover a phonetic inventory of a language adequately. What they have found out in their study is that those short stories are by far not long enough to give a good picture of the phonetics of a language. This is of course problematic if those texts are used to demonstrate how a language works phonetically. That said, I will use these stories with care and only as an additional dataset to have more variety.
 
-\begin{table}[h!]
-\begin{center}
-\stepcounter{mytable}
-\csvautotabular{tables/overview.csv}
-\caption[The North Wind and the Sun]{The table shows a list of all the short stories \textit{The North Wind and the Sun} that are available as phonetic text and whose languages are in the 100 language corpus.}
-\label{north-wind-stories}
-\end{center}
-\end{table}
+\tab{tab:north-wind-stories}{ The table shows a list of all the short stories \textit{The North Wind and the
+Sun} that are available as phonetic text and whose languages are in the 100
+language corpus.}{
+\begin{tabular}{|llll|}
+\hline
+\textbf{Iso 639-3} & \textbf{Type}    & \textbf{Variation} & \textbf{Language} \\
+\hline
+\hline
+arn      & broad and narrow &              & Mapudungun       \\
+cmn      &                  & Pekinese     & Mandarin Chinese \\
+deu      & broad and narrow & North German & German           \\
+ell      &                  &              & Modern Greek     \\
+eng      & broad and narrow & Americsn     & English          \\
+eus      & broad and narrow & Goizueta     & Basque           \\
+hau      & narrow           &              & Hausa            \\
+heb      &                  &              & Modern Hebrew    \\
+hin      & narrow           &              & Hindi            \\
+ind      &                  &              & Indonesian       \\
+kat      & broad and narrow &              & Georgian         \\
+kor      &                  &              & Korean           \\
+mya      &                  &              & Burmese          \\
+pes      &                  &              & Western Farsi    \\
+spa      & broad and narrow & Castilian    & Spanish          \\
+tha      &                  &              & Thai             \\
+tur      & broad            & Istanbul     & Turkish          \\
+\hline       
+\end{tabular}
+}{Overview NWS stories}
+
+
 
 
 \subsubsection{Transcription of NWS stories}
-A collection of the \ac{nws} stories is available in a handbook of the \ac{jpa} which is only available as a pdf scan of the original book \citep{JIPA2010}. Luckily, most of those texts have been transcribed and made available by Simon Greenhill \citep{GitHub.04.02.2022}. At least the phonetic part of it, the original version was still not available already transcribed. Before I knew about the availability of these texts, I did some research on \ac{ocr} for \ac{ipalpha} texts and manual transcription. While \ac{ocr} is technically possible it turns out to be very difficult for IPA characters. There are tools that include \ac{ipalpha} character recognition like the ABBYY FineReader which can be acquired for a fee. The CL institute at the \ac{uzh} owns a version of the ABBYY tool but this version does not include the IPA module. I ran the ABBYY version on a \ac{jpa} pdf containing said phonetic transcriptions but the result could not be used. Mostly diacritics and special phonetic symbols were not correctly transcribed. These are exactly those characters that make it difficult to transcribe \ac{ipalpha} manually, so there is not point in using this tool. There are also open source tools. One of which is called tesseract. tesseract does not include the IPA alphabet. It is possible to train the model to include the IPA alphabet but this would need appropriate training data. \review{Add quote}
+A collection of the \ac{nws} stories is available in a handbook of the \ac{jpa} which is only available as a pdf scan of the original book \citep{JIPA2010}. Luckily, most of those texts have been transcribed and made available by Simon Greenhill \citep{GitHub.04.02.2022}. At least the phonetic part of it, the original version was still not available already transcribed. Before I knew about the availability of these texts, I did some research on \ac{ocr} for \ac{ipalpha} texts and manual transcription. While \ac{ocr} is technically possible it turns out to be very difficult for IPA characters. There are tools that include \ac{ipalpha} character recognition like the ABBYY FineReader which can be acquired for a fee. The CL institute at the \ac{uzh} owns a version of the ABBYY tool but this version does not include the IPA module. I ran the ABBYY version on a \ac{jpa} pdf containing said phonetic transcriptions but the result could not be used. Mostly diacritics and special phonetic symbols were not correctly transcribed. These are exactly those characters that make it difficult to transcribe \ac{ipalpha} manually, so there is not point in using this tool. There are also open source tools. One of which is called tesseract. tesseract does not include the IPA alphabet. It is possible to train the model to include the IPA alphabet but this would need appropriate training data\myfootnote{\url{https://github.com/tesseract-ocr/tesstrain}}.
 
 As it was not possible to use \ac{ocr} to get the texts, a next approach is to transcribe them. I experimented with a software called Transkribus\myfootnote{https://readcoop.eu/de/transkribus/} to manually transcribe the pdf scans. The software allows to make use of neural \ac{htr} models. There exists no pre-trained model for transcribing \ac{ipalpha} charachters, but I trained my own while transcribing some of the documents. On the website they mention that, ideally, training needs 5,000 - 10,000 words already transcribed. Although my available data is not nearly enough to train a reliable model (the short stories have around 40 - 100 tokens), it was a great help to transcribe. As the scans where not handwritten but machine typed text, the model still reached a surprisingly good quality. As an example: For the Hebrew transcription, the model reached a \ac{wer} of 34.52 and a \ac{cer} of 6.11. The two main mistakes were made for two characters that were not even in the training data. The quality of the scans differed quite a lot which had an influence on the performance of the model as well. After transcribing another document I trained the model again and transcribed a few more documents. The transcriptions got continuously better such that in the end I did not take me nearly as much time as in the beginning. Most of the errors resulted from characters that had not been in the previously described documents. 
 
@@ -137,21 +159,23 @@ rus &     94.79 &   95.83 &   56.30 &      unk &    narrow &       402,586 \\
 \end{tabularx}}{Coverage}
 
 \section{Language profiles}
-In order to get a feeling of the data and what it covers, I collected phoneme and grapheme profiles of the data and compared it to the Phoible dataset. For each language that I am working with, I have two different types of data: first the short story and second the WikiPron \ac{g2p} dictionary. For each language and each data type I got three lists:
+Once I collected my datasets, I wanted to find out what characters they include. I collected phoneme and grapheme profiles of the data and compared it to the PHOIBLE dataset. A profile lists all used characters or tokens (this depends on your chosen settings) for a text and lists its frequency. All profiles were collected for each language and each dataset separately. For each language and each data type I got these three lists:
 \begin{itemize}
  \item Grapheme list: contains all graphemes in that language. Characters that need a base character like diacritics are shown together with their base character. 
  \item Phoneme list: contains all phonemes in that language. Again, diacritics and similar characters are shown with their base characters.
  \item Phoneme cluster list: Phonemes can be clustered into bigger sound groups. How to do this, is an ongoing discussion, but I used the segments library to get the clusters (compare \citet{unicode-lingu})
 \end{itemize}
 
-Having those overview for the characters for each language allowed me to compare the character vocabulary to the characters or character clusters available in the Phoible dataset. This comparison showed that quite a few characters are missing that are included in the WikiPron data and the short stories. Some problems and potential strategies to solve it:
+Having this overview for the characters for each language allowed me to compare the character vocabulary to the characters or character clusters available in the Phoible dataset. This comparison showed that quite a few characters are missing that are included in the WikiPron data and the short stories. My observations are listed below.:
 
 \begin{itemize}
-\item No real \ac{ipalpha}: There are sometimes characters included that are no part of the \ac{ipalpha}. There might be a reason why the authors of the transcriptions decided to use this special character to denote a particular sound, but this is not always known. A possibility is to try and map it to a character that is available in Phoible and that represents a similar sound (or even the same sound actually). 
-\item Tie bars: The creators of Phoible decided to exclude tie bars because they add no real value to the transcriptions. \review{add source for this?}
-\item Stress marks: Stress marks are not represented in Phoible as they do not represent a sound. 
-\item Tones: Even within the \ac{ipalpha} there exist different conventions of how to represent tones. Some are better suited for different languages. Apart from different ways of representing tones, it is not always sensible to have tones represented. Mostly, tones are not written as speakers of that language know how to pronounce the tones. So, the questions is whether it is necessary to include the tones at all. When looking at the written representation it does not matter what the tones are as the basic phonemes do not change. This is of course different when the phonetic representation is mapped to a spoken representation. \review{add more on that, maybe in background chap}
+\item Characters that are not included in the official \ac{ipalpha} chart: There are sometimes characters included that are no part of the \ac{ipalpha}. There might be a reason why the authors of the transcriptions decided to use this special character to denote a particular sound, but this is not always known. A possibility is to try and map it to a character that is available in Phoible and that represents a similar sound (or even the same sound actually). 
+\item Tie bars: The creators of Phoible decided to exclude tie bars because they add no real value to the transcriptions\myfootnote{\url{https://phoible.github.io/conventions/}}.
+\item Stress marks: Stress marks are not represented in Phoible as they do not represent a sound. They are included in the \ac{nws} short stories. The same is true for other suprasegmental elements.
+\item Tones: Even within the \ac{ipalpha} there exist different conventions of how to represent tones. Some are better suited for different languages. Apart from different ways of representing tones, it is not always sensible to have tones represented. Mostly, tones are not written as speakers of that language know how to pronounce the tones. So, the questions is whether it is necessary to include the tones at all. When looking at the written representation it does not matter what the tones are as the basic phonemes do not change. This is of course different when the phonetic representation is mapped to a spoken representation.
 \end{itemize}
+
+I conducted this preliminary analysis at an early stage of my thesis. In chapter \ref{chap:exp} I will clean the datasets to use them for training and testing. At this point, I will give a more detailed list of what characters are in my datasets but not included in PHOIBLE.
 
 
 
