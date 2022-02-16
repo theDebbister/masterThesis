@@ -48,10 +48,16 @@ def clean_phonemes(phonemes: list, language: str) -> list:
         new_ph = ''
 
         for ph in phones:
-            ph = re.sub(r'[̋́́ ̄̀ ̏ꜜꜛꜜ̌̂᷄ ᷅᷈]', '', ph)
-            ph = re.sub(r'[⁵¹²³⁴⁻⁽⁾⁰̍͜͡‿ʸ↘↗˥˦˧˨˩˩˥˥˩˧˥˩˧˧˦˨|‖ˌᵊ˔~ᵑᶢ]', '', ph)
+            ph = re.sub(r'[ˈ̋́́ ̄̀ ̏ꜜꜛꜜ̌̂᷄ ᷅᷈]', '', ph)
+            ph = re.sub(r'[⁵¹²³⁴⁻⁽⁾⁰̍͜͡‿ʸ↘↗˥˦˧˨˩˩˥˥˩˧˥˩˧˧˦˨|‖|ˌᵊ˔~ᵑᶢ]', '', ph)
             ph = re.sub(r'ɝ', 'ɚ', ph)
             ph = re.sub(r'g', 'ɡ', ph)
+            ph = re.sub(r'à', 'a', ph)
+            ph = re.sub(r'á', 'a', ph)
+            ph = re.sub(r'è', 'e', ph)
+            ph = re.sub(r'é', 'e', ph)
+            ph = re.sub(r'ì', 'ɪ', ph)
+            ph = re.sub(r'í', 'ɪ', ph)
             ph = re.sub(r'\.', '', ph)
 
             # some language specific cleaning for Finnish

@@ -152,9 +152,6 @@ What has worked well for \ac{g2p} models is to use multi-task learning. This mea
 \subparagraph{Neural models}
 Not surprisingly, models that achieve peek performance are almost exclusively neural models \citep{gorman-etal-2020-sigmorphon}. Due to their ability to process increasingly longer sequences and the above discussed techniques like attention, the are ideal for almost all \ac{nlp} tasks. What type of neural model is chosen also depends on the amount of data available. Transformers are suggested to work better for larger datasets, while they are outperformed by LSTMs on medium-size datasets (a few thousand training pairs) \citep{gorman-etal-2020-sigmorphon}.
 
-\subparagraph{Reduce vocabulary size}
-Some syllabary languages like Korean allow the decomposition into smaller units that make up the signs. Many other languages that do not use the Latin alphabet allow to be written with Latin letters. If a reduction of the vocabulary size is possible in one of these ways, it almost always improves performance as smaller vocabulary sizes are easier to handle for models \citep{gorman-etal-2020-sigmorphon}. 
-
 \subsection{Data manipulation}
 A model is only as good as the data that is used to train it. While this is a very basic paradigm, in reality assuring data quality is not always easy. In this section I list a few strategies that are used to preprocess and prepare \ac{g2p} data and how to deal with too little available data. 
 
@@ -181,6 +178,9 @@ Apart from a few well-studied examples, for most languages there is only little 
 \citet{yu-etal-2020} propose a data augmentation model for low-resource settings. The methodology applied in their approach is ensemble learning combined with a self-learning strategy. They use their ensemble to make predictions on unlabelled data. This newly created data is then added to the training data and the models are trained for another epoch on the extended data. This strategy worked well and produced good results. 
 
 Results in a low-resource setting are still bad when only using 800 samples for training. More research needs to be done in data augmentation techniques and improving the systems to cope with only little available data.
+
+\subparagraph{Reduce vocabulary size}
+Some syllabary languages like Korean allow the decomposition into smaller units that make up the signs. Many other languages that do not use the Latin alphabet allow to be written with Latin letters. If a reduction of the vocabulary size is possible in one of these ways, it almost always improves performance as smaller vocabulary sizes are easier to handle for models \citep{gorman-etal-2020-sigmorphon}. 
 
 
 \subsection{Error and result analysis}

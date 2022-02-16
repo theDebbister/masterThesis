@@ -24,7 +24,7 @@ def transform_into_dict(transcript: str, ortho: str, output: str, language: str)
     ortho_tokens = []
     for line in ortho_lines:
         # clean out punctuation
-        ortho_tokens.extend(re.sub(r'[:;.,!?，。、\(\)「」]', '', line.lower()).split())
+        ortho_tokens.extend(re.sub(r'[:;.,!?，。、\(\)「」’]', '', line.lower()).split())
         
     trans_tokens = []
     tokenizer = seg.Tokenizer()
@@ -46,6 +46,7 @@ def transform_into_dict(transcript: str, ortho: str, output: str, language: str)
         for t in trans_tokens:
             print(t)
         print(f'Num tokens phonetic: {len(trans_tokens)}\t Num tokens orthographic: {len(ortho_tokens)}')
+
 
 if __name__ == '__main__':
     t = sys.argv[1]

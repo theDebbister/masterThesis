@@ -40,9 +40,10 @@ The data folder contains all the data I have worked with. I used two datasets:
 
 Both are explained in more detail in the [data](https://github.com/theDebbister/masterThesis/tree/main/data) folder. 
 
-## Model
+## Models
 
 The model I used for my experiments is the [g2p-seq2seq](https://github.com/cmusphinx/g2p-seq2seq) model presented by CMUSphinx.
+Everything concernign the models and the training is found in the [model](https://github.com/theDebbister/MA_fork/tree/master/models) folder.
 
 
 
