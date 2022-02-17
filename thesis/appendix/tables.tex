@@ -1,35 +1,109 @@
 \chapter{Tables}
 \label{annex:Tables}
 
+\tab{tab:100_lang}{The table shows all the languages that are in the 100 language corpus including their language family.}{
 \begin{longtable}{lrr}
-\stepcounter{mytable} \\
-\caption[100 Language Sample]{The table shows a list of the 100 languages in the corpus including information on the language families.} \\
-\\
-\hline
-\bfseries Iso639-3 &\bfseries Name \ac{wals} &\bfseries Family \ac{wals} \\ \midrule \endfirsthead \hline
-\bfseries Iso639-3 &\bfseries Name \ac{wals} &\bfseries Family \ac{wals}\\ \midrule \endhead 
-\bottomrule \endfoot
-\csvreader[    
-  late after line=\\,
-  late after last line=,
-  before reading={\catcode`\#=12},
-  after reading={\catcode`\#=6}
-]{langInfo100LC.csv}{1=\iso639-3,2=\Name-WALS,3=\Family-WALS}{\iso639-3 & \Name-WALS & \Family-WALS}
-\label{tab:100LC}
+\textbf{Iso 639-3} & \textbf{Name-WALS}        & \textbf{Family-WALS} \\
+abk                & Abkhaz                    & Northwest Caucasian  \\
+amp                & Alamblak                  & Sepik                \\
+aey                & Amele                     & Trans-New Guinea     \\
+apu                & Apurinã                   & Arawakan             \\
+bmi                & Bagirmi                   & Central Sudanic      \\
+bsn                & Barasano                  & Tucanoan             \\
+gry                & Grebo                     & Niger-Congo          \\
+eus                & Basque                    & Basque               \\
+ape                & Arapesh (Mountain)        & Torricelli           \\
+bsk                & Burushaski                & Burushaski           \\
+ram                & Canela-Krahô              & Macro-Ge             \\
+tzm                & Berber (Middle Atlas)     & Afro-Asiatic         \\
+cha                & Chamorro                  & Austronesian         \\
+ckt                & Chukchi                   & Chukotko-Kamchatkan  \\
+zoc                & Zoque (Copainalá)         & Mixe-Zoque           \\
+dgz                & Daga                      & Dagan                \\
+hae                & Oromo (Harar)             & Afro-Asiatic         \\
+arz                & Arabic (Egyptian)         & Afro-Asiatic         \\
+fij                & Fijian                    & Austronesian         \\
+fin                & Finnish                   & Uralic               \\
+gni                & Gooniyandi                & Bunuban              \\
+khk                & Khalkha                   & Altaic               \\
+hau                & Hausa                     & Afro-Asiatic         \\
+heb                & Hebrew (Modern)           & Afro-Asiatic         \\
+hin                & Hindi                     & Indo-European        \\
+hix                & Hixkaryana                & Cariban              \\
+hnj                & Hmong Njua                & Hmong-Mien           \\
+qvi                & Quechua (Imbabura)        & Quechuan             \\
+imn                & Imonda                    & Border               \\
+ind                & Indonesian                & Austronesian         \\
+kal                & Greenlandic (West)        & Eskimo-Aleut         \\
+kyh                & Karok                     & Karok                \\
+gyd                & Kayardild                 & Tangkic              \\
+kio                & Kiowa                     & Kiowa-Tanoan         \\
+cku                & Koasati                   & Muskogean            \\
+kor                & Korean                    & Korean               \\
+ses                & Koyraboro Senni           & Songhay              \\
+kgo                & Krongo                    & Kadu                 \\
+kut                & Kutenai                   & Kutenai              \\
+\pagebreak
+lkt                & Lakhota                   & Siouan               \\
+laj                & Lango                     & Eastern Sudanic      \\
+lvk                & Lavukaleve                & Solomons East Papuan \\
+lez                & Lezgian                   & Nakh-Daghestanian    \\
+dni                & Dani (Lower Grand Valley) & Trans-New Guinea     \\
+lue                & Luvale                    & Niger-Congo          \\
+ayz                & Maybrat                   & West Papuan          \\
+myh                & Makah                     & Wakashan             \\
+cmn                & Mandarin                  & Sino-Tibetan         \\
+mpc                & Mangarrayi                & Mangarrayi-Maran     \\
+mni                & Meithei                   & Sino-Tibetan         \\
+arn                & Mapudungun                & Araucanian           \\
+mrc                & Maricopa                  & Hokan                \\
+vma                & Martuthunira              & Pama-Nyungan         \\
+mph                & Maung                     & Iwaidjan             \\
+ote                & Otomí (Mezquital)         & Oto-Manguean         \\
+ell                & Greek (Modern)            & Indo-European        \\
+naq                & Khoekhoe                  & Khoe-Kwadi           \\
+scs                & Slave                     & Na-Dene              \\
+tur                & Turkish                   & Altaic               \\
+kat                & Georgian                  & Kartvelian           \\
+kan                & Kannada                   & Dravidian            \\
+mya                & Burmese                   & Sino-Tibetan         \\
+jpn                & Japanese                  & Japanese             \\
+one                & Oneida                    & Iroquoian            \\
+pwn                & Paiwan                    & Austronesian         \\
+gug                & Guaraní                   & Tupian               \\
+myp                & Pirahã                    & Mura                 \\
+crk                & Cree (Plains)             & Algic                \\
+plt                & Malagasy                  & Austronesian         \\
+jac                & Jakaltek                  & Mayan                \\
+rma                & Rama                      & Chibchan             \\
+rap                & Rapanui                   & Austronesian         \\
+rus                & Russian                   & Indo-European        \\
+sag                & Sango                     & Niger-Congo          \\
+mig                & Mixtec (Chalcatongo)      & Oto-Manguean         \\
+xsu                & Sanuma                    & Yanomam              \\
+spa                & Spanish                   & Indo-European        \\
+fra                & French                    & Indo-European        \\
+eng                & English                   & Indo-European        \\
+deu                & German                    & Indo-European        \\
+spp                & Supyire                   & Niger-Congo          \\
+swh                & Swahili                   & Niger-Congo          \\
+tgl                & Tagalog                   & Austronesian         \\
+tml                & Asmat                     & Trans-New Guinea     \\
+tha                & Thai                      & Tai-Kadai            \\
+tiw                & Tiwi                      & Tiwian               \\
+bhq                & Tukang Besi               & Austronesian         \\
+vie                & Vietnamese                & Austro-Asiatic       \\
+wyb                & Ngiyambaa                 & Pama-Nyungan         \\
+wba                & Warao                     & Warao                \\
+pav                & Wari'                     & Chapacura-Wanham     \\
+pes                & Persian                   & Indo-European        \\
+kew                & Kewa                      & Trans-New Guinea     \\
+kjq                & Acoma                     & Keresan              \\
+wic                & Wichita                   & Caddoan              \\
+mzh                & Wichí                     & Matacoan             \\
+yad                & Yagua                     & Peba-Yaguan          \\
+yaq                & Yaqui                     & Uto-Aztecan          \\
+yor                & Yoruba                    & Niger-Congo          \\
+zul                & Zulu                      & Niger-Congo          \\
 \end{longtable}
-
-\tab{tab:corpus}{caption}{
-\begin{longtable}{lrr}
-\\
-\hline
-\bfseries Iso639-3 &\bfseries Name \ac{wals} &\bfseries Family \ac{wals} \\ \midrule \endfirsthead \hline
-\bfseries Iso639-3 &\bfseries Name \ac{wals} &\bfseries Family \ac{wals}\\ \midrule \endhead 
-\bottomrule \endfoot
-\csvreader[    
-  late after line=\\,
-  late after last line=,
-  before reading={\catcode`\#=12},
-  after reading={\catcode`\#=6}
-]{langInfo100LC.csv}{1=\Iso639-3,2=\Name-WALS,3=\Family-WALS}{\Iso639-3 & \Name-WALS & \Family-WALS}
-\end{longtable}
-}{short caption}
+}{100 Language Corpus}

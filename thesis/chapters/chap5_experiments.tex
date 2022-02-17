@@ -79,6 +79,8 @@ Apart from cleaning the stories as described in table\ref{preprocess}, I had to 
 
 Chinese and Thai required special tokenization. To tokenize Chinese and Thai I used \textit{polyglot}\myfootnote{\url{https://polyglot.readthedocs.io/en/latest/}}, a Python library.
 
+Apart form the characters that I cleaned out in table \ref{tab:preprocessing}, there were a few more characters that needed o be cleaned. The cleanings here were a classic example for the Unicode normalization issues that I presented in section \ref{sec:unicode_ipa}. \review{finish this}
+
 
 \subsection*{WikiPron} 
 As the CMU model does not expect the graphemes to contain any whitespace, I replaced any whitespace in the input with underscores. This was necessary only for Vietnamese. In a first run, I did not do this. When running the evaluation on the Vietnamese model, it did not work but showed an error message. As the model creates a vocabulary file, I had a look at it which revealed the following: 
@@ -115,7 +117,51 @@ It is therefore not surprising that the model did not perform well. In fact, the
 \subsection*{Version 2}
 For the second attempt at encoding phonetic features I tried a different approach. Instead of adding two flags, I added only one flag after each phoneme. Also, this time the idea was not to add a unique flag to each phoneme but to encode only some features for all phonemes. This means that for some phonemes the same flag was added. As the phonemes were not replaced by the flags, but the phonemes were kept in the text, there is no information lost. The intuition behind it is to encode high-level patterns in phoneme sequences. For example, as vowels typically have some overlapping features, very similar vowels will be encoded using the same flag. In order to choose appropriate features for each language, I calculated the pearson correlation between the features. I only used those features whose correlation with all other features is not above a certain threshold. The reason for this is that all languages only use a relatively small subset of phonemes. This means that many features are not important for a language as those features are not used to distinguish meaning. In order to recognize high-level patterns, only the most distinctive features are important. Other than that I encoded the features in the same way as for version one. First results for this version reached similar scores as the baselines ones. I trained a full set of models for this version.
 
-While encoding these features, I noticed that some phonemes are not listed as individual phonemes in PHOIBLE but are listed as allophones of one phoneme that is in there. This means that some broad transcriptions contain allophones which, ideally, should not be the case. Also, it means that I did not have features for these phonemes which means that those were not encoded.  
+While encoding these features, I noticed that some phonemes are not listed as individual phonemes in PHOIBLE but are listed as allophones of one phoneme that is in there. This means that some broad transcriptions contain allophones which, ideally, should not be the case. Also, it means that I did not have features for these phonemes which means that those were not encoded. 
+
+\tab{tab:enc_features}{The table shows all features that were encoded for each language. Some of them are encoded for all languages, those are at the top of the table.}{
+\begin{tabularx}{1.1\textwidth}{|llX|}
+\hline
+\textbf{ISO 396-3} & \textbf{Type} & \textbf{Features}                                                                                                                  \\
+\hline
+\hline
+all langs     & -             & tone, stress, syllabic, short, consonantal, tap, trill, lateral, labial, epilaryngealSource, spreadGlottis, loweredLarynxImplosive \\
+\hline
+\hline
+cmn                & broad         & long, continuant, nasal, constrictedGlottis, raisedLarynxEjective                                                                  \\
+deu                & narrow        & long, continuant, nasal, constrictedGlottis, raisedLarynxEjective                                                                  \\
+ell                & broad         & long, sonorant, continuant, delayedRelease, nasal, coronal, dorsal, constrictedGlottis, raisedLarynxEjective                       \\
+eng uk             & broad         & long, continuant, nasal, constrictedGlottis, raisedLarynxEjective                                                                  \\
+eng uk             & narrow        & long, continuant, nasal, constrictedGlottis                                                                                        \\
+eng us             & broad         & long, continuant, nasal, constrictedGlottis, raisedLarynxEjective                                                                  \\
+eng us             & narrow        & long, continuant, nasal, constrictedGlottis                                                                                        \\
+eus                & broad         & long, continuant, delayedRelease, nasal, constrictedGlottis, raisedLarynxEjective                                                  \\
+fin                & broad         & long, continuant, nasal, constrictedGlottis, raisedLarynxEjective                                                                  \\
+fin                & narrow        & long, continuant, delayedRelease, nasal, constrictedGlottis, raisedLarynxEjective                                                  \\
+fra                & broad         & long, nasal, constrictedGlottis, raisedLarynxEjective                                                                              \\
+hin                & broad         & constrictedGlottis, raisedLarynxEjective                                                                                           \\
+hin                & narrow        & nasal, constrictedGlottis, raisedLarynxEjective                                                                                    \\
+ind                & broad         & long, continuant, nasal, constrictedGlottis, raisedLarynxEjective                                                                  \\
+ind                & narrow        & long, continuant, nasal, constrictedGlottis, raisedLarynxEjective                                                                  \\
+jpn                & narrow        & long, delayedRelease, coronal, dorsal, constrictedGlottis, raisedLarynxEjective                                                    \\
+kat                & broad    & long, continuant, delayedRelease, nasal, coronal, constrictedGlottis                                                               \\
+kor                & narrow        & continuant, nasal, constrictedGlottis, raisedLarynxEjective                                                                        \\
+mya                & broad    & long, delayedRelease, nasal, raisedLarynxEjective                                                                                  \\
+rus                & narrow        & long, continuant, nasal, coronal, dorsal, constrictedGlottis, raisedLarynxEjective                                                 \\
+spa ca             & broad         & long, sonorant, continuant, delayedRelease, nasal, dorsal, constrictedGlottis, raisedLarynxEjective                                \\
+spa ca             & narrow        & long, sonorant, continuant, nasal, constrictedGlottis, raisedLarynxEjective                                                        \\
+spa la             & broad         & long, sonorant, continuant, nasal, coronal, dorsal, constrictedGlottis, raisedLarynxEjective                                       \\
+spa la             & narrow        & long, sonorant, continuant, nasal, constrictedGlottis, raisedLarynxEjective                                                        \\
+tgl                & broad         & long, continuant, delayedRelease, nasal, constrictedGlottis, raisedLarynxEjective                                                  \\
+tgl                & narrow        & long, sonorant, continuant, nasal, dorsal, constrictedGlottis, raisedLarynxEjective                                                \\
+tha                & broad         & nasal, constrictedGlottis, raisedLarynxEjective                                                                                    \\
+tur                & broad         & long, continuant, nasal, constrictedGlottis, raisedLarynxEjective                                                                  \\
+tur                & narrow        & long, nasal, constrictedGlottis, raisedLarynxEjective                                                                              \\
+vie                & narrow        & long, nasal, coronal, constrictedGlottis, raisedLarynxEjective                                                                     \\
+zul                & broad         & continuant, delayedRelease, nasal, coronal, constrictedGlottis, raisedLarynxEjective  \\
+\hline                                            
+\end{tabularx}
+}{Encoded features per language}
 
 
 \section{Results}
@@ -258,6 +304,9 @@ vie & 7.50 & 100.00 & 0.89 & narrow \\
 \hline
 \end{tabularx}
 }{Baseline Short Results}
+
+\subsection{Results NWS tests}
+
 
 
 
