@@ -115,11 +115,15 @@ A problem with this approach is that the sequences get really long if all phonem
 It is therefore not surprising that the model did not perform well. In fact, the \ac{wer} was about double the \ac{wer} of the long model trained on the uncleaned data. Given this results, I decided not to train any more models and look for another way of how to encode the features.
 
 \subsection*{Version 2}
-For the second attempt at encoding phonetic features I tried a different approach. Instead of adding two flags, I added only one flag after each phoneme. Also, this time the idea was not to add a unique flag to each phoneme but to encode only some features for all phonemes. This means that for some phonemes the same flag was added. As the phonemes were not replaced by the flags, but the phonemes were kept in the text, there is no information lost. The intuition behind it is to encode high-level patterns in phoneme sequences. For example, as vowels typically have some overlapping features, very similar vowels will be encoded using the same flag. In order to choose appropriate features for each language, I calculated the pearson correlation between the features. I only used those features whose correlation with all other features is not above a certain threshold. The reason for this is that all languages only use a relatively small subset of phonemes. This means that many features are not important for a language as those features are not used to distinguish meaning. In order to recognize high-level patterns, only the most distinctive features are important. Other than that I encoded the features in the same way as for version one. First results for this version reached similar scores as the baselines ones. I trained a full set of models for this version.
+For the second attempt at encoding phonetic features I tried a different approach. Instead of adding two flags, I added only one flag after each phoneme. Also, this time the idea was not to add a unique flag to each phoneme but to encode only some features for all phonemes. This means that for some phonemes the same flag was added. As the phonemes were not replaced by the flags, but the phonemes were kept in the text, there is no information lost. The intuition behind it is to encode high-level patterns in phoneme sequences. For example, as vowels typically have some overlapping features, very similar vowels will be encoded using the same flag. In order to choose appropriate features for each language, I calculated the pearson correlation between the features. I only used those features whose correlation with all other features is not above a certain threshold. For this experiment I set the threshold to be 0.5. If the threshold was too high, for many languages, no correlating features were found. This is not surprising as features in general do not make a lot of sense if they are all telling the same thing. This is why I set the threshold relatively low which means I kicked out a lot of features. 
+The reason for this is that all languages only use a relatively small subset of phonemes. This means that many features are not important for a language as those features are not used to distinguish meaning. In order to recognize high-level patterns, only the most distinctive features are important. Other than that I encoded the features in the same way as for version one. First results for this version reached similar scores as the baselines ones. I trained a full set of models for this version.
 
 While encoding these features, I noticed that some phonemes are not listed as individual phonemes in PHOIBLE but are listed as allophones of one phoneme that is in there. This means that some broad transcriptions contain allophones which, ideally, should not be the case. Also, it means that I did not have features for these phonemes which means that those were not encoded. 
 
+In table \ref{tab:enc_features}, I list the features that were encoded for every language. Every possible combination of those features was assigned a different flag. For most languages, about half of the 37 features were encoded.
+
 \tab{tab:enc_features}{The table shows all features that were encoded for each language. Some of them are encoded for all languages, those are at the top of the table.}{
+\vspace{-0.5cm}
 \begin{tabularx}{1.1\textwidth}{|llX|}
 \hline
 \textbf{ISO 396-3} & \textbf{Type} & \textbf{Features}                                                                                                                  \\
@@ -161,18 +165,88 @@ vie                & narrow        & long, nasal, coronal, constrictedGlottis, r
 zul                & broad         & continuant, delayedRelease, nasal, coronal, constrictedGlottis, raisedLarynxEjective  \\
 \hline                                            
 \end{tabularx}
+\vspace{-0.2cm}
 }{Encoded features per language}
 
 
 \section{Results}
 
-For the evaluation of my models, I first used the test sets that were produced automatically by the model. In addition, I tested each model on the respective \ac{nws} story if available in that language. Below, I first discuss the results separately for the long (setting 2, setting 4 and setting 6) and the short (setting 1, setting 3 and setting 5) models. 
+For the evaluation of my models, I first used the test sets that were produced automatically by the model. In addition, I tested each model on the respective \ac{nws} story if available in that language. Below, I first discuss the results separately for the short (setting 1, setting 3 and setting 5) and the long (setting 2, setting 4 and setting 6) models. I will mostly compare the \ac{wer} scores of the model, as this is common in research. Also, the \ac{per} scores are a bit harder to interpret, as the edit distance it involves is not very intuitively understandable as there are many different ways of how to get to the same result. 
 
 To evaluate the models that were trained on data containing feature flags, I cleaned out the features to calculate the scores on the predicted phonemes only. Leaving in the feature flags would make it difficult to compare it to other models' results.
 
+\subsection{Results short models}
+Table \ref{tab:res_short_full} shows the results for all models that I trained for 10,000 steps. It is interesting that the results for all three models are actually very similar. I was surprised by the fact that for a vast majority of the languages the version trained on the cleaned data did not improve the performance although the cleaning was supposed to make the data more consistent. For example, excluding duplicate words with different phoneme sequences should remove some ambiguities. However, it is also possible that it actually introduced more ambiguities as I randomly took one version of the duplicates which might be an uncommon one. An interesting result is the one for Zulu (zul). The cleaned model performed a lot better than the other two. As this result seems rather strange, I will have a close look at the data again. Manually comparing the test prediction for Zulu to the reference phonemes (there are only 167 words in the test set), reveals that the model almost exclusively got the tones wrong. Those were excluded in the cleaned version which might explain the wide gap. Finnish (fin) had a very similar result but the gap was not as large.
+
+\tab{tab:res_short_full}{This table shows the results for setting 1 (BS), setting 3 (BS-clean) and setting 5 (F2).These are the short models.}{
+\begin{tabularx}{\textwidth}{|l|X||r|r||X|X||r|r|}
+\hline
+\textbf{Iso 639-3} & \textbf{Type WikiPron} & \textbf{WER BS}       & \textbf{PER BS} & \textbf{WER BS-clean} & \textbf{PER BS-clean} & \textbf{WER F2} & \textbf{PER F2} \\ \hline \hline
+cmn    & broad  & 19.6 & 4.5  & \textbf{18.1} & 5.0  & 20.3 & 6.0  \\
+deu    & broad  & 40.3 & 5.4  & \textbf{38.1} & 5.3  & 40.2 & 6.6  \\
+deu    & narrow & \textbf{52.1} & 7.5  & 59.9 & 9.4  & 59.9 & 10.4 \\
+ell    & broad  & \textbf{9.8}  & 0.9  & 10.4 & 1.0  & 11.5 & 1.1  \\
+eng us & broad  & 54.4 & 10.6 & \textbf{53.0} & 10.8 & 57.7 & 12.1 \\
+eng us & narrow & 84.6 & 32.0 & \textbf{84.2} & 31.8 & 86.6 & 32.2 \\
+eng uk & broad  & \textbf{48.6} & 9.5  & 50.0 & 10.1 & 51.8 & 11.1 \\
+eng uk & narrow & \textbf{88.8} & 32.2 & 93.8 & 34.5 & 90.5 & 31.2 \\
+eus    & broad  & \textbf{19.4} & 2.8  & 22.8 & 2.8  & 23.6 & 4.0  \\
+fin    & broad  & \textbf{5.8}  & 0.4  & 11.3 & 1.3  & 11.5 & 3.1  \\
+fin    & narrow & 14.3 & 1.0  & \textbf{7.1}  & 0.7  & 17.1 & 4.3  \\
+fra    & broad  & \textbf{7.2}  & 1.0  & 8.8  & 1.3  & 9.1  & 1.6  \\
+hin    & narrow & 8.4  & 1.4  & 10.1 & 1.6  & \textbf{8.3}  & 1.3  \\
+hin    & broad  & \textbf{5.6} & 1.2  & 7.3  & 1.2  & 6.9  & 1.2  \\
+ind    & broad  & \textbf{35.3} & 5.3  & 36.3 & 4.8  & 38.6 & 5.7  \\
+ind    & narrow & \textbf{43.5} & 5.5  & 44.1 & 6.0  & 44.3 & 6.1  \\
+jpn    & narrow & \textbf{6.6}  & 0.9  & 6.7  & 0.9  & 6.8  & 1.1  \\
+kat    & broad  & \textbf{0.3}  & 0.2  & 1.1  & 0.2  & 1.7  & 0.9  \\
+kor    & narrow & 28.7 & 4.6  & 27.0 & 4.4  & \textbf{26.7} & 4.9  \\
+mya    & broad  & 34.2 & 7.4  & \textbf{34.1} & 7.1  & 87.5 & 18.8 \\
+rus    & narrow & \textbf{14.8} & 1.7  & 16.4 & 1.9  & 22.0 & 3.6  \\
+spa ca & broad  & \textbf{2.3}  & 0.3  & 2.7  & 0.4  & 5.3  & 1.5  \\
+spa ca & narrow & \textbf{3.6}  & 0.5  & 9.1  & 1.5  & 8.4  & 1.6  \\
+spa la & broad  & \textbf{2.6}  & 0.3  & 2.8  & 0.5  & 4.4  & 1.0  \\
+spa la & narrow & 3.3  & 0.4  & \textbf{3.2}  & 0.3  & 5.4  & 0.8  \\
+tgl    & broad  & \textbf{33.3} & 5.9  & 33.4 & 5.1  & 34.8 & 5.6  \\
+tgl    & narrow & \textbf{42.9} & 6.6  & 51.1 & 7.6  & 50.3 & 7.2  \\
+tha    & broad  & 14.1 & 2.9  & \textbf{13.0} & 2.8  & 15.3 & 3.7  \\
+tur    & broad  & \textbf{52.8} & 8.0  & 53.4 & 7.9  & 54.3 & 8.6  \\
+tur    & narrow & 57.9 & 8.4  & 53.9 & 7.9  & \textbf{52.0} & 8.5  \\
+vie    & narrow & \textbf{3.0}  & 1.3  & \textbf{3.0}  & 1.5  & 4.3  & 2.0  \\
+zul    & broad  & 61.7 & 11.5 & \textbf{10.4} & 1.1  & 95.1 & 13.7 \\ \hline
+\end{tabularx}
+}{Results: short models}
+
+Table \ref{tab:baseline_short} shows a comparison between my short models and the \ac{sigm} models. As the comparison results from the shared task stay the same for both, my long and short models, and as the long models perform all better than these here, I will only compare the results further down for the long models.
+
+\tab{tab:baseline_short}{The table shows the \ac{wer} results for the best of my short models compared with the \ac{sigm} 2020 and 2021 results. For each language the best score is reported no matter what year or what model from the \ac{sigm} task.}{
+\begin{tabularx}{\columnwidth}{
+| 	>{\raggedright\arraybackslash}l | 
+	>{\raggedleft\arraybackslash}r | 
+	>{\raggedleft\arraybackslash}r  | 
+	>{\raggedleft\arraybackslash}X |
+	>{\raggedright\arraybackslash}X |}
+\hline
+\textbf{ISO396-3} & \textbf{BS WER} & \textbf{BS WER \ac{nws}} & \textbf{SIG WER} & \textbf{Transcription type} \\
+\hline
+\hline
+eng (us) & 53.00 & 87.60 & \textbf{37.43} & broad \\
+fra & 7.20 & 47.20 & \textbf{5.11} & broad \\
+ell & \textbf{9.80} & 83.20 & 18.67 & broad \\
+kat & 0.30 & 65.20 & \textbf{0.00} & broad \\
+hin & 5.60 & 87.10 & \textbf{5.11} & broad \\
+jpn & 6.60 & - & \textbf{4.89} & narrow \\
+kor & 26.70 & 100.00 & \textbf{16.20} & narrow \\
+vie & 3.00 & 100.00 & \textbf{0.89} & narrow \\
+\hline
+\end{tabularx}
+}{Short models comparison}
+
 \subsection{Results long models}
 
-Table \ref{tab:res_long_full} shows the results for all models that I trained for 200,000 steps. It is interesting that the results for all three models are actually very similar. I was surprised by the fact that for a vast majority of the languages the version trained on the cleaned data did not improve the performance although the cleaning was supposed to make the data more consistent. For example, excluding duplicate words with different phoneme sequences should remove some ambiguities. However, it is also possible that it actually introduced more ambiguities as I randomly took one version of the duplicates which might be an uncommon one. An interesting result is the one for Zulu. The cleaned model performed a lot better than the other two. As this result seems rather strange, I will have a close look at the data again.
+Table \ref{tab:res_long_full} shows the results for all models that I trained for 200,000 steps. The results and the differences between the models are very similar to the short models. The observation for Zulu (zul) is still the same. In fact, the model on the uncleaned data performed even worse than its short equivalent.
+
+The largest improvement from the short to the long models was for Russian (rus). Russian had by far the largest dataset with more than 400,000 samples. It makes sense that for this large dataset, the model takes more time to extract all the relevant information. 
 
 \tab{tab:res_long_full}{This table shows the results for setting 2 (BS), setting 4 (BS-clean) and setting 6 (F2). These are the long models}{
 \begin{tabularx}{\textwidth}{|l|X||r|r||X|X||r|r|}
@@ -213,7 +287,7 @@ zul       & broad         & 65.9         & \textit{10.7}   & \textbf{9.8}       
 \end{tabularx}
 }{Results: long models}
 
-Table \ref{tab:baseline_long_sig} shows a comparison of the best long model compared with the best \ac{sigm} shared task result. For three of those eight languages, my model reached a better or the same score. The \ac{sigm} Korean model performed quite a lot better than mine which can be explained by the fact, that this model was not trained on the Korean logograms but those were converted to hangul characters which is a Latin alphabet representation of Korean. As explained in section \ref{section:sig}, this can lead to better results as it reduces the vocabulary size. My result for English is a lot worse as well. Generally, English (as well as German) seems to be a language that is relatively difficult to pronounce as the results are often a lot worse than those of other languages. In the present case, the different might result from the fact that the \ac{sigm} model was an ensemble and it was only trained for English and therefore optimized to work for the English language. 
+Table \ref{tab:baseline_long_sig} shows a comparison of the best long model compared with the best \ac{sigm} shared task result. For three of those eight languages, my model reached a better or the same score. The \ac{sigm} Korean model performed quite a lot better than mine which can be explained by the fact, that this model was not trained on the Korean logograms but those were converted to hangul characters which is a Latin alphabet representation of Korean. As explained in section \ref{section:sig}, this can lead to better results as it reduces the vocabulary size. My result for English is a lot worse as well. Generally, English (as well as German) seems to be a language that is relatively difficult to pronounce as the results are often a lot worse than those of other languages. In the present case, the different might result from the fact that the \ac{sigm} model was an ensemble and it was only trained for English and therefore optimized to work for the English language. My model performs better on Modern Greek. This is an excepted result, as the model from the \ac{sigm} task was trained on only 800 samples. I had more than 10,000 samples. This aligns with cutting edge research, as 800 samples have been found not to be enough to train a decent model. These results confirm this finding as my model was \textit{considerably} better.
 
 \tab{tab:baseline_long_sig}{The table shows the \ac{wer} results for the best of my long models compared with the \ac{sigm} 2020 and 2021 results. For each language the best score is reported no matter what year or what model from the \ac{sigm} task.}{
 \begin{tabularx}{\columnwidth}{
@@ -236,76 +310,16 @@ kor & 23.40 && \textbf{16.20} & narrow \\
 vie & 1.50 & & \textbf{0.89} & narrow \\
 \hline
 \end{tabularx}
-}{Baseline Long Results}
+}{Long models comparison}
 
 
-
-\subsection{Results short models}
-
-\tab{tab:res_short_full}{This table shows the results for setting 1 (BS), setting 2 (BS-clean) and setting 5 (F2).These are the short models.}{
-\begin{tabularx}{\textwidth}{|l|X||r|r||X|X||r|r|}
-\hline
-\textbf{Iso 639-3} & \textbf{Type WikiPron} & \textbf{WER BS}       & \textbf{PER BS} & \textbf{WER BS-clean} & \textbf{PER BS-clean} & \textbf{WER F2} & \textbf{PER F2} \\ \hline \hline
-cmn       & broad         &        &        & 18.1         & 5.0          & 20.3   & 6.0    \\
-deu       & broad         &        &        & 38.1         & 5.3          & 40.2   & 6.6    \\
-deu       & narrow        &        &        & 59.9         & 9.4          & 59.9   & 10.4   \\
-ell       & broad         &        &        & 10.4         & 1.0          & 11.5   & 1.1    \\
-eng us    & broad         &        &        & 53.0         & 10.8         & 57.7   & 12.1   \\
-eng us    & narrow        &        &        & 84.2         & 31.8         & 86.6   & 32.2   \\
-eng uk    & broad         &        &        & 50.0         & 10.1         & 51.8   & 11.1   \\
-eng uk    & narrow        &        &        & 93.8         & 34.5         & 90.5   & 31.2   \\
-eus       & broad         &        &        & 22.8         & 2.8          & 23.6   & 4.0    \\
-fin       & broad         &        &        & 11.3         & 1.3          & 11.5   & 3.1    \\
-fin       & narrow        &        &        & 7.1          & 0.7          & 17.1   & 4.3    \\
-fra       & broad         &        &        & 8.8          & 1.3          & 9.1    & 1.6    \\
-hin       & narrow        &        &        & 10.1         & 1.6          & 8.3    & 1.3    \\
-hin       & broad         &        &        & 7.3          & 1.2          & 6.9    & 1.2    \\
-ind       & broad         &        &        & 36.3         & 4.8          & 38.6   & 5.7    \\
-ind       & narrow        &        &        & 44.1         & 6.0          & 44.3   & 6.1    \\
-jpn       & narrow        &        &        & 6.7          & 0.9          & 6.8    & 1.1        \\
-kat       & broad         &        &        & 1.1          & 0.2          & 1.7    & 0.9    \\
-kor       & narrow        &        &        & 27.0         & 4.4          & 26.7   & 4.9    \\
-mya       & broad         &        &        & 34.1         & 7.1          & 87.5   & 18.8   \\
-rus       & narrow        &        &        & 16.4         & 1.9          & 22.0   & 3.6    \\
-spa ca    & broad         &        &        & 2.7          & 0.4          & 5.3    & 1.5    \\
-spa ca    & narrow        &        &        & 9.1          & 1.5          & 8.4    & 1.6    \\
-spa la    & broad         &        &        & 2.8          & 0.5          & 4.4    & 1.0    \\
-spa la    & narrow        &        &        & 3.2          & 0.3          & 5.4    & 0.8    \\
-tgl       & broad         &        &        & 33.4         & 5.1          & 34.8   & 5.6    \\
-tgl       & narrow        &        &        & 51.1         & 7.6          & 50.3   & 7.2    \\
-tha       & broad         &        &        & 13.0         & 2.8          & 15.3   & 3.7    \\
-tur       & broad         &        &        & 53.4         & 7.9          & 54.3   & 8.6    \\
-tur       & narrow        &        &        & 53.9         & 7.9          & 52.0   & 8.5    \\
-vie       & narrow        &        &        & 3.0          & 1.5          & 4.3    & 2.0    \\
-zul       & broad         &        &        & 10.4         & 1.1          & 95.1   & 13.7   \\ \hline
-\end{tabularx}
-}{Results: short models}
-
-
-\tab{tab:baseline_short}{Baseline CMUSphinx results compared with \ac{sigm} 2020 and 2021 results. For each language the best score is reported no matter what year or what model. The table shows the results for setting 1. CMUSphinx provides a WER implementation which has been used to evaluate the models.}{
-\begin{tabularx}{\columnwidth}{
-| 	>{\raggedright\arraybackslash}l | 
-	>{\raggedleft\arraybackslash}r | 
-	>{\raggedleft\arraybackslash}r  | 
-	>{\raggedleft\arraybackslash}X |
-	>{\raggedright\arraybackslash}X |}
-\hline
-\textbf{ISO396-3} & \textbf{BS WER} & \textbf{BS WER \ac{nws}} & \textbf{SIG WER} & \textbf{Transcription type} \\
-\hline
-\hline
-eng (us) & 54.40 & 87.60 & 37.43 & broad \\
-fra & 7.20 & 47.20 & 5.11 & broad \\
-ell & 9.80 & 83.20 & 18.67 & broad \\
-kat & 0.30 & 65.20 & 0.00 & broad \\
-hin & 5.60 & 87.10 & 5.11 & broad \\
-jpn & 6.60 & - & 4.89 & narrow \\
-kor & 28.70 & 100.00 & 16.20 & narrow \\
-vie & 7.50 & 100.00 & 0.89 & narrow \\
-\hline
-\end{tabularx}
-}{Baseline Short Results}
 
 \subsection{Results NWS tests}
+
+\subsection{Results overall}
+All three model types show s similar performance no matter how long they were trained. The most notable observation is that the difference between the performance of the long and the short models is rather small. For some language, the best short model performed even better than the long one or the results were the same. This was the case for narrow German (deu), narrow US English (eng us), narrow UK English (eng uk), broad Goizueta Basque (eus), broad Burmese (mya), narrow Tagalog (tgl) and narrow Turkish (tur). I find it surprising that most of these are the narrow variants as those are more detailed. I would expect a model trained for longer to catch more details. However, none of the scores were really low, the lowest being 19.4 for Basque. Additionally, the differences are never larger than 2.8 percentage points.
+
+The feature models did not show any relevant improvement compared to the models trained without features. They did not worsen the results but performed very similarly. Overall they showed for almost all languages quite a large improvement when trained longer. This could mean that they would get better still when trained longer, but the relation between the three model types did not change with longer training time, so I suppose it is rather unlikely that they outperform the other model types.
 
 
 

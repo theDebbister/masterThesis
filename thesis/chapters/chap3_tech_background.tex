@@ -60,78 +60,6 @@ Transformers are \ac{s2s} models as well. A central concept and what makes trans
 Neural transducers, as presented by \citet{jaitly2016neural}, extend previously used \ac{s2s} models. They can treat more arriving input without having to redo the entire calculation for the entire updated sequence. At each time step, the neural transducer can output zero to many output symbols. 
 
 
-\begin{landscape}
-\thispagestyle{empty}
-\tab{tab:sota_table_long}{The table lists the SOTA models from the SIGMORPHON tasks in 2020 and 2021. Superscript: model numbers. Numbers in bold: best WER. Languages in bold are in the 100LC corpus. $^A$: 10,000 training samples in 2021. $^B$: 800 training samples in 2021. Model explanations: table \ref{tab:sota}.}{
-\begin{tabularx}{1.65\textwidth}{Xrrrrrrrrrr|rrrrr}
-\hline
-\textbf{ISO396-3} & \multicolumn{6}{c}{\textbf{BS20}} & \multicolumn{2}{c}{\textbf{DeepSPIN20}} & \multicolumn{2}{c|}{\textbf{IMS20}} & \textbf{BS21} & \multicolumn{1}{c}{\textbf{CL21}} & \multicolumn{2}{c}{\textbf{UBC21}} & \multicolumn{1}{c}{\textbf{DP21}}   \\
-
- & \multicolumn{2}{c}{\textbf{LSTM}} & \multicolumn{2}{c}{\textbf{transformer}} & \multicolumn{2}{c}{\textbf{pair n-gram}} & & & & & & CL & UBC-1 &  UBC-2 & \\
-
-		        & WER          & PER          & WER   & PER          & WER   & PER          & WER             &PER& WER        & PER          & WER   & WER          & WER   & WER   & \\\cline{2-16}
-
-ady$^B$         & 28.00        &\textit{6.53} & 28.44 &\textit{6.49} & 32.00 &\textit{7.56} & 24.67$^3$       & & 25.00        &\textit{5.79} &\textbf{22.00} & \textbf{22.00$^{23}$} & 25.00 & \textbf{22.00}& \\
-bul$^A$ 	    & 31.11        &\textit{5.94} & 34.00 &\textit{7.89} & 41.33 &\textit{9.05} &    -            & & 22.22        &\textit{4.85} &\textbf{18.30} & 18.80$^6$    &       &       & \\
-cym (wel\_sw)$^B$   &              &              &       &              &       &              &                 & &              &              &\textbf{10.00} & \textbf{10.00$^1$}    & 13.00 & 12.00 & \\
-\textbf{ell (gre)$^B$}& 18.89  &\textit{3.30} & 18.89 &\textit{3.06} & 21.78 &\textit{4.05} & -               & &\textbf{18.67}&\textit{2.97} & 21.00 & 20.00$^{13}$ & 22.00 & 22.00 & \\
-\textbf{eng(\_us)}&            &              &       &              &       &              &                 & &              &              & 41.94 &              &       &       & \textbf{37.43}\\
-\textbf{fra (fre)$^A$}& 6.22   &\textit{1.32} & 6.89  &\textit{1.72} & 13.56 &\textit{3.12} &\textbf{5.11$^3$} && 6.89         &\textit{1.60} & 8.50  & 7.50$^{456}$ &       &       & \\
-hbs$^A$         &              &              &       &              &       &              &                 & &              &              &\textbf{32.10} & 35.3$^7$    & & & \\
-\textbf{hin} 	& 6.67         &\textit{1.47} & 9.56  &\textit{2.40} & 12.67 &\textit{4.05} & -               & &\textbf{5.11} &\textit{1.20} &       &              &       &       & \\
-hun$^A$ 	    & 5.33         &\textit{1.18} & 5.33  &\textit{1.28} & 6.67  &\textit{1.51} &        -        & &  5.11        &\textit{1.12} & 1.80  &  \textbf{1.00$^{67}$} &       &       & \\
-hye (arm\_e)$^A$   & 14.67        &\textit{3.49} & 14.22 &\textit{3.29} & 18.00 &\textit{3.90} & -               & & 12.67        &\textit{2.94} & 7.00  &  \textbf{6.40$^{7}$}  &       &       & \\
-ice$^B$ 	    & 10.00        &\textit{2.36} & 10.22 &\textit{2.21} & 17.56 &\textit{3.62} &    -            & &\textbf{9.33} &\textit{2.04} & 12.00 & 10.00$^{13}$ & 13.00 & 11.00 & \\
-ita$^B$         &              &              &       &              &       &              &                 & &              &              &\textbf{19.00} & 31.00$^{3}$  & 20.00 & 22.00 & \\
-\textbf{jpn(\_hira)$^A$}& 7.56 &\textit{1.79} & 7.33  &\textit{1.86} & 9.56  &\textit{2.07} &\textbf{4.89$^4$} && 5.33         &\textit{1.26} & 5.20  &  5.00$^{7}$  &       &       & \\
-\textbf{kat (geo)$^A$}& 26.44  &\textit{5.14} & 28.00 &\textit{5.43} & 37.78 &\textit{6.48} &       -         & & 24.89        &\textit{4.57} &\textbf{0.00}  &\textbf{0.00$^{4567}$} &       &       & \\
-khm$^B$ 	    &              &              &       &              &       &              &                 & &              &              & 34.00 & 32.00$^{13}$ & 31.00 & \textbf{28.00} & \\
-\textbf{kor$^A$}& 46.89        &\textit{16.78}& 43.78 &\textit{17.50}& 52.22 &\textit{15.88}& 24.00$^{13}$    & & 26.22        &\textit{4.38} & 16.30 & \textbf{16.20$^{4}$}  &       &       & \\
-lav$^B$ 	    &              &              &       &              &       &              &                 & &              &              & 55.00 & \textbf{49.00$^{23}$} & 58.00 & \textbf{49.00} & \\
-lit 	        &\textbf{19.11}&\textit{3.55} & 20.67 &\textit{3.65} & 23.11 &\textit{4.43} & -               & & 20.00        &\textit{3.63} &       &              &       &       & \\
-mlt(\_ltn)$^B$  &              &              &       &              &       &              &                 & &              &              & 19.00 & 12.00$^{1}$  & 19.00 & 18.00 & \\
-nld (dut)$^A$   & 16.44        &\textit{2.94} & 15.78 &\textit{2.89} & 23.78 &\textit{3.97} &  -              & &\textbf{13.56}&\textit{2.36} & 14.70 & 14.70$^{7}$  &       &       & \\
-rum$^B$ 	    & 10.67        &\textit{2.53} & 12.00 &\textit{3.62} & 11.56 &\textit{3.55} &\textbf{9.78$^3$} && 10.22        &\textit{2.23} & 10.00 & 12.00$^{3}$  & 14.00 & 10.00 & \\
-slv$^B$ 	    &              &              &       &              &       &              &                  &&              &              & 49.00 & 50.00$^{1}$  & 56.00 & \textbf{47.00} & \\
-\textbf{vie$^A$}& 4.67         &\textit{1.52} & 7.56  &\textit{2.27} & 8.44  &\textit{1.79} &\textbf{0.89$^2$} &&  1.56        &\textit{0.48} & 2.50  &  2.00$^{57}$ &       &       & \\
-
-\hline
-%macro 	        & 16.84        &\textit{3.99 }& 17.51 &\textit{4.30} & 22.00 &\textit{4.92} &14.15&\textit{2.92}& 13.81        &\textit{2.76} &       &             &       &       & \\
-%macro low	    &              &              &       &              &       &              &                 & &              &              & 25.10 &             & 27.10 & 24.10 & \\
-%macro medium    &              &              &       &              &       &              &                 & &              &              & 10.60 &             &       &       & \\
-\end{tabularx}
-}{State-of-the-art models}
-\thispagestyle{empty}
-
-\end{landscape}
-
-\thispagestyle{empty}
-
-\tab{tab:sota}{This table presents the state-of-the-art \ac{g2p} models. The results for these models can be found in table \ref{tab:sota_table_long}}{
-\begin{tabularx}{\textwidth}{|X|X|p{0.6\textwidth}|}
-\hline
-\textbf{Model name} & \textbf{Authors} & \textbf{Model Architecture} \\
-\hline
-\hline
-CL21  & SIG21: \citet{Clematide-Makarov.2021}      & These are seven models in total. LSTM-based neural transducer with pointer network-like monotonic hard attention trained with imitation learning. All models 1-7 are majority-vote ensembles with different number of models (5-30) and different inputs (characters or segments). \\\hline
-
-UBC21 & SIG21: \citet{lo-nicolai-2021-linguistic}  & UBC-2 outperforms the baseline. They analysed the errors of the baseline and extend it by adding penalties for wrong vowels and wrong diacritics. Errors on vowels actually decreased. UBC-2 achieved the best macro average for low-resource languages in 2021. UBC-1 included syllable prediction which did not improve the results. \\\hline
-
-DP21  & SIG21: \citet{gautam.2021}                 & Dialpad-1: Majority-vote ensemble consisting of three different public models (weighted FST, joint-sequence model trained with EM and a neural seq2seq), two seq2seq variants (LSTM and transformer) and two baseline variations. \\\hline
-
-BS21 &  \citet{Ashby-Bartley.2021}                 & The baseline in 2021 is a neural transducer trained with imitation learning similar to a model submitted in 2020 \citep{makarov-clematide-2020-cluzh}. As they are so similar, I did not include the model twice, but only the newer one. \\\hline
-
-DeepSPIN20 & SIG20: \citet{peters-martins-2020-one}& DeepSPIN-2,-3,-4: Transformer- or LSTM-based seq2seq models with sparse attention. Add language embedding to encoder or decoder states instead of language token. \\\hline
-
-IMS20 & SIG20: \citet{yu-etal-2020}                & IMS: Self training ensemble of one n-gram-based FST and three seq2seq (vanilla with attention, hard monotonic attention with pointer, hybrid of hard monotonic attention and tagging model).\\\hline
-
-BS20 & \citet{gorman-etal-2020-sigmorphon}         & The baseline for the task in 2020 consisted of three different model types. An LSTM, an transformer and a pair-n-gram model that is based on a weighted FST. All of them were outperformed by other models except for Lithuanian. The LSTM performed best among these three. \\\hline
-\end{tabularx}
-}{SOTA G2P models}
-
-
-
-
 \section{State-of-the-art G2P models}
 \label{section:sig}
 As I have to decide what model I will use to train on my language set, I will now have a look at the state-of-the-art models that can be used for \ac{g2p} conversion.  
@@ -187,25 +115,94 @@ Some syllabary languages like Korean allow the decomposition into smaller units 
 In this section I will list different types of analysis that have been performed by different authors on a trained model to improve future research.
 
 \subparagraph{Broad and narrow transcriptions}
-In the \ac{sigm} tasks, there are great differences in the performance of models for different languages. One possible explanation is that the datasets were a mix between broad and narrow transcriptions. As narrow transcriptions contain much more detail, it can be argued that this is more difficult for any system \citep{Ashby-Bartley.2021}. This assumption still needs to be analysed more closely. This differing performance for various languages calls for the questions what makes a language hard to pronounce. Especially as for Georgian all models from the \ac{sigm} task reached a \ac{wer} of $0.0$. Interestingly enough, the \ac{wer} for the language in the high-resource setting, English, reached one of the highest \acp{wer}.
+In the \ac{sigm} tasks, there are great differences in the performance of models for different languages. One possible explanation is that the datasets were a mix between broad and narrow transcriptions. As narrow transcriptions are a lot more detailed, it can be argued that this is more difficult for any system \citep{Ashby-Bartley.2021}. This assumption still needs to be analysed more closely. This differing performance for various languages calls for the questions what makes a language hard to pronounce. Especially as for Georgian all models from the \ac{sigm} task reached a \ac{wer} of $0.0$. For Georgian the provided training set only contained 10,000 samples. Interestingly enough, the \ac{wer} for English which was trained on 42,000 samples reached one of the highest \acp{wer}.
 
 \subparagraph{Linguistic error analysis} \citet{lo-nicolai-2021-linguistic} chose to perform an error analysis and try to minimize the frequent errors of a model in a multilingual low-resource setting. The analysis showed that often the model gets vowels and diacritics wrong. They extended the model in a way such that wrong vowel and diacritics predictions are punished more than other errors. Compared with the unchanged model, this extended model reached a better performance for some languages. The predictions with their model shows an improvement in vowel prediction. A further analysis showed that many errors still happen with vowels. Vowels get often confused with similar vowels. Their conclusion is that many of these errors make sense in a linguistic sense. They also tested augmenting the input data with syllable boundaries which did not improve the results. 
 
-Another type of linguistic analysis that can be performed is to analyse the data and check for uncommon pronunciations or language internal ambiguities. If a model produces a lot of wrong output because of ambiguities or uncommon data, then this is not necessarily the models fault but just a language inherent inconsistency. As languages are generally ambiguous, this type of analysis is very insightful to find out about \textit{real} errors of the model. These are errors that could be derived from the data, but the model did not get there. \cite{Ashby-Bartley.2021} did such an analysis for the \ac{sigm} 2021 task which showed that many errors are due to language internal ambiguities.
+Another type of linguistic analysis that can be performed is to analyse the data and check for uncommon pronunciations or language internal ambiguities. If a model produces a lot of wrong output because of ambiguities or uncommon data, then this is not necessarily the model's fault but just a language inherent inconsistency. As languages are generally ambiguous, this type of analysis is very insightful to find out about \textit{real} errors of the model. These are errors that could be derived from the data, but the model did not get there. \cite{Ashby-Bartley.2021} did such an analysis for the \ac{sigm} 2021 task which showed that many errors are due to language internal ambiguities.
 
 
 \subparagraph{Include linguistic information} What has been suggested by \cite{gorman-etal-2020-sigmorphon}, is to make use of phonetic resources or rule-based systems to improve the quality of current models. The advantage of such an approach is that it is specifically tailored to the problem at hand and not at all task-agnostic. \cite{makarov-clematide-2020-cluzh} confirm this suggestion as they performed an error analysis which showed that including linguistic information such as \ac{pos}-tags might be useful. 
 
 As is always the case with such research there are many different aspects that can be tuned in order to improve model results. For my thesis I will have a closer look at how we can use phonetic features to improve models. 
+\begin{landscape}
+\thispagestyle{empty}
+\tab{tab:sota_table_long}{The table lists the SOTA models from the SIGMORPHON tasks in 2020 and 2021. Superscript: model numbers. Numbers in bold: best WER. Languages in bold are in the 100LC corpus. $^A$: 10,000 training samples in 2021. $^B$: 800 training samples in 2021. Model explanations: table \ref{tab:sota}.}{
+\vspace{-1cm}
+\begin{tabularx}{1.65\textwidth}{Xrrrrrrrrrr|rrrrr}
+\hline
+\textbf{ISO396-3} & \multicolumn{6}{c}{\textbf{BS20}} & \multicolumn{2}{c}{\textbf{DeepSPIN20}} & \multicolumn{2}{c|}{\textbf{IMS20}} & \textbf{BS21} & \multicolumn{1}{c}{\textbf{CL21}} & \multicolumn{2}{c}{\textbf{UBC21}} & \multicolumn{1}{c}{\textbf{DP21}}   \\
+
+ & \multicolumn{2}{c}{\textbf{LSTM}} & \multicolumn{2}{c}{\textbf{transformer}} & \multicolumn{2}{c}{\textbf{pair n-gram}} & & & & & & CL & UBC-1 &  UBC-2 & \\
+
+		        & WER          & PER          & WER   & PER          & WER   & PER          & WER             &PER& WER        & PER          & WER   & WER          & WER   & WER   & \\\cline{2-16}
+
+ady$^B$         & 28.00        &\textit{6.53} & 28.44 &\textit{6.49} & 32.00 &\textit{7.56} & 24.67$^3$       & & 25.00        &\textit{5.79} &\textbf{22.00} & \textbf{22.00$^{23}$} & 25.00 & \textbf{22.00}& \\
+bul$^A$ 	    & 31.11        &\textit{5.94} & 34.00 &\textit{7.89} & 41.33 &\textit{9.05} &    -            & & 22.22        &\textit{4.85} &\textbf{18.30} & 18.80$^6$    &       &       & \\
+cym (wel\_sw)$^B$   &              &              &       &              &       &              &                 & &              &              &\textbf{10.00} & \textbf{10.00$^1$}    & 13.00 & 12.00 & \\
+\textbf{ell (gre)$^B$}& 18.89  &\textit{3.30} & 18.89 &\textit{3.06} & 21.78 &\textit{4.05} & -               & &\textbf{18.67}&\textit{2.97} & 21.00 & 20.00$^{13}$ & 22.00 & 22.00 & \\
+\textbf{eng(\_us)}&            &              &       &              &       &              &                 & &              &              & 41.94 &              &       &       & \textbf{37.43}\\
+\textbf{fra (fre)$^A$}& 6.22   &\textit{1.32} & 6.89  &\textit{1.72} & 13.56 &\textit{3.12} &\textbf{5.11$^3$} && 6.89         &\textit{1.60} & 8.50  & 7.50$^{456}$ &       &       & \\
+hbs$^A$         &              &              &       &              &       &              &                 & &              &              &\textbf{32.10} & 35.3$^7$    & & & \\
+\textbf{hin} 	& 6.67         &\textit{1.47} & 9.56  &\textit{2.40} & 12.67 &\textit{4.05} & -               & &\textbf{5.11} &\textit{1.20} &       &              &       &       & \\
+hun$^A$ 	    & 5.33         &\textit{1.18} & 5.33  &\textit{1.28} & 6.67  &\textit{1.51} &        -        & &  5.11        &\textit{1.12} & 1.80  &  \textbf{1.00$^{67}$} &       &       & \\
+hye (arm\_e)$^A$   & 14.67        &\textit{3.49} & 14.22 &\textit{3.29} & 18.00 &\textit{3.90} & -               & & 12.67        &\textit{2.94} & 7.00  &  \textbf{6.40$^{7}$}  &       &       & \\
+ice$^B$ 	    & 10.00        &\textit{2.36} & 10.22 &\textit{2.21} & 17.56 &\textit{3.62} &    -            & &\textbf{9.33} &\textit{2.04} & 12.00 & 10.00$^{13}$ & 13.00 & 11.00 & \\
+ita$^B$         &              &              &       &              &       &              &                 & &              &              &\textbf{19.00} & 31.00$^{3}$  & 20.00 & 22.00 & \\
+\textbf{jpn(\_hira)$^A$}& 7.56 &\textit{1.79} & 7.33  &\textit{1.86} & 9.56  &\textit{2.07} &\textbf{4.89$^4$} && 5.33         &\textit{1.26} & 5.20  &  5.00$^{7}$  &       &       & \\
+\textbf{kat (geo)$^A$}& 26.44  &\textit{5.14} & 28.00 &\textit{5.43} & 37.78 &\textit{6.48} &       -         & & 24.89        &\textit{4.57} &\textbf{0.00}  &\textbf{0.00$^{4567}$} &       &       & \\
+khm$^B$ 	    &              &              &       &              &       &              &                 & &              &              & 34.00 & 32.00$^{13}$ & 31.00 & \textbf{28.00} & \\
+\textbf{kor$^A$}& 46.89        &\textit{16.78}& 43.78 &\textit{17.50}& 52.22 &\textit{15.88}& 24.00$^{13}$    & & 26.22        &\textit{4.38} & 16.30 & \textbf{16.20$^{4}$}  &       &       & \\
+lav$^B$ 	    &              &              &       &              &       &              &                 & &              &              & 55.00 & \textbf{49.00$^{23}$} & 58.00 & \textbf{49.00} & \\
+lit 	        &\textbf{19.11}&\textit{3.55} & 20.67 &\textit{3.65} & 23.11 &\textit{4.43} & -               & & 20.00        &\textit{3.63} &       &              &       &       & \\
+mlt(\_ltn)$^B$  &              &              &       &              &       &              &                 & &              &              & 19.00 & 12.00$^{1}$  & 19.00 & 18.00 & \\
+nld (dut)$^A$   & 16.44        &\textit{2.94} & 15.78 &\textit{2.89} & 23.78 &\textit{3.97} &  -              & &\textbf{13.56}&\textit{2.36} & 14.70 & 14.70$^{7}$  &       &       & \\
+rum$^B$ 	    & 10.67        &\textit{2.53} & 12.00 &\textit{3.62} & 11.56 &\textit{3.55} &\textbf{9.78$^3$} && 10.22        &\textit{2.23} & 10.00 & 12.00$^{3}$  & 14.00 & 10.00 & \\
+slv$^B$ 	    &              &              &       &              &       &              &                  &&              &              & 49.00 & 50.00$^{1}$  & 56.00 & \textbf{47.00} & \\
+\textbf{vie$^A$}& 4.67         &\textit{1.52} & 7.56  &\textit{2.27} & 8.44  &\textit{1.79} &\textbf{0.89$^2$} &&  1.56        &\textit{0.48} & 2.50  &  2.00$^{57}$ &       &       & \\
+
+\hline
+%macro 	        & 16.84        &\textit{3.99 }& 17.51 &\textit{4.30} & 22.00 &\textit{4.92} &14.15&\textit{2.92}& 13.81        &\textit{2.76} &       &             &       &       & \\
+%macro low	    &              &              &       &              &       &              &                 & &              &              & 25.10 &             & 27.10 & 24.10 & \\
+%macro medium    &              &              &       &              &       &              &                 & &              &              & 10.60 &             &       &       & \\
+\end{tabularx}
+}{State-of-the-art models}
+\thispagestyle{empty}
+
+\end{landscape}
+
+\thispagestyle{empty}
+
+\tab{tab:sota}{This table presents the state-of-the-art \ac{g2p} models which will be important to compare my own results to. The results for these models can be found in table \ref{tab:sota_table_long}}{
+\begin{tabularx}{\textwidth}{|X|X|p{0.6\textwidth}|}
+\hline
+\textbf{Model name} & \textbf{Authors} & \textbf{Model Architecture} \\
+\hline
+\hline
+CL21  & SIG21: \citet{Clematide-Makarov.2021}      & These are seven models in total. LSTM-based neural transducer with pointer network-like monotonic hard attention trained with imitation learning. All models 1-7 are majority-vote ensembles with different number of models (5-30) and different inputs (characters or segments). \\\hline
+
+UBC21 & SIG21: \citet{lo-nicolai-2021-linguistic}  & UBC-2 outperforms the baseline. They analysed the errors of the baseline and extend it by adding penalties for wrong vowels and wrong diacritics. Errors on vowels actually decreased. UBC-2 achieved the best macro average for low-resource languages in 2021. UBC-1 included syllable prediction which did not improve the results. \\\hline
+
+DP21  & SIG21: \citet{gautam.2021}                 & Dialpad-1: Majority-vote ensemble consisting of three different public models (weighted FST, joint-sequence model trained with EM and a neural seq2seq), two seq2seq variants (LSTM and transformer) and two baseline variations. \\\hline
+
+BS21 &  \citet{Ashby-Bartley.2021}                 & The baseline in 2021 is a neural transducer trained with imitation learning similar to a model submitted in 2020 \citep{makarov-clematide-2020-cluzh}. As they are so similar, I did not include the model twice, but only the newer one. \\\hline
+
+DeepSPIN20 & SIG20: \citet{peters-martins-2020-one}& DeepSPIN-2,-3,-4: Transformer- or LSTM-based seq2seq models with sparse attention. Add language embedding to encoder or decoder states instead of language token. \\\hline
+
+IMS20 & SIG20: \citet{yu-etal-2020}                & IMS: Self training ensemble of one n-gram-based FST and three seq2seq (vanilla with attention, hard monotonic attention with pointer, hybrid of hard monotonic attention and tagging model).\\\hline
+
+BS20 & \citet{gorman-etal-2020-sigmorphon}         & The baseline for the task in 2020 consisted of three different model types. An LSTM, an transformer and a pair-n-gram model that is based on a weighted FST. All of them were outperformed by other models except for Lithuanian. The LSTM performed best among these three. \\\hline
+\end{tabularx}
+}{SOTA G2P models}
 
 
 \section{CMUSphinx}
 \label{sec:cmu}
-For my personal experiments, I decided to use the CMUSphinx \ac{s2s} \ac{g2p} model. This model has been used in the \ac{sigm} task. It was not used on many languages but promised a good performance which is why I decided to use this model for this present thesis. the CMUSphinx model is a transformer-based ac{as2s} model implemented with tensorflow. There exists a pre-trained version of the model for ac{g2p}, however, they use a transcription format other than \ac{ipalpha} which means it cannot be used for our dataset \citep{GitHub.03.02.2022}. 
+For my personal experiments, I decided to use the CMUSphinx \ac{s2s} \ac{g2p} model. This model has been used in the \ac{sigm} 2021 task as part of the Dialpad ensemble \citep{gautam.2021}. It was not used on many languages but promised a good performance which is why I decided to use this model for this present thesis. The CMUSphinx model is a transformer-based ac{as2s} model implemented with tensorflow. Unfortunatley, there is not a lot of information available online about the model. There exists a pre-trained version of the model for ac{g2p}, however, they use a transcription format other than \ac{ipalpha} which means it cannot be used for our dataset \citep{GitHub.03.02.2022}. 
 
 \section{Unicode and the International Phonetic Alphabet}
 \label{sec:unicode_ipa}
-When it comes to representing characters in a machine-readable format things get very tricky, very quickly. In order to understand this fundamental problem it is necessary to understand the basic concept behind unicode and encodings in general. \citet{unicode-lingu} present a neat overview in their book. As discussed in chapter \ref{chap:ling-background}, there are many different kinds of what we typically call letters, graphemes, characters or signs\myfootnote{Please note that I will from now on use grapheme to denote the smallest meaningful element of any writing system. Grapheme does not imply any specific writing system nor does is take the Unicode background into consideration. If I wish to distinguish the Unicode specifications I will use the correct Unicode term as described in this section.}. Just as a human writer must be able to uniquely identify each different graphemes, so must a computer. The most widely spread standard to represent scripts is called Unicode. Graphemes are mapped to unique numbers that can be rendered differently depending on the font and the context. There are different stages of representation until a graphemes can be represented on screen:
+When it comes to representing characters in a machine-readable format things get very tricky, very quickly. In order to understand this fundamental problem it is necessary to understand the basic concept behind Unicode and how characters are represented behind the scenes. \citet{unicode-lingu} present a neat overview in their book. As discussed in chapter \ref{chap:ling-background}, there are many different kinds of what we typically call letters, graphemes, characters or signs\myfootnote{Please note that I will from now on use grapheme to denote the smallest meaningful element of any writing system. Grapheme does not imply any specific writing system nor does is take the Unicode background into consideration. If I wish to distinguish the Unicode specifications I will use the correct Unicode term as described in this section.}. Just as a human writer must be able to uniquely identify each different grapheme, so must a computer. The most widely spread standard to represent scripts is called Unicode. Graphemes are mapped to unique numbers that can be rendered differently depending on the font and the context. There are different stages of representation until a graphemes can be represented on screen:
 
 \begin{description}
 \item[\textsc{Code point}] A unique numerical, non-negative value usually expressed as a hexadecimal number (U+0000). Allows one-to-one mapping between letters and codes. Each code point has a set of properties attributed to it. Properties like the script, uppercase or not, etc.
@@ -224,7 +221,7 @@ It is striking that these two look exactly the same. Things like this become imp
 Unicode code points are often organized in blocks. A block can, for example, contain all letters of the Latin script. Those blocks are helpful although not always consistent. The \ac{ipalpha} is represented in a basic block but many \ac{ipalpha} symbols are actually found in other blocks. Confusion often arises from the fact, that one human-perceived grapheme is sometimes represented as more than one code point. 
 
 \begin{description}
-\item[\textsc{Grapheme clusters}] A grapheme cluster is one visual letter that is represented in Unicode as more than one code point. This is the case for diacritic marks. A problem with grapheme clusters is that some diacritic marks, so marks that cannot really exists without any base character are underspecified. This means that when we want to split into clusters, we do not know if that character belongs to the left or the right base character. This is the case for many characters in the \ac{ipalpha}. Unicode does not specify these but leaves it to the user to create tailored grapheme clusters. 
+\item[\textsc{Grapheme clusters}] A grapheme cluster is one visual letter that is represented in Unicode as more than one code point. This is the case for diacritic marks. A problem with grapheme clusters is that some diacritic marks, which are characters that cannot really exist without any base character, are underspecified. This means that when we want to split into clusters, we do not know if that character belongs to the left or the right base character. This is the case for many characters in the \ac{ipalpha}. Unicode does not specify these but leaves it to the user to create tailored grapheme clusters. An example is the superscript aspiration \ipa{\super h}. It is typically written after the respective aspirated character, but there is no reason why I could no be written before the respective character (except for convention).
 \item[\textsc{Precomposed characters}] Note that sometimes, grapheme clusters can be precomposed and the combination of those two or more characters is assigned a new number. These clusters can be problematic if in a specific context, the graphemes should not be clustered but read separately. An example is the German `ä'. 
 \end{description} 
 
