@@ -90,13 +90,15 @@ def calc_errors(inputs, decodes, words, pronunciations):
                         best_edit = temp_edit
                 num_edits += best_edit
                 len_reference += best_len
+
+        # if it cannot find the word I do not count it
         except KeyError:
             not_in_test += 1
 
-    return correct, errors, num_edits, len_reference
+    return correct, errors, num_edits, len_reference, not_in_test
 
 
-def clean_data(predictions: str):
+def clean_data(predictions: str, reference_directory):
     """
     param predictions: path to a file containing all predictions for all languages for the test set.
     """
@@ -117,7 +119,7 @@ def clean_data(predictions: str):
                 counter = 6
                 end_of_data = False
 
-                calculate_scores(last_lines, inputs, dec)
+                calculate_scores(last_lines, inputs, dec, reference_directory)
 
                 inputs = []
                 dec = []
@@ -136,39 +138,54 @@ def clean_data(predictions: str):
             elif not end_of_data and line != '\n':
                 line = line.split('\t')
                 inputs.append(line[0])
-
                 phon = line[1].strip()
                 # clean out features that are capital letters
                 phon = re.sub(r'[ABCDEFGHIJKLMNOPQRSTUVWXYZ][ABCDEFGHIJKLMNOPQRSTUVWXYZ]', '', phon)
                 phon = re.sub(r'(\s+)', ' ', phon)
                 dec.append(phon.strip())
-        calculate_scores(last_lines, inputs, dec)
+        calculate_scores(last_lines, inputs, dec, reference_directory)
 
 
-def calculate_scores(lang_info, input_words, predictions):
+def calculate_scores(lang_info, input_words, predictions, reference_directory):
     """
     calculates the scores given a language, some input words and their predictions
     """
     lang = re.sub(r'Lang: ', '', lang_info[-1])
 
-    gold_df = pd.read_csv('gold/' + lang + '.tsv.part.test', sep='\t', names=['word', 'pron'])
+    if 'nws' in reference_directory:
+        gold_df = pd.read_csv(reference_directory + '/' + lang + '.tsv', sep='\t',
+                              names=['word', 'pron'], encoding='utf8')
+        words = gold_df['word'].to_list()
+        pron = gold_df['pron'].to_list()
+    else:
+        gold_df = pd.read_csv(reference_directory + '/' + lang + '.tsv.part.test', sep='\t', names=['word', 'pron'])
+        words = gold_df['word'].to_list()
+        pron = gold_df['pron'].to_list()
 
-    words = gold_df['word'].to_list()
-    pron = gold_df['pron'].to_list()
+    correct, errors, edits, len_reference, not_in_test = calc_errors(input_words, predictions, words, pron)
 
-    correct, errors, edits, len_reference = calc_errors(input_words, predictions, words, pron)
+    if (correct + errors + edits + len_reference) == 0:
+        print("Words: %d" % not_in_test)
+        print("Errors: %d" % not_in_test)
+        print("WER: %.3f" % 1.000)
+        print("PER: %.3f" % 1.000)
+        print("Accuracy: %.3f" % 0.000)
+        print(f'Lang: {lang}')
+        print('--')
 
-    print("Words: %d" % (correct + errors))
-    print("Errors: %d" % errors)
-    print("WER: %.3f" % (float(errors) / (correct + errors)))
-    print("PER: %.3f" % (float(edits) / len_reference))
-    print("Accuracy: %.3f" % float(1. - (float(errors) / (correct + errors))))
-    print(f'Lang: {lang}')
-    print('--')
+    else:
+        print("Words: %d" % (correct + errors))
+        print("Errors: %d" % errors)
+        print("WER: %.3f" % (float(errors) / (correct + errors)))
+        print("PER: %.3f" % (float(edits) / len_reference))
+        print("Accuracy: %.3f" % float(1. - (float(errors) / (correct + errors))))
+        print(f'Lang: {lang}')
+        print('--')
 
 
 if __name__ == '__main__':
     predictions_path = sys.argv[1]
+    reference_dir = sys.argv[2]
 
-    clean_data(predictions_path)
+    clean_data(predictions_path, reference_dir)
 

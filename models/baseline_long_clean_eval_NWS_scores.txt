@@ -1,0 +1,153 @@
+Words: 101
+Errors: 95
+WER: 0.941
+PER: 0.452
+Accuracy: 0.059
+Lang: cmn_hani_broad
+--
+Words: 108
+Errors: 78
+WER: 0.722
+PER: 0.245
+Accuracy: 0.278
+Lang: deu_latn_broad_filtered
+--
+Words: 108
+Errors: 69
+WER: 0.639
+PER: 0.196
+Accuracy: 0.361
+Lang: deu_latn_narrow
+--
+Words: 114
+Errors: 86
+WER: 0.754
+PER: 0.292
+Accuracy: 0.246
+Lang: ell_grek_broad_filtered
+--
+Words: 113
+Errors: 95
+WER: 0.841
+PER: 0.270
+Accuracy: 0.159
+Lang: eng_latn_us_broad_filtered
+--
+Words: 113
+Errors: 110
+WER: 0.973
+PER: 0.518
+Accuracy: 0.027
+Lang: eng_latn_us_narrow
+--
+Words: 87
+Errors: 32
+WER: 0.368
+PER: 0.048
+Accuracy: 0.632
+Lang: eus_latn_broad
+--
+Words: 108
+Errors: 37
+WER: 0.343
+PER: 0.143
+Accuracy: 0.657
+Lang: fra_latn_broad_filtered
+--
+Words: 124
+Errors: 112
+WER: 0.903
+PER: 0.585
+Accuracy: 0.097
+Lang: hin_deva_broad_filtered
+--
+Words: 124
+Errors: 118
+WER: 0.952
+PER: 0.578
+Accuracy: 0.048
+Lang: hin_deva_narrow
+--
+Words: 108
+Errors: 88
+WER: 0.815
+PER: 0.297
+Accuracy: 0.185
+Lang: ind_latn_broad
+--
+Words: 108
+Errors: 89
+WER: 0.824
+PER: 0.313
+Accuracy: 0.176
+Lang: ind_latn_narrow
+--
+Words: 67
+Errors: 39
+WER: 0.582
+PER: 0.115
+Accuracy: 0.418
+Lang: kat_geor_broad_filtered
+--
+Words: 47
+Errors: 47
+WER: 1.000
+PER: 0.525
+Accuracy: 0.000
+Lang: kor_hang_narrow_filtered
+--
+Words: 40
+Errors: 38
+WER: 0.950
+PER: 0.213
+Accuracy: 0.050
+Lang: mya_mymr_broad_filtered
+--
+Words: 95
+Errors: 85
+WER: 0.895
+PER: 0.363
+Accuracy: 0.105
+Lang: rus_cyrl_narrow
+--
+Words: 97
+Errors: 27
+WER: 0.278
+PER: 0.051
+Accuracy: 0.722
+Lang: spa_latn_ca_broad_filtered
+--
+Words: 97
+Errors: 57
+WER: 0.588
+PER: 0.162
+Accuracy: 0.412
+Lang: spa_latn_ca_narrow
+--
+Words: 160
+Errors: 91
+WER: 0.569
+PER: 0.190
+Accuracy: 0.431
+Lang: tha_thai_broad
+--
+Words: 65
+Errors: 30
+WER: 0.462
+PER: 0.067
+Accuracy: 0.538
+Lang: tur_latn_broad
+--
+Words: 65
+Errors: 50
+WER: 0.769
+PER: 0.119
+Accuracy: 0.231
+Lang: tur_latn_narrow_filtered
+--
+Words: 117
+Errors: 93
+WER: 0.795
+PER: 0.442
+Accuracy: 0.205
+Lang: vie_latn_hanoi_narrow_filtered
