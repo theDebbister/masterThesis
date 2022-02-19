@@ -13,9 +13,4 @@ Aesop's short story *The North Wind and the Sun* that has been translated in man
 different languages. As those are human created texts, I used them to test the models
 I created. 
 
-## SCRIPTS
-
-I used the following scripts to process and work with the data:
-
-* 
 
