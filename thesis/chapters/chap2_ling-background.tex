@@ -28,30 +28,8 @@ A diphthong is a sequence of vowels that is considered as just one phoneme if is
 
 \subparagraph{Suprasegmentals} Apart from individual sounds, there are features of spoken language like stress or intonation. Those are referred to as suprasegmentals. They are often related to syllables. For example, we can put stress on a different syllable or raise the pitch. Semantically, some suprasegmentals in some languages distinguish meanings, some do not. A special case are tones. Tones are a special way of intonation. In some languages like Chinese or many African languages tones are used to distinguish meaning while in most European languages, the concept of tones does not exist \citep{Intro.2007}.
 
-
-\section{PHOIBLE}
-A way to analyse or use phonetic corpora is to use phonetic features to represent each phoneme. These features are a list of properties that are overlapping with the phonetic description of each phoneme that I have mentioned before when talking about vowels and consonants. It is a minimal list that can be used to describe unique phones. There exists an online database called PHOIBLE \citep{phoible} that contains over 3,000 phonemes for more than 2,000 languages. PHOIBLE includes a feature system that can describe each phoneme uniquely. In total, there are 37 features that are used to describe the phonemes. Each of the features can take on three values: either `+' (applies to this phoneme), `-' (does not apply) or `0' (not applicable). In addition to the phonetic features each phoneme has other features like for example what allophones are used for it in a specific language. The entire PHOIBLE inventory is structured around languages. It lists all phonemes including features for all languages that are in there. This means that one phoneme can be listed for more than one language, but the features will always be the same. All the PHOIBLE phonetic features are listed in table \ref{tab:phoible_features}. Some of them might sound familiar from the linguistic background chapter. The exact description of each and every feature is not important at this point. The main point is that these features allow to uniquely describe each phoneme.
-
-\tab{tab:phoible_features}{This table displays all the features that are use in PHOIBLE to describe one phoneme. Each feature is either `+' (applies to this phoneme), `-' (does not apply to this phoneme) or `0' (not applicable).}{
-\begin{tabular}{llll}
-tone           & tap         & strident              & epilaryngealSource     \\
-stress         & trill       & dorsal                & spreadGlottis          \\
-syllabic       & nasal       & high                  & constrictedGlottis     \\
-short          & lateral     & low                   & fortis                 \\
-long           & labial      & front                 & raisedLarynxEjective   \\
-consonantal    & round       & back                  & loweredLarynxImplosive \\
-sonorant       & labiodental & tense                 & click                  \\
-continuant     & coronal     & retractedTongueRoot   &                        \\
-delayedRelease & anterior    & advancedTongueRoot    &                        \\
-approximant    & distributed & periodicGlottalSource &                       
-\end{tabular}
-}{PHOIBLE features}
-
-
-For this present thesis, PHOIBLE does not only serve as a phonetic feature database but as a phonetic reference database in general. As it contains a very complete list of phonemes for each language it is a great help to clean phonetic data and detect mistakes or uncommon transcriptions.
-
+\section{Phonetic Features}
 %\citet{tulkens-etal-2018-wordkit} note that a problem of such featurization is that the words are no longer comparable across different models as the words are possibly featurized in different ways. This is why the present a tool called \textit{WordKit} which is a Python library that allows to featurize words in a standardized way.
-
 
 %There are models that make use of such features vectors. An example of feature data can be found \href{https://github.com/uiuc-sst/g2ps}{here}.
 
@@ -103,22 +81,6 @@ Apart from different character sets that can be used to represent sounds, there 
 
 Example \ref{exNar} is a narrow (phonetic) transcription of the beginning of the Mapudungun version of the short story \textit{The North Wind and the Sun}. The same text is transcribed broadly (phonemic) in example \ref{exBro}. As becomes clear in this example, the narrow transcriptions is longer as it contains more different characters. In this case it is only the superscript h that is different. The problem, with especially the narrow transcriptions, is that the transcriber still needs to define what narrow means in a specific case. One could argue that there are as many narrow transcriptions of a language as there are speakers of that language. This becomes tricky when given a task to automatically transcribe text. The training data might employ one definition of narrow, while there are texts in the test set that might follow another definition. This is mostly important when talking about data preprocessing and cleaning.
   
-\section{The 100 language corpus}
-\label{sec:corpus}
-As mentioned in the introduction, the basis of the data used in this thesis is a corpus provided by the SPUR lab at the \ac{uzh}. The corpus contains 100 languages which are proposed by \citet{Comrie&Dryer.2013}. This is an online book that contains different chapters each of which shows a different linguistic feature including a map which shows the distribution of that feature over the world's languages. While the number of languages presented on the individual maps depends on the amount of research done in a specific area, the sum of all maps gives quite an impressive overview on the structure of nearly half of the world's languages. Out of the 2676 languages a sample of 100 languages was chosen. This sample does not contain too many languages from one area, neither does it contain too many languages from one family. Those are the 100 languages that are in the corpus. Not considering the aforementioned criteria of maximizing genealogical and areal diversity can lead to misleading results in multilingual analysis. Figure \ref{fig:100lc} shows the distribution of the corpus on a world map. The different icons show the genus of the languages which is a classification of languages defined by the \ac{wals} team that maintains the language description collection. The interactive map can be viewed online \citep{100LC.21.07.2021}. Table \ref{tab:100LC} in the appendix A shows all languages that are in the 100 language corpus. None of the text samples are provided by \ac{wals}. The entire corpus is provided by the SPUR team that collected the corpus over the last few years and is continuously working on and with it.
-
-\fig{images/100sample.png}{fig:100lc}{WALS - Map that shows the 100 Languages}{\textwidth}{100 Language Map}
-
-\begin{figure}[h]
-\vspace*{-1.5cm}
-    \begin{center}
-    \hspace*{-2cm}
-      \includegraphics[width=1.3\linewidth]{ipa_chart.pdf}
-    \end{center}
-    \stepcounter{myfigure}
-    \caption[Full IPA chart]{This is the full IPA chart, last updated in 2015}
-    \label{fig:ipa_chart}
-  \end{figure}
 
 
 

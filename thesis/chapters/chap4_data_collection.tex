@@ -1,11 +1,11 @@
-\newchap{Experiments: Data Collection}
+\newchap{Experiments: Data Collection and Preprocessing}
 \label{chap:data_collection}
 The first practical part of this thesis is concerned with data collection. Although phonetics is an important sub-area in linguistics, phonetic transcriptions are hard to find. If there are any transcriptions available, there are various hindrances that prevent it from being used as is. In the following, I outline the different data types which are available and the different strategies that are used to convert the data into one well-formatted corpus. There is quite a famous set of phonetic texts which is a collection of short stories called \textit{The North Wind and the Sun}. Those stories were the starting point for my search for data. The reason for this is that the short stories are available in many different languages. As the corpus  this thesis is based on is a large multilingual corpus, the availability of data in many languages was one of the key criteria to look choose the datasets.
 
 One of the first things I have noticed while collecting my datasets is the abundance of different codes and names to refer to the languages. I have decided to us the ISO 396-3 convention, not to be confused with the ISO 396-2 convention which uses sometimes completely different codes and does not cover all of my languages. ISO 396-3 distinguishes some more dialects and variants. This also means that throughout my research I paid close attention to what variant was actually referred to. For some cases, it seems that there exists a dataset for a language which is in the 100LC, but actually it is not the same variant. To make sure I pick the same code and language, I used the Glottolog as reference\myfootnote{https://glottolog.org/glottolog}.
 
 
-\section{Transcription Sources \& Formats}
+\section{Transcription sources \& formats}
 Phonetic transcriptions of various languages are available from different sources in different formats. From what I have found out in my research phonetic transcriptions are available as either full texts or a word lists.
 
 \subparagraph{Full Text}
@@ -63,6 +63,23 @@ vie                & Vietnamese              & narrow                 & 15,240  
 zul                & Zulu                    & broad                  & 1,677                      & -                 \\ \hline
 \end{tabularx}}{Languages for experiments}
 
+\section{The 100 language corpus}
+\label{sec:corpus}
+The basis of the data used in this thesis is a corpus provided by the SPUR lab at the \ac{uzh}. The text group of the Language and Space lab at the University of Zurich maintains a project that provides a multilingual corpus consisting of 100 language text samples \citep{UniversityofZurich.19.07.2021} which is referred to as 100LC (see section \ref{sec:corpus}). Those 100 languages are meant to be representative for all the world's languages. It is therefore meant to give insight on relations, similarities, differences or properties of individual languages or language families. Specifically, their goal is to use quantitative methods like statistical modelling, machine learning and information theory to study language variation and compare languages. The corpus contains 100 languages which are proposed by \citet{Comrie&Dryer.2013}. This is an online book that contains different chapters each of which shows a different linguistic feature including a map which shows the distribution of that feature over the world's languages. While the number of languages presented on the individual maps depends on the amount of research done in a specific area, the sum of all maps gives quite an impressive overview on the structure of nearly half of the world's languages. Out of the 2676 languages a sample of 100 languages was chosen. This sample does not contain too many languages from one area, neither does it contain too many languages from one family. Those are the 100 languages that are in the corpus. Not considering the aforementioned criteria of maximizing genealogical and areal diversity can lead to misleading results in multilingual analysis. Figure \ref{fig:100lc} shows the distribution of the corpus on a world map. The different icons show the genus of the languages which is a classification of languages defined by the \ac{wals} team that maintains the language description collection. The interactive map can be viewed online \citep{100LC.21.07.2021}. Table \ref{tab:100LC} in the appendix A shows all languages that are in the 100 language corpus. None of the text samples are provided by \ac{wals}. The entire corpus is provided by the SPUR team that collected the corpus over the last few years and is continuously working on and with it.
+
+\fig{images/100sample.png}{fig:100lc}{WALS - Map that shows the 100 Languages}{\textwidth}{100 Language Map}
+
+\begin{figure}[h]
+\vspace*{-1.5cm}
+    \begin{center}
+    \hspace*{-2cm}
+      \includegraphics[width=1.3\linewidth]{ipa_chart.pdf}
+    \end{center}
+    \stepcounter{myfigure}
+    \caption[Full IPA chart]{This is the full IPA chart, last updated in 2015}
+    \label{fig:ipa_chart}
+  \end{figure}
+
 
 \section{Data used for this thesis}
 \label{sec:dataset}
@@ -112,13 +129,33 @@ Below, I include the English version of the short story.
 The North Wind and the Sun were disputing which was the stronger, when a traveler came along wrapped in a warm cloak. They agreed that the one who first succeeded in making the traveler take his cloak off should be considered stronger than the other. Then the North Wind blew as hard as he could, but the more he blew the more closely did the traveler fold his cloak around him; and at last the North Wind gave up the attempt. Then the Sun shined out warmly, and immediately the traveler took off his cloak. And so the North Wind was obliged to confess that the Sun was the stronger of the two.
 \end{quote}
 
-
 \subsubsection{Transcription of NWS stories}
 A collection of the \ac{nws} stories is available in a handbook of the \ac{jpa} which is only available as a pdf scan of the original book \citep{JIPA2010}. Luckily, most of those texts have been transcribed and made available by Simon Greenhill \citep{GitHub.04.02.2022}. At least the phonetic part of it, the original version was still not available already transcribed. Before I knew about the availability of these texts, I did some research on \ac{ocr} for \ac{ipalpha} texts and manual transcription. While \ac{ocr} is technically possible it turns out to be very difficult for IPA characters. There are tools that include \ac{ipalpha} character recognition like the ABBYY FineReader which can be acquired for a fee. The CL institute at the \ac{uzh} owns a version of the ABBYY tool but this version does not include the IPA module. I ran the ABBYY version on a \ac{jpa} pdf containing said phonetic transcriptions but the result could not be used. Mostly diacritics and special phonetic symbols were not correctly transcribed. These are exactly those characters that make it difficult to transcribe \ac{ipalpha} manually, so there is not point in using this tool. There are also open source tools. One of which is called tesseract. tesseract does not include the IPA alphabet. It is possible to train the model to include the IPA alphabet but this would need appropriate training data\myfootnote{\url{https://github.com/tesseract-ocr/tesstrain}}.
 
 As it was not possible to use \ac{ocr} to get the texts, a next approach is to transcribe them. I experimented with a software called Transkribus\myfootnote{https://readcoop.eu/de/transkribus/} to manually transcribe the pdf scans. The software allows to make use of neural \ac{htr} models. There exists no pre-trained model for transcribing \ac{ipalpha} charachters, but I trained my own while transcribing some of the documents. On the website they mention that, ideally, training needs 5,000 - 10,000 words already transcribed. Although my available data is not nearly enough to train a reliable model (the short stories have around 40 - 100 tokens), it was a great help to transcribe. As the scans where not handwritten but machine typed text, the model still reached a surprisingly good quality. As an example: For the Hebrew transcription, the model reached a \ac{wer} of 34.52 and a \ac{cer} of 6.11. The two main mistakes were made for two characters that were not even in the training data. The quality of the scans differed quite a lot which had an influence on the performance of the model as well. After transcribing another document I trained the model again and transcribed a few more documents. The transcriptions got continuously better such that in the end I did not take me nearly as much time as in the beginning. Most of the errors resulted from characters that had not been in the previously described documents. 
 
 It was interesting to see that it is relatively easy to transcribe \ac{ipalpha} text when using the right software. The original texts were easier to transcribe as they do not contain as many diacritics or other special characters. Still, for some texts like Chinese or Hindi, I needed help from native speakers as it is nearly impossible to find the matching sign if the language is unknown. 
+
+\section{PHOIBLE}
+A way to analyse or use phonetic corpora is to use phonetic features to represent each phoneme. These features are a list of properties that are overlapping with the phonetic description of each phoneme that I have mentioned before when talking about vowels and consonants. It is a minimal list that can be used to describe unique phones. There exists an online database called PHOIBLE \citep{phoible} that contains over 3,000 phonemes for more than 2,000 languages. PHOIBLE includes a feature system that can describe each phoneme uniquely. In total, there are 37 features that are used to describe the phonemes. Each of the features can take on three values: either `+' (applies to this phoneme), `-' (does not apply) or `0' (not applicable). In addition to the phonetic features each phoneme has other features like for example what allophones are used for it in a specific language. The entire PHOIBLE inventory is structured around languages. It lists all phonemes including features for all languages that are in there. This means that one phoneme can be listed for more than one language, but the features will always be the same. All the PHOIBLE phonetic features are listed in table \ref{tab:phoible_features}. Some of them might sound familiar from the linguistic background chapter. The exact description of each and every feature is not important at this point. The main point is that these features allow to uniquely describe each phoneme.
+
+\tab{tab:phoible_features}{This table displays all the features that are use in PHOIBLE to describe one phoneme. Each feature is either `+' (applies to this phoneme), `-' (does not apply to this phoneme) or `0' (not applicable).}{
+\begin{tabular}{llll}
+tone           & tap         & strident              & epilaryngealSource     \\
+stress         & trill       & dorsal                & spreadGlottis          \\
+syllabic       & nasal       & high                  & constrictedGlottis     \\
+short          & lateral     & low                   & fortis                 \\
+long           & labial      & front                 & raisedLarynxEjective   \\
+consonantal    & round       & back                  & loweredLarynxImplosive \\
+sonorant       & labiodental & tense                 & click                  \\
+continuant     & coronal     & retractedTongueRoot   &                        \\
+delayedRelease & anterior    & advancedTongueRoot    &                        \\
+approximant    & distributed & periodicGlottalSource &                       
+\end{tabular}
+}{PHOIBLE features}
+
+
+For this present thesis, PHOIBLE does not only serve as a phonetic feature database but as a phonetic reference database in general. As it contains a very complete list of phonemes for each language it is a great help to clean phonetic data and detect mistakes or uncommon transcriptions.
 
 \section{Pronunciation dictionary coverage}
 \label{sec:coverage}
