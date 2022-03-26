@@ -1,0 +1,57 @@
+
+\newchap{Experiments: Phonetic \& Orthographic Word Length Correlation}
+\label{chap:mwl}
+Multilingual corpora, like the one I am using for the present thesis, are used more and more in \ac{nlp} research. This leads to the question how well these corpora represent linguistic diversity. Having a linguistically diverse corpus is important as multilingual does not necessarily mean that the languages in the corpus are very different from each other. While this is often neglected in present \ac{nlp} research there are approaches to measure linguistic diversity. No matter how we intend to create such a diversity score, we will eventually need to compare languages and tell whether they are similar or not. This is needed as a multilingual corpus can only be diverse if the languages it contains are not all very similar. But they need to be similar to languages that are not in the corpus as those need to be represented as well. In order to compare languages, we need to be able to describe them properly. There are many different characteristics like language family, script, grammatical features and other characteristics of languages that can be used to describe a language. The entire process of describing languages and comparing them would take up another entire thesis. But with the help of my corpus I can make a contribution to push work on linguistic diversity.
+
+\section{Mean word length correlation}
+A very simple characteristic to describe a language is to calculate the mean word length of a language.
+
+
+Although this task sounds very simple there are in fact multiple challenges to tackle before it is possible to accomplish the task:
+
+\begin{itemize}
+    \item \textbf{Tokenization}: In order to calculate word lengths, the texts need to be tokenized properly. This sounds extremely trivial, but in reality this can be a huge problem.
+    \item \textbf{Preprocessing}: Different scripts use different punctuation symbols. Should we exclude those? For example hyphens between two words. Do they count as part of the word? What to do about tones in the phonetic transcription?
+    \item \textbf{Tokenization on character-basis}: For the phonetic texts it was of particular importance to decide how the individual tokens should be tokenized on character-basis to calculate the length. 
+\end{itemize}
+
+As the texts I am using for this experiment are rather short, many of those challenges are already resolved because the phenomenon is not present in the corpus. Still, it is important to be aware of these challenges if further experiments are to be conducted.
+
+\tab{tab:mean_word_length}{This table shows the mean word lengths for the \ac{nws} phonetic and orthographic.}
+{
+\begin{tabular}{|lrrl|}
+\hline
+\textbf{Iso396-3}   &   \textbf{Avg len orthographic} &   \textbf{Avg len phonemes} & \textbf{Type}   \\
+\hline
+\hline
+aey        &                   5.21 &               5.5  & unk    \\
+arn        &                   4.81 &               4.65 & narrow \\
+cmn        &                   1.59 &               4.44 & unk    \\
+deu        &                   5    &               4.35 & narrow \\
+ell        &                   4.62 &               4.23 & unk    \\
+eng        &                   4.19 &               3.46 & narrow \\
+eus        &                   5.3  &               4.98 & narrow \\
+fra        &                   4.55 &               3.18 & broad  \\
+hau        &                   3.8  &               4.07 & narrow \\
+heb        &                   6.62 &               6.57 & unk    \\
+hin        &                   3.53 &               3.93 & narrow \\
+ind        &                   5.92 &               5.25 & unk    \\
+jpn        &                   1.59 &               3.77 & unk    \\
+kat        &                   5.99 &               6.32 & narrow \\
+kor        &                   2.85 &               6.56 & unk    \\
+mya        &                  10.22 &               8.15 & unk    \\
+pes        &                   3.99 &               5.03 & unk    \\
+spa        &                   4.62 &               4.36 & narrow \\
+tha        &                   3.25 &               3.03 & unk    \\
+tur        &                   6.74 &               7.02 & broad  \\
+vie        &                   3.24 &               3.87 & unk    \\
+\hline
+\end{tabular}
+}{Mean word length of phonetic and orthographic text}
+
+
+To calculate the mean word lengths I exclusively used the narrow transcriptions if those were available. If not, I used the broad transcription or just the one I had with unknown transcription type. 
+
+
+
+
