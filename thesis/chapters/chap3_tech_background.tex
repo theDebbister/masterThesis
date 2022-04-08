@@ -1,23 +1,103 @@
 \newchap{Computational models to create phonetic transcriptions}
 \label{chap:tech-background}
-This chapter presents the technical background that is needed to understand how we can create phonetic transcriptions using computational models. I will first set the basis and dive into general architectures and frameworks that are commonly used and then present current state-of-the-art models.
+This chapter presents the technical background that is needed to understand how we can create phonetic transcriptions using computational models. I will first set the basis and dive into general architectures and frameworks that are commonly used and then present current state-of-the-art models. In chapter \ref{chap:ling-background}, I have pointed out that there are many different written representations of language. In the first section of this chapter, I am going to explain how a computer represents language and different scripts. 
 
 %Phonetic transcriptions are often used in \ac{asr} and \ac{stt} technologies. There are systems that can produce speech directly from orthography and question the necessity of phonetic transcriptions. When only  little data is available, the training data might not be enough to train an orthography-to-speech system, making the intermediate step of creating phonetic transcriptions necessary. Another reason for creating phonetic transcriptions is that its usage is not limited to speech applications \citep{mortensen-etal-2018-epitran}. They might also be used to compare languages on speech basis. In order to do that, there needs to be a lot of knowledge about how language works. 
 
+\section{Unicode and the International Phonetic Alphabet}
+\label{sec:unicode_ipa}
+Computational representations of languages are very important as no matter what model we use or what task we try to accomplish, we need to understand how written text is processed by a computer. For the present thesis, this topic is relevant for multiple reasons: 
+\begin{enumerate}
+\item The \ac{ipalpha} contains many special characters and many diacritics.
+\item The language data is available in many different scripts.
+\end{enumerate} 
+
+It is crucial that all data files, be it phonetic or `normal' scripts, are formatted and read correctly by any machine that needs to process them. There exists a standard that is widely used to computationally represent written text. This standard is called `The Unicode Standard', in the following referred to as simply `Unicode'. 
+
+When it comes to representing letters or signs in a machine-readable format things get very tricky, very quickly. In order to understand this fundamental problem it is necessary to understand the basic concept behind Unicode and how characters are represented behind the scenes. \citet{unicode-lingu} present a neat overview in their book. As discussed in chapter \ref{chap:ling-background}, there are many different kinds of what I referred to as letters or signs. From now on, I will use grapheme to denote the smallest meaningful element of any writing system. Grapheme does not imply any specific writing system nor does is take the Unicode background into consideration. If I wish to distinguish the Unicode specifications I will use the correct Unicode term as described in this section. Just as a human writer must be able to uniquely identify each different grapheme, so must a computer. In Unicode, graphemes are mapped to unique numbers that can be rendered differently depending on the font and the context. There are different stages of representation until a grapheme can be represented on screen:
+
+\begin{description}
+\item[\textsc{Code point}] A unique numerical, non-negative value usually expressed as a hexadecimal number (U+0000). Allows one-to-one mapping between letters and codes. Each code point has a set of properties attributed to it. Properties like the script, uppercase or not, etc.
+\item[\textsc{Character}] An abstract representation of the shape of the grapheme. Can in theory not be represented visually, as this includes a font. A Unicode character is \textit{not} the same as what we would call a grapheme in different writing systems.
+\item[\textsc{Glyph}] The rendered and therefore visual representation of one or more Unicode characters that can be identified by its code point(s). A glyph is rendered in a specific font in a specific context. For me as a user, two glyphs can look completely different. Still, both glyphs might have the exact same code point and thus Unicode treats them as the exact same character. 
+
+\begin{covsubexamples}
+\label{ex:same-codepoint}
+\item {\aunclfamily e} : Unicode code point U+0065
+\item e : Unicode code point U+0065
+\end{covsubexamples}
+
+In example \ref{ex:same-codepoint}, both subexamples represent the same Unicode code point. Their glyphs look different because it is a different font that is used for both of them.
+Sometimes one character is represented as two glyphs. It is important to note here, that the exact visual representation of a glyph is not at all defined by its code point. This means that the exact same glyph can represent more than one code points. This happens sometimes in the \ac{ipalpha}. An example is the post-alveolar click:
+
+\begin{covsubexamples}
+\label{ex:same-glyph}
+\item ! : this glyph represents an exclamation mark with unicode code point U+0021.
+\item \textipa{!} : this glyph represents a post-alveolar click with unicode code point U+01C3.
+\end{covsubexamples}
+
+It is striking that both glyphs in example \ref{ex:same-glyph} look exactly the same. This ambiguity becomes important when, for example, I want to count the different characters in a text.
+
+\end{description}
+
+Unicode code points are often organized in blocks. Blocks are not needed by Unicode but they help users to organize characters that are related into larger groups. For example: all letters of the Latin alphabet are represented by a code point. Instead of just using any code point for all letters it makes sense to use consecutive numbers a code points. Then I can say that all basic Latin letters have a code point in the range of U+0000 to U+007F. Those blocks are helpful although not always consistent. The \ac{ipalpha} is represented in a basic block but many \ac{ipalpha} symbols are actually found in other blocks. Confusion often arises from the fact, that one human-perceived grapheme is sometimes represented as more than one code point. 
+
+\begin{description}
+\item[\textsc{Grapheme clusters}] A grapheme cluster is one visual letter that is represented in Unicode as more than one code point. This is the case for diacritic marks. A problem with grapheme clusters is that some diacritic marks, which are characters that cannot really exist without any base character, are underspecified. This means that when we want to split into clusters, we do not know if that character belongs to the left or the right base character. This is the case for many characters in the \ac{ipalpha}. Unicode does not specify these but leaves it to the user to create tailored grapheme clusters. An example is the superscript aspiration \ipa{\super h}. It is typically written after the respective aspirated character, but there is no reason why it could no be written before the respective character (except for convention).
+\item[\textsc{Precomposed characters}] Note that sometimes, grapheme clusters can be precomposed and the combination of those two or more characters is assigned a new number. These clusters can be problematic if in a specific context, the graphemes should not be clustered but read separately. An example is the German `ä'. 
+\end{description} 
+
+Additional complexity is added through the possibility of Unicode to create Unicode locales. These allow users to specify language- or writing-system-specific cases. An additional challenge is that of picking the right font. Our standard font format can only contain about half of all the Unicode code point. It is therefore simply not possible to display the entire set of Unicode characters with one font. Many problems encountered with displaying writing systems are somehow connected to the font rather than Unicode itself \citep{unicode-lingu}. \citet{unicode-lingu} list a few more `pitfalls' that one might encounter when dealing with Unicode.
+
+\subparagraph{Segments library} \citet{unicode-lingu} present a python library called segments\myfootnote{\url{https://pypi.org/project/segments/}} that can be used to process phonetic text. It includes a method to segment \ac{ipalpha} strings into grapheme clusters. Those grapheme clusters are designed in a way such that they represent sound units better. Example \ref{ex:segments} illustrates how this segmentation looks like. Different segments are separated by white space.
+
+\begin{covexamples}
+\label{ex:segments}
+\item /\textipa{j u: z I \t{dZ}}/
+\end{covexamples}
+
+In the \ac{ipalpha} there exists a length marker to denote vowel lengthening. The vowel and the length marker are displayed as one segment. Characters connected by a tie bar are displayed as one segment as well. This segmentation is adapted to the actual sounds as it is not possible to pronounce a vowel and the length marker as a separated sound. However, from a Unicode perspective those are both different code points. Later when processing the data I will make use of this library.
+
+\subsection*{Unicode normalization forms}
+The above explanations make clear that there are considerable differences in what a human reader perceives and in what happens in the background. Unicode therefore provides normalization forms that can help to process written data. Unicode publishes extensive explanations along with their standards which also includes those normalization forms. I will therefore not explain everything in full detail as this is done already online \citep{Unicode.27.08.2021}. 
+
+There are two important aspects to normalization. One is that we can have decomposed or composed characters. The second aspect of normalization is that we have a compatibility form and a non-compatibility form. Based on these two aspects there are four normalization forms:
+\begin{description}
+\item[NFD] : Canonical Decomposition
+\item[NFC] : Canonical Decomposition, followed by Canonical composition
+\item[NFKD] : Compatibility Decomposition
+\item[NFKC] : Compatibility Decomposition, followed by Canonical Composition
+\end{description}
+
+What is important is that each normalization form results in very different behaviour if a text is processed. What the normalization form of a text is, is not necessarily visible to the human reader. All of this happens at the level of internal representation of a computer which means that it happens at the level of Unicode code points. In a decomposed string, we split the characters into their individual components. This means that characters with diacritics are split up into two or more characters. This again means that a character that is assigned one code point in a composed normalization form can in a decomposed form have more than one code points. As this is very difficult to understand on a abstract level, figures \ref{} and \ref{} show what each normalization form changes about the characters and code points.
+
+\fig{}
+
+In a composed normalization usually precomposed forms are kept. This means that some parts can be similar or the same to the decomposed version but if for a character there exists a precomposed version, this one is usually used. If a normalization is according to compatibility decomposition, this means that any formatting is removed such that we receive the underlying character in its original form. Superscript characters are then shown as example \ref{ex:superscript-chars} illustrates. 
+
+\begin{covexamples}
+\label{ex:superscript-chars}
+\item \textipa{\super h} $\rightarrow$ h
+\end{covexamples}
+
+How exactly these normalization forms work is not always equally important, but what is absolutely crucial is to make sure that when characters are compared or counted, the same normalization form is used. This is because when counting characters, we do not count the human perceivable glyphs, but Unicode code points.  
+
+In python, it is possible to convert a text that is read from a file in a normalization form into another normalization form. None of this process is visible for the human reader. Similarly, it is not possible for a human reader to see what the normalization form of a text is. This is because computational text representations depend on Unicode code points. But what the human reader perceives are the individual glyphs. And has I have pointed out, those have nothing to do with the underlying Unicode representation.  
+
 \section{G2P as sequence-to-sequence task}
 \label{model_theory}
-No matter what computational model I use, creating phonetic transcriptions is referred to as a \acf{s2s} task. There are many other \ac{s2s}  \ac{nlp} tasks whose goal is to transform a sequence of symbols into another sequence of symbols. Machine translation is a very well-known \ac{s2s} task \citep{Rao2015GraphemetophonemeCU}. In machine translation we transform a sequence of words in one language into a sequence of words in another language. In the present case of \ac{g2p} conversion, the input sequence is a sequence of letters or signs. These can look very differently depending on the script (see section \ref{writing-sys}). The output sequence is a sequence of phonemes\myfootnote{Please refer to section \ref{phonology} in order to understand the terminological implications of  phoneme. As it is common in research, I will stick to the term \textit{phoneme} although strictly speaking it is not always correct. Phoneme in this case just refers to any symbol that is used to represent a sound.} written in \ac{ipalpha}. This process is typically referred to as \acf{g2p}. There are a few problems and characteristics of \ac{s2s} tasks that are important also for \ac{g2p} conversion:
+No matter what computational model I use, creating phonetic transcriptions is referred to as a \acf{s2s} task. There are many other \ac{s2s} \ac{nlp} tasks whose goal it is to transform a sequence of symbols into another sequence of symbols. \ac{s2s} is not only a type of task but also an architecture for computational models that are build to solve \ac{s2s} tasks. Further down, I will introduce this architecture. Machine translation is a very well-known \ac{s2s} task \citep{Rao2015GraphemetophonemeCU}. In machine translation we transform a sequence of words in one language into a sequence of words in another language. In the present case of creating phonetic transcriptions, the input sequence is a sequence of graphemes. These can look very differently depending on the script (see section \ref{writing-sys}). The output sequence is a sequence of phonemes\myfootnote{Please refer to section \ref{phonology} in order to understand the terminological implications of  phoneme. As it is common in research, I will stick to the term \textit{phoneme} although strictly speaking it is not always correct. Phoneme in this case just refers to any symbol that is used to represent a sound.} written in \ac{ipalpha}. This process is typically referred to as \acf{g2p} conversion. There are a few problems and characteristics of \ac{s2s} tasks that are important also for \ac{g2p} conversion:
 
 \begin{itemize}
-\item The input and output sequences are not always of the same length. It is difficult to align input and output which means to map one or more grapheme to one or more phoneme. Not all systems rely on aligning input and output but often it is needed to analyse the results (for example to create confusion matrices). 
+\item The input and output sequences are not always of the same length. It is difficult to align input and output which means to map one or more grapheme to one or more phoneme. Not all systems rely on aligning input and output but often it is needed to analyse the results. For example to visualize which grapheme(s) is/are mapped to which phoneme(s). 
 \item Due to the open-vocabulary situation and the impossibility to cover all possible words, all systems must be able to deal with rare and unseen words \citep{Rao2015GraphemetophonemeCU, ney-joint-sequence2008}. 
 \item Most of the research done in this area is limited to the English language. This is not uncommon in \ac{nlp} research. The availability of English data resources and the unavailability and struggles to find data in other languages heavily influences this research. \citet{Ashby-Bartley.2021} report that the \acs{sigm} (\acl{sigm}) \ac{g2p} shared tasks in 2020 and 2021 are the first attempt to tackle multilingual \ac{g2p}.
 \end{itemize}
 
-There exist powerful \ac{s2s} models that can deal with the first point mentioned in the listing above. Computational \ac{s2s} models include an encoder and a decoder or more than one of each depending on the exact implementation. The output of the (last) encoder is used as input for the decoder. What makes such a model architecture powerful is that they can map an input sequence to an output sequence of a different length and different type which is exactly what we need for \ac{g2p} conversion. Some but not all of the models I will present below can deal with the second point mentioned above while the third point does not depend on the model but on the availability of language resources.
+There exist powerful \ac{s2s} models that can deal with the first point mentioned in the listing above. Some but not all of the models I will present below can deal with the second point mentioned above while the third point does not depend on the model but on the availability of language resources.
 
-\section{Computationl models for \ac{g2p}}
-In the following, I explain the most important model types. Often, those different types are used in combination as the different models have different advantages which can be used very well in combination. 
+\section{Computational models for \ac{g2p}}
+In the following, I explain the most important model types. Sometimes, it is possible to use more than one model type in combination to exploit the advantages of each model.
 
 \subsection{Look-up dictionary} The simplest version of a \ac{g2p} model is a look-up table where a grapheme sequence is stored together with its phonetic transcription. Such a dictionary is expensive to create and needs a lot of storage and has a very limited coverage. Although such a system is no longer useful on its own it can still be used in addition to other, for example, statistical models \citep{ney-joint-sequence2008}.
 
@@ -33,7 +113,12 @@ N-gram models, statistical models or joint-sequence models were used before neur
 \subparagraph{Joint-sequence model} The term \textit{joint-sequence} hints already at the underlying architecture of those models: the idea is to process \textit{joint} sequences of input and output symbols. In order to do that they must be aligned. We can then concatenate those alignments, which means to concatenate the grapheme and the phoneme which it is mapped to, and receive what is called a graphone. Using the concept of \ac{fst}, we can build a model. \acp{fst} are similar to finite-state automatons. But instead of just telling whether a certain sequence belongs to a certain language (which is pattern matching), they can output none or many symbols at every step as well. This means that in the process of iterating over the sequence, they produce another sequence. Knowing that, it is easily understandable that this works well for our given \ac{g2p} task. The idea is now, that we model the joint-probability of the input graphemes and output phonemes or rather our graphones. Doing this we can use the \ac{em} algorithm to find a mapping of graphemes to phonemes that is most probable. As those graphones consist of n-grams of both the input and output sequence, they themselves can be considered n-grams which is why those models are sometimes referred to as n-gram models \citep{ney-joint-sequence2008, lo-nicolai-2021-linguistic}.
 
 \subsection{Neural models}
-Neural \ac{g2p} models have been reported to outperform most other models \citep{Lee&Ashby.2020}. Many researchers experiment with different variants of LSTM models \citep{Lee&Ashby.2020, hammond-2021-data, gautam.2021, Rao2015GraphemetophonemeCU}. But there are also other models that have been used. The most important of those will be introduced in the following. All of the models I will introduce below, can be used as an encoder and decoder for \ac{s2s} models.
+Neural \ac{g2p} models have been reported to outperform most other models \citep{Lee&Ashby.2020}. Many researchers experiment with different variants of LSTM models \citep{Lee&Ashby.2020, hammond-2021-data, gautam.2021, Rao2015GraphemetophonemeCU}. But there are also other models that have been used. The most important of those will be introduced in the following. As I have pointed out
+
+
+Computational \ac{s2s} models include an encoder and a decoder or more than one of each depending on the exact implementation. The output of the (last) encoder is used as input for the decoder. What makes such a model architecture powerful is that they can map an input sequence to an output sequence of a different length and different type which is exactly what we need for \ac{g2p} conversion.
+
+All of the models I will introduce below, can be used as an encoder and decoder for \ac{s2s} models.
 
 Generally, there is a difference between models that assume conditional independence between each output step (e.g. Hidden Markov Models) and there are models that do not make this assumption but condition the current output on the entire sequence before. \ac{s2s} models are of the latter type. Depending on what model type is used as encoder or decoder, considering the entire preceding input can get tricky if the input sequence is really long. This is true especially for simple \ac{rnn} models. Apart form this potential limitation, \ac{s2s} models have to wait until the full input sequence is processed before they can start decoding. This does not work well for input that gets continuously longer \citep{Kostadinov.2019, DBLP:journals/corr/SutskeverVL14}. 
 
@@ -196,59 +281,3 @@ WER = \frac{S+I+D}{N}
 In equation \ref{eq:wer} $S$ stands for substitution, $I$ for insertion, $D$ for deletion and $N$ denotes the total number of words in the reference sequence. Those numbers can be calculated by using an algorithm to get the edit distance. It is quite common to multiply the resulting number with $100$ \citep{gorman-etal-2020-sigmorphon}. Note that the \ac{wer} can be more than $100$\%. This happens if, for example, the are a lot of additional insertions or deletions in the system text. If the system output and reference are character sequences, the score is called \acf{cer}. It is calculated in the exact same way as the \ac{wer}, but instead of words everything is calculated on character basis. In the phonetic transcriptions setting, the \ac{cer} is typically replaced by the \acf{per} to match the correct terminology. The calculations are not changed. In a multilingual setting, it is sometimes necessary to have a score for the entire system covering more than one language. In such cases it is custom to use a macro-averaged \ac{wer} or \ac{cer}. This means that the sum of the scores for each language is divided by the number of languages \citep{Leung.2021}.
 
 In the case of \ac{g2p} conversion, the \ac{wer} actually just reflects the rate of wrongly predicted words, as one sequence consists of only one word. It is therefore just 1 (or 100) minus the accuracy. The accuracy is the rate of the correctly predicted words (which means we divide all correctly predicted words by the total number of words). It is important to note, that the \ac{wer} and the \ac{per} suggest slightly different things. If each word has exactly one wrong character this means that the \ac{wer} would be 100 as all words are predicted wrongly. Now, if the words are really long, the \ac{per} score would be very good compared to the really bad \ac{wer}. If the words are rather short, the \ac{per} would get worse as well but the \ac{wer} would just stay the same. So, when analysing the results it is important to pay close attention to how those two metrics relate.
-
-\section{CMUSphinx}
-\label{sec:cmu}
-For my personal experiments, I decided to use the CMUSphinx \ac{s2s} \ac{g2p} model. This model has been used in the \ac{sigm} 2021 task as part of the Dialpad ensemble \citep{gautam.2021}. It was not used on many languages but promised a good performance which is why I decided to use this model for this present thesis. The CMUSphinx model is a transformer-based ac{as2s} model implemented with tensorflow. Unfortunatley, there is not a lot of information available online about the model. There exists a pre-trained version of the model for ac{g2p}, however, they use a transcription format other than \ac{ipalpha} which means it cannot be used for our dataset \citep{GitHub.03.02.2022}. 
-
-\section{Unicode and the International Phonetic Alphabet}
-\label{sec:unicode_ipa}
-When it comes to representing characters in a machine-readable format things get very tricky, very quickly. In order to understand this fundamental problem it is necessary to understand the basic concept behind Unicode and how characters are represented behind the scenes. \citet{unicode-lingu} present a neat overview in their book. As discussed in chapter \ref{chap:ling-background}, there are many different kinds of what we typically call letters, graphemes, characters or signs\myfootnote{Please note that I will from now on use grapheme to denote the smallest meaningful element of any writing system. Grapheme does not imply any specific writing system nor does is take the Unicode background into consideration. If I wish to distinguish the Unicode specifications I will use the correct Unicode term as described in this section.}. Just as a human writer must be able to uniquely identify each different grapheme, so must a computer. The most widely spread standard to represent scripts is called Unicode. Graphemes are mapped to unique numbers that can be rendered differently depending on the font and the context. There are different stages of representation until a graphemes can be represented on screen:
-
-\begin{description}
-\item[\textsc{Code point}] A unique numerical, non-negative value usually expressed as a hexadecimal number (U+0000). Allows one-to-one mapping between letters and codes. Each code point has a set of properties attributed to it. Properties like the script, uppercase or not, etc.
-\item[\textsc{Character}] An abstract representation of the shape of the grapheme. Can in theory not be represented visually, as this includes a font. A Unicode character is \textit{not} the same as what we would call a grapheme in different writing systems.
-\item[\textsc{Glyph}] The rendered and therefore visual representation of one or more Unicode characters that can be identified by its code point(s). A glyph is rendered in a specific font in a specific context. No matter how different it looks to the user, for Unicode all different representations of one code point are exactly the same. Sometimes one character is represented as two glyphs. It is important to note here, that the exact visual representation of a glyph is not at all defined by its code point. This means that the exact same glyph can represent more than one code points. This happens sometimes in the \ac{ipalpha}. An example is the post-alveolar click:
-
-\begin{itemize}
-\item ! : this glyph represents an exclamation mark with unicode code point U+0021.
-\item \textipa{!} : this glyph represents an post-alveolar click with unicode code point U+01C3.
-\end{itemize}
-
-It is striking that these two look exactly the same. Things like this become important when, for example, I want to count the different characters in a text.
-
-\end{description}
-
-Unicode code points are often organized in blocks. A block can, for example, contain all letters of the Latin script. Those blocks are helpful although not always consistent. The \ac{ipalpha} is represented in a basic block but many \ac{ipalpha} symbols are actually found in other blocks. Confusion often arises from the fact, that one human-perceived grapheme is sometimes represented as more than one code point. 
-
-\begin{description}
-\item[\textsc{Grapheme clusters}] A grapheme cluster is one visual letter that is represented in Unicode as more than one code point. This is the case for diacritic marks. A problem with grapheme clusters is that some diacritic marks, which are characters that cannot really exist without any base character, are underspecified. This means that when we want to split into clusters, we do not know if that character belongs to the left or the right base character. This is the case for many characters in the \ac{ipalpha}. Unicode does not specify these but leaves it to the user to create tailored grapheme clusters. An example is the superscript aspiration \ipa{\super h}. It is typically written after the respective aspirated character, but there is no reason why I could no be written before the respective character (except for convention).
-\item[\textsc{Precomposed characters}] Note that sometimes, grapheme clusters can be precomposed and the combination of those two or more characters is assigned a new number. These clusters can be problematic if in a specific context, the graphemes should not be clustered but read separately. An example is the German `ä'. 
-\end{description} 
-
-Additional complexity is added through the possibility of Unicode to create Unicode locales. These allow users to specify language- or writing-system-specific cases. An additional challenge is that of picking the right font. Our standard font format can only contain about half of all the Unicode code point. It is therefore simply not possible to display the entire set of Unicode characters with one font. Many problems encountered with displaying writing systems are somehow connected to the font rather than Unicode itself \citep{unicode-lingu}. \citet{unicode-lingu} list a few more `pitfalls' that one might encounter when dealing with Unicode.
-
-For the present thesis, this topic is relevant for multiple reasons: 
-\begin{enumerate}
-\item The \ac{ipalpha} contains many special characters and many diacritics.
-\item The language data is available in many different scripts.
-\end{enumerate} 
-
-It is crucial that all data files, be it phonetic or `normal' scripts, are formatted and read correctly. Or rather that the encoding and processing is made transparent as often there is not one correct way of how to treat \ac{ipalpha} characters. 
-
-\subparagraph{Segments library} \citet{unicode-lingu} present a python library called segments\myfootnote{\url{https://pypi.org/project/segments/}} that can be used to process phonetic text. It includes a method to segment \ac{ipalpha} strings into grapheme clusters that make sense in a \ac{ipalpha} context. This means that, for example, diacritics are put on the base character but also that characters connected by a tie bar are displayed as one unit. I will make use of this library later when processing the data.
-
-\subsection{Unicode normalization forms}
-The above explanations make clear that there are considerable differences in what a human reader perceives and in what happens in the background. Unicode therefore provides normalization forms that can help to process written data.  Unicode publishes extensive explanations along with their standards which also includes those normalization forms. I will therefore not explain everything in full detail as this is done so already online \citep{Unicode.27.08.2021}. What is important is that each normalization form results in very different behaviour if a text is processes. There are two important aspects to normalization. One is that we can have decomposed or composed characters. The second is that we have a compatibility form and a non-compatibility form. In a decomposed string, we split the characters into their individual components. This means that characters with diacritics are split up into two or more characters. This means that a characters that had originally assigned one code point can in a decomposed form have more than one code points. In a composed normalization usually precomposed forms are kept. This means that some parts can be similar or the same to the decomposed version but if for a character there exists a precomposed version, this one is usually used. If a normalization is according to compatibility decomposition, this means that any formatting is removed such that we receive the underlying character in its original form. Superscript characters are then shown normal. How exactly these normal forms work is not always equally important, but what is absolutely crucial to make sure that when characters are compared or counted, the same normalization form is used.  The names for these normalization form are as follows:
-
-\begin{description}
-\item[NFD] : Canonical Decomposition
-\item[NFC] : Canonical Decomposition, followed by Canonical composition
-\item[NFKD] : Compatibility Decomposition
-\item[NFKC] : Compatibility Decomposition, followed by Canonical Composition
-\end{description}
-
-
-
-
-
