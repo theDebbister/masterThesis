@@ -8,6 +8,10 @@ The model that I am using for my \ac{g2p} experiments is explained in section \r
 \section{Reproducability}
 All scripts that I used to preprocess, train and evaluate my models are found on my GitHub. I installed the model on my machine as specified on the model's GitHub\myfootnote{\url{https://github.com/cmusphinx/g2p-seq2seq}}. In order to reproduce my results I include a table below that lists all links to my relevant scripts and settings including the settings for the virtual environment. 
 
+\section{CMUSphinx}
+\label{sec:cmu}
+For my personal experiments, I decided to use the CMUSphinx \ac{s2s} \ac{g2p} model. This model has been used in the \ac{sigm} 2021 task as part of the Dialpad ensemble \citep{gautam.2021}. It was not used on many languages but promised a good performance which is why I decided to use this model for this present thesis. The CMUSphinx model is a transformer-based \ac{s2s} model implemented with tensorflow. Unfortunatley, there is not a lot of information available online about the model. There exists a pre-trained version of the model for ac{g2p}, however, they use a transcription format other than \ac{ipalpha} which means it cannot be used for our dataset \citep{GitHub.03.02.2022}. 
+
 \section{Training settings}
 As I have shortly mentioned before, some WikiPron word lists have less than one thousand word pairs. I marked them as low resource and only used the high resource languages to train my models. There are different settings which I will use to train the models and analyse their performance. The settings are chosen in a way such that they are built on each other. The first experiments are set up very simply and without much effort. Then I continuously add more complexity. Below I added a short description of each setting as a n overview. I will add more details on the individual steps in separate sections. 
 
