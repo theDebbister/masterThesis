@@ -53,14 +53,46 @@ In section \ref{sec:ipa} I talked about the incompleteness and difficulties of t
 
 The first analysis is a character based comparison. This means that I used the python segments library\myfootnote{\url{https://pypi.org/project/segments/}} to split up all the phonemes into Unicode characters. Then I compared those characters to the PHOIBLE database. As I have explained in section \ref{sec:phoible}, in can use the PHOIBLE databse to find phonemes that are uncommon for a specific language. While it is possible that a correctly used phoneme is not in PHOIBLE, it still gives a good overview of uncommon phonemes in the transcription or even points out mistakes in my data. This character based cleaning is done for both datasets. The more detailed list of what needs to be cleaned is found in table \ref{tab:preprocessing}.
 
-There are two more general things that I removed from the datasets. The first is \textbf{tones}. The reason for that is that it is not possible to infer tones from graphemes. Although they are used to distinguish meaning, they are not written down, but usually just known. This means that there are grapheme sequences that look exactly the same and their transcription is the same as well \textit{except} for the tones. Example shows what I mean by that:
+There are two more general things that I removed from the datasets. The first is \textbf{tones}. The reason for that is that it is not possible to infer tones from graphemes. Although they are used to distinguish meaning, they are not written down, but usually just known. This means that there are grapheme sequences that look exactly the same and their transcription is the same as well \textit{except} for the tones. Example \ref{ex:chinese-tones} shows the same Chinese sign together with its transcription. The superscript number represent the tones. For none of the three examples are the tones the same. But if only shown the sign, there is absolutely no way to find out which tones are meant:
 
 \begin{covsubexamples}
-\item
-\item
+\label{ex:chinese-tones}
+\item 
+\begin{CJK*}{UTF8}{bsmi}
+浸 \>\>\>\>\textipa{\t{tC}\super h i n} \textsuperscript{2}\textsuperscript{1}\textsuperscript{4}
+\end{CJK*}
+\item 
+\begin{CJK*}{UTF8}{bsmi}
+浸 \>\>\>\>\textipa{\t{tC}\super h i n} \textsuperscript{5}\textsuperscript{1}
+\end{CJK*}
+\item  
+\begin{CJK*}{UTF8}{bsmi}
+浸 \>\>\>\>\textipa{\t{tC}\super h i n} \textsuperscript{5}\textsuperscript{5}
+\end{CJK*}
 \end{covsubexamples}
 
-There are different ways to represent tones and I excluded all of them. The second additional preprocessing step I took is to remove all \textbf{punctuation symbols}. This accounts mostly for the \ac{nws} short stories. For a character-based modelling, punctuation does not add any valuable information as this only becomes relevant, and can only be inferred, on a word, respectively, sentence basis.    
+For the reason of the ambiguity shown in example \ref{ex:chinese-tones}, I decided to exclude tones. There are different ways to represent tones and I excluded all of them. The second additional preprocessing step I took is to remove all \textbf{punctuation symbols}. This accounts mostly for grapheme version of the \ac{nws} short stories. For character-based modelling, punctuation does not add any valuable information as this only becomes relevant on a sentence basis. 
+
+In example \ref{ex:cleaning} I list a few phonetic transcriptions before and after cleaning. 
+
+\begin{covsubexamples}[preamble={This example shows stringe before and after cleaning them. The left-hand side shows the uncleaned version and the right-hand side the cleaned version. I added the language code and the transcription type and the original grapheme sequence in parentheses.}]
+\label{ex:cleaning}
+\item deu, narrow
+
+\textipa{a: b @ n t m a: l \t{ts} a \textsubarch{I} t} $\rightarrow$ \textipa{a: b @ n t m a: l t s a \textsubarch{I} t} (Abendmahlzeit)
+\item fin, broad
+
+\textipa{A: l: o t A\super x}  $\rightarrow$ \textipa{A: l: o t A P} (aallota)
+\item cmn, broad
+
+\textipa{\t{tC}\super h i n} \textsuperscript{2}\textsuperscript{1}\textsuperscript{4} $\rightarrow$ \textipa{t C \super h i n}
+\begin{CJK*}{UTF8}{bsmi}
+(浸)
+\end{CJK*}
+\item eng uk, narrow
+
+\textipa{@ l 3\textrhoticity  d Z I k} $\rightarrow$ \textipa{@ l @\textrhoticity  d Z I k} (allergic)
+\end{covsubexamples}
 
 \tab{tab:preprocessing}{The table shows what phonemes where changed or excluded and what the reason is for this preprocessing. All characters that were excluded are replaced by a NULL value. }{
 \begin{tabularx}{\textwidth}{
@@ -93,11 +125,12 @@ $\sim$							& \scriptsize{SWUNG DASH} 									& NULL 						& \multirow[t]{4}{\
 \end{tabularx}}{Preprocessing}
 
 \subsection*{NWS corpus}
-Apart from cleaning the stories as described in table\ref{preprocess}, I had to transform them into dictionary format in order to be able to use them as testing data. I order to do that it is necessary to tokenize both orthographic and phonetic texts and then align them. As the number of tokens (when split naively at blanks) is not always the same for orthographic and phonetic text, it was necessary to align some of them manually. While this is not a problem when talking about languages that I know, it is a bit tricky for languages completely unknown to me. Luckily there are tools online that provide a rough pronunciation of a word in a given language or even a phonetic transcription (although rarely in \ac{ipalpha})\myfootnote{For most languages I could use Google translator (\url{https://translate.google.com/?hl=de&sl=ko&tl=de&op=translate}), for languages like Hebrew, I could ask someone who knows the language to help me out.}. 
+Apart from cleaning the stories as described in table\ref{preprocess}, I had to transform them into dictionary format in order to be able to use them as testing data. In order to do that it is necessary to tokenize both orthographic and phonetic texts and then align them. As the number of tokens (when split naively at blanks) is not always the same for orthographic and phonetic text, it was necessary to align some of them manually. While this is not a problem when talking about languages that I know how to pronounce, it is a bit tricky for languages completely unknown to me. Luckily there are tools online that provide a rough pronunciation of a word in a given language or even a phonetic transcription (although rarely in \ac{ipalpha})\myfootnote{For most languages I could use Google translator (\url{https://translate.google.com/?hl=de&sl=ko&tl=de&op=translate}), for languages like Hebrew, I could ask someone who knows the language to help me out.}. 
 
 Chinese and Thai required special tokenization. To tokenize Chinese and Thai I used \textit{polyglot}\myfootnote{\url{https://polyglot.readthedocs.io/en/latest/}}, a Python library.
 
-Apart form the characters that I cleaned out in table \ref{tab:preprocessing}, there were a few more characters that needed to be cleaned. The cleanings here were a classic example for the Unicode normalization issues that I presented in section \ref{sec:unicode_ipa}. As the models cannot handle characters that are not in their vocabulary, I needed to remove those to be able to evaluate the models on those stories. However, for some characters, they were in the vocabulary, but as precomposed characters while they were not precomposed in the stories. Those characters look exactly the same but the model (or any other text processing application) treats them as two completely different characters. 
+Apart form the characters that I cleaned out in table \ref{tab:preprocessing}, there were a few more characters that needed to be cleaned. 
+As the models cannot handle characters that are not in their vocabulary (in the vocabulary are all characters that were in the training data), I needed to remove the unknown characters to be able to evaluate the models on those stories. However, for some characters, they were in the vocabulary, but the input data was in the wrong Unicode normalization form as described in section \ref{sec:unicode_ipa}. For example, some characters were precomposed characters while they were not precomposed in the \ac{nws} stories I used to test the model. Both characters in the model's vocabulary and the \ac{nws} stories look exactly the same but the model (or any other text processing application) treats them as two completely different characters because they have a different code point. 
 
 
 \subsection*{WikiPron} 
@@ -121,24 +154,85 @@ I experimented with several things before I trained a first set of models. I wil
 
 \subsection*{Version 1}
 
-The first thing I tried was to add two flags to every phoneme. In order to do this, I encoded the features as two strings. This means that I split the features into two sets and then used a different set of random capital letters to encode all of these uniquely. After each phoneme I will add two flags that describe that phoneme. The combination of the two flags will be unique for each phoneme. The individual flags can overlap between the phonemes, if one half of the features is the same for that phoneme. The example below shows a possible encoding of a phonetic text:
+The first thing I tried was to add two flags to every phoneme. The idea is to use the PHOIBLE feature set for each of the phonemes and encode the information that is found in those features. As there are 37 features for each phoneme they allow to encode much more information than one single character can. By encoding the phonetic features we can add more information that the model can use to create the grapheme sequences. For example: in some languages, there are vowel-consonant patterns. In German or also English a word typically needs at least one vowel and it is uncommon to have consonant sequences longer than three letters. If it was possible to encode for each phoneme if it was a vowel or a consonant, the model could abstract that information more easily. 
+
+In order to add this phonetic information to the datasets, I performed the following steps:
+\begin{description}
+    \item[\textsc{1. step}] I split the list of all 37 PHOIBLE features (see section \ref{sec:phoible}) into two sets of PHOIBLE features. After this step, I had two sets. One containing the first half of all features, the other one containing the second half of all features.
+    \item[\textsc{2. step}] For each set, I used two different letters to encode all possible feature combinations that can be obtained by combining all features in the set with all other features in the same set. If there had been two features, `syllabic' and `consonantal', in the set, there are nine possible combinations (refer to section \ref{sec:phoible} to understand the meaning of the values for each features). Table \ref{tab:feature-encoding} shows how this step looks like for a small example.
+    To each of these combinations I assigned two different capital letters.
+    \item[\textsc{3. step}] Once I completed the above step, I had to sets of strings, that I could combine to encode all possible combinations of features. Each string represents a different combination for one subset of the features.
+    \item[\textsc{4. step}] Then, for each phoneme, I could assign it to two strings. The first string represents the first half of its features, the second string represents the second half of its features.
+\end{description}
+
+    \tab{tab:feature-encoding}{This table shows an example of how the feature encoding works. In this case there are only two features involved. Nonetheless, the procedure works the same for more features.}{
+    \begin{tabular}{|ll|l|}
+    \hline
+        \textbf{syllabic} & \textbf{consonantal} & \textbf{feature encoding} \\\hline\hline
+        +        & -           & AA       \\
+        +        & 0           & AB       \\
+        +        & +           & AC       \\
+        -        & -           & AD       \\
+        -        & 0           & BA       \\
+        -        & +           & BB       \\
+        0        & -           & BC       \\
+        0        & 0           & BD       \\
+        0        & +           & CA       \\\hline     
+        \end{tabular}
+        }{Feature encoding}
+After completing the above steps, I get an output that looks similar to the example below. The combination of the two flags is be unique for each phoneme.
 
 \begin{covexamples}
 \item \label{ex1} \textipa{p} AB CD \textipa{k\super h} AA BC
 \item \label{ex2} \textipa{k\super h} AA BC  \ipa{U} BF CC
 \end{covexamples}
 
-A problem with this approach is that the sequences get really long if all phonemes are represented by a string of length three. The CMU model cuts the sequence off at 30 characters. This means that only phoneme sequences that no longer than 10 characters will be represented in full. This is way to short to account for many words. It is possible to increase that limit. However, 30 characters is already quite long and there is no point in setting this limit too high as those models still experience difficulties in processing sequences that are too long. Not only the sequence length is influenced but also the vocabulary size. Each flag will be added to the vocabulary.  
+A problem with this approach is that the sequences get really long if all phonemes are represented by a string of length three.  Examples \ref{ex1} and \ref{ex2} show that the phoneme sequence gets three times longer. Originally there were only two segments separated by a white space while after the feature flags are added there are six segments. However, the CMU model separates the input phoneme sequences at white spaces and cuts off every segment after 30 segments. Each of the segments gets added to the vocabulary. This means that only phoneme sequences that are no longer than 10 segments will be represented in full when for each phoneme two additional feature flags are added as in the example above. Many original phoneme sequences are longer than 10 segments. It is possible to increase the limit of the model when to cut off segments. However, 30 segments is already quite long. There are not many words that are longer than 30 segments. There is no point in setting this limit too high as neural models like the CMU model still experience difficulties in processing sequences that are too long. Not only the sequence length is influenced but also the vocabulary size. Each flag will be added to the vocabulary which increases the vocabulary by a lot.  
 
 It is therefore not surprising that the model did not perform well. In fact, the \ac{wer} was about double the \ac{wer} of the long model trained on the uncleaned data. Given this results, I decided not to train any more models and look for another way of how to encode the features.
 
 \subsection*{Version 2}
-For the second attempt at encoding phonetic features I tried a different approach. Instead of adding two flags, I added only one flag after each phoneme. Also, this time the idea was not to add a unique flag to each phoneme but to encode only some features for all phonemes. This means that for some phonemes the same flag was added. As the phonemes were not replaced by the flags, but the phonemes were kept in the text, there is no information lost. The intuition behind it is to encode high-level patterns in phoneme sequences. For example, as vowels typically have some overlapping features, very similar vowels will be encoded using the same flag. In order to choose appropriate features for each language, I calculated the pearson correlation between the features. I only used those features whose correlation with all other features is not above a certain threshold. For this experiment I set the threshold to be 0.5. If the threshold was too high, for many languages, no correlating features were found. This is not surprising as features in general do not make a lot of sense if they are all telling the same thing. This is why I set the threshold relatively low which means I kicked out a lot of features. 
-The reason for this is that all languages only use a relatively small subset of phonemes. This means that many features are not important for a language as those features are not used to distinguish meaning. In order to recognize high-level patterns, only the most distinctive features are important. Other than that I encoded the features in the same way as for version one. First results for this version reached similar scores as the baselines ones. I trained a full set of models for this version.
+For the second attempt at encoding phonetic features I tried a different approach. Instead of adding two flags, I added only one flag after each phoneme. Also, this time the idea was not to add a unique flag to each phoneme but to encode only some features for all phonemes. This means that for some phonemes the same flag was added. As the phonemes were not replaced by the flags, but the phonemes were kept in the text, there is no information lost. 
 
-While encoding these features, I noticed that some phonemes are not listed as individual phonemes in PHOIBLE but are listed as allophones of one phoneme that is in there. This means that some broad transcriptions contain allophones which, ideally, should not be the case. Also, it means that I did not have features for these phonemes which means that those were not encoded. 
+The intuition behind this second approach is to encode high-level patterns in phoneme sequences. For example, as vowels typically have some overlapping features, very similar vowels will be encoded using the same flag. Again, in order to enrich my data with the features, I followed specific steps which I will describe in more detail below: 
 
-In table \ref{tab:enc_features}, I list the features that were encoded for every language. Every possible combination of those features was assigned a different flag. For most languages, about half of the 37 features were encoded.
+\begin{description}
+    \item[\textsc{1. step}] As a very first step, I collected a list of all unique phonemes in PHOIBLE together with their features.
+    \item[\textsc{2. step}] In contrast to the first feature version, for the second feature version I computed the features based on the phoneme inventory of each language. Consequently, I collected a set all PHOIBLE phonemes for \textit{each language separately}. As I am going to train a model for each language separately, I can encode the features language specific as long as the logic behind it is the same to be able to compare them. All of the following steps are conducted for each language separately.
+    \item[\textsc{3. step}] As a next step, I collected a set of all phonemes for each language that are found in the training data for the models which is the WikiPron data in my case. 
+    After this step, for each language I have two sets of phonemes:
+    \begin{enumerate}
+        \item one set for all phonemes in the WikiPron training data for the respective language
+        \item one set for all phonemes in PHOIBLE for the respective language
+    \end{enumerate}
+    Taking the intersection of these two sets gives me the set of phonemes which are found in PHOIBLE for that language.
+    \item[\textsc{4. step}] For each phoneme in the training set, I can get the PHOIBLE feature vector for that phoneme. If a phoneme is not found in PHOIBLE but in the training data, I just ignore that phoneme for the next steps.
+    \item[\textsc{5. step}] This step is the key to the current feature version. I decide what features to encode for each language performing this step. In order to choose appropriate features for each language, I calculated the Pearson correlation between the features for each language. I only used those features whose correlation with all other features is not above a certain threshold. For this experiment I set the threshold to be 0.5. If the threshold was too high, for many languages, no correlating features were found. This is not surprising as features in general do not make a lot of sense if they are all telling the same thing. This is why I set the threshold relatively low which means I kicked out a lot of features. 
+    
+    The reason for this is that all languages only use a relatively small subset of phonemes. This means that many features are not important for a language as those features are not used to distinguish meaning. In order to recognize high-level patterns, only the most distinctive features are important.
+    \item[\textsc{6. step}] Once that I have all the features for one language that I want to encode, I can actually encode them. This step is the same as for the first feature version. I get all combinations of the features to encode for each language (similar as in table \ref{tab:feature-encoding}) and assign it a different capitalized two-letter string. Table \ref{tab:f2-strings} lists a few example strings for how the input data changed after enriching it with features. In table \ref{tab:enc_features}, I list the features that were encoded for each language. 
+\end{description}
+
+\tab{tab:f2-strings}{This table shows example for the German broad WikiPron data for the feature encoding version 2. It shows the graphems, the unchanged phoneme sequence and the phoneme sequence with features.}{
+\begin{tabular}{|lll|}
+\hline
+\textbf{Grapheme}   & \textbf{Phoneme}           & \textbf{Phonemes with features}                    \\\hline\hline
+a          & \textipa{P a:}                 & \textipa{P} AK \textipa{a:} AM                                \\
+aa         & \textipa{a:}                   & \textipa{a:} AM                                     \\
+aachen     & \textipa{a: x @ n}             & \textipa{a:} AM \textipa{x} AJ \textipa{@} AL \textipa{n} AG                      \\
+aachener   & \textipa{a: x @ n 5}           & \textipa{a:} AM \textipa{x} AJ \textipa{@} AL \textipa{n} AG \textipa{5} AG          \\
+aachenerin & \textipa{a: x @ n @ K I n}     & \textipa{a: x @ n @ K I n} aː AM x AJ ə AL n AG ə AL ʁ AJ ɪ AL n AG  \\
+...        & ...                            & ...                                       \\
+übungen    & \textipa{P y: b U N @ n}       & \textipa{P y: b U N @ n} ʔ AK yː BA b AH ʊ AN ŋ AG ə AL n AG       \\
+übungsbuch & \textipa{y: b U N s b u: x}    & \textipa{y: b U N s b u: x} yː BA b AH ʊ AN ŋ AG s AJ b AH uː BA x AJ \\
+üppig      & \textipa{Y p I \|)c} ̧          &\textipa{Y p I \|)c}  ʏ AN p AH ɪ AL ç                         \\
+üsselig    & \textipa{Y z @ l I \|)c}̧       &\textipa{Y z @ l I \|)c} ʏ AN z AJ ə AL l AE ɪ AL ç               \\
+œuvre      & \textipa{œ: v K @} œː v ʁ ə    & \textipa{œ: v K @} œː BA v BC ʁ AJ ə AL       \\\hline              
+\end{tabular}
+}{Example data feature version 2}
+
+
+While encoding these features, I noticed that some phonemes are not listed as individual phonemes in PHOIBLE but are listed as allophones of one phoneme that is in there. This means that some broad transcriptions contain allophones which, ideally, should not be the case. Also, it means that I did not have features for these phonemes which means that those were not encoded. It would be possible to replace all allophones for each language with the respective phoneme. However, this would have gone beyond the scope of this present thesis.
 
 \tab{tab:enc_features}{The table shows all features that were encoded for each language. Some of them are encoded for all languages, those are at the top of the table.}{
 \vspace{-0.5cm}
@@ -235,7 +329,7 @@ zul    & broad  & 61.7 & 11.5 & \textbf{10.4} & 1.1  & 95.1 & 13.7 \\ \hline
 \end{tabularx}
 }{Results: short models}
 
-Table \ref{tab:baseline_short} shows a comparison between my short models and the \ac{sigm} models. As the comparison results from the shared task stay the same for both, my long and short models, and as the long models perform all better than these here, I will only compare the results further down for the long models.
+Table \ref{tab:baseline_short} shows a comparison between my short models and the \ac{sigm} models. The results for the shared task are the same no matter to which of my models I compare them. As we will see in the next section, my long models performed better than the short ones o presented in the current section. Therefore, I will not discuss the results at this point for the short models compared with the shared task. I will only discuss my results of the long models compared with the \ac{sigm} models.
 
 \tab{tab:baseline_short}{The table shows the \ac{wer} results for the best of my short models compared with the \ac{sigm} 2020 and 2021 results. For each language the best score is reported no matter what year or what model from the \ac{sigm} task. My models and the \ac{sigm} models were trained on WikiPron data. However, the \ac{sigm} data was preprocessed in a slightly different way which means that the results are not directly comparable. All references for the \ac{sigm} models can be found in tables \ref{tab:sota} and \ref{tab:sota_table_long}.}{
 \begin{tabular}{|rrrr|}
@@ -300,7 +394,7 @@ zul       & broad         & 65.9         & \textit{10.7}   & \textbf{9.8}       
 \end{tabularx}
 }{Results: long models}
 
-Table \ref{tab:baseline_long_sig} shows a comparison of the best long model compared with the best \ac{sigm} shared task result. For three of those eight languages, my model reached a better or the same score. The \ac{sigm} Korean model performed quite a lot better than mine which can be explained by the fact, that this model was not trained on the Korean logograms but those were converted to hangul characters which is a Latin alphabet representation of Korean. As explained in section \ref{section:sig}, this can lead to better results as it reduces the vocabulary size. My result for English is a lot worse as well. Generally, English (as well as German) seems to be a language that is relatively difficult to pronounce as the results are often a lot worse than those of other languages. In the present case, the difference might result from the fact that the \ac{sigm} model was an ensemble and it was only trained for English and therefore optimized to work for the English language. My model performs better on Modern Greek. This is an excepted result, as the model from the \ac{sigm} task was trained on only 800 samples. I had more than 10,000 samples. This aligns with cutting edge research, as \citet{Ashby-Bartley.2021} have found that 800 samples are not enough to train a decent model. My results confirm this finding as my model trained on 10,000 samples of the same data was \textit{considerably} better than the model trained on only 800 samples. The only difference between the training sets of the models was that I applied a few different preprocessing steps (see section \ref{preprocess}). 
+Table \ref{tab:baseline_long_sig} shows a comparison of the best long model compared with the best \ac{sigm} shared task result. For three of those eight languages, my model reached a better or the same score. The \ac{sigm} Korean model performed quite a lot better than mine which can be explained by the fact, that the \ac{sigm} model was not trained on the Korean logograms but those were converted to hangul characters which is a Latin alphabet representation of Korean. As explained in section \ref{section:sig}, this can lead to better results as it reduces the vocabulary size. My result for English is a lot worse as well. Generally, English (as well as German) seems to be a language that is relatively difficult to pronounce as the results are often a lot worse than those of other languages. In the present case, the difference might result from the fact that the \ac{sigm} model was an ensemble and it was only trained for English and therefore optimized to work for the English language. My model performs better on Modern Greek. This is an excepted result, as the model from the \ac{sigm} task was trained on only 800 samples. I had more than 10,000 samples. This aligns with cutting edge research, as \citet{Ashby-Bartley.2021} have found that 800 samples are not enough to train a decent model. My results confirm this finding as my model trained on 10,000 samples of the same data was \textit{considerably} better than the model trained on only 800 samples. The only difference between the training sets of the models was that I applied a few different preprocessing steps (see section \ref{preprocess}). 
 
 \tab{tab:baseline_long_sig}{The table shows the \ac{wer} results for the best of my long models compared with the \ac{sigm} 2020 and 2021 results. For each language the best score is reported no matter what year or what model from the \ac{sigm} task. My models and the \ac{sigm} models were trained on WikiPron data. However, the \ac{sigm} data was preprocessed in a slightly different way which means that the results are not directly comparable. All references for the \ac{sigm} models can be found in tables \ref{tab:sota} and \ref{tab:sota_table_long}.}{
 \begin{tabular}{|rrrr|}
@@ -367,7 +461,7 @@ vie                & narrow        & 100.0              & 99.8             & 100
 \subsection{Results overall}
 All three model types show s similar performance no matter how long they were trained. The most notable observation is that the difference between the performance of the long and the short models is rather small. For some language, the best short model performed even better than the long one or the results were the same. This was the case for narrow German (deu), narrow US English (eng us), narrow UK English (eng uk), broad Goizueta Basque (eus), broad Burmese (mya), narrow Tagalog (tgl) and narrow Turkish (tur). I find it surprising that most of these are the narrow variants as those are more detailed. I would expect a model trained for longer to catch more details. However, none of the scores were really low, the lowest being 19.4 for Basque. Additionally, the differences are never larger than 2.8 percentage points.
 
-The feature models did not show any relevant improvement compared to the models trained without features. They did not worsen the results but performed very similarly. Overall they showed for almost all languages quite a large improvement when trained longer. This could mean that they would get better still when trained longer, but the relation between the three model types did not change with longer training time, so I suppose it is rather unlikely that they outperform the other model types.
+The feature models did not show any relevant improvement compared to the models trained without features. They did not worsen the results but performed very similarly. When the long features models are compared to the short ones, the models trained for longer reached a better performance for almost all languages. As the input data is more complex because I added the features, it might be worth exploring even longer training times. However, also the long trained trained models without features reached a better performance than the models that for trained short without features. This means that it could be possible that the feature models would still not outperform the models trained without features if both model types were trained for longer. 
 
 
 
