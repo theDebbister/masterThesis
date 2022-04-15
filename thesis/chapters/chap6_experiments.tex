@@ -3,14 +3,14 @@
 \label{chap:exp}
 In this chapter, I present the experiments I conducted to obtain models for phonetic transcription. As a result of my first practical part in chapter \ref{chap:data_collection} I presented two datasets that I will now use to perform these experiments. The \ac{nws} corpus is much smaller which is why I will use it as a test dataset only. This means that I will train any model on the WikiPron dataset. As the \ac{nws} corpus is quite well known among linguists or at least among phoneticians, it will hopefully give interesting insights when testing the models on these short texts. Table \ref{tab:all_langs} shows all languages that I am using in my experiments. Note that WikiPron continuously adds data to their repository. This means that there might be new languages that are in the 100 language corpus and that I did not use. Additionally, there were languages which had a WikiPron dictionary that was smaller than 1,000 pairs. \citet{Ashby-Bartley.2021} that based their conclusion on similar WikiPron data have found that a dataset with 1,000 samples is not enough to train a decent model which is why I excluded these. If the transcription type of the \ac{nws} story is unknown, I only added it to the broad type of the WikiPron dictionary, such that there are no duplicates in the table. 
 
-The model that I am using for my \ac{g2p} experiments is explained in section \ref{sec:cmu}. Setting it up was not very easy as there were issues with the tensorflow version and some other dependencies. Also, they do have a pre-trained model, but this uses a completely different transcription convention than IPA. So we cannot use this pre-trained model. But it is of course well possible to train  new models for the languages I am using. Generally, broad and narrow transcriptions are treated as separate languages and thus trained separately as well. The same is true for dialects if there is any information available. American and British English are trained in different models. In order to compare my results to already existing models, I will use the results of the \ac{sigm} tasks in 2020 and 2020. They present results for quite a few languages. Also, they use the same data type. They cleaned some of the data for some languages and made these datasets available. Whenever a filtered version is available I use that one as the basis for my experiments. 
+The model that I am using for my \ac{g2p} experiments is explained in section \ref{sec:cmu}. Setting it up was not very easy as there were issues with the tensorflow version and some other dependencies. Also, they do have a pre-trained model, but this uses a completely different transcription convention than IPA. So we cannot use this pre-trained model. But it is of course well possible to train  new models for the languages I am using. Generally, broad and narrow transcriptions are treated as separate languages and thus trained separately as well. The same is true for dialects if there is any information available. American and British English are trained in different models. In order to compare my results to already existing models, I will use the results of the \ac{sigm} tasks in 2020 and 2021. They present results for quite a few languages. Also, they use the same data type. They cleaned some of the data for some languages and made these datasets available. Whenever a filtered version is available I use that one as the basis for my experiments. 
 
 \section{Reproducability}
 All scripts that I used to preprocess, train and evaluate my models are found on my GitHub. I installed the model on my machine as specified on the model's GitHub\myfootnote{\url{https://github.com/cmusphinx/g2p-seq2seq}}. In order to reproduce my results I include a table below that lists all links to my relevant scripts and settings including the settings for the virtual environment. 
 
 \section{CMUSphinx}
 \label{sec:cmu}
-For my personal experiments, I decided to use the CMUSphinx \ac{s2s} \ac{g2p} model. This model has been used in the \ac{sigm} 2021 task as part of the Dialpad ensemble \citep{gautam.2021}. It was not used on many languages but promised a good performance which is why I decided to use this model for this present thesis. The CMUSphinx model is a transformer-based \ac{s2s} model implemented with tensorflow. Unfortunatley, there is not a lot of information available online about the model. There exists a pre-trained version of the model for ac{g2p}, however, they use a transcription format other than \ac{ipalpha} which means it cannot be used for our dataset \citep{GitHub.03.02.2022}. 
+For my personal experiments, I decided to use the CMUSphinx \ac{s2s} \ac{g2p} model. This model has been used in the \ac{sigm} 2021 task as part of the Dialpad ensemble \citep{gautam.2021}. It was not used on many languages but promised a good performance which is why I decided to use this model for this present thesis. The CMUSphinx model is a transformer-based \ac{s2s} model implemented with tensorflow. Unfortunatley, there is not a lot of information available online about the model. There exists a pre-trained version of the model for ac{g2p}, however, they use a transcription format other than \ac{ipalpha} which means it cannot be used for our dataset\myfootnote{\url{https://github.com/cmusphinx/g2p-seq2seq}}. 
 
 \section{Training settings}
 \label{sec:train-settings}
@@ -19,7 +19,7 @@ As I have shortly mentioned before, some WikiPron word lists have less than one 
 There are a few properties that are always the same for all models:
 \begin{itemize}
 \item The CMU model splits the data automatically if no specified otherwise. The automatic split is 85\% training data, 5\% development data and 10\% test data. I did not change this split.
-\item The hyperparameters are left as default if not mentioned otherwise. This means that I did not adapt the model and used it as it can be found online. More on teh default settings can be found on the model's GitHub\myfootnote{\url{https://github.com/cmusphinx/g2p-seq2seq}}.
+\item The hyperparameters are left as default if not mentioned otherwise. This means that I did not adapt the model and used it as it can be found online. More on teh default settings can be found on the model's GitHub.
 \item The training time for the short model for one language with 10,000 steps is about 20 minutes. The long models took another six hours to complete the training per language.  
 \end{itemize}
 
@@ -49,9 +49,9 @@ The same as setting 5, but again the models are trained for 200,000 steps like i
 
 \section{Preprocessing}
 \label{preprocess}
-In section \ref{sec:ipa} I talked about the incompleteness and difficulties of transcribing using the \ac{ipalpha}. How exactly a sound is mapped to an \ac{ipalpha} symbol also depends on whoever transcribes a particular text. The WikiPron data has been put together by many different people. There are conventions on how to add transcriptions by Wiktionary, but there still might be inconsistencies. Other than that, it is always possible that something is correct, but neural models just cannot handle it well. That said I will carefully examine and clean the datasets. There is preprocessing that is done for both datasets, further down I will describe some preprocessing that had to be done for each individual dataset.
+In section \ref{sec:ipa}, I wrote about the incompleteness and difficulties of transcribing using the \ac{ipalpha}. How exactly a sound is mapped to an \ac{ipalpha} symbol also depends on whoever transcribes a particular text. The WikiPron data has been put together by many different people. There are conventions on how to add transcriptions by Wiktionary, but there still might be inconsistencies. Other than that, it is always possible that something is correct, but neural models just cannot handle it well. That said I will carefully examine and clean the datasets. There is preprocessing that is done for both datasets, further down I will describe some preprocessing that had to be done for each individual dataset.
 
-The first analysis is a character based comparison. This means that I used the python segments library\myfootnote{\url{https://pypi.org/project/segments/}} to split up all the phonemes into Unicode characters. Then I compared those characters to the PHOIBLE database. As I have explained in section \ref{sec:phoible}, in can use the PHOIBLE databse to find phonemes that are uncommon for a specific language. While it is possible that a correctly used phoneme is not in PHOIBLE, it still gives a good overview of uncommon phonemes in the transcription or even points out mistakes in my data. This character based cleaning is done for both datasets. The more detailed list of what needs to be cleaned is found in table \ref{tab:preprocessing}.
+The first analysis is a character based comparison. This means that I used the Python segments library\myfootnote{\url{https://pypi.org/project/segments/}} to split up all the phonemes into Unicode characters. Then I compared those characters to the PHOIBLE database. As I have explained in section \ref{sec:phoible}, in can use the PHOIBLE databse to find phonemes that are uncommon for a specific language. While it is possible that a correctly used phoneme is not in PHOIBLE, it still gives a good overview of uncommon phonemes in the transcription or even points out mistakes in my data. This character based cleaning is done for both datasets. The more detailed list of what needs to be cleaned is found in table \ref{tab:preprocessing}.
 
 There are two more general things that I removed from the datasets. The first is \textbf{tones}. The reason for that is that it is not possible to infer tones from graphemes. Although they are used to distinguish meaning, they are not written down, but usually just known. This means that there are grapheme sequences that look exactly the same and their transcription is the same as well \textit{except} for the tones. Example \ref{ex:chinese-tones} shows the same Chinese sign together with its transcription. The superscript number represent the tones. For none of the three examples are the tones the same. But if only shown the sign, there is absolutely no way to find out which tones are meant:
 
@@ -187,9 +187,9 @@ After completing the above steps, I get an output that looks similar to the exam
 \item \label{ex2} \textipa{k\super h} AA BC  \ipa{U} BF CC
 \end{covexamples}
 
-A problem with this approach is that the sequences get really long if all phonemes are represented by a string of length three.  Examples \ref{ex1} and \ref{ex2} show that the phoneme sequence gets three times longer. Originally there were only two segments separated by a white space while after the feature flags are added there are six segments. However, the CMU model separates the input phoneme sequences at white spaces and cuts off every segment after 30 segments. Each of the segments gets added to the vocabulary. This means that only phoneme sequences that are no longer than 10 segments will be represented in full when for each phoneme two additional feature flags are added as in the example above. Many original phoneme sequences are longer than 10 segments. It is possible to increase the limit of the model when to cut off segments. However, 30 segments is already quite long. There are not many words that are longer than 30 segments. There is no point in setting this limit too high as neural models like the CMU model still experience difficulties in processing sequences that are too long. Not only the sequence length is influenced but also the vocabulary size. Each flag will be added to the vocabulary which increases the vocabulary by a lot.  
+A problem with this approach is that the sequences get really long if all phonemes are represented by a string of length three.  Examples \ref{ex1} and \ref{ex2} show that the phoneme sequence gets three times longer. Originally there were only two segments separated by a white space while after the feature flags are added there are six segments. However, the CMU model separates the input phoneme sequences at white spaces and cuts off every segment after 30 segments. Each of the segments gets added to the vocabulary. This means that only phoneme sequences that are no longer than 10 segments will be represented in full when for each phoneme two additional feature flags are added as in the example above. Many original phoneme sequences are longer than 10 segments. It is possible to increase the limit of the model when to cut off segments. However, 30 segments is already quite long. There are not many words that are longer than 30 segments. There is no point in setting this limit too high as neural models like the CMU model still experience difficulties in processing sequences that are too long. Not only the sequence length is influenced but also the vocabulary size. Each flag will be added to the vocabulary which increases the vocabulary by a lot. This makes it harder for the model to pick one character from the vocabulary as output as there are more options available.  
 
-It is therefore not surprising that the model did not perform well. In fact, the \ac{wer} was about double the \ac{wer} of the long model trained on the uncleaned data. Given this results, I decided not to train any more models and look for another way of how to encode the features.
+It is therefore not surprising that the model did not perform well. In fact, the \ac{wer} was about double the \ac{wer} of the long model trained on the data with no features. Given this results, I decided not to train any more models and look for another way of how to encode the features.
 
 \subsection*{Version 2}
 For the second attempt at encoding phonetic features I tried a different approach. Instead of adding two flags, I added only one flag after each phoneme. Also, this time the idea was not to add a unique flag to each phoneme but to encode only some features for all phonemes. This means that for some phonemes the same flag was added. As the phonemes were not replaced by the flags, but the phonemes were kept in the text, there is no information lost. 
@@ -207,27 +207,36 @@ The intuition behind this second approach is to encode high-level patterns in ph
     \end{enumerate}
     Taking the intersection of these two sets gives me the set of phonemes which are found in PHOIBLE for that language.
     \item[\textsc{4. step}] For each phoneme in the training set, I can get the PHOIBLE feature vector for that phoneme. If a phoneme is not found in PHOIBLE but in the training data, I just ignore that phoneme for the next steps.
-    \item[\textsc{5. step}] This step is the key to the current feature version. I decide what features to encode for each language performing this step. In order to choose appropriate features for each language, I calculated the Pearson correlation between the features for each language. I only used those features whose correlation with all other features is not above a certain threshold. For this experiment I set the threshold to be 0.5. If the threshold was too high, for many languages, no correlating features were found. This is not surprising as features in general do not make a lot of sense if they are all telling the same thing. This is why I set the threshold relatively low which means I kicked out a lot of features. 
+    \item[\textsc{5. step}] This step is the key step to the current feature version. I decide what features to encode for each language performing this step. In order to choose appropriate features for each language, I calculated the Pearson correlation between the features for each language. The idea behind calculating the correlation between the features is to exclude features for one language that are not important for that language. If I find two features for the phonemes of a language that have a strong correlation, it means that those two features behave in a similar way. For example:
     
-    The reason for this is that all languages only use a relatively small subset of phonemes. This means that many features are not important for a language as those features are not used to distinguish meaning. In order to recognize high-level patterns, only the most distinctive features are important.
-    \item[\textsc{6. step}] Once that I have all the features for one language that I want to encode, I can actually encode them. This step is the same as for the first feature version. I get all combinations of the features to encode for each language (similar as in table \ref{tab:feature-encoding}) and assign it a different capitalized two-letter string. Table \ref{tab:f2-strings} lists a few example strings for how the input data changed after enriching it with features. In table \ref{tab:enc_features}, I list the features that were encoded for each language. 
+    \begin{itemize}
+        \item There is a phoneme \textipa{N} that has feature `sonorant' marked as ``+' and feature `continuant' as `-'.
+        \item Then there is another phoneme \textipa{n} that also has feature `sonorant' marked as ``+' and feature `continuant' as `-'.
+    \end{itemize}
+    Based on the above very small example, we could argue that whenever the feature `sonorant' is ``+', then the feature `continuant' is `-'. If we observe this pattern for those two features for many phonemes of a language, then there is a strong correlation between the two features `sonorant' and `continuant'. For all features of all phonemes of a language, the calculation is a bit more complex but the intuition is the same. When we study table \ref{tab:enc_features} more closely, we can actually see that for some languages (for example Chinese or German) only `sonorant' was encoded but not `continuant'. This means, that there actually is a correlation between `continuant' and at least another feature in those language. 
+    
+    I only used those features whose correlation with no other feature within one language is higher than a certain threshold. For this experiment I set the correlation threshold to be 0.5. If the threshold was too high, for many languages, no correlating features were found. This is not surprising as features in general do not make a lot of sense if they are all encoding the same information. This is why I set the threshold relatively low which means I did not encode a lot of features. 
+    
+    The reason why this feature encoding strategy can be used to find important feature for a language is that all languages only use a relatively small subset of phonemes. This means that many features are not important for a language as those features are not used to distinguish meaning. In order to recognize high-level patterns, only the most distinctive features are important. In table \ref{tab:enc_features}, I list the features that have a correlation which is lower than 0.5 with all other features.
+    
+    \item[\textsc{6. step}] Once that I have all the features for one language that I want to encode, I can actually encode them. This step is the same as for the first feature version. I get all combinations of the features to encode for each language (similar as in table \ref{tab:feature-encoding}) and assign it a different capitalized two-letter string. Table \ref{tab:f2-strings} lists a few example strings for how the input data changed after enriching it with features.  
 \end{description}
 
-\tab{tab:f2-strings}{This table shows example for the German broad WikiPron data for the feature encoding version 2. It shows the graphems, the unchanged phoneme sequence and the phoneme sequence with features.}{
+\tab{tab:f2-strings}{This table shows parallel examples for the first few and the last few entries of the German broad WikiPron data file for the feature encoding version 2. It shows the graphemes, the unchanged phoneme sequence and the phoneme sequence with features. In the original file, the phoneme column is omitted. The feature encodings are not unique for each phoneme. I marked an example for the same encoding for two phonemes in red. Note that the two phonemes are very similar (see figure \ref{fig:ipa_chart}, thus have similar features and consequently the same feature encoding.}{
 \begin{tabular}{|lll|}
 \hline
 \textbf{Grapheme}   & \textbf{Phoneme}           & \textbf{Phonemes with features}                    \\\hline\hline
-a          & \textipa{P a:}                 & \textipa{P} AK \textipa{a:} AM                                \\
-aa         & \textipa{a:}                   & \textipa{a:} AM                                     \\
-aachen     & \textipa{a: x @ n}             & \textipa{a:} AM \textipa{x} AJ \textipa{@} AL \textipa{n} AG                      \\
-aachener   & \textipa{a: x @ n 5}           & \textipa{a:} AM \textipa{x} AJ \textipa{@} AL \textipa{n} AG \textipa{5} AG          \\
-aachenerin & \textipa{a: x @ n @ K I n}     & \textipa{a: x @ n @ K I n} aː AM x AJ ə AL n AG ə AL ʁ AJ ɪ AL n AG  \\
+a          & \textipa{P a:}                 & \textipa{P } AK \textipa{a: } AM                                \\
+aa         & \textipa{a:}                   & \textipa{a: } AM                                     \\
+aachen     & \textipa{a: x @ n}             & \textipa{a: } AM \textipa{x } AJ \textipa{@ } AL \textipa{n } AG                      \\
+aachener   & \textipa{a: x @ n 5}           & \textipa{a: } AM \textipa{x } AJ \textipa{@ } AL \textipa{n } AG \textipa{5} AG          \\
+aachenerin & \textipa{a: x @ n @ K I n}     & \textipa{a: } AM \textipa{x } AJ \textipa{@ } AL \textipa{n } AG \textipa{@ } AL \textipa{K } AJ \textipa{I } AL \textipa{n } AG  \\
 ...        & ...                            & ...                                       \\
-übungen    & \textipa{P y: b U N @ n}       & \textipa{P y: b U N @ n} ʔ AK yː BA b AH ʊ AN ŋ AG ə AL n AG       \\
-übungsbuch & \textipa{y: b U N s b u: x}    & \textipa{y: b U N s b u: x} yː BA b AH ʊ AN ŋ AG s AJ b AH uː BA x AJ \\
-üppig      & \textipa{Y p I \|)c} ̧          &\textipa{Y p I \|)c}  ʏ AN p AH ɪ AL ç                         \\
-üsselig    & \textipa{Y z @ l I \|)c}̧       &\textipa{Y z @ l I \|)c} ʏ AN z AJ ə AL l AE ɪ AL ç               \\
-œuvre      & \textipa{œ: v K @} œː v ʁ ə    & \textipa{œ: v K @} œː BA v BC ʁ AJ ə AL       \\\hline              
+übungen    & \textipa{P y: b U N @ n}       & \textipa{P } AK \textipa{y: } BA \texipa{b } AH \textipa{U } AN {\color{red}\textipa{N } AG} \texipa{@ } AL {\color{red}\textipa{n } AG}       \\
+übungsbuch & \textipa{y: b U N s b u: x}    & \textipa{y:} BA \textipa{b } AH \textuipa{U } AN \textipa{N } AG \texipa{s } AJ \textipa{b } AH \textipa{u: } BA \textipa{x } AJ  \\
+üppig      & \textipa{Y p I \|)c}           & \textipa{Y } AN \textipa{p } AH \textipa{I } AL  \textipa{\|)c}                        \\
+üsselig    & \textipa{Y z @ l I \|)c}       & \textipa{Y } AN \textipa{z } AJ \textipa{@ } AL \textipa{l } AE \textipa{I }  AL \textipa{\|)c }    \\
+œuvre      & \textipa{{\oe}: v K @}    & \textipa{{\oe}:} BA \textipa{v } BC \textipa{K } AJ \teytipa{@ } AL \\\hline              
 \end{tabular}
 }{Example data feature version 2}
 
@@ -236,7 +245,8 @@ While encoding these features, I noticed that some phonemes are not listed as in
 
 \tab{tab:enc_features}{The table shows all features that were encoded for each language. Some of them are encoded for all languages, those are at the top of the table.}{
 \vspace{-0.5cm}
-\begin{tabularx}{1.1\textwidth}{|llX|}
+\hspace*{-1.1cm}
+\begin{tabularx}{1.2\textwidth}{|llX|}
 \hline
 \textbf{ISO 396-3} & \textbf{Type} & \textbf{Features}                                                                                                                  \\
 \hline
@@ -291,7 +301,8 @@ To evaluate the models that were trained on data containing feature flags, I cle
 Table \ref{tab:res_short_full} shows the results for all models that I trained for 10,000 steps. It is interesting that the results for all three models are actually very similar. I was surprised by the fact that for a vast majority of the languages the version trained on the cleaned data did not improve the performance although the cleaning was supposed to make the data more consistent. For example, excluding duplicate words with different phoneme sequences should remove some ambiguities. However, it is also possible that it actually introduced more ambiguities as I randomly took one version of the duplicates which might be an uncommon one. An interesting result is the one for Zulu (zul). The cleaned model performed a lot better than the other two. As this result seems rather strange, I will have a close look at the data again. Manually comparing the test prediction for Zulu to the reference phonemes (there are only 167 words in the test set), reveals that the model almost exclusively got the tones wrong. Those were excluded in the cleaned version which might explain the wide gap. Finnish (fin) had a very similar result but the gap was not as large.
 
 \tab{tab:res_short_full}{This table shows the results for setting 1 (BS), setting 3 (BS-clean) and setting 7 (F2).These are the short models.}{
-\begin{tabularx}{\textwidth}{|l|X||r|r||X|X||r|r|}
+\hspace*{-1.1cm}
+\begin{tabularx}{1.1\textwidth}{|l|X||r|r||X|X||r|r|}
 \hline
 \textbf{Iso 639-3} & \textbf{Type WikiPron} & \textbf{WER BS}       & \textbf{PER BS} & \textbf{WER BS-clean} & \textbf{PER BS-clean} & \textbf{WER F2} & \textbf{PER F2} \\ \hline \hline
 cmn    & broad  & 19.6 & 4.5  & \textbf{18.1} & 5.0  & 20.3 & 6.0  \\
@@ -332,19 +343,19 @@ zul    & broad  & 61.7 & 11.5 & \textbf{10.4} & 1.1  & 95.1 & 13.7 \\ \hline
 Table \ref{tab:baseline_short} shows a comparison between my short models and the \ac{sigm} models. The results for the shared task are the same no matter to which of my models I compare them. As we will see in the next section, my long models performed better than the short ones o presented in the current section. Therefore, I will not discuss the results at this point for the short models compared with the shared task. I will only discuss my results of the long models compared with the \ac{sigm} models.
 
 \tab{tab:baseline_short}{The table shows the \ac{wer} results for the best of my short models compared with the \ac{sigm} 2020 and 2021 results. For each language the best score is reported no matter what year or what model from the \ac{sigm} task. My models and the \ac{sigm} models were trained on WikiPron data. However, the \ac{sigm} data was preprocessed in a slightly different way which means that the results are not directly comparable. All references for the \ac{sigm} models can be found in tables \ref{tab:sota} and \ref{tab:sota_table_long}.}{
-\begin{tabular}{|rrrr|}
+\begin{tabular}{|rrrrl|}
 \hline
-\textbf{ISO396-3} & \textbf{BS WER} &  \textbf{SIG WER} & \textbf{Transcription type} \\
+\textbf{ISO396-3} & \textbf{BS WER} &  \textbf{SIG WER} & \textbf{Transcription type} & \textbf{Model name SIG} \\
 \hline
 \hline
-eng (us) & 53.00 & \textbf{37.43} & broad \\
-fra & 7.20 &  \textbf{5.11} & broad \\
-ell & \textbf{9.80} &  18.67 & broad \\
-kat & 0.30 &  \textbf{0.00} & broad \\
-hin & 5.60 &  \textbf{5.11} & broad \\
-jpn & 6.60 &  \textbf{4.89} & narrow \\
-kor & 26.70 &  \textbf{16.20} & narrow \\
-vie & 3.00 &  \textbf{0.89} & narrow \\
+eng (us) & 53.00 & \textbf{37.43} & broad & DP21 \\
+fra & 7.20 &  \textbf{5.11} & broad & DeepSPIN20 \\
+ell & \textbf{9.80} &  18.67 & broad & IMS20 \\
+kat & 0.30 &  \textbf{0.00} & broad & BS21/CL21\\
+hin & 5.60 &  \textbf{5.11} & broad & IMS20\\
+jpn & 6.60 &  \textbf{4.89} & narrow & DeepSPIN20\\
+kor & 26.70 &  \textbf{16.20} & narrow & CL21\\
+vie & 3.00 &  \textbf{0.89} & narrow & DeepSPIN20\\
 \hline
 \end{tabular}
 }{Short models comparison}
@@ -356,9 +367,10 @@ Table \ref{tab:res_long_full} shows the results for all models that I trained fo
 The largest improvement from the short to the long models was for Russian (rus). Russian had by far the largest dataset with more than 400,000 samples. It makes sense that for this large dataset, the model takes more time to extract all the relevant information. 
 
 \tab{tab:res_long_full}{This table shows the results for setting 2 (BS), setting 4 (BS-clean) and setting 8 (F2). These are the long models}{
-\begin{tabularx}{\textwidth}{|l|X||r|r||X|X||r|r|}
+\hspace*{-1.5cm}
+\begin{tabularx}{1.2\textwidth}{|l|X||r|r||X|X||r|r|}
 \hline
-\textbf{Iso 639-3} & \textbf{Type WikiPron} & \textbf{WER BS}       & \textbf{PER BS} & \textbf{WER BS-clean} & \textbf{PER BS-clean} & \textbf{WER F2} & \textbf{PER F2} \\ \hline \hline
+\textbf{ISO 639-3} & \textbf{Type WikiPron} & \textbf{WER BS}       & \textbf{PER BS} & \textbf{WER BS-clean} & \textbf{PER BS-clean} & \textbf{WER F2} & \textbf{PER F2} \\ \hline \hline
 cmn       & broad         & 17.6         & \textit{3.9}    & \textbf{17.0}         & \textit{4.0}          & 18.1   & \textit{4.4}    \\
 deu       & broad         & \textbf{37.1}& \textit{4.8}    & 38.1         & \textit{5.0}          & 38.6   & \textit{5.9}    \\
 deu       & narrow        & \textbf{52.2}& \textit{7.1}    & 56.9         & \textit{8.4}          & 55.9   & \textit{9.4}    \\
@@ -394,27 +406,25 @@ zul       & broad         & 65.9         & \textit{10.7}   & \textbf{9.8}       
 \end{tabularx}
 }{Results: long models}
 
-Table \ref{tab:baseline_long_sig} shows a comparison of the best long model compared with the best \ac{sigm} shared task result. For three of those eight languages, my model reached a better or the same score. The \ac{sigm} Korean model performed quite a lot better than mine which can be explained by the fact, that the \ac{sigm} model was not trained on the Korean logograms but those were converted to hangul characters which is a Latin alphabet representation of Korean. As explained in section \ref{section:sig}, this can lead to better results as it reduces the vocabulary size. My result for English is a lot worse as well. Generally, English (as well as German) seems to be a language that is relatively difficult to pronounce as the results are often a lot worse than those of other languages. In the present case, the difference might result from the fact that the \ac{sigm} model was an ensemble and it was only trained for English and therefore optimized to work for the English language. My model performs better on Modern Greek. This is an excepted result, as the model from the \ac{sigm} task was trained on only 800 samples. I had more than 10,000 samples. This aligns with cutting edge research, as \citet{Ashby-Bartley.2021} have found that 800 samples are not enough to train a decent model. My results confirm this finding as my model trained on 10,000 samples of the same data was \textit{considerably} better than the model trained on only 800 samples. The only difference between the training sets of the models was that I applied a few different preprocessing steps (see section \ref{preprocess}). 
+Table \ref{tab:baseline_long_sig} shows a comparison of the best long model compared with the best SIGMORPHON shared task result. For three of those eight languages, my model reached a better or the same score. The \ac{sigm} Korean model performed quite a lot better than mine which can be explained by the fact, that the \ac{sigm} model was not trained on the Korean logograms but those were converted to hangul characters which is a Latin alphabet representation of Korean. As explained in section \ref{section:sig}, this can lead to better results as it reduces the vocabulary size. My result for English is a lot worse as well. Generally, English (as well as German) seems to be a language that is relatively difficult to pronounce as the results are often a lot worse than those of other languages. In the present case, the difference might result from the fact that the \ac{sigm} model was an ensemble and it was only trained for English and therefore optimized to work for the English language. My model performs better on Modern Greek. This is an excepted result, as the model from the \ac{sigm} task was trained on only 800 samples. I had more than 10,000 samples. This aligns with cutting edge research, as \citet{Ashby-Bartley.2021} have found that 800 samples are not enough to train a decent model. My results confirm this finding as my model trained on 10,000 samples of the same data was \textit{considerably} better than the model trained on only 800 samples. The only difference between the training sets of the models was that I applied a few different preprocessing steps (see section \ref{preprocess}). 
 
 \tab{tab:baseline_long_sig}{The table shows the \ac{wer} results for the best of my long models compared with the \ac{sigm} 2020 and 2021 results. For each language the best score is reported no matter what year or what model from the \ac{sigm} task. My models and the \ac{sigm} models were trained on WikiPron data. However, the \ac{sigm} data was preprocessed in a slightly different way which means that the results are not directly comparable. All references for the \ac{sigm} models can be found in tables \ref{tab:sota} and \ref{tab:sota_table_long}.}{
-\begin{tabular}{|rrrr|}
+\begin{tabular}{|rrrrl|}
 \hline
-\textbf{ISO396-3} & \textbf{BS WER} & \textbf{SIG WER} & \textbf{Transcription type} \\
+\textbf{ISO396-3} & \textbf{BS WER} & \textbf{SIG WER} & \textbf{Transcription type} & \textbf{Model name SIG} \\
 \hline
 \hline
-eng (us) & 50.70 &  \textbf{37.43} & broad \\
-fra & 5.30 &  \textbf{5.11} & broad \\
-ell & \textbf{7.10} &  18.67 & broad \\
-kat & \textbf{0.00} &  \textbf{0.00} & broad \\
-hin & \textbf{4.40} &  5.11 & broad \\
-jpn & 6.50 &  \textbf{4.89} & narrow \\
-kor & 23.40 & \textbf{16.20} & narrow \\
-vie & 1.50 &  \textbf{0.89} & narrow \\
+eng (us) & 50.70 &  \textbf{37.43} & broad & DP21\\
+fra & 5.30 &  \textbf{5.11} & broad & DeepSPIN20\\
+ell & \textbf{7.10} &  18.67 & broad & IMS20\\
+kat & \textbf{0.00} &  \textbf{0.00} & broad & BS21/CL21 \\
+hin & \textbf{4.40} &  5.11 & broad & IMS2\\
+jpn & 6.50 &  \textbf{4.89} & narrow & DeepSPIN2\\
+kor & 23.40 & \textbf{16.20} & narrow & CL21\\
+vie & 1.50 &  \textbf{0.89} & narrow & DeepSPIN20\\
 \hline
 \end{tabular}
 }{Long models comparison}
-
-
 
 \subsection{Results NWS tests}
 Table \ref{tab:nws_test} presents the results for the tests on the \ac{nws} stories. The models do not perform very well on these stories in general. Concering the model types, there is no real pattern in how they perform. The clean models seems to perform a bit better than the other two types. Most of them reach the best performance at least once. Also, as the texts are really short, the performance is often very similar.
@@ -423,8 +433,8 @@ Still, when compared to the coverage experiment in section \ref{sec:coverage}, m
 
 \begin{center}
 \tab{tab:nws_test}{In this table I present the results for all models when they predicted the NWS stories. The models are explained in section \ref{sec:train-settings} where I explain the different training settings. `Long' corresponds to setting 2, `short' to setting 1, `Long clean' to setting 4, `Short clean' to setting 3, `F2 long' to setting 8 and `F2 short' to setting 7.}{
-\hspace*{-1.5cm}
-\begin{tabularx}{1.2\textwidth}{|Xl||ll||ll||ll||ll||ll||ll|}
+\hspace*{-2cm}
+\begin{tabularx}{1.3\textwidth}{|Xl||ll||ll||ll||ll||ll||ll|}
 \hline
 \textbf{ISO 396-3} & \textbf{Type} & \multicolumn{2}{c||}{\textbf{Long}} & \multicolumn{2}{c||}{\textbf{Short}} & \multicolumn{2}{c||}{\textbf{Long clean}} & \multicolumn{2}{c||}{\textbf{Short clean}} & \multicolumn{2}{c||}{\textbf{F2 long}} & \multicolumn{2}{c|}{\textbf{F2 short}} \\ \hline
                    &               & \textbf{WER}       & \textbf{PER}     & \textbf{WER}       & \textbf{PER}      & \textbf{WER}        & \textbf{PER}      & \textbf{WER}        & \textbf{PER}       & \textbf{WER}      & \textbf{PER}     & \textbf{WER}       & \textbf{PER}     \\ \hline \hline
@@ -459,7 +469,7 @@ vie                & narrow        & 100.0              & 99.8             & 100
 
 
 \subsection{Results overall}
-All three model types show s similar performance no matter how long they were trained. The most notable observation is that the difference between the performance of the long and the short models is rather small. For some language, the best short model performed even better than the long one or the results were the same. This was the case for narrow German (deu), narrow US English (eng us), narrow UK English (eng uk), broad Goizueta Basque (eus), broad Burmese (mya), narrow Tagalog (tgl) and narrow Turkish (tur). I find it surprising that most of these are the narrow variants as those are more detailed. I would expect a model trained for longer to catch more details. However, none of the scores were really low, the lowest being 19.4 for Basque. Additionally, the differences are never larger than 2.8 percentage points.
+All three model types show s similar performance no matter how long they were trained. The most notable observation is that the difference between the performance of the long and the short models is rather small. For some languages, the best short model performed even better than the long one or the results were the same. This was the case for narrow German (deu), narrow US English (eng us), narrow UK English (eng uk), broad Goizueta Basque (eus), broad Burmese (mya), narrow Tagalog (tgl) and narrow Turkish (tur). I find it surprising that most of these are the narrow variants as those are more detailed. I would expect a model trained for longer to catch more details. However, none of the scores were really low, the lowest being 19.4 for Basque. Additionally, the differences are never larger than 2.8 percentage points.
 
 The feature models did not show any relevant improvement compared to the models trained without features. They did not worsen the results but performed very similarly. When the long features models are compared to the short ones, the models trained for longer reached a better performance for almost all languages. As the input data is more complex because I added the features, it might be worth exploring even longer training times. However, also the long trained trained models without features reached a better performance than the models that for trained short without features. This means that it could be possible that the feature models would still not outperform the models trained without features if both model types were trained for longer. 
 

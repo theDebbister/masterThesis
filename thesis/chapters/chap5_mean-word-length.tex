@@ -1,56 +1,124 @@
 
 \newchap{Experiments: Phonetic \& Orthographic Word Length Correlation}
 \label{chap:mwl}
-Multilingual corpora, like the one I am using for the present thesis, are used more and more in \ac{nlp} research. This leads to the question how well these corpora represent linguistic diversity. Having a linguistically diverse corpus is important as multilingual does not necessarily mean that the languages in the corpus are very different from each other. While this is often neglected in present \ac{nlp} research there are approaches to measure linguistic diversity. No matter how we intend to create such a diversity score, we will eventually need to compare languages and tell whether they are similar or not. This is needed as a multilingual corpus can only be diverse if the languages it contains are not all very similar. But they need to be similar to languages that are not in the corpus as those need to be represented as well. In order to compare languages, we need to be able to describe them properly. There are many different characteristics like language family, script, grammatical features and other characteristics of languages that can be used to describe a language. The entire process of describing languages and comparing them would take up another entire thesis. But with the help of my corpus I can make a contribution to push work on linguistic diversity.
+Multilingual corpora, like the one I am using for the present thesis, are used more and more in \ac{nlp} research. This leads to the question how well these corpora represent linguistic diversity. It is observed that sometimes having a large number of languages in a corpus is referred to as linguistic diversity. But the number of languages is not enough to account for linguistic diversity. Having a \textit{linguistically diverse} multilingual corpus instead of only having a multilingual corpus is important as multilingual does not necessarily mean that the languages in the corpus are very different from each other. A linguistically diverse multilingual corpus ideally includes different languages that are different from each other in terms linguistic properties. More on linguistic diversity is presented in section \ref{sec:measure-ling-div}.
 
-\section{Mean word length correlation}
-A very simple characteristic to describe a language is to calculate the mean word length of a language.
+Someone might ask why we need linguistically diverse corpora. One reason why we should use linguistically diverse corpora is that we want to be able to generalize well to as many languages as possible. If we can generalize well, it allows us to make statements about languages in general even if those languages are not in the corpus. If in our corpus there are only languages with the same properties, we cannot make assumptions about languages with very different properties. If we observe something for a subset of similar languages, we do not know if our observations are true for a different subset of very different languages. If we make an observation in a linguistically diverse corpus, we can assume that our observations generalize to other languages as, ideally, there is at least on language in our corpus that is similar to any other language.
 
+As the corpus my work is based on is already designed to be linguistically diverse (see section \ref{sec:corpus}), I will not go into more detail about the linguistic diversity of my corpus. The goal of the experiment presented in this chapter is to find out if phonetic versions of languages need to be treated as a separate language. Or if they represent the same linguistic properties of a language as the orthographic version of that same language represents. This means: if we study a language, do we need both orthographic and phonetic texts of that language in order to full represent the language in question. If both orthographic and phonetic texts represent one language equally well, it suffices to use only orthographic text to study a language. If both orthographic and phonetic texts represent different aspects of the language, we need samples of orthographic and phonetic text to properly study the language in question. More on the experiment is found in section \ref{sec:mean-len-experiment}.
 
-Although this task sounds very simple there are in fact multiple challenges to tackle before it is possible to accomplish the task:
+\section{Measuring linguistic diversity}
+\label{sec:measure-ling-div}
+If we would like to create linguistically diverse corpora, we need to measure linguistic diversity somehow to judge whether a corpus is linguistically diverse or not. While linguistic diversity in general is often neglected in present \ac{nlp} research there are approaches to measure linguistic diversity. One very simple part of such a diversity score is the number of languages in our corpus as I have mentioned before. Although the number of languages on its own is not sufficient to measure linguistic diversity, a corpus with only two languages cannot be linguistically diverse either. 
+
+No matter how we intend to create such a diversity score, we will eventually need to compare languages and tell whether they are similar or not. This is needed as a multilingual corpus can only be diverse if the languages it contains are not all very similar. But they need to be similar to languages that are not in the corpus as those need to be represented as well. In order to compare languages, we need to be able to describe them properly. There are many different characteristics like language family, script, grammatical features and other characteristics of languages that can be used to describe a language. The entire process of describing languages and comparing them would take up another entire thesis. But with the help of my corpus I can make a contribution to push work on linguistic diversity. In the next section, I will have a look at one property of languages that can be used to compare languages to each other. 
+
+\section{Mean word length as linguistic property of a language}
+A very simple characteristic to describe a language is to calculate the mean word length of a language. Although this task sounds very simple there are in fact multiple challenges to tackle before it is possible to calculate the mean word length of a language. Many of these challenges break down to a set of questions that need to be answered:
 
 \begin{itemize}
     \item \textbf{Tokenization}: In order to calculate word lengths, the texts need to be tokenized properly. This sounds extremely trivial, but in reality this can be a huge problem.
-    \item \textbf{Preprocessing}: Different scripts use different punctuation symbols. Should we exclude those? For example hyphens between two words. Do they count as part of the word? What to do about tones in the phonetic transcription?
-    \item \textbf{Tokenization on character-basis}: For the phonetic texts it was of particular importance to decide how the individual tokens should be tokenized on character-basis to calculate the length. 
+    \item \textbf{Preprocessing}: Different scripts use different punctuation symbols. Is it necessary to exclude those? For example hyphens between two words. Do they count as part of the word? What to do about tones in the phonetic transcription?
+    \item \textbf{Counting characters}: In section \ref{sec:unicode_ipa} I have given an introduction to the Unicode standard and that there can arise problems when counting characters of a string. While this problem cannot just be solved, it is important to decide for one way to count the characters and do this for every language. Otherwise it is not possible to compare the results. 
 \end{itemize}
 
-As the texts I am using for this experiment are rather short, many of those challenges are already resolved because the phenomenon is not present in the corpus. Still, it is important to be aware of these challenges if further experiments are to be conducted.
+All of those questions need to be answered before conducting an experiment to calculate mean word lengths. As the texts I am using for this experiment are rather short, many of those challenges are already resolved because the phenomenon is not present in the corpus. Still, it is important to be aware of these challenges if further experiments are to be conducted.
 
-\tab{tab:mean_word_length}{This table shows the mean word lengths for the \ac{nws} phonetic and orthographic.}
-{
-\begin{tabular}{|lrrl|}
+Once I have the mean word lengths for different languages computed I can compare the results. A simple comparison is to calculate the difference between the mean word lengths for the different languages. Languages that have a very different mean word length are potentially different from each other. Again, this very simple score is not enough to properly judge whether languages are diverse or not but it could be used as a part of such a linguistic diversity score.
+
+
+\section{Mean word length correlation of phonetic and orthographic texts}
+\label{sec:mean-len-experiment}
+In this section I present the actual experiment I conducted. As I have pointed out in the introduction to this chapter, the question I would like to answer is:
+
+\begin{itemize}
+    \item Is the difference between orthographic and phonemic text of the same language small enough that we can consider them as one and the same language?
+\end{itemize}
+
+In order to calculate the difference between the phonetic and the orthographic written version of a language, I use the above explained property of mean word length. I need to add a few more calculations to answer the question. In order to answer this question I conducted the following steps:
+
+\begin{description}[style=unboxed]
+\item[\textsc{1. step - Corpus}:] As a corpus I used the \ac{nws} corpus that I have collected (see section \ref{sec:dataset}). It contains parallel examples of orthographic and phonetic written full text for many 21 languages. Refer to table \ref{tab:mean_word_length} for an overview of all languages.
+\item[\textsc{2. step - Preprocessing}:] As I have pointed out in the section before, it it necessary to preprocess both orthographic and phonetic texts and tokenize them before I can perform any calculations. I solved the above mentioned problems in the following way:
+\begin{itemize}
+    \item \textbf{Tokenization}: Luckily, I already knew about a tokenizer that I can use for the orthographic texts of Chinese, Japanese and Thai that are difficult to tokenize. I used the same tokenizer \textit{polyglot}\myfootnote{\url{https://polyglot.readthedocs.io/en/latest/}} that I have already used in previous experiments. For all other languages and all phonetic texts I chose the simple strategy to tokenize the texts at white spaces. 
+
+    \item \textbf{Preprocessing}: I performed a minimal cleaning of both orthographic texts and phonetic texts. The characters I excluded are:
+    \begin{itemize}
+        \item Orthographic text: all punctuation symbols
+        \item Phonetic text: segment marker symbols and tones
+    \end{itemize}
+    \item \textbf{Counting characters}: In order to count the characters I used the default Python string length function for the orthographic texts. For the phonetic texts, I used the segments library to tokenize the individual phonemes on segment basis (see section \ref{sec:unicode_ipa}).  I counted the number of segments that I received for each phoneme. 
+\end{itemize}
+Table \ref{tab:ex-wordlength} gives an example of how the word lengths can be counted for orthographic and phonetic texts.
+\tab{tab:ex-wordlength}{This table gives an example for the word length of orthographic and phonetic texts. The text is a parallel example of the first few words of the English \ac{nws} story. The characters are split with white spaces to make manual counting easier. The phonemes are processed by the segments library such that phonetic segments are counted. We can see that, for example, the \ac{ipalpha} symbols marking stress (\textipa{"} and \textipa{""}) are one segment together with the subsequent character.}{
+\begin{tabular}{|ll|ll|}
 \hline
-\textbf{Iso396-3}   &   \textbf{Avg len orthographic} &   \textbf{Avg len phonemes} & \textbf{Type}   \\
-\hline
-\hline
-aey        &                   5.21 &               5.5  & unk    \\
-arn        &                   4.81 &               4.65 & narrow \\
-cmn        &                   1.59 &               4.44 & unk    \\
-deu        &                   5    &               4.35 & narrow \\
-ell        &                   4.62 &               4.23 & unk    \\
-eng        &                   4.19 &               3.46 & narrow \\
-eus        &                   5.3  &               4.98 & narrow \\
-fra        &                   4.55 &               3.18 & broad  \\
-hau        &                   3.8  &               4.07 & narrow \\
-heb        &                   6.62 &               6.57 & unk    \\
-hin        &                   3.53 &               3.93 & narrow \\
-ind        &                   5.92 &               5.25 & unk    \\
-jpn        &                   1.59 &               3.77 & unk    \\
-kat        &                   5.99 &               6.32 & narrow \\
-kor        &                   2.85 &               6.56 & unk    \\
-mya        &                  10.22 &               8.15 & unk    \\
-pes        &                   3.99 &               5.03 & unk    \\
-spa        &                   4.62 &               4.36 & narrow \\
-tha        &                   3.25 &               3.03 & unk    \\
-tur        &                   6.74 &               7.02 & broad  \\
-vie        &                   3.24 &               3.87 & unk    \\
-\hline
+\textbf{Grapheme} & \textbf{Length grapheme} & \textbf{Phoneme}              & \textbf{Length phoneme} \\\hline\hline
+t h e             & 3                        & \textipa{D @}               & 2                       \\
+n o r t h         & 5                        & \textipa{"n o {\*r} T} & 4                       \\
+w i n d           & 4                        & \textipa{""w I n d}                     & 4                       \\
+a n d             & 3                        & \textipa{@ n}                           & 2                       \\
+t h e             & 3                        & \textipa{D @}                           & 2                       \\
+s u n             & 3                        & \textipa{"s 2 n}                        & 3   \\\hline                   
 \end{tabular}
+}{Example mean word length}
+
+\item[\textsc{3. step - Calculating mean word lengths}:] For each language, I calculated two mean word lengths:
+\begin{enumerate}
+    \item the mean word length for the orthographic version of the \ac{nws} short story for that language
+    \item the mean word length for the phonetic version of the \ac{nws} short story for that language
+\end{enumerate}
+ In order to calculate the mean, I summed up all word lengths for one text and divided it by the number of tokens of that text. All the means for both texts for all languages are found in table \ref{tab:mean_word_length}. To calculate the mean word lengths I exclusively used the narrow transcriptions if those were available. If not, I used the broad transcription or just the one I had with the unknown transcription type. 
+
+\tab{tab:mean_word_length}{This table shows the mean word lengths for the \ac{nws} phonetic and orthographic texts.}
+{
+\begin{tabularx}{0.9\textwidth}{|ll>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}Xl|}
+\hline
+\textbf{Iso396-3} & \textbf{Language name } &   \textbf{Mean word length orthographic} &   \textbf{Mean word length phonemes} & \textbf{Type}   \\
+\hline
+\hline
+aey   & Amele      &                   5.21 &               5.5  & unk    \\
+arn   & Mapudungun &                   4.81 &               4.65 & narrow \\
+cmn   & Chinese    &                   1.59 &               4.44 & unk    \\
+deu   & German     &                   5    &               4.35 & narrow \\
+ell   & Greek      &                   4.62 &               4.23 & unk    \\
+eng   & English    &                   4.19 &               3.46 & narrow \\
+eus   & Basque     &                   5.3  &               4.98 & narrow \\
+fra   & French     &                   4.55 &               3.18 & broad  \\
+hau   & Hausa      &                   3.8  &               4.07 & narrow \\
+heb   & Hebrew     &                   6.62 &               6.57 & unk    \\
+hin   & Hindi      &                   3.53 &               3.93 & narrow \\
+ind   & Indonesian &                   5.92 &               5.25 & unk    \\
+jpn   & Japanese   &                   1.59 &               3.77 & unk    \\
+kat   & Georgian   &                   5.99 &               6.32 & narrow \\
+kor   & Korean     &                   2.85 &               6.56 & unk    \\
+mya   & Burmese    &                  10.22 &               8.15 & unk    \\
+pes   & Farsi      &                   3.99 &               5.03 & unk    \\
+spa   & Spanish    &                   4.62 &               4.36 & narrow \\
+tha   & Thai       &                   3.25 &               3.03 & unk    \\
+tur   & Turkish    &                   6.74 &               7.02 & broad  \\
+vie   & Vietnamese &                   3.24 &               3.87 & unk    \\
+\hline
+\end{tabularx}
 }{Mean word length of phonetic and orthographic text}
 
 
-To calculate the mean word lengths I exclusively used the narrow transcriptions if those were available. If not, I used the broad transcription or just the one I had with unknown transcription type. 
+
+\item[\textsc{4. step - Calculating correlation}] This last step is the most important step of this experiment. I calculate the correlation between the mean word length for phonetic texts and orthographic texts. For this step, I do not distinguish anymore between languages. The correlation is calculated on two lists, one containing all mean word lengths for all orthographic texts and the other one contains all mean word lengths for the phonetic texts.
+
+The correlation I calculated is the Spearman correlation between phonetic and orthographic mean word length:
+$$ \rho = 0.66$$
+
+
+The correlation value is a real number between 0 and 1. If the correlation between two factors is strong (which means it is close to 1) this means that the two factors behave in a similar way. For our experiment this means that both mean word lengths for orthographic and phonetic texts behave in a similar way. A Spearman correlation of $0.66$ is not extremely strong, but there definitively is some correlation. 
+\end{description}
+
+Although this study is very small, it indicates that phonetic and orthographic texts are not representing contrary properties of a language as there is some correlation between their mean word lengths. It is up to future research to further investigate how orthographic and phonetic texts relate.
+
+
+
+
 
 
 
