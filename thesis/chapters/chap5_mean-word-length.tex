@@ -1,11 +1,11 @@
 
 \newchap{Experiments: Phonetic \& Orthographic Word Length Correlation}
 \label{chap:mwl}
-Multilingual corpora, like the one I am using for the present thesis, are used more and more in \ac{nlp} research. This leads to the question how well these corpora represent linguistic diversity. It is observed that sometimes having a large number of languages in a corpus is referred to as linguistic diversity. But the number of languages is not enough to account for linguistic diversity. Having a \textit{linguistically diverse} multilingual corpus instead of only having a multilingual corpus is important as multilingual does not necessarily mean that the languages in the corpus are very different from each other. A linguistically diverse multilingual corpus ideally includes different languages that are different from each other in terms linguistic properties. More on linguistic diversity is presented in section \ref{sec:measure-ling-div}.
+Multilingual corpora, like the one I am using for the present thesis, are used more and more in \ac{nlp} research. This leads to the question how well these corpora represent linguistic diversity. Having a \textit{linguistically diverse} multilingual corpus instead of only having a multilingual corpus is important as multilingual does not necessarily mean that the languages in the corpus represent a broad spectrum of different languages. Sometimes, having a large number of languages in a corpus is referred to as linguistic diversity. But the number of languages is not enough to account for linguistic diversity. A linguistically diverse multilingual corpus ideally includes different languages that are different from each other in terms linguistic properties. More on linguistic diversity is presented in section \ref{sec:measure-ling-div}.
 
-Someone might ask why we need linguistically diverse corpora. One reason why we should use linguistically diverse corpora is that we want to be able to generalize well to as many languages as possible. If we can generalize well, it allows us to make statements about languages in general even if those languages are not in the corpus. If in our corpus there are only languages with the same properties, we cannot make assumptions about languages with very different properties. If we observe something for a subset of similar languages, we do not know if our observations are true for a different subset of very different languages. If we make an observation in a linguistically diverse corpus, we can assume that our observations generalize to other languages as, ideally, there is at least on language in our corpus that is similar to any other language.
+Someone might ask why we need linguistically diverse corpora. One reason why we should use linguistically diverse corpora is that we want to be able to generalize well to as many languages as possible. If we can generalize well, it allows us to make statements about languages in general even if those languages are not in the corpus. If in our corpus there are only languages with the same properties, we cannot make assumptions about languages with very different properties. If we observe something for a subset of similar languages, we do not know if our observations are true for a different subset of languages with very different properties. If we make an observation based on a linguistically diverse corpus, we can assume that our observations generalize to other languages as, ideally, there is at least on language in our corpus that is similar to any other language.
 
-As the corpus my work is based on is already designed to be linguistically diverse (see section \ref{sec:corpus}), I will not go into more detail about the linguistic diversity of my corpus. The goal of the experiment presented in this chapter is to find out if phonetic versions of languages need to be treated as a separate language. Or if they represent the same linguistic properties of a language as the orthographic version of that same language represents. This means: if we study a language, do we need both orthographic and phonetic texts of that language in order to full represent the language in question. If both orthographic and phonetic texts represent one language equally well, it suffices to use only orthographic text to study a language. If both orthographic and phonetic texts represent different aspects of the language, we need samples of orthographic and phonetic text to properly study the language in question. More on the experiment is found in section \ref{sec:mean-len-experiment}.
+As the corpus my work is based on is already designed to be linguistically diverse (see section \ref{sec:corpus}), I will not go into more detail about the linguistic diversity of my corpus. The goal of the experiment presented in this chapter is to find out if phonetic versions of languages need to be treated as a completely different way of representing a language. Or if they represent the same linguistic properties of a language as the orthographic version of that same language represents. This means: if we study a language, do we need both orthographic and phonetic texts of that language in order to fully represent the language in question. If both orthographic and phonetic texts represent one language equally well, it suffices to use only orthographic text to study a language. If both orthographic and phonetic texts represent different aspects of a language, we need samples of orthographic \textit{and} phonetic text to properly study the language in question. More on the experiment is found in section \ref{sec:mean-len-experiment}.
 
 \section{Measuring linguistic diversity}
 \label{sec:measure-ling-div}
@@ -17,41 +17,51 @@ No matter how we intend to create such a diversity score, we will eventually nee
 A very simple characteristic to describe a language is to calculate the mean word length of a language. Although this task sounds very simple there are in fact multiple challenges to tackle before it is possible to calculate the mean word length of a language. Many of these challenges break down to a set of questions that need to be answered:
 
 \begin{itemize}
-    \item \textbf{Tokenization}: In order to calculate word lengths, the texts need to be tokenized properly. This sounds extremely trivial, but in reality this can be a huge problem.
-    \item \textbf{Preprocessing}: Different scripts use different punctuation symbols. Is it necessary to exclude those? For example hyphens between two words. Do they count as part of the word? What to do about tones in the phonetic transcription?
-    \item \textbf{Counting characters}: In section \ref{sec:unicode_ipa} I have given an introduction to the Unicode standard and that there can arise problems when counting characters of a string. While this problem cannot just be solved, it is important to decide for one way to count the characters and do this for every language. Otherwise it is not possible to compare the results. 
+    \item \textbf{Tokenization}: In order to calculate word lengths, the texts need to be tokenized properly. This sounds extremely trivial, but in reality this can be a huge problem. In order to tokenize a text we need to define the notion of a token before. 
+    \item \textbf{Preprocessing}: Different scripts use different punctuation symbols. Is it necessary to exclude those? For example hyphens between two words. Do they count as part of the word? What to do about tones in the phonetic transcription? Should tones be excluded or are they part of the phonetic word? For every language, there are many uncertainties about how to preprocess the data similar to the one in example \ref{ex:mean-word-preprocess}. In the end, preprocessing often breaks down to deciding what information in a text should be kept and what can be excluded because it does not add any valuable information.
+    
+    \begin{covsubexamples}[preamble={The example of the English word `sub-area' shows the difficulties of preprocessing. The question is how to treat hyphens in English. Does a hyphen add any valuable information to the text? What happens to character or token counts for different preprocessing options? I can think  of four versions of how to process the word. It is likely that there are more.}]
+    \label{ex:mean-word-preprocess}
+    \item Leave the word as-is: `sub-area' \\
+    Token count: 1, character count: 8
+    \item Delete the hyphen and merge the word: `subarea' \\
+    Token count: 1, character count: 7
+    \item Delete the hyphen and split the word: `sub area' \\
+    Token count: 2, character count: 7
+    \item Leave the hyphen to preserve the character count but split the word: `sub- area' \\
+    Token count: 2, character count: 8
+    \end{covsubexamples}
+    
+    \item \textbf{Counting characters}: In section \ref{sec:unicode_ipa} I have given an introduction to the Unicode standard and that there can arise problems when counting characters of a string. While there is no clear answer how to count characters, it is important to decide for one way to count the characters and do this for every language. Otherwise it is not possible to compare the results. 
 \end{itemize}
 
-All of those questions need to be answered before conducting an experiment to calculate mean word lengths. As the texts I am using for this experiment are rather short, many of those challenges are already resolved because the phenomenon is not present in the corpus. Still, it is important to be aware of these challenges if further experiments are to be conducted.
-
-Once I have the mean word lengths for different languages computed I can compare the results. A simple comparison is to calculate the difference between the mean word lengths for the different languages. Languages that have a very different mean word length are potentially different from each other. Again, this very simple score is not enough to properly judge whether languages are diverse or not but it could be used as a part of such a linguistic diversity score.
-
+All of those questions need to be answered before conducting an experiment to calculate mean word lengths. As the texts I am using for this experiment are rather short, many of those challenges are already resolved because the phenomenon is not present in the corpus. Still, it is important to be aware of these challenges especially as I will conduct more experiments on the same datasets in chapter \ref{chap:exp}.
 
 \section{Mean word length correlation of phonetic and orthographic texts}
 \label{sec:mean-len-experiment}
-In this section I present the actual experiment I conducted. As I have pointed out in the introduction to this chapter, the question I would like to answer is:
+In this section I present the actual analysis I performed. As I have pointed out in the introduction to this chapter, the question I would like to answer is:
 
 \begin{itemize}
-    \item Is the difference between orthographic and phonemic text of the same language small enough that we can consider them as one and the same language?
+    \item Is the difference between orthographic and phonetic text of the same language small enough such that we do not need samples of both orthographic and phonetic texts to properly represent the language?
 \end{itemize}
 
-In order to calculate the difference between the phonetic and the orthographic written version of a language, I use the above explained property of mean word length. I need to add a few more calculations to answer the question. In order to answer this question I conducted the following steps:
+In order to calculate the difference between the phonetic and the orthographic written version of a language, I used the above explained property of mean word length. There are a few more steps necessary to answer the question. In order to answer this question I performed the following steps:
 
 \begin{description}[style=unboxed]
-\item[\textsc{1. step - Corpus}:] As a corpus I used the \ac{nws} corpus that I have collected (see section \ref{sec:dataset}). It contains parallel examples of orthographic and phonetic written full text for many 21 languages. Refer to table \ref{tab:mean_word_length} for an overview of all languages.
-\item[\textsc{2. step - Preprocessing}:] As I have pointed out in the section before, it it necessary to preprocess both orthographic and phonetic texts and tokenize them before I can perform any calculations. I solved the above mentioned problems in the following way:
+\item[\textsc{1. step - Corpus}:] As a corpus I used the \ac{nws} corpus that I have collected (see section \ref{sec:dataset}). It contains parallel examples of orthographic and phonetic written full text for 21 languages. Refer to table \ref{tab:mean_word_length} for an overview of all languages.
+\item[\textsc{2. step - Preprocessing}:] As I have pointed out in the section before, it is necessary to preprocess both orthographic and phonetic texts and tokenize them before I can perform any calculations. I solved the above mentioned problems in the following way:
 \begin{itemize}
     \item \textbf{Tokenization}: Luckily, I already knew about a tokenizer that I can use for the orthographic texts of Chinese, Japanese and Thai that are difficult to tokenize. I used the same tokenizer \textit{polyglot}\myfootnote{\url{https://polyglot.readthedocs.io/en/latest/}} that I have already used in previous experiments. For all other languages and all phonetic texts I chose the simple strategy to tokenize the texts at white spaces. 
 
-    \item \textbf{Preprocessing}: I performed a minimal cleaning of both orthographic texts and phonetic texts. The characters I excluded are:
+    \item \textbf{Preprocessing}: I performed a minimal cleaning of both orthographic and phonetic texts. The characters I excluded are:
     \begin{itemize}
         \item Orthographic text: all punctuation symbols
         \item Phonetic text: segment marker symbols and tones
     \end{itemize}
-    \item \textbf{Counting characters}: In order to count the characters I used the default Python string length function for the orthographic texts. For the phonetic texts, I used the segments library to tokenize the individual phonemes on segment basis (see section \ref{sec:unicode_ipa}).  I counted the number of segments that I received for each phoneme. 
+    \item \textbf{Counting characters}: In order to count the characters, I used the default Python string length function for the orthographic texts. For the phonetic texts, I used the segments library to tokenize the individual phonemes on segment basis (see section \ref{sec:unicode_ipa}).  I counted the number of segments that I have received for each phoneme. 
 \end{itemize}
 Table \ref{tab:ex-wordlength} gives an example of how the word lengths can be counted for orthographic and phonetic texts.
-\tab{tab:ex-wordlength}{This table gives an example for the word length of orthographic and phonetic texts. The text is a parallel example of the first few words of the English \ac{nws} story. The characters are split with white spaces to make manual counting easier. The phonemes are processed by the segments library such that phonetic segments are counted. We can see that, for example, the \ac{ipalpha} symbols marking stress (\textipa{"} and \textipa{""}) are one segment together with the subsequent character.}{
+\tab{tab:ex-wordlength}{This table gives an example for the word length of orthographic and phonetic texts. The text is a parallel example of the first few tokens of the English \ac{nws} story. The characters are separated by white space to make manual counting easier. The phonemes are processed by the segments library such that phonetic segments are counted. We can see that, for example, the \ac{ipalpha} symbols marking stress (\textipa{"} and \textipa{""}) are one segment together with the subsequent character.}{
 \begin{tabular}{|ll|ll|}
 \hline
 \textbf{Grapheme} & \textbf{Length grapheme} & \textbf{Phoneme}              & \textbf{Length phoneme} \\\hline\hline
@@ -105,13 +115,12 @@ vie   & Vietnamese &                   3.24 &               3.87 & unk    \\
 
 
 
-\item[\textsc{4. step - Calculating correlation}] This last step is the most important step of this experiment. I calculate the correlation between the mean word length for phonetic texts and orthographic texts. For this step, I do not distinguish anymore between languages. The correlation is calculated on two lists, one containing all mean word lengths for all orthographic texts and the other one contains all mean word lengths for the phonetic texts.
+\item[\textsc{4. step - Calculating correlation}] This last step is the most important step of this experiment. I calculated the correlation between the mean word length for phonetic texts and orthographic texts. For this step, I do not distinguish anymore between languages. The correlation is calculated on two lists, one containing all mean word lengths for all orthographic texts and the other one containing all mean word lengths for the phonetic texts.
 
-The correlation I calculated is the Spearman correlation between phonetic and orthographic mean word length:
+The correlation I used is the Spearman correlation between phonetic and orthographic mean word length:
 $$ \rho = 0.66$$
 
-
-The correlation value is a real number between 0 and 1. If the correlation between two factors is strong (which means it is close to 1) this means that the two factors behave in a similar way. For our experiment this means that both mean word lengths for orthographic and phonetic texts behave in a similar way. A Spearman correlation of $0.66$ is not extremely strong, but there definitively is some correlation. 
+The correlation value is a real number between 0 and 1. If the correlation between two factors is strong (which means it is close to 1) this means that the two factors behave in a similar way. For my experiment this means that both mean word lengths for orthographic and phonetic texts behave in a similar way. A Spearman correlation of $0.66$ is not extremely strong, but there definitively is some correlation. 
 \end{description}
 
 Although this study is very small, it indicates that phonetic and orthographic texts are not representing contrary properties of a language as there is some correlation between their mean word lengths. It is up to future research to further investigate how orthographic and phonetic texts relate.
