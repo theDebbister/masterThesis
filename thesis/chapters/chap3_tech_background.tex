@@ -2,7 +2,7 @@
 \label{chap:tech-background}
 In this chapter I present the technical background that is needed to understand how we can create phonetic transcriptions using computational models. I will first set the basis and dive into general architectures and frameworks that are commonly used and then present current state-of-the-art models. In chapter \ref{chap:ling-background}, I have pointed out that there are many different written representations of language. In the first section of this chapter, I am going to explain how a computer represents language and different scripts. 
 
-\section{Unicode and the International Phonetic Alphabet}
+\section{The Unicode Standard and the International Phonetic Alphabet}
 \label{sec:unicode_ipa}
 Computational representations of languages are very important as no matter what task we try to solve, we need to understand how written text is processed by a computer. For the present thesis, this topic is relevant for multiple reasons: 
 \begin{enumerate}
@@ -69,7 +69,7 @@ An additional challenge is that of picking the right font. Our standard font for
 In the \ac{ipalpha} there exists a length marker to denote vowel lengthening. The vowel and the length marker are displayed as one segment. Characters connected by a tie bar are displayed as one segment as well. This segmentation is adapted to the actual sounds as it is not possible to pronounce a vowel and the length marker as a separated sound. However, from a Unicode perspective those are both different code points. Later when processing the data I will make use of this library.
 
 \subsection*{Unicode normalization forms}
-The above explanations make clear that there are considerable differences in what a human reader perceives and in what happens in the background. Unicode therefore provides normalization forms that can help to process written data. Unicode publishes extensive explanations along with their standards which also includes those normalization forms. I will therefore not explain everything in full detail as this is done already online \citepalias{Unicode.27.08.2021}. 
+The above explanations make clear that there are considerable differences in what a human reader perceives and in what happens in the background. Unicode therefore provides normalization forms that can help to process written data. Unicode publishes extensive explanations along with their standards which also includes those normalization forms. I will therefore not explain everything in full detail as this is done already online\myfootnote{\url{https://unicode.org/reports/tr15/}}. 
 
 There are two important aspects to normalization. One is that we can have decomposed or composed characters. The second aspect of normalization is that we have a compatibility form and a non-compatibility form. Based on these two aspects there are four normalization forms:
 \begin{description}
@@ -164,7 +164,7 @@ In the case of \ac{g2p} conversion, the \ac{wer} actually just reflects the rate
 
 \section{State-of-the-art G2P models}
 \label{section:sig}
-I will now have a look at the state-of-the-art models that have been used for \ac{g2p} conversion. The \ac{sigm} \citep{Sigmorphon.2021} regularly organizes shared tasks concerned with morphology and phonology. For the years 2020 and 2021 they organized a \ac{g2p} conversion task \citep{Ashby-Bartley.2021, gorman-etal-2020-sigmorphon}. The tasks represent a first attempt at creating benchmarks for multilingual \ac{g2p} conversion. Although there is other research on \ac{g2p}, many recent publications have been made within the \ac{sigm} shared tasks. In the next sections, I will summarize the results and insights from \ac{g2p} research with a focus on those shared tasks. As they covered so many different languages, I will use their results to compare my results to. Tables \ref{tab:sota_table_long} and \ref{tab:sota} list the models and their results from those two tasks.
+I will now have a look at the state-of-the-art models that have been used for \ac{g2p} conversion. The \ac{sigm}\myfootnote{\url{https://sigmorphon.github.io/}} regularly organizes shared tasks concerned with morphology and phonology. For the years 2020 and 2021 they organized a \ac{g2p} conversion task \citep{Ashby-Bartley.2021, gorman-etal-2020-sigmorphon}. The tasks represent a first attempt at creating benchmarks for multilingual \ac{g2p} conversion. Although there is other research on \ac{g2p}, many recent publications have been made within the \ac{sigm} shared tasks. In the next sections, I will summarize the results and insights from \ac{g2p} research with a focus on those shared tasks. As they covered so many different languages, I will use their results to compare my results to. Tables \ref{tab:sota_table_long} and \ref{tab:sota} list the models and their results from those two tasks.
 
 \subsection{Model architectures}
 In section \ref{model_theory}, I explained the most important theoretical basics. Now, I familiarized myself a bit more with strategies that work well in practice and what some concrete problems are. The methodologies mentioned below are for the most part task-agnostic. This means that they often improve results on most \ac{nlp} tasks and are not specifically developed for the \ac{g2p} task.
