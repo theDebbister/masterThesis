@@ -1,9 +1,18 @@
 \chapter{Tables}
 \label{annex:Tables}
 
-\tab{tab:100LC}{The table shows all the languages that are in the 100 language corpus including their language family.}{
-\begin{longtable}{lrr}
-\textbf{Iso 639-3} & \textbf{Name-WALS}        & \textbf{Family-WALS} \\
+%\tab{tab:100LC}{The table shows all the languages that are in the 100 language corpus including their language family.}{
+\begin{longtable}{|l|r|r|}
+\caption[TeDDi sample]{This table lists all the languages that are in the TeDDi sample described in section \ref{sec:corpus}.}\\\hline
+\textbf{Iso 639-3} & \textbf{Name-WALS}        & \textbf{Family-WALS} \\\hline\hline
+\endfirsthead
+\hline
+\textbf{Iso 639-3} & \textbf{Name-WALS}        & \textbf{Family-WALS} \\\hline\hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
 abk                & Abkhaz                    & Northwest Caucasian  \\
 amp                & Alamblak                  & Sepik                \\
 aey                & Amele                     & Trans-New Guinea     \\
@@ -43,7 +52,6 @@ kor                & Korean                    & Korean               \\
 ses                & Koyraboro Senni           & Songhay              \\
 kgo                & Krongo                    & Kadu                 \\
 kut                & Kutenai                   & Kutenai              \\
-\pagebreak
 lkt                & Lakhota                   & Siouan               \\
 laj                & Lango                     & Eastern Sudanic      \\
 lvk                & Lavukaleve                & Solomons East Papuan \\
@@ -104,6 +112,7 @@ mzh                & Wichí                     & Matacoan             \\
 yad                & Yagua                     & Peba-Yaguan          \\
 yaq                & Yaqui                     & Uto-Aztecan          \\
 yor                & Yoruba                    & Niger-Congo          \\
-zul                & Zulu                      & Niger-Congo          \\
+zul                & Zulu                      & Niger-Congo          
+\label{tab:100LC}
 \end{longtable}
-}{100 Language Corpus}
+
