@@ -32,13 +32,13 @@ I used a subset of these languages to perform G2P experiments. Currently I am wo
 
 There are no results available just yet. The thesis is still in progess. I will push results as soon as the thesis is completed.
 
-## [Data](https://github.com/theDebbister/masterThesis/tree/main/data)
+## [Data](https://github.com/theDebbister/masterThesis/tree/master/data)
 The data folder contains all the data I have worked with. I used two datasets:
 
 * [WikiPron](https://github.com/CUNY-CL/wikipron)
 * *The North Wind and the Sun* short stories
 
-Both are explained in more detail in the [data](https://github.com/theDebbister/masterThesis/tree/main/data) folder. 
+Both are explained in more detail in the [data](https://github.com/theDebbister/masterThesis/tree/master/data) folder. 
 
 ## Models
 
