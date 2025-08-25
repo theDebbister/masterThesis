@@ -2,7 +2,7 @@
 
 For my master's thesis I worked on a multilingual model for grapheme-to-phoneme conversion. 
 The text group of the Language and Space lab at the University of Zurich maintains a
-[project](https://www.spur.uzh.ch/en/departments/research/textgroup/MorphDiv.html) that provides a multilingual corpus consisting of 100 language text samples.
+[project](https://www.spur.uzh.ch/en/research/projects-all/3rdParty-projects/ts-MorphDiv.html) that provides a multilingual corpus consisting of 100 language text samples.
 I used a subset of these languages to perform G2P experiments. Currently I am working with the following languages:
 
 | ISO396-3 | Language            |
@@ -77,7 +77,7 @@ Both are explained in more detail in the [data](https://github.com/theDebbister/
 ## Models
 
 The model I used for my experiments is the [g2p-seq2seq](https://github.com/cmusphinx/g2p-seq2seq) model presented by CMUSphinx.
-Everything concernign the models and the training is found in the [model](https://github.com/theDebbister/masterThesis/tree/master/models) folder.
+Everything concerning the models and the training is found in the [model](https://github.com/theDebbister/masterThesis/tree/master/models) folder.
 
 
 
